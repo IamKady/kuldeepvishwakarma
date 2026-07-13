@@ -43,20 +43,38 @@ export default function Contact() {
   const handleFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setFormSending(true);
-    // Simulate API delay
+
+    const mailtoUrl = `mailto:kuldeepvishwakarma3803@gmail.com?subject=${encodeURIComponent(
+      formData.subject
+    )}&body=${encodeURIComponent(
+      `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`
+    )}`;
+
+    // Open email client
+    window.location.href = mailtoUrl;
+
     setTimeout(() => {
       setFormSending(false);
       setFormSent(true);
       setFormData({ name: '', email: '', subject: '', message: '' });
       triggerConfetti();
       setTimeout(() => setFormSent(false), 5000);
-    }, 1500);
+    }, 1000);
   };
 
   const handleBookMeeting = (e: React.FormEvent) => {
     e.preventDefault();
     if (!selectedDay || !selectedTime || !schedulerName || !schedulerEmail) return;
     
+    const mailtoUrl = `mailto:kuldeepvishwakarma3803@gmail.com?subject=${encodeURIComponent(
+      `Zoom Meeting Booking: ${schedulerName}`
+    )}&body=${encodeURIComponent(
+      `Hello Kuldeep,\n\nI would like to schedule a Zoom consultation with you.\n\nDate: ${selectedDay}\nTime: ${selectedTime} (IST)\n\nMy Details:\nName: ${schedulerName}\nEmail: ${schedulerEmail}\n\nBest regards,\n${schedulerName}`
+    )}`;
+
+    // Open email client
+    window.location.href = mailtoUrl;
+
     setMeetingBooked(true);
     triggerConfetti();
   };
