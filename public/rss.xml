@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<channel>
+  <title>Kuldeep Chandra Vishwakarma | RSS Feed</title>
+  <link>https://kuldeepvishwakarma.com</link>
+  <description>Latest logs, tech news, and system telemetry from Kuldeep's personal operating system.</description>
+  <language>en-us</language>
+  <lastBuildDate>Mon, 13 Jul 2026 13:36:32 +0530</lastBuildDate>
+  <item>
+    <title>Building an Automated AI News Feed using Next.js &amp; Gemini</title>
+    <link>https://kuldeepvishwakarma.com/blog#ai-news-automation</link>
+    <description>A deep-dive guide on how to parse RSS feeds, run them through Google Gemini for relevance, and automatically publish posts.</description>
+    <pubDate>Sat, 11 Jul 2026 00:00:00 +0530</pubDate>
+    <guid>https://kuldeepvishwakarma.com/blog#ai-news-automation</guid>
+  </item>
+  <item>
+    <title>How to Achieve a 100 Lighthouse Performance Rating in Next.js</title>
+    <link>https://kuldeepvishwakarma.com/blog#lighthouse-score-performance</link>
+    <description>Learn the exact performance optimization techniques I used to get a perfect Lighthouse score on my portfolio and StartupWire.</description>
+    <pubDate>Thu, 09 Jul 2026 00:00:00 +0530</pubDate>
+    <guid>https://kuldeepvishwakarma.com/blog#lighthouse-score-performance</guid>
+  </item>
+</channel>
+</rss>

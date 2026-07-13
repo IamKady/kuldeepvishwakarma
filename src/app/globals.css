@@ -1,26 +1,157 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #fafafa;
+  --foreground: #09090b;
+  --card-bg: rgba(255, 255, 255, 0.7);
+  --card-border: rgba(0, 0, 0, 0.08);
+  --accent-ai: #4f46e5;
+  --accent-startup: #059669;
+  --accent-cyber: #d97706;
+  --accent-blog: #e11d48;
+  --accent-rgb-ai: 79, 70, 229;
+  --accent-rgb-startup: 5, 150, 105;
+  --accent-rgb-cyber: 217, 119, 6;
+  --accent-rgb-blog: 225, 29, 72;
 }
 
-@theme inline {
+/* Make it dark-mode by default by matching system pref or using class */
+:root, .dark {
+  --background: #030014;
+  --foreground: #fafafa;
+  --card-bg: rgba(10, 10, 15, 0.6);
+  --card-border: rgba(255, 255, 255, 0.08);
+  --accent-ai: #818cf8;
+  --accent-startup: #34d399;
+  --accent-cyber: #fbbf24;
+  --accent-blog: #fb7185;
+  --accent-rgb-ai: 129, 140, 248;
+  --accent-rgb-startup: 52, 211, 153;
+  --accent-rgb-cyber: 251, 191, 36;
+  --accent-rgb-blog: 251, 113, 133;
+}
+
+/* Optional light mode class if explicit toggle is used */
+.light {
+  --background: #fafafa;
+  --foreground: #09090b;
+  --card-bg: rgba(255, 255, 255, 0.7);
+  --card-border: rgba(0, 0, 0, 0.08);
+  --accent-ai: #4f46e5;
+  --accent-startup: #059669;
+  --accent-cyber: #d97706;
+  --accent-blog: #e11d48;
+  --accent-rgb-ai: 79, 70, 229;
+  --accent-rgb-startup: 5, 150, 105;
+  --accent-rgb-cyber: 217, 119, 6;
+  --accent-rgb-blog: 225, 29, 72;
+}
+
+@theme {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-card-bg: var(--card-bg);
+  --color-card-border: var(--card-border);
+  --color-ai: var(--accent-ai);
+  --color-startup: var(--accent-startup);
+  --color-cyber: var(--accent-cyber);
+  --color-blog: var(--accent-blog);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1);
+}
+:root::-webkit-scrollbar-track, .dark::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.01);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+}
+:root::-webkit-scrollbar-thumb, .dark::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.12);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.3);
+}
+:root::-webkit-scrollbar-thumb:hover, .dark::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+/* Glassmorphism Panel styles */
+.glass-panel {
+  background: var(--card-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--card-border);
+}
+
+/* Glowing animations */
+@keyframes pulse-glow-ai {
+  0%, 100% {
+    opacity: 0.8;
+    box-shadow: 0 0 15px rgba(var(--accent-rgb-ai), 0.2);
+  }
+  50% {
+    opacity: 1.0;
+    box-shadow: 0 0 25px rgba(var(--accent-rgb-ai), 0.45);
+  }
+}
+
+@keyframes pulse-glow-startup {
+  0%, 100% {
+    opacity: 0.8;
+    box-shadow: 0 0 15px rgba(var(--accent-rgb-startup), 0.2);
+  }
+  50% {
+    opacity: 1.0;
+    box-shadow: 0 0 25px rgba(var(--accent-rgb-startup), 0.45);
+  }
+}
+
+@keyframes pulse-glow-cyber {
+  0%, 100% {
+    opacity: 0.8;
+    box-shadow: 0 0 15px rgba(var(--accent-rgb-cyber), 0.2);
+  }
+  50% {
+    opacity: 1.0;
+    box-shadow: 0 0 25px rgba(var(--accent-rgb-cyber), 0.45);
+  }
+}
+
+.glow-ai {
+  animation: pulse-glow-ai 3s infinite ease-in-out;
+}
+
+.glow-startup {
+  animation: pulse-glow-startup 3s infinite ease-in-out;
+}
+
+.glow-cyber {
+  animation: pulse-glow-cyber 3s infinite ease-in-out;
+}
+
+/* Grid overlay background */
+.grid-bg {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 0);
+  background-size: 24px 24px;
+}
+
+.light .grid-bg {
+  background-image: radial-gradient(rgba(0, 0, 0, 0.03) 1px, transparent 0);
 }
