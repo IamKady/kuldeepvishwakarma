@@ -21,14 +21,14 @@
   --foreground: #fafafa;
   --card-bg: rgba(10, 10, 15, 0.6);
   --card-border: rgba(255, 255, 255, 0.08);
-  --accent-ai: #818cf8;
+  --accent-ai: #a5b4fc;
   --accent-startup: #34d399;
   --accent-cyber: #fbbf24;
-  --accent-blog: #fb7185;
-  --accent-rgb-ai: 129, 140, 248;
+  --accent-blog: #fda4af;
+  --accent-rgb-ai: 165, 180, 252;
   --accent-rgb-startup: 52, 211, 153;
   --accent-rgb-cyber: 251, 191, 36;
-  --accent-rgb-blog: 251, 113, 133;
+  --accent-rgb-blog: 253, 164, 175;
 }
 
 /* Optional light mode class if explicit toggle is used */

@@ -170,6 +170,31 @@ export default function Projects() {
                   <p className="text-xs text-zinc-400 font-sans mt-1">
                     {selectedProject.tagline}
                   </p>
+                  
+                  {selectedProject.metrics && (
+                    <div className="flex flex-wrap items-center gap-3 sm:gap-4 bg-zinc-900/40 px-3 py-1.5 rounded-lg border border-white/5 text-[10px] font-mono text-zinc-400 mt-3 max-w-fit">
+                      <span className="text-zinc-500 font-bold uppercase tracking-wider text-[8px]">Metrics:</span>
+                      <div className="flex items-center space-x-1">
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                        <span>Perf: <strong className="text-emerald-400">{selectedProject.metrics.performance}</strong></span>
+                      </div>
+                      <div className="flex items-center space-x-1">
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                        <span>A11y: <strong className="text-emerald-400">{selectedProject.metrics.accessibility}</strong></span>
+                      </div>
+                      <div className="flex items-center space-x-1">
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                        <span>Best: <strong className="text-emerald-400">{selectedProject.metrics.bestPractices}</strong></span>
+                      </div>
+                      <div className="flex items-center space-x-1">
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                        <span>SEO: <strong className="text-emerald-400">{selectedProject.metrics.seo}</strong></span>
+                      </div>
+                      <div className="hidden sm:flex items-center space-x-1 border-l border-white/10 pl-3">
+                        <span>Speed: <strong className="text-indigo-400">{selectedProject.metrics.loadTimeMs}ms</strong></span>
+                      </div>
+                    </div>
+                  )}
                 </div>
 
                 <button 

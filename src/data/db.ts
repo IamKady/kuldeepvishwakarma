@@ -30,6 +30,13 @@ export interface Project {
     lessons: string;
     futureRoadmap: string;
   };
+  metrics?: {
+    performance: number;
+    accessibility: number;
+    bestPractices: number;
+    seo: number;
+    loadTimeMs: number;
+  };
 }
 
 export interface StartupLog {
@@ -118,6 +125,13 @@ export const projectsData: Project[] = [
       challenges: 'Handling duplicate articles from different sources and avoiding AI-hallucinated summaries. Fixed by writing a vector similarity filter to detect identical topics and fine-tuning prompt instructions to enforce absolute truthfulness with zero external facts added.',
       lessons: 'Understood the power of programmatic SEO combined with LLM content filtering. Learned how to manage structured schemas in PostgreSQL and configure Next.js cache revalidation effectively.',
       futureRoadmap: 'Integrate automated audio summaries (text-to-speech podcast), allow users to subscribe to customized daily email digests based on specific keywords, and open a public API.'
+    },
+    metrics: {
+      performance: 99,
+      accessibility: 98,
+      bestPractices: 100,
+      seo: 100,
+      loadTimeMs: 240
     }
   },
   {
@@ -140,6 +154,13 @@ export const projectsData: Project[] = [
       challenges: 'Validating complex user inputs and parsing dynamic nested variables without performance lag.',
       lessons: 'Optimized state rendering by debouncing regex matching. Explored the efficiency of offline-first storage mechanics.',
       futureRoadmap: 'Enable synchronization with Supabase and Git repositories to share prompts across development teams.'
+    },
+    metrics: {
+      performance: 98,
+      accessibility: 100,
+      bestPractices: 95,
+      seo: 90,
+      loadTimeMs: 120
     }
   }
 ];
