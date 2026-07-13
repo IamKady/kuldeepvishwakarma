@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Kuldeep Chandra Vishwakarma | Software Engineer • AI Builder • Startup Founder",
     description: "Personal Operating System of Kuldeep Chandra Vishwakarma. Software Engineer, AI Builder, Startup Founder, and Tech Writer.",
-    creator: "@kuldeepcv"
+    creator: "@iamkady"
   },
   robots: {
     index: true,

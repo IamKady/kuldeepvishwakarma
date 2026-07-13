@@ -13,7 +13,8 @@ import {
   Send, 
   Download, 
   Info,
-  CalendarCheck
+  CalendarCheck,
+  Phone
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
@@ -81,7 +82,8 @@ export default function Contact() {
     { name: 'Email', value: 'kuldeepvishwakarma3803@gmail.com', url: 'mailto:kuldeepvishwakarma3803@gmail.com', icon: <Mail className="w-4 h-4 text-rose-400" /> },
     { name: 'LinkedIn', value: 'linkedin.com/in/iamkady', url: 'https://www.linkedin.com/in/iamkady/', icon: <Linkedin className="w-4 h-4 text-indigo-400" /> },
     { name: 'GitHub', value: 'github.com/IamKady', url: 'https://github.com/IamKady', icon: <Github className="w-4 h-4 text-white" /> },
-    { name: 'X / Twitter', value: 'twitter.com/iamkady', url: 'https://x.com/iamkady', icon: <Twitter className="w-4 h-4 text-emerald-400" /> }
+    { name: 'X / Twitter', value: 'twitter.com/iamkady', url: 'https://x.com/iamkady', icon: <Twitter className="w-4 h-4 text-emerald-400" /> },
+    { name: 'Phone', value: '+91 8303929309', url: 'tel:+918303929309', icon: <Phone className="w-4 h-4 text-emerald-400" /> }
   ];
 
   return (

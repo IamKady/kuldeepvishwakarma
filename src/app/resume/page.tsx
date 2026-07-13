@@ -13,7 +13,8 @@ import {
   GraduationCap, 
   Trophy, 
   Code,
-  Award
+  Award,
+  Phone
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
@@ -92,6 +93,10 @@ export default function Resume() {
             <a href="https://kuldeepvishwakarma.com" className="flex items-center space-x-1.5 hover:text-white print:hover:text-black">
               <Globe className="w-3.5 h-3.5" />
               <span>kuldeepvishwakarma.com</span>
+            </a>
+            <a href="tel:+918303929309" className="flex items-center space-x-1.5 hover:text-white print:hover:text-black">
+              <Phone className="w-3.5 h-3.5" />
+              <span>+91 8303929309</span>
             </a>
           </div>
         </div>

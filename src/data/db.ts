@@ -104,7 +104,7 @@ export const projectsData: Project[] = [
     status: 'Active',
     logo: '⚡',
     technologies: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS', 'Supabase', 'Gemini API'],
-    github: 'https://github.com/kuldeepcv/startupwire',
+    github: 'https://github.com/IamKady/startupwire',
     live: 'https://startupwire.in',
     summary: 'A automated, SEO-optimized tech startup and AI news aggregation platform that uses AI agents to curate, summarize, and publish relevant articles.',
     caseStudy: {
@@ -127,7 +127,7 @@ export const projectsData: Project[] = [
     status: 'Beta',
     logo: '🤖',
     technologies: ['React', 'Vite', 'TypeScript', 'Tailwind CSS', 'LocalStorage'],
-    github: 'https://github.com/kuldeepcv/ai-prompt-studio',
+    github: 'https://github.com/IamKady/ai-prompt-studio',
     summary: 'A developer utility to curate, store, variable-inject, and copy high-performing LLM prompts for daily engineering workflows.',
     caseStudy: {
       problem: 'Developers copy-paste prompts from text files or chat histories, losing version control and variable structure.',

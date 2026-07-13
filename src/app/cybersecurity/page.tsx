@@ -70,7 +70,7 @@ export default function Cybersecurity() {
         break;
       case 'contact':
         newHistory.push({
-          text: 'Email: kuldeepvishwakarma3803@gmail.com | Github: github.com/IamKady | LinkedIn: linkedin.com/in/iamkady',
+          text: 'Email: kuldeepvishwakarma3803@gmail.com | Phone: +91 8303929309 | Github: github.com/IamKady | LinkedIn: linkedin.com/in/iamkady',
           type: 'output'
         });
         break;

@@ -361,12 +361,12 @@ export default function Home() {
               </span>
             </div>
             <a 
-              href="https://github.com/kuldeepcv" 
+              href="https://github.com/IamKady" 
               target="_blank" 
               rel="noopener noreferrer" 
               className="text-[10px] text-zinc-400 hover:text-emerald-400 transition-colors font-mono flex items-center"
             >
-              github.com/kuldeepcv <ChevronRight className="w-3 h-3 ml-0.5" />
+              github.com/IamKady <ChevronRight className="w-3 h-3 ml-0.5" />
             </a>
           </div>
 
