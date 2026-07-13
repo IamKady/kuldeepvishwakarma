@@ -17,10 +17,10 @@ export default function Footer() {
   };
 
   const socialLinks = [
-    { name: 'Github', icon: <Github className="w-4 h-4" />, url: 'https://github.com/kuldeepcv' },
-    { name: 'LinkedIn', icon: <Linkedin className="w-4 h-4" />, url: 'https://linkedin.com/in/kuldeepcv' },
-    { name: 'X / Twitter', icon: <Twitter className="w-4 h-4" />, url: 'https://x.com/kuldeepcv' },
-    { name: 'Email', icon: <Mail className="w-4 h-4" />, url: 'mailto:kuldeep@kuldeepvishwakarma.com' },
+    { name: 'Github', icon: <Github className="w-4 h-4" />, url: 'https://github.com/IamKady' },
+    { name: 'LinkedIn', icon: <Linkedin className="w-4 h-4" />, url: 'https://www.linkedin.com/in/iamkady/' },
+    { name: 'X / Twitter', icon: <Twitter className="w-4 h-4" />, url: 'https://x.com/iamkady' },
+    { name: 'Email', icon: <Mail className="w-4 h-4" />, url: 'mailto:kuldeepvishwakarma3803@gmail.com' },
   ];
 
   return (

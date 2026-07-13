@@ -51,6 +51,12 @@ export default function CommandPalette({ isOpen, onClose }: CommandPaletteProps)
     setSelectedIndex(0);
   }, [query]);
 
+  const handleSelect = (item: SearchableItem) => {
+    router.push(item.url);
+    onClose();
+    setQuery('');
+  };
+
   // Global keybind for CMD+K or Ctrl+K to toggle (controlled by layout)
   useEffect(() => {
     if (isOpen) {
@@ -90,11 +96,7 @@ export default function CommandPalette({ isOpen, onClose }: CommandPaletteProps)
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [isOpen, results, selectedIndex]);
 
-  const handleSelect = (item: SearchableItem) => {
-    router.push(item.url);
-    onClose();
-    setQuery('');
-  };
+
 
   const getIcon = (type: SearchableItem['type']) => {
     switch (type) {
@@ -203,7 +205,7 @@ export default function CommandPalette({ isOpen, onClose }: CommandPaletteProps)
                 </div>
               ) : (
                 <div className="py-8 text-center text-zinc-500 font-sans text-sm">
-                  No results found for <span className="text-zinc-300">"{query}"</span>
+                  No results found for <span className="text-zinc-300">&quot;{query}&quot;</span>
                 </div>
               )}
             </div>

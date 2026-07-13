@@ -77,17 +77,17 @@ export default function Resume() {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs font-mono text-zinc-400 print:text-zinc-700">
-            <a href="mailto:kuldeep@kuldeepvishwakarma.com" className="flex items-center space-x-1.5 hover:text-white print:hover:text-black">
+            <a href="mailto:kuldeepvishwakarma3803@gmail.com" className="flex items-center space-x-1.5 hover:text-white print:hover:text-black">
               <Mail className="w-3.5 h-3.5" />
-              <span>kuldeep@kuldeepvishwakarma.com</span>
+              <span>kuldeepvishwakarma3803@gmail.com</span>
             </a>
-            <a href="https://linkedin.com/in/kuldeepcv" target="_blank" rel="noopener noreferrer" className="flex items-center space-x-1.5 hover:text-white print:hover:text-black">
+            <a href="https://www.linkedin.com/in/iamkady/" target="_blank" rel="noopener noreferrer" className="flex items-center space-x-1.5 hover:text-white print:hover:text-black">
               <Linkedin className="w-3.5 h-3.5" />
-              <span>linkedin.com/in/kuldeepcv</span>
+              <span>linkedin.com/in/iamkady</span>
             </a>
-            <a href="https://github.com/kuldeepcv" target="_blank" rel="noopener noreferrer" className="flex items-center space-x-1.5 hover:text-white print:hover:text-black">
+            <a href="https://github.com/IamKady" target="_blank" rel="noopener noreferrer" className="flex items-center space-x-1.5 hover:text-white print:hover:text-black">
               <Github className="w-3.5 h-3.5" />
-              <span>github.com/kuldeepcv</span>
+              <span>github.com/IamKady</span>
             </a>
             <a href="https://kuldeepvishwakarma.com" className="flex items-center space-x-1.5 hover:text-white print:hover:text-black">
               <Globe className="w-3.5 h-3.5" />
