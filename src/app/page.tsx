@@ -45,6 +45,7 @@ export default function Home() {
   const [localTime, setLocalTime] = useState('13:36 PM');
   const [dashboardTab, setDashboardTab] = useState<'status' | 'deployments' | 'radar' | 'oss' | 'books'>('status');
   const [copiedText, setCopiedText] = useState(false);
+  const [hudView, setHudView] = useState<'code' | 'photo'>('code');
 
   // Update India Time (IST) dynamically
   useEffect(() => {
@@ -210,36 +211,116 @@ export default function Home() {
             <div className="w-full p-6 rounded-xl glass-panel relative z-10 border-white/10 shadow-2xl overflow-hidden group">
               {/* Window Header */}
               <div className="flex items-center justify-between border-b border-white/5 pb-4 mb-4 font-mono text-xs text-zinc-500">
-                <div className="flex space-x-1.5">
-                  <span className="w-2.5 h-2.5 rounded-full bg-rose-500/60" />
-                  <span className="w-2.5 h-2.5 rounded-full bg-amber-500/60" />
-                  <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/60" />
+                <div className="flex items-center space-x-3">
+                  <div className="flex space-x-1.5">
+                    <span className="w-2 h-2 rounded-full bg-rose-500/60" />
+                    <span className="w-2 h-2 rounded-full bg-amber-500/60" />
+                    <span className="w-2 h-2 rounded-full bg-emerald-500/60" />
+                  </div>
+                  {/* Tab toggles */}
+                  <div className="flex items-center space-x-2 border-l border-white/10 pl-3">
+                    <button 
+                      onClick={() => setHudView('code')}
+                      className={`text-[10px] font-mono tracking-wider uppercase font-semibold transition-colors cursor-pointer ${
+                        hudView === 'code' ? 'text-white border-b border-indigo-500 pb-0.5' : 'text-zinc-500 hover:text-zinc-300'
+                      }`}
+                    >
+                      Schema
+                    </button>
+                    <button 
+                      onClick={() => setHudView('photo')}
+                      className={`text-[10px] font-mono tracking-wider uppercase font-semibold transition-colors cursor-pointer ${
+                        hudView === 'photo' ? 'text-white border-b border-indigo-500 pb-0.5' : 'text-zinc-500 hover:text-zinc-300'
+                      }`}
+                    >
+                      Visual
+                    </button>
+                  </div>
                 </div>
-                <span>kcv-profile-engine.json</span>
-                <button 
-                  onClick={handleCopyProfile}
-                  className="px-2 py-0.5 rounded bg-white/5 hover:bg-white/10 text-[10px] text-zinc-400 hover:text-white transition-colors"
-                >
-                  {copiedText ? 'Copied!' : 'Copy'}
-                </button>
+                {hudView === 'code' ? (
+                  <button 
+                    onClick={handleCopyProfile}
+                    className="px-2 py-0.5 rounded bg-white/5 hover:bg-white/10 text-[10px] text-zinc-400 hover:text-white transition-colors cursor-pointer"
+                  >
+                    {copiedText ? 'Copied!' : 'Copy'}
+                  </button>
+                ) : (
+                  <span className="text-[9px] uppercase tracking-wider text-emerald-400 font-mono font-semibold bg-emerald-500/10 border border-emerald-500/20 px-2 py-0.5 rounded">
+                    Operator
+                  </span>
+                )}
               </div>
 
-              {/* Monospaced JSON HUD */}
-              <pre className="font-mono text-[11px] text-zinc-300 overflow-x-auto space-y-0.5 p-3 rounded bg-black/40 border border-white/5">
-                <span className="text-zinc-500">// Personal Identity Schema</span>
-                <br/>{`{`}
-                <br/>  <span className="text-indigo-400">"name"</span>: <span className="text-emerald-400">"Kuldeep Chandra Vishwakarma"</span>,
-                <br/>  <span className="text-indigo-400">"role"</span>: <span className="text-emerald-400">"Software Engineer"</span>,
-                <br/>  <span className="text-indigo-400">"education"</span>: <span className="text-emerald-400">"MSc CompSci (Pursuing)"</span>,
-                <br/>  <span className="text-indigo-400">"focus"</span>: <span className="text-emerald-400">"Full-Stack & AI pipelines"</span>,
-                <br/>  <span className="text-indigo-400">"startup"</span>: <span className="text-emerald-400">"StartupWire.in"</span>,
-                <br/>  <span className="text-indigo-400">"currently_learning"</span>: [
-                <br/>    <span className="text-amber-400">"AI Agent Curation"</span>,
-                <br/>    <span className="text-amber-400">"JWT/CSP Web Security"</span>
-                <br/>  ],
-                <br/>  <span className="text-indigo-400">"status"</span>: <span className="text-emerald-400">"Open to software roles"</span>
-                <br/>{`}`}
-              </pre>
+              {/* Monospaced JSON HUD or Visual profile photo */}
+              <AnimatePresence mode="wait">
+                {hudView === 'code' ? (
+                  <motion.pre
+                    key="code"
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    transition={{ duration: 0.2 }}
+                    className="font-mono text-[11px] text-zinc-300 overflow-x-auto space-y-0.5 p-3 rounded bg-black/40 border border-white/5"
+                  >
+                    <span className="text-zinc-500">// Personal Identity Schema</span>
+                    <br/>{`{`}
+                    <br/>  <span className="text-indigo-400">"name"</span>: <span className="text-emerald-400">"Kuldeep Chandra Vishwakarma"</span>,
+                    <br/>  <span className="text-indigo-400">"role"</span>: <span className="text-emerald-400">"Software Engineer"</span>,
+                    <br/>  <span className="text-indigo-400">"education"</span>: <span className="text-emerald-400">"MSc CompSci (Pursuing)"</span>,
+                    <br/>  <span className="text-indigo-400">"focus"</span>: <span className="text-emerald-400">"Full-Stack & AI pipelines"</span>,
+                    <br/>  <span className="text-indigo-400">"startup"</span>: <span className="text-emerald-400">"StartupWire.in"</span>,
+                    <br/>  <span className="text-indigo-400">"currently_learning"</span>: [
+                    <br/>    <span className="text-amber-400">"AI Agent Curation"</span>,
+                    <br/>    <span className="text-amber-400">"JWT/CSP Web Security"</span>
+                    <br/>  ],
+                    <br/>  <span className="text-indigo-400">"status"</span>: <span className="text-emerald-400">"Open to software roles"</span>
+                    <br/>{`}`}
+                  </motion.pre>
+                ) : (
+                  <motion.div
+                    key="photo"
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    transition={{ duration: 0.2 }}
+                    className="relative aspect-[4/3] w-full rounded-lg overflow-hidden border border-white/5 bg-black/40 flex items-center justify-center group/img"
+                  >
+                    <img 
+                      src="/kuldeep.jpg" 
+                      alt="Kuldeep Chandra Vishwakarma" 
+                      className="absolute inset-0 w-full h-full object-cover transform scale-[1.08] hover:scale-[1.15] transition-transform duration-700" 
+                      style={{ objectPosition: 'center 20%' }}
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/35 to-transparent pointer-events-none" />
+                    
+                    {/* Decorative cyber overlays */}
+                    <div className="absolute top-2 left-2 flex items-center space-x-1.5 bg-black/60 backdrop-blur-md border border-white/10 px-2 py-0.5 rounded text-[8px] font-mono tracking-widest text-zinc-300">
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                      <span>SYS_ACTIVE</span>
+                    </div>
+
+                    <div className="absolute top-2 right-2 bg-indigo-500/10 border border-indigo-500/20 text-indigo-300 text-[8px] font-mono uppercase tracking-widest px-2 py-0.5 rounded">
+                      Ver: 1.4.6
+                    </div>
+
+                    {/* Scanlines visual effect overlay */}
+                    <div className="absolute inset-0 pointer-events-none bg-scanlines opacity-10" />
+
+                    {/* Tech frames */}
+                    <div className="absolute left-0 top-1/4 bottom-1/4 w-[2px] bg-gradient-to-b from-transparent via-indigo-500 to-transparent" />
+                    <div className="absolute right-0 top-1/4 bottom-1/4 w-[2px] bg-gradient-to-b from-transparent via-emerald-500 to-transparent" />
+
+                    <div className="absolute bottom-3 left-3 right-3 text-left space-y-1">
+                      <h3 className="text-xs font-bold text-white font-sans tracking-tight">
+                        Kuldeep Chandra Vishwakarma
+                      </h3>
+                      <p className="text-[9px] text-zinc-400 font-mono flex items-center gap-1">
+                        <span className="text-indigo-400">Node:</span> MSc CS • Full-Stack Developer
+                      </p>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
 
               <div className="pt-4 flex justify-between items-center text-[10px] text-zinc-500 font-mono">
                 <div className="flex items-center space-x-1.5">

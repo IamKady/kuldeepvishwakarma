@@ -87,14 +87,47 @@ export default function About() {
   return (
     <div className="max-w-5xl mx-auto px-4 space-y-16 py-6">
       
-      {/* Page Title */}
-      <div className="space-y-3 text-left">
-        <h1 className="text-3xl sm:text-5xl font-black text-white tracking-tight">
-          Systems Developer Narrative
-        </h1>
-        <p className="text-sm text-zinc-400 font-sans max-w-xl">
-          Tracing my transition from physics drafting into distributed systems, coding philosophies, and academic benchmarks.
-        </p>
+      {/* Page Title & Profile Badge */}
+      <div className="flex flex-col md:flex-row gap-8 items-start justify-between border-b border-white/5 pb-10">
+        <div className="space-y-4 text-left max-w-2xl flex-grow">
+          <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full border border-white/10 glass-panel bg-white/5">
+            <span className="w-1.5 h-1.5 rounded-full bg-indigo-400 animate-pulse" />
+            <span className="text-[10px] font-mono text-zinc-300 tracking-wider">
+              OPERATOR BIO // IDENT: KCV-77
+            </span>
+          </div>
+          <h1 className="text-3xl sm:text-5xl font-black text-white tracking-tight leading-none">
+            Systems Developer Narrative
+          </h1>
+          <p className="text-sm text-zinc-400 font-sans leading-relaxed max-w-xl">
+            Tracing my transition from physics drafting into distributed systems, coding philosophies, and academic benchmarks.
+          </p>
+        </div>
+
+        {/* Operator Badge Photo Card */}
+        <div className="w-full md:w-60 flex-shrink-0">
+          <div className="relative p-2 rounded-2xl glass-panel border-white/10 shadow-xl group overflow-hidden bg-white/[0.01]">
+            <div className="relative aspect-[3/4] rounded-xl overflow-hidden border border-white/5 bg-black/40">
+              <img 
+                src="/kuldeep.jpg" 
+                alt="Kuldeep Chandra Vishwakarma" 
+                className="w-full h-full object-cover object-center scale-[1.02] transform hover:scale-[1.08] transition-transform duration-500"
+                style={{ objectPosition: 'center 20%' }}
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/80 via-transparent to-transparent pointer-events-none" />
+              <div className="absolute top-2 right-2 bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-[8px] font-mono uppercase tracking-widest px-2 py-0.5 rounded">
+                Active
+              </div>
+            </div>
+            <div className="pt-3 px-1 flex items-center justify-between">
+              <div className="space-y-0.5">
+                <span className="text-[11px] font-bold text-white block">Kuldeep Chandra V.</span>
+                <span className="text-[9px] font-mono text-zinc-500 block">kcv-node-0</span>
+              </div>
+              <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse border border-emerald-500/50" />
+            </div>
+          </div>
+        </div>
       </div>
 
       {/* Narrative Story Grid */}
