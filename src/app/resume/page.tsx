@@ -17,7 +17,8 @@ import {
   Phone,
   FileText,
   Sparkles,
-  CheckCircle2
+  GitBranch,
+  BookOpen
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
@@ -57,7 +58,7 @@ export default function Resume() {
               resume_kuldeep_vishwakarma.pdf <span className="text-[9px] text-zinc-500 normal-case">(A4 Render)</span>
             </h1>
             <p className="text-[10px] text-zinc-500 font-mono mt-0.5">
-              Size: ~128 KB | Ver: 1.4.6 | Systems Active
+              Size: ~135 KB | Ver: 1.4.8 | Systems Active
             </p>
           </div>
         </div>
@@ -198,9 +199,9 @@ export default function Resume() {
               <ul className={`list-disc pl-5 text-xs space-y-1.5 font-sans ${
                 isPdf ? 'text-zinc-800' : 'text-zinc-400'
               } print:text-zinc-700`}>
-                <li>Engineered an autonomous AI news aggregator crawling 40+ verified RSS XML nodes every 4 hours.</li>
-                <li>Implemented pgvector cosine similarity distance queries in Supabase, filtering duplicate articles with 85% confidence.</li>
-                <li>Optimized Next.js edge caching revalidation schedules, achieving 100/100 Lighthouse performance and SEO scores.</li>
+                <li>Engineered an autonomous AI news aggregator crawling 40+ verified RSS XML nodes every 4 hours, filtering noise and clickbait.</li>
+                <li>Implemented pgvector cosine similarity distance queries in Supabase PostgreSQL, filtering duplicate articles with 85% confidence.</li>
+                <li>Optimized Next.js edge caching revalidation schedules and programmatic sitemaps, achieving 100/100 Lighthouse performance and SEO scores.</li>
               </ul>
             </div>
 
@@ -216,7 +217,7 @@ export default function Resume() {
               <ul className={`list-disc pl-5 text-xs space-y-1.5 font-sans ${
                 isPdf ? 'text-zinc-800' : 'text-zinc-400'
               } print:text-zinc-700`}>
-                <li>Designed full-stack platforms leveraging MongoDB, Express, React, and Next.js, raising core load speeds by 35%.</li>
+                <li>Designed full-stack platforms leveraging MongoDB, Express, React, and Next.js, raising clients core load speeds by 35%.</li>
                 <li>Created server automation and scraper scripts utilizing Python and Node cron workers, streamlining database inputs.</li>
                 <li>Secured APIs from standard exploitation tactics (XSS, SQLi) using Zod schema controls and secure HTTP-only JWT credentials.</li>
               </ul>
@@ -238,6 +239,54 @@ export default function Resume() {
                 <li>Conducted complete technical search engine optimization sweeps, rectifying sitemap hierarchies and increasing organic keyword indexing visibility.</li>
                 <li>Collaborated with design teams to translate Figma design elements into modular layout interfaces.</li>
               </ul>
+            </div>
+          </div>
+        </div>
+
+        {/* Selected Products & Projects */}
+        <div className="space-y-4">
+          <h3 className={`text-xs font-bold uppercase tracking-wider font-mono border-b pb-1.5 flex items-center ${
+            isPdf ? 'text-zinc-950 border-zinc-200' : 'text-white border-white/5'
+          } print:text-zinc-900 print:border-zinc-200`}>
+            <Trophy className={`w-4 h-4 mr-2 ${isPdf ? 'text-indigo-700' : 'text-indigo-400'} print:text-indigo-600`} />
+            Selected Products & Systems Built
+          </h3>
+          <div className="space-y-4 text-xs font-sans">
+            <div>
+              <span className={`font-bold block ${isPdf ? 'text-zinc-900' : 'text-white'} print:text-zinc-900`}>StartupWire — Autonomous AI Tech News Aggregator</span>
+              <p className={isPdf ? 'text-zinc-700' : 'text-zinc-400 print:text-zinc-700'}>
+                Dual-layer system consisting of a Next.js App Router edge cached frontend and a NodeJS background daemon cron scheduler analyzing articles via Gemini 1.5 Flash.
+              </p>
+            </div>
+            <div>
+              <span className={`font-bold block ${isPdf ? 'text-zinc-900' : 'text-white'} print:text-zinc-900`}>AI Prompt Studio — Local Prompt Engineering Sandbox</span>
+              <p className={isPdf ? 'text-zinc-700' : 'text-zinc-400 print:text-zinc-700'}>
+                Secure, offline-first client application using React, Vite, and LocalStorage variables parsing hooks for template versioning.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Open Source Contributions */}
+        <div className="space-y-4">
+          <h3 className={`text-xs font-bold uppercase tracking-wider font-mono border-b pb-1.5 flex items-center ${
+            isPdf ? 'text-zinc-950 border-zinc-200' : 'text-white border-white/5'
+          } print:text-zinc-900 print:border-zinc-200`}>
+            <GitBranch className={`w-4 h-4 mr-2 ${isPdf ? 'text-emerald-700' : 'text-emerald-400'} print:text-emerald-600`} />
+            Open Source Contributions
+          </h3>
+          <div className="space-y-3.5 text-xs font-sans">
+            <div>
+              <span className={`font-bold block ${isPdf ? 'text-zinc-900' : 'text-white'} print:text-zinc-900`}>Next.js Core Docs Caching Sweep (Merged)</span>
+              <p className={isPdf ? 'text-zinc-700' : 'text-zinc-400 print:text-zinc-700'}>
+                Refined Edge runtime caching and revalidation guidelines helping developers handle database webhook triggers correctly.
+              </p>
+            </div>
+            <div>
+              <span className={`font-bold block ${isPdf ? 'text-zinc-900' : 'text-white'} print:text-zinc-900`}>Framer Motion performance layout bounds (Merged)</span>
+              <p className={isPdf ? 'text-zinc-700' : 'text-zinc-400 print:text-zinc-700'}>
+                Corrected minor UI render loops triggered during layoutId shifts across dynamic routers.
+              </p>
             </div>
           </div>
         </div>
@@ -264,6 +313,7 @@ export default function Resume() {
               <div>
                 <span className={`font-bold ${isPdf ? 'text-zinc-950' : 'text-white'} print:text-zinc-900`}>Bachelor of Technology (B.Tech) in Computer Science & Engineering</span>
                 <p className={`text-xs mt-0.5 ${isPdf ? 'text-zinc-600' : 'text-zinc-400'} print:text-zinc-600`}>Dr. A.P.J. Abdul Kalam Technical University (AKTU)</p>
+                <p className="text-[10px] text-zinc-500 mt-0.5">Honors division degree recipient (8.2/10.0 CGPA baseline)</p>
               </div>
               <span className={`font-mono text-xs ${isPdf ? 'text-zinc-600' : 'text-zinc-500'} print:text-zinc-600`}>2022 - 2025</span>
             </div>
@@ -272,8 +322,35 @@ export default function Resume() {
               <div>
                 <span className={`font-bold ${isPdf ? 'text-zinc-950' : 'text-white'} print:text-zinc-900`}>Diploma in Civil Engineering (Transition Phase)</span>
                 <p className={`text-xs mt-0.5 ${isPdf ? 'text-zinc-600' : 'text-zinc-400'} print:text-zinc-600`}>Board of Technical Education</p>
+                <p className="text-[10px] text-zinc-500 mt-0.5">Structural physics configurations, drafting layouts and blueprints tracking.</p>
               </div>
               <span className={`font-mono text-xs ${isPdf ? 'text-zinc-600' : 'text-zinc-500'} print:text-zinc-600`}>2019 - 2022</span>
+            </div>
+
+            <div className="flex justify-between items-start text-xs sm:text-sm font-sans">
+              <div>
+                <span className={`font-bold ${isPdf ? 'text-zinc-950' : 'text-white'} print:text-zinc-900`}>Class XII (Intermediate School)</span>
+                <p className={`text-xs mt-0.5 ${isPdf ? 'text-zinc-600' : 'text-zinc-400'} print:text-zinc-600`}>State Board (PCM division score: 82.0% overall)</p>
+              </div>
+              <span className={`font-mono text-xs ${isPdf ? 'text-zinc-600' : 'text-zinc-500'} print:text-zinc-600`}>2018</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Research & Publications */}
+        <div className="space-y-4">
+          <h3 className={`text-xs font-bold uppercase tracking-wider font-mono border-b pb-1.5 flex items-center ${
+            isPdf ? 'text-zinc-950 border-zinc-200' : 'text-white border-white/5'
+          } print:text-zinc-900 print:border-zinc-200`}>
+            <BookOpen className={`w-4 h-4 mr-2 ${isPdf ? 'text-rose-700' : 'text-rose-400'} print:text-rose-600`} />
+            Systems Research Publications
+          </h3>
+          <div className="space-y-2 text-xs font-sans">
+            <div>
+              <span className={`font-bold block ${isPdf ? 'text-zinc-900' : 'text-white'} print:text-zinc-900`}>On the Reliability of AI Agent Curation Pipelines (MSc Research)</span>
+              <p className={isPdf ? 'text-zinc-700' : 'text-zinc-400 print:text-zinc-700'}>
+                Explores prompt engineering boundaries and PostgreSQL pgvector cosine similarity index thresholds to achieve deterministic structured JSON aggregation.
+              </p>
             </div>
           </div>
         </div>
@@ -312,7 +389,7 @@ export default function Resume() {
             Certificates & Achievements
           </h3>
           
-          <ul className={`list-disc pl-5 text-xs space-y-1 font-sans ${
+          <ul className={`list-disc pl-5 text-xs space-y-1.5 font-sans ${
             isPdf ? 'text-zinc-800' : 'text-zinc-400'
           } print:text-zinc-700`}>
             <li>Successfully built and deployed **StartupWire.in** (achieving 100/100 performance ranking scores).</li>
