@@ -24,17 +24,19 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="mt-auto border-t border-card-border bg-black/40 backdrop-blur-md relative z-10">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
+    <footer className="mt-auto border-t border-card-border bg-black/40 backdrop-blur-md relative z-10 font-sans">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        
+        {/* Main Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 items-start">
           
-          {/* Brand/Summary */}
+          {/* Column 1: Brand & Socials */}
           <div className="space-y-4">
-            <h3 className="text-sm font-bold text-white uppercase tracking-wider font-sans">
+            <h3 className="text-sm font-bold text-white uppercase tracking-wider font-mono">
               Kuldeep C. Vishwakarma
             </h3>
-            <p className="text-xs text-zinc-400 font-sans max-w-sm leading-relaxed">
-              Software Engineer, AI Builder, and Founder. Designing the future of startup journalism, ethical systems, and automation.
+            <p className="text-xs text-zinc-400 max-w-sm leading-relaxed">
+              Software Engineer, AI Builder, and Startup Founder. Designing programmatic curation pipelines, edge networks, and security protocols.
             </p>
             <div className="flex items-center space-x-3 pt-2">
               {socialLinks.map((s) => (
@@ -57,24 +59,50 @@ export default function Footer() {
                 <Rss className="w-4 h-4" />
               </Link>
             </div>
+            
+            <div className="text-[10px] text-zinc-500 font-mono">
+              <span>Status: </span>
+              <span className="text-emerald-400 font-semibold">Available for Hire (IST)</span>
+            </div>
           </div>
 
-          {/* Newsletter */}
+          {/* Column 2: Navigation Links Grid */}
           <div className="space-y-4">
-            <h3 className="text-sm font-bold text-white uppercase tracking-wider font-sans">
+            <h3 className="text-sm font-bold text-white uppercase tracking-wider font-mono">
+              System Sitemap
+            </h3>
+            <div className="grid grid-cols-2 gap-x-4 gap-y-2 text-xs">
+              <Link href="/now" className="text-zinc-400 hover:text-white transition-colors">/now</Link>
+              <Link href="/uses" className="text-zinc-400 hover:text-white transition-colors">/uses</Link>
+              <Link href="/reading" className="text-zinc-400 hover:text-white transition-colors">/reading</Link>
+              <Link href="/architecture" className="text-zinc-400 hover:text-white transition-colors">/architecture</Link>
+              <Link href="/case-studies" className="text-zinc-400 hover:text-white transition-colors">/case-studies</Link>
+              <Link href="/open-source" className="text-zinc-400 hover:text-white transition-colors">/open-source</Link>
+              <Link href="/ai-experiments" className="text-zinc-400 hover:text-white transition-colors">/ai-experiments</Link>
+              <Link href="/developer-notes" className="text-zinc-400 hover:text-white transition-colors">/developer-notes</Link>
+              <Link href="/learning-journal" className="text-zinc-400 hover:text-white transition-colors">/learning-journal</Link>
+              <Link href="/research" className="text-zinc-400 hover:text-white transition-colors">/research</Link>
+              <Link href="/speaking" className="text-zinc-400 hover:text-white transition-colors">/speaking</Link>
+              <Link href="/roadmap" className="text-zinc-400 hover:text-white transition-colors">/roadmap</Link>
+            </div>
+          </div>
+
+          {/* Column 3: Newsletter System Updates */}
+          <div className="space-y-4">
+            <h3 className="text-sm font-bold text-white uppercase tracking-wider font-mono">
               System Updates
             </h3>
-            <p className="text-xs text-zinc-400 font-sans leading-relaxed">
-              Subscribe to my newsletter. I write monthly on AI prompts, software development, and the founder journey of StartupWire.
+            <p className="text-xs text-zinc-400 leading-relaxed">
+              Subscribe to my tech publication newsletter. I log monthly reports on AI prompts, edge caches, and startup building.
             </p>
             <form onSubmit={handleSubscribe} className="flex max-w-md">
               <input
                 type="email"
                 required
-                placeholder="system_admin@domain.com"
+                placeholder="sys_admin@domain.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full px-3 py-2 text-xs bg-white/5 text-white border border-white/10 rounded-l-md outline-none focus:border-ai transition-colors font-mono"
+                className="w-full px-3 py-2 text-xs bg-white/5 text-white border border-white/10 rounded-l-md outline-none focus:border-indigo-500 transition-colors font-mono"
               />
               <button
                 type="submit"
@@ -89,9 +117,9 @@ export default function Footer() {
             </form>
           </div>
 
-          {/* Professional OS Telemetry Dashboard */}
+          {/* Column 4: OS Telemetry Console */}
           <div className="space-y-4">
-            <h3 className="text-sm font-bold text-white uppercase tracking-wider font-sans">
+            <h3 className="text-sm font-bold text-white uppercase tracking-wider font-mono">
               OS Telemetry Console
             </h3>
             <div className="p-3.5 rounded-lg border border-white/10 bg-black/50 font-mono text-[10px] space-y-1.5 text-zinc-400">
@@ -108,26 +136,29 @@ export default function Footer() {
                 <span className="text-amber-400">kcv-core-agentd.exe</span>
               </div>
               <div className="flex justify-between">
-                <span>SSL STATUS:</span>
-                <span className="text-emerald-400">ACTIVE (VERIFIED)</span>
-              </div>
-              <div className="flex justify-between">
                 <span>PORTFOLIO OS:</span>
-                <span className="text-zinc-200">v1.2.6 (Next.js Node)</span>
+                <span className="text-zinc-200">v1.4.6 (Next.js Node)</span>
+              </div>
+              <div className="flex justify-between border-t border-white/5 pt-1.5 mt-1 text-zinc-500">
+                <span>CHANGELOG:</span>
+                <span className="text-indigo-400">All 12 subpages active</span>
               </div>
             </div>
           </div>
 
         </div>
 
-        <div className="mt-12 pt-6 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between text-[11px] text-zinc-500 font-sans">
+        {/* Footer Bottom */}
+        <div className="mt-12 pt-6 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between text-[11px] text-zinc-500">
           <p>© {new Date().getFullYear()} Kuldeep Chandra Vishwakarma. All rights reserved.</p>
-          <div className="flex space-x-4 mt-4 sm:mt-0">
-            <Link href="/resume" className="hover:text-zinc-300">Resume</Link>
-            <Link href="/projects" className="hover:text-zinc-300">Case Studies</Link>
-            <Link href="/contact" className="hover:text-zinc-300">Schedule Meeting</Link>
+          <div className="flex space-x-4 mt-4 sm:mt-0 font-mono text-[10px]">
+            <Link href="/resume" className="hover:text-zinc-300">/resume</Link>
+            <Link href="/projects" className="hover:text-zinc-300">/case-studies</Link>
+            <Link href="/contact" className="hover:text-zinc-300">/contact</Link>
+            <a href="https://github.com/IamKady" target="_blank" rel="noopener noreferrer" className="hover:text-zinc-300">github</a>
           </div>
         </div>
+
       </div>
     </footer>
   );

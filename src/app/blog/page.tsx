@@ -9,7 +9,10 @@ import {
   Clock, 
   X, 
   ArrowLeft,
-  Rss
+  Rss,
+  Hash,
+  CornerDownLeft,
+  ChevronRight
 } from 'lucide-react';
 import { blogsData } from '@/data/db';
 
@@ -21,12 +24,21 @@ export default function Blog() {
   const categories = [
     'All', 
     'Artificial Intelligence', 
-    'Web Development', 
+    'Programming', 
+    'Next.js', 
+    'React', 
     'Cybersecurity', 
-    'Startups', 
+    'Architecture', 
+    'System Design', 
+    'Linux', 
+    'Automation', 
+    'Open Source', 
     'Career', 
-    'Productivity', 
-    'Entrepreneurship'
+    'Books', 
+    'Engineering', 
+    'Startup Building', 
+    'Deep Dives', 
+    'Tutorials'
   ];
 
   const filteredBlogs = blogsData.filter(blog => {
@@ -34,6 +46,7 @@ export default function Blog() {
                           blog.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
                           blog.content.toLowerCase().includes(searchQuery.toLowerCase());
     
+    // Exact category match or All
     const matchesCategory = selectedCategory === 'All' || blog.category === selectedCategory;
 
     return matchesSearch && matchesCategory;
@@ -57,14 +70,13 @@ export default function Blog() {
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
               <div className="space-y-3">
                 <h1 className="text-3xl sm:text-5xl font-black text-white tracking-tight">
-                  Technology Writer
+                  Engineering Publications
                 </h1>
                 <p className="text-sm text-zinc-400 font-sans max-w-md">
-                  Practical guides and developer thoughts regarding systems engineering, security, and AI integrations.
+                  Deep dives into systems architecture, rate-limiting, programmatic SEO, and AI agents workflows.
                 </p>
               </div>
 
-              {/* RSS Feed Simulator Link */}
               <a 
                 href="/rss.xml" 
                 className="inline-flex items-center space-x-2 px-3 py-1.5 rounded-lg border border-rose-500/20 bg-rose-500/5 text-xs text-rose-400 font-medium hover:bg-rose-500/10 cursor-pointer self-start sm:self-auto"
@@ -75,35 +87,38 @@ export default function Blog() {
             </div>
 
             {/* Filters Row */}
-            <div className="flex flex-col sm:flex-row gap-4 border-b border-white/5 pb-6">
+            <div className="flex flex-col gap-6 border-b border-white/5 pb-6">
               
               {/* Search input */}
-              <div className="relative flex-grow max-w-sm">
+              <div className="relative w-full max-w-md">
                 <Search className="absolute left-3 top-3 w-4 h-4 text-zinc-500" />
                 <input
                   type="text"
-                  placeholder="Search articles..."
+                  placeholder="Search articles indexing..."
                   value={searchQuery}
                   onChange={e => setSearchQuery(e.target.value)}
                   className="pl-9 pr-4 py-2 text-xs bg-white/5 border border-white/10 rounded-lg outline-none text-white focus:border-indigo-500 transition-colors w-full font-sans"
                 />
               </div>
 
-              {/* Categories list */}
-              <div className="flex flex-wrap gap-1.5 items-center">
-                {categories.map((cat) => (
-                  <button
-                    key={cat}
-                    onClick={() => setSelectedCategory(cat)}
-                    className={`px-3 py-1.5 rounded-lg text-[10px] font-semibold uppercase tracking-wider transition-all cursor-pointer ${
-                      selectedCategory === cat 
-                        ? 'bg-indigo-600 text-white shadow-md' 
-                        : 'text-zinc-400 hover:text-zinc-200 hover:bg-white/5 border border-white/5'
-                    }`}
-                  >
-                    {cat}
-                  </button>
-                ))}
+              {/* Categories Scroll Grid */}
+              <div className="space-y-2">
+                <span className="text-[10px] font-mono text-zinc-500 uppercase tracking-wider block">Filter by Category Taxonomy</span>
+                <div className="flex flex-wrap gap-1.5">
+                  {categories.map((cat) => (
+                    <button
+                      key={cat}
+                      onClick={() => setSelectedCategory(cat)}
+                      className={`px-3 py-1.5 rounded-lg text-[9px] font-mono uppercase tracking-wider transition-all cursor-pointer border ${
+                        selectedCategory === cat 
+                          ? 'bg-indigo-600 border-indigo-400 text-white shadow-md' 
+                          : 'text-zinc-400 hover:text-zinc-200 hover:bg-white/5 border-white/5 bg-zinc-950/40'
+                      }`}
+                    >
+                      {cat}
+                    </button>
+                  ))}
+                </div>
               </div>
 
             </div>
@@ -115,12 +130,13 @@ export default function Blog() {
                   key={blog.id} 
                   id={blog.id}
                   onClick={() => setReadingBlogId(blog.id)}
-                  className="glass-panel p-6 rounded-xl border-white/10 space-y-4 hover:border-white/20 transition-all cursor-pointer shadow-lg group relative overflow-hidden"
+                  className="glass-panel p-6 rounded-2xl border-white/10 space-y-4 hover:border-white/20 transition-all cursor-pointer shadow-lg group relative overflow-hidden"
                 >
                   <div className="absolute inset-0 bg-gradient-to-r from-rose-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
 
                   <div className="flex flex-wrap items-center justify-between gap-2">
-                    <span className="text-[10px] font-mono text-rose-400 uppercase bg-rose-500/5 px-2 py-0.5 rounded border border-rose-500/10">
+                    <span className="text-[9px] font-mono text-rose-400 uppercase bg-rose-500/5 px-2.5 py-0.8 rounded border border-rose-500/10 flex items-center gap-1">
+                      <Hash className="w-3 h-3" />
                       {blog.category}
                     </span>
                     
@@ -136,7 +152,7 @@ export default function Blog() {
                     </div>
                   </div>
 
-                  <div className="space-y-1">
+                  <div className="space-y-1.5">
                     <h3 className="text-base sm:text-lg font-bold text-white group-hover:text-rose-400 transition-colors font-sans">
                       {blog.title}
                     </h3>
@@ -146,7 +162,7 @@ export default function Blog() {
                   </div>
 
                   <div className="pt-2 text-xs font-semibold text-rose-400 flex items-center space-x-1 font-sans">
-                    <span>Read Article</span>
+                    <span>Inspect Publication</span>
                     <span className="group-hover:translate-x-1 transition-transform">→</span>
                   </div>
                 </div>
@@ -166,7 +182,7 @@ export default function Blog() {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 10 }}
-            className="space-y-8 bg-zinc-950/40 p-6 sm:p-8 rounded-xl border border-white/10 shadow-2xl relative"
+            className="space-y-8 bg-zinc-950/40 p-6 sm:p-8 rounded-2xl border border-white/10 shadow-2xl relative"
           >
             {/* Back to list */}
             <button
@@ -180,7 +196,8 @@ export default function Blog() {
             {/* Header info */}
             <div className="space-y-4 border-b border-white/5 pb-6">
               <div className="flex flex-wrap items-center gap-2">
-                <span className="text-[10px] font-mono text-rose-400 bg-rose-500/5 px-2 py-0.5 rounded border border-rose-500/10">
+                <span className="text-[9px] font-mono text-rose-400 bg-rose-500/5 px-2.5 py-0.8 rounded border border-rose-500/10 flex items-center gap-1">
+                  <Hash className="w-3 h-3" />
                   {activeBlog?.category}
                 </span>
                 <span className="text-[10px] font-mono text-zinc-500">
@@ -197,11 +214,52 @@ export default function Blog() {
               </p>
             </div>
 
-            {/* Markdown styled content */}
+            {/* Markdown styled content (Handles headings, paragraphs, and lists) */}
             <div className="font-sans text-xs sm:text-sm text-zinc-300 leading-relaxed space-y-6 max-w-none pt-2">
-              <p>{activeBlog?.content}</p>
-              <p className="pt-4 border-t border-white/5 text-[11px] text-zinc-500 font-mono">
-                EOF (End of File) • System index: {activeBlog?.id}.log
+              {activeBlog?.content.split('\n\n').map((paragraph, pIdx) => {
+                // If it starts with markdown heading
+                if (paragraph.startsWith('### ')) {
+                  return (
+                    <h3 key={pIdx} className="text-base font-bold text-white font-sans border-b border-white/5 pb-1.5 pt-2 uppercase tracking-wider font-mono text-indigo-400">
+                      {paragraph.replace('### ', '')}
+                    </h3>
+                  );
+                }
+                
+                // If it's a code block
+                if (paragraph.startsWith('```')) {
+                  const lines = paragraph.split('\n');
+                  const codeLines = lines.slice(1, lines.length - 1).join('\n');
+                  return (
+                    <pre key={pIdx} className="p-4 rounded-xl bg-black border border-white/5 font-mono text-[10px] sm:text-xs text-zinc-300 overflow-x-auto whitespace-pre leading-relaxed leading-tight">
+                      <code>{codeLines}</code>
+                    </pre>
+                  );
+                }
+
+                // If it's a bulleted list
+                if (paragraph.startsWith('* ') || paragraph.startsWith('1. ')) {
+                  return (
+                    <ul key={pIdx} className="list-disc pl-5 space-y-2 text-xs sm:text-sm text-zinc-400 font-sans">
+                      {paragraph.split('\n').map((li, lIdx) => (
+                        <li key={lIdx}>
+                          {li.replace(/^\* |^\d+\.\s/, '')}
+                        </li>
+                      ))}
+                    </ul>
+                  );
+                }
+
+                return (
+                  <p key={pIdx} className="text-zinc-300 leading-relaxed">
+                    {paragraph}
+                  </p>
+                );
+              })}
+              
+              <p className="pt-4 border-t border-white/5 text-[11px] text-zinc-500 font-mono flex items-center justify-between">
+                <span>EOF (End of File) • System index: {activeBlog?.id}.log</span>
+                <span className="text-emerald-400 font-bold">SYS_ACTIVE</span>
               </p>
             </div>
 

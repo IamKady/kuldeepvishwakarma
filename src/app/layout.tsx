@@ -47,12 +47,68 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // Person schema LD+JSON
+  const personSchema = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Kuldeep Chandra Vishwakarma",
+    "alternateName": "Kuldeep Vishwakarma",
+    "url": "https://kuldeepvishwakarma.com",
+    "image": "https://kuldeepvishwakarma.com/favicon.ico",
+    "sameAs": [
+      "https://github.com/IamKady",
+      "https://www.linkedin.com/in/iamkady/",
+      "https://x.com/Kuldeep81824338"
+    ],
+    "jobTitle": "Software Engineer",
+    "worksFor": {
+      "@type": "Organization",
+      "name": "StartupWire"
+    },
+    "alumniOf": {
+      "@type": "EducationalOrganization",
+      "name": "Dr. A.P.J. Abdul Kalam Technical University"
+    },
+    "knowsAbout": [
+      "Software Engineering",
+      "Web Development",
+      "Next.js",
+      "React.js",
+      "PostgreSQL",
+      "Artificial Intelligence",
+      "Cybersecurity"
+    ]
+  };
+
+  // WebSite search schema
+  const websiteSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "url": "https://kuldeepvishwakarma.com",
+    "name": "Kuldeep Chandra Vishwakarma Portfolio",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://kuldeepvishwakarma.com/?search={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  };
+
   return (
     <html
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
       suppressHydrationWarning
     >
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+        />
+      </head>
       <body className="min-h-full flex flex-col font-sans">
         <ClientShell>{children}</ClientShell>
       </body>
