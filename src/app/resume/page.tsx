@@ -16,7 +16,8 @@ import {
   Award,
   Phone,
   FileText,
-  Sparkles
+  Sparkles,
+  CheckCircle2
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
@@ -36,7 +37,7 @@ export default function Resume() {
   const skillsGroup = [
     { title: 'Languages', items: ['TypeScript', 'JavaScript', 'Python', 'C++', 'SQL', 'HTML5', 'CSS3'] },
     { title: 'Frameworks / Libs', items: ['React.js', 'Next.js (App Router)', 'Node.js', 'Express', 'Tailwind CSS'] },
-    { title: 'Databases & Cloud', items: ['PostgreSQL', 'MongoDB', 'Supabase', 'Docker', 'Vercel', 'AWS (Basic)'] },
+    { title: 'Databases & Cloud', items: ['PostgreSQL', 'pgvector', 'MongoDB', 'Supabase', 'Docker', 'Vercel', 'AWS (Basic)'] },
     { title: 'Specializations', items: ['AI Agent Integration', 'Gemini API models', 'Programmatic SEO', 'API Security (JWT/CSP)', 'Linux Terminal Shell'] }
   ];
 
@@ -45,7 +46,7 @@ export default function Resume() {
   return (
     <div className="max-w-4xl mx-auto px-4 space-y-10 py-6 print:py-0 print:px-0">
       
-      {/* Simulated PDF Toolbar (Hidden when printed) */}
+      {/* PDF Toolbar */}
       <div className="flex flex-col md:flex-row justify-between items-stretch md:items-center gap-4 bg-zinc-950/70 p-4 rounded-xl border border-white/10 print:hidden backdrop-blur-md">
         <div className="flex items-center space-x-3">
           <div className="p-2 bg-rose-500/10 rounded border border-rose-500/20">
@@ -56,7 +57,7 @@ export default function Resume() {
               resume_kuldeep_vishwakarma.pdf <span className="text-[9px] text-zinc-500 normal-case">(A4 Render)</span>
             </h1>
             <p className="text-[10px] text-zinc-500 font-mono mt-0.5">
-              Size: ~124 KB | Ver: 1.4.2 | Systems Active
+              Size: ~128 KB | Ver: 1.4.6 | Systems Active
             </p>
           </div>
         </div>
@@ -171,7 +172,7 @@ export default function Resume() {
           <p className={`text-xs sm:text-sm leading-relaxed font-sans ${
             isPdf ? 'text-zinc-800' : 'text-zinc-400'
           } print:text-zinc-700`}>
-            Innovative Computer Science graduate and software engineer with expertise designing responsive MERN & Next.js web applications, building background crawlers, and integrating artificial intelligence engines. Hands-on experience developing StartupWire.in, programmatically summarizing content, optimizing for Google crawlers, and handling server operations securely.
+            Innovative Computer Science graduate and software engineer with expertise designing responsive MERN & Next.js web applications, building background crawlers, and integrating artificial intelligence engines. Hands-on experience developing StartupWire.in, programmatically summarizing content, optimizing for Google crawlers, and handling server operations securely. Lays strong computational baselines combining structured academic research with indie product launches.
           </p>
         </div>
 
@@ -185,6 +186,25 @@ export default function Resume() {
           </h3>
           
           <div className="space-y-5">
+            {/* StartupWire */}
+            <div className="space-y-1.5">
+              <div className="flex justify-between items-start text-xs sm:text-sm font-sans">
+                <div>
+                  <span className={`font-bold ${isPdf ? 'text-zinc-950' : 'text-white'} print:text-zinc-900`}>Startup Founder & Lead Engineer</span>
+                  <span className={isPdf ? 'text-zinc-600' : 'text-zinc-400 print:text-zinc-600'}> — StartupWire.in</span>
+                </div>
+                <span className={`font-mono text-xs ${isPdf ? 'text-zinc-600' : 'text-zinc-500'} print:text-zinc-600`}>2025 - Present</span>
+              </div>
+              <ul className={`list-disc pl-5 text-xs space-y-1.5 font-sans ${
+                isPdf ? 'text-zinc-800' : 'text-zinc-400'
+              } print:text-zinc-700`}>
+                <li>Engineered an autonomous AI news aggregator crawling 40+ verified RSS XML nodes every 4 hours.</li>
+                <li>Implemented pgvector cosine similarity distance queries in Supabase, filtering duplicate articles with 85% confidence.</li>
+                <li>Optimized Next.js edge caching revalidation schedules, achieving 100/100 Lighthouse performance and SEO scores.</li>
+              </ul>
+            </div>
+
+            {/* Freelance */}
             <div className="space-y-1.5">
               <div className="flex justify-between items-start text-xs sm:text-sm font-sans">
                 <div>
@@ -196,12 +216,13 @@ export default function Resume() {
               <ul className={`list-disc pl-5 text-xs space-y-1.5 font-sans ${
                 isPdf ? 'text-zinc-800' : 'text-zinc-400'
               } print:text-zinc-700`}>
-                <li>Designed full-stack platforms leveraging MongoDB, Express, React, and Next.js, raising clients core load speeds by 35%.</li>
+                <li>Designed full-stack platforms leveraging MongoDB, Express, React, and Next.js, raising core load speeds by 35%.</li>
                 <li>Created server automation and scraper scripts utilizing Python and Node cron workers, streamlining database inputs.</li>
-                <li>Secured APIs from standard exploitation tactics (XSS, SQLi) using Zod schema controls and secure JWT credentials.</li>
+                <li>Secured APIs from standard exploitation tactics (XSS, SQLi) using Zod schema controls and secure HTTP-only JWT credentials.</li>
               </ul>
             </div>
 
+            {/* Saarthi */}
             <div className="space-y-1.5">
               <div className="flex justify-between items-start text-xs sm:text-sm font-sans">
                 <div>
@@ -222,19 +243,38 @@ export default function Resume() {
         </div>
 
         {/* Education Section */}
-        <div className="space-y-3">
+        <div className="space-y-4">
           <h3 className={`text-xs font-bold uppercase tracking-wider font-mono border-b pb-1.5 flex items-center ${
             isPdf ? 'text-zinc-950 border-zinc-200' : 'text-white border-white/5'
           } print:text-zinc-900 print:border-zinc-200`}>
             <GraduationCap className={`w-4 h-4 mr-2 ${isPdf ? 'text-indigo-700' : 'text-indigo-400'} print:text-indigo-600`} />
             Education History
           </h3>
-          <div className="flex justify-between items-start text-xs sm:text-sm font-sans">
-            <div>
-              <span className={`font-bold ${isPdf ? 'text-zinc-950' : 'text-white'} print:text-zinc-900`}>Bachelor of Technology (B.Tech) in Computer Science & Engineering</span>
-              <p className={`text-xs mt-0.5 ${isPdf ? 'text-zinc-600' : 'text-zinc-400'} print:text-zinc-600`}>Dr. A.P.J. Abdul Kalam Technical University (AKTU)</p>
+          
+          <div className="space-y-4">
+            <div className="flex justify-between items-start text-xs sm:text-sm font-sans">
+              <div>
+                <span className={`font-bold ${isPdf ? 'text-zinc-950' : 'text-white'} print:text-zinc-900`}>M.Sc. in Computer Science (Pursuing)</span>
+                <p className={`text-xs mt-0.5 ${isPdf ? 'text-zinc-600' : 'text-zinc-400'} print:text-zinc-600`}>Dr. A.P.J. Abdul Kalam Technical University (AKTU)</p>
+              </div>
+              <span className={`font-mono text-xs ${isPdf ? 'text-zinc-600' : 'text-zinc-500'} print:text-zinc-600`}>2025 - Present</span>
             </div>
-            <span className={`font-mono text-xs ${isPdf ? 'text-zinc-600' : 'text-zinc-500'} print:text-zinc-600`}>2020 - 2024</span>
+
+            <div className="flex justify-between items-start text-xs sm:text-sm font-sans">
+              <div>
+                <span className={`font-bold ${isPdf ? 'text-zinc-950' : 'text-white'} print:text-zinc-900`}>Bachelor of Technology (B.Tech) in Computer Science & Engineering</span>
+                <p className={`text-xs mt-0.5 ${isPdf ? 'text-zinc-600' : 'text-zinc-400'} print:text-zinc-600`}>Dr. A.P.J. Abdul Kalam Technical University (AKTU)</p>
+              </div>
+              <span className={`font-mono text-xs ${isPdf ? 'text-zinc-600' : 'text-zinc-500'} print:text-zinc-600`}>2022 - 2025</span>
+            </div>
+
+            <div className="flex justify-between items-start text-xs sm:text-sm font-sans">
+              <div>
+                <span className={`font-bold ${isPdf ? 'text-zinc-950' : 'text-white'} print:text-zinc-900`}>Diploma in Civil Engineering (Transition Phase)</span>
+                <p className={`text-xs mt-0.5 ${isPdf ? 'text-zinc-600' : 'text-zinc-400'} print:text-zinc-600`}>Board of Technical Education</p>
+              </div>
+              <span className={`font-mono text-xs ${isPdf ? 'text-zinc-600' : 'text-zinc-500'} print:text-zinc-600`}>2019 - 2022</span>
+            </div>
           </div>
         </div>
 
