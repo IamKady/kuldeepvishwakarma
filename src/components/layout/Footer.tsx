@@ -123,25 +123,25 @@ export default function Footer() {
               OS Telemetry Console
             </h3>
             <div className="p-3.5 rounded-lg border border-white/10 bg-black/50 font-mono text-[10px] space-y-1.5 text-zinc-400">
-              <div className="flex justify-between">
-                <span>SYSTEM UPTIME:</span>
-                <span className="text-emerald-400 font-medium">324d 18h 45m</span>
+              <div className="flex justify-between gap-2">
+                <span className="flex-shrink-0">SYSTEM UPTIME:</span>
+                <span className="text-emerald-400 font-medium text-right">324d 18h 45m</span>
               </div>
-              <div className="flex justify-between">
-                <span>WORKSPACE:</span>
-                <span className="text-indigo-400">c:\Kuldeepvishwakarma.com</span>
+              <div className="flex justify-between gap-2">
+                <span className="flex-shrink-0">WORKSPACE:</span>
+                <span className="text-indigo-400 break-all text-right">c:\Kuldeepvishwakarma.com</span>
               </div>
-              <div className="flex justify-between">
-                <span>DAEMON PROCESS:</span>
-                <span className="text-amber-400">kcv-core-agentd.exe</span>
+              <div className="flex justify-between gap-2">
+                <span className="flex-shrink-0">DAEMON PROCESS:</span>
+                <span className="text-amber-400 break-all text-right">kcv-core-agentd.exe</span>
               </div>
-              <div className="flex justify-between">
-                <span>PORTFOLIO OS:</span>
-                <span className="text-zinc-200">v1.4.6 (Next.js Node)</span>
+              <div className="flex justify-between gap-2">
+                <span className="flex-shrink-0">PORTFOLIO OS:</span>
+                <span className="text-zinc-200 break-all text-right">v1.4.6 (Next.js Node)</span>
               </div>
-              <div className="flex justify-between border-t border-white/5 pt-1.5 mt-1 text-zinc-500">
-                <span>CHANGELOG:</span>
-                <span className="text-indigo-400">All 12 subpages active</span>
+              <div className="flex justify-between gap-2 border-t border-white/5 pt-1.5 mt-1 text-zinc-500">
+                <span className="flex-shrink-0">CHANGELOG:</span>
+                <span className="text-indigo-400 break-all text-right">All 12 subpages active</span>
               </div>
             </div>
           </div>
