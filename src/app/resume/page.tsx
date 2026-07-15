@@ -303,8 +303,8 @@ export default function Resume() {
           <div className="space-y-4">
             <div className="flex justify-between items-start text-xs sm:text-sm font-sans">
               <div>
-                <span className={`font-bold ${isPdf ? 'text-zinc-950' : 'text-white'} print:text-zinc-900`}>M.Sc. in Computer Science (Pursuing)</span>
-                <p className={`text-xs mt-0.5 ${isPdf ? 'text-zinc-600' : 'text-zinc-400'} print:text-zinc-600`}>Dr. A.P.J. Abdul Kalam Technical University (AKTU)</p>
+                <span className={`font-bold ${isPdf ? 'text-zinc-950' : 'text-white'} print:text-zinc-900`}>M.Sc. in Computer Science (Pursuing – Distance Mode)</span>
+                <p className={`text-xs mt-0.5 ${isPdf ? 'text-zinc-600' : 'text-zinc-400'} print:text-zinc-600`}>UPRTOU Prayagraj (Uttar Pradesh Rajarshi Tandon Open University)</p>
               </div>
               <span className={`font-mono text-xs ${isPdf ? 'text-zinc-600' : 'text-zinc-500'} print:text-zinc-600`}>2025 - Present</span>
             </div>
@@ -313,7 +313,7 @@ export default function Resume() {
               <div>
                 <span className={`font-bold ${isPdf ? 'text-zinc-950' : 'text-white'} print:text-zinc-900`}>Bachelor of Technology (B.Tech) in Computer Science & Engineering</span>
                 <p className={`text-xs mt-0.5 ${isPdf ? 'text-zinc-600' : 'text-zinc-400'} print:text-zinc-600`}>Dr. A.P.J. Abdul Kalam Technical University (AKTU)</p>
-                <p className="text-[10px] text-zinc-500 mt-0.5">Honors division degree recipient (8.2/10.0 CGPA baseline)</p>
+                <p className="text-[10px] text-zinc-500 mt-0.5">Honors division degree recipient (7.29/10.0 CGPA)</p>
               </div>
               <span className={`font-mono text-xs ${isPdf ? 'text-zinc-600' : 'text-zinc-500'} print:text-zinc-600`}>2022 - 2025</span>
             </div>

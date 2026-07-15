@@ -454,7 +454,7 @@ export const timelineMilestones: TimelineMilestone[] = [
     description: 'Transitioned fully into computer science, completing coursework in database indexing, systems programming, and compilers.',
     category: 'education',
     details: [
-      'Graduated with honors (8.2 CGPA). Deployed freelance MERN stack web nodes for global startup clients.',
+      'Graduated with honors (7.29 CGPA). Deployed freelance MERN stack web nodes for global startup clients.',
       'Wrote Python data analyzers and automated shell integration scripts.',
       'Completed project audits on SQL Injection pathways and server protection checklists.'
     ]

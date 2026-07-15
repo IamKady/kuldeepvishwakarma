@@ -672,7 +672,7 @@ export default function Home() {
                 <CheckCircle2 className="w-4 h-4 text-emerald-400 mr-2.5 flex-shrink-0 mt-0.5" />
                 <div>
                   <span className="font-bold text-white block">Academic Credentials</span>
-                  <span className="text-xs text-zinc-400">B.Tech Computer Science graduate (Honors, 8.2 CGPA). Pursuing MSc Computer Science with research targeting distributed systems security.</span>
+                  <span className="text-xs text-zinc-400">B.Tech Computer Science graduate (Honors, 7.29 CGPA). Pursuing MSc Computer Science (Distance Mode, UPRTOU Prayagraj) with research targeting distributed systems security.</span>
                 </div>
               </li>
               <li className="flex items-start">
