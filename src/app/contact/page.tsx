@@ -40,17 +40,45 @@ export default function Contact() {
 
   const timeSlots = ['10:00 AM', '11:30 AM', '02:00 PM', '03:30 PM', '05:00 PM'];
 
-  const handleFormSubmit = (e: React.FormEvent) => {
+  const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setFormSending(true);
 
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          type: 'message',
+          ...formData,
+        }),
+      });
+
+      if (response.ok) {
+        setFormSending(false);
+        setFormSent(true);
+        setFormData({ name: '', email: '', subject: '', message: '' });
+        triggerConfetti();
+        setTimeout(() => setFormSent(false), 5000);
+      } else {
+        const data = await response.json().catch(() => ({}));
+        console.warn('API error, falling back to mailto client:', data.message || response.statusText);
+        triggerMailtoFallback();
+      }
+    } catch (err) {
+      console.error('Failed to submit contact form through API:', err);
+      triggerMailtoFallback();
+    }
+  };
+
+  const triggerMailtoFallback = () => {
     const mailtoUrl = `mailto:kuldeepvishwakarma3803@gmail.com?subject=${encodeURIComponent(
       formData.subject
     )}&body=${encodeURIComponent(
       `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`
     )}`;
-
-    // Open email client
     window.location.href = mailtoUrl;
 
     setTimeout(() => {
@@ -62,19 +90,46 @@ export default function Contact() {
     }, 1000);
   };
 
-  const handleBookMeeting = (e: React.FormEvent) => {
+  const handleBookMeeting = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!selectedDay || !selectedTime || !schedulerName || !schedulerEmail) return;
-    
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          type: 'booking',
+          name: schedulerName,
+          email: schedulerEmail,
+          date: selectedDay,
+          time: selectedTime,
+        }),
+      });
+
+      if (response.ok) {
+        setMeetingBooked(true);
+        triggerConfetti();
+      } else {
+        const data = await response.json().catch(() => ({}));
+        console.warn('API booking error, falling back to mailto client:', data.message || response.statusText);
+        triggerBookingFallback();
+      }
+    } catch (err) {
+      console.error('Failed to submit booking form through API:', err);
+      triggerBookingFallback();
+    }
+  };
+
+  const triggerBookingFallback = () => {
     const mailtoUrl = `mailto:kuldeepvishwakarma3803@gmail.com?subject=${encodeURIComponent(
       `Zoom Meeting Booking: ${schedulerName}`
     )}&body=${encodeURIComponent(
       `Hello Kuldeep,\n\nI would like to schedule a Zoom consultation with you.\n\nDate: ${selectedDay}\nTime: ${selectedTime} (IST)\n\nMy Details:\nName: ${schedulerName}\nEmail: ${schedulerEmail}\n\nBest regards,\n${schedulerName}`
     )}`;
-
-    // Open email client
     window.location.href = mailtoUrl;
-
     setMeetingBooked(true);
     triggerConfetti();
   };
