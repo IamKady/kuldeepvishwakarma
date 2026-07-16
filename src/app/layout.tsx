@@ -21,28 +21,53 @@ export const metadata: Metadata = {
   description: "Personal Operating System of Kuldeep Chandra Vishwakarma. Software Engineer, AI Builder, Startup Founder, and Tech Writer. Building StartupWire, researching cybersecurity and AI workflows.",
   metadataBase: new URL("https://kuldeepvishwakarma.com"),
   keywords: ["Kuldeep Chandra Vishwakarma", "Software Engineer", "AI Builder", "Startup Founder", "StartupWire", "MERN Developer", "Cybersecurity Log", "React Developer", "Next.js Portfolio"],
-  authors: [{ name: "Kuldeep Chandra Vishwakarma" }],
+  authors: [{ name: "Kuldeep Chandra Vishwakarma", url: "https://kuldeepvishwakarma.com" }],
+  creator: "Kuldeep Chandra Vishwakarma",
+  publisher: "Kuldeep Chandra Vishwakarma",
+  alternates: {
+    canonical: "https://kuldeepvishwakarma.com",
+    types: {
+      "application/rss+xml": "https://kuldeepvishwakarma.com/rss.xml",
+    },
+  },
   openGraph: {
     title: "Kuldeep Chandra Vishwakarma | Software Engineer • AI Builder • Startup Founder",
-    description: "Personal Operating System of Kuldeep Chandra Vishwakarma. Software Engineer, AI Builder, Startup Founder, and Tech Writer.",
+    description: "Personal Operating System of Kuldeep Chandra Vishwakarma. Software Engineer, AI Builder, Startup Founder, and Tech Writer. Building StartupWire, researching cybersecurity and AI workflows.",
     url: "https://kuldeepvishwakarma.com",
     siteName: "Kuldeep Chandra Vishwakarma Portfolio",
     locale: "en_US",
     type: "website",
+    images: [
+      {
+        url: "https://kuldeepvishwakarma.com/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Kuldeep Chandra Vishwakarma – Software Engineer, AI Builder, Startup Founder",
+        type: "image/png",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Kuldeep Chandra Vishwakarma | Software Engineer • AI Builder • Startup Founder",
     description: "Personal Operating System of Kuldeep Chandra Vishwakarma. Software Engineer, AI Builder, Startup Founder, and Tech Writer.",
-    creator: "@Kuldeep81824338"
+    creator: "@Kuldeep81824338",
+    images: ["https://kuldeepvishwakarma.com/og-image.png"],
   },
   robots: {
     index: true,
-    follow: true
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
   },
   verification: {
     google: "Yq-SkGoiqszMExrGcTcQDQd0q8HquIk-bnaPSh9YA0c",
-  }
+  },
 };
 
 export default function RootLayout({
