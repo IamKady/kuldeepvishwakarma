@@ -259,9 +259,9 @@ export default function Resume() {
               </p>
             </div>
             <div>
-              <span className={`font-bold block ${isPdf ? 'text-zinc-900' : 'text-white'} print:text-zinc-900`}>AI Prompt Studio — Local Prompt Engineering Sandbox</span>
+              <span className={`font-bold block ${isPdf ? 'text-zinc-900' : 'text-white'} print:text-zinc-900`}>AIToolsWebsite — AI Tools Directory & Comparison Hub</span>
               <p className={isPdf ? 'text-zinc-700' : 'text-zinc-400 print:text-zinc-700'}>
-                Secure, offline-first client application using React, Vite, and LocalStorage variables parsing hooks for template versioning.
+                A relational AI catalog platform using Next.js, Prisma, and Neon PostgreSQL, featuring dynamic side-by-side product comparisons, verified user reviews, and Clerk identity authentication.
               </p>
             </div>
             <div>

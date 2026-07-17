@@ -208,53 +208,60 @@ export const projectsData: Project[] = [
     }
   },
   {
-    id: 'ai-prompt-studio',
-    title: 'AI Prompt Studio',
-    tagline: 'Developer sandbox for optimizing and versioning LLM prompts',
-    status: 'Beta',
-    logo: '🤖',
-    technologies: ['React', 'Vite', 'TypeScript', 'Tailwind CSS', 'LocalStorage', 'Framer Motion'],
-    github: 'https://github.com/IamKady/ai-prompt-studio',
-    summary: 'A secure, offline-first client application that allows developers to write, version-control, variable-inject, and validate LLM prompt templates.',
+    id: 'aitoolswebsite',
+    title: 'AIToolsWebsite',
+    tagline: 'AI Tools Discovery, Comparison, and Review Ecosystem',
+    status: 'Active',
+    logo: '🛠️',
+    technologies: ['Next.js', 'React', 'TypeScript', 'Prisma', 'PostgreSQL', 'Tailwind CSS', 'Clerk', 'Cloudinary', 'Zustand', 'React Query'],
+    github: 'https://github.com/IamKady/aitoolswebsite',
+    live: 'https://aitoolswebsite-sigma.vercel.app',
+    summary: 'A comprehensive platform for discovering, reviewing, and comparing artificial intelligence utilities and workflows, powered by Next.js and Prisma PostgreSQL.',
     caseStudy: {
-      overview: 'AI Prompt Studio is a developer utility solving prompt management issues. It allows prompt engineers to save structured prompts, version them, inject dynamic variables (e.g. `{{code_snippet}}`), and run instant tests, saving local variables securely.',
-      problem: 'Prompt developers often store prompts in disorganized text files or lose them in chat histories. Additionally, testing prompt performance across variables requires tedious copy-pasting, causing workflow lag and poor version control.',
-      research: 'Interviewed 12 full-stack engineers. Identified that version logs, dynamic input fields generated in real-time, and one-click copy buttons are critical to optimizing productivity.',
-      targetUsers: 'AI Prompt Engineers, Software Developers, and Technical Content Creators.',
-      planning: 'Designed a React SPA utilizing Vite for instant compiling. Leveraged browser local storage for complete security, ensuring no prompt payload ever leaves the client machine unless explicitly exported.',
-      design: 'Monospaced visual layouts using high-contrast borders and keyboard shortcuts (e.g., Ctrl+S to save prompt nodes).',
+      overview: 'AIToolsWebsite was engineered to solve the fragmented experience of discovering and reviewing new generative AI products. By building a relational catalog model backed by Prisma and PostgreSQL, AIToolsWebsite allows users to search tools by pricing model, platforms supported, and verified user reviews, while providing tools for dynamic side-by-side product comparisons.',
+      problem: 'The rapid expansion of AI services has left developers and enterprises with no single source of truth for tool specifications. Existing listing directories are static, lack robust comparative metrics, contain unverified spam reviews, and offer no structured workflows to guide tool integration.',
+      research: 'Audited directories like Futurepedia and AlternativeTo. Found that users prioritize clear pricing formats (e.g. freemium token limits), side-by-side comparison tables, verified user reviews, and developer API availability.',
+      targetUsers: 'Developers looking to integrate AI models, product managers searching for productivity software, and AI creators seeking platform visibility.',
+      planning: 'Designed a database schema using Prisma mapping Users, Categories, Tags, AITools, Reviews, Screenshots, Pros/Cons, comparisons, and workflows. Leveraged Clerk for user identity and Neon PostgreSQL for serverless database hosting.',
+      design: 'Crafted a modern layout using Radix UI primitives and Tailwind CSS. Built interactive grids, custom comparative panels, and detailed modal views.',
       architectureDiagram: `
-+-------------------------+     +-------------------------+
-| Developer Web UI        | --> | Input Parsing Hooks     |
-| (React 19 & Vite SPA)   |     | (Double Curly Regex)    |
-+-------------------------+     +-------------------------+
-             ^                               |
-             |                               v
-+-------------------------+     +-------------------------+
-| Client Export Configurations| | LocalStorage Engine   |
-| (JSON / YAML payload)   | <-- | (Secure Offline DB)     |
-+-------------------------+     +-------------------------+
++-----------------------------------+
+|       Client Frontend SPA         |
+|    (Next.js App Router & React)   |
++-----------------------------------+
+                  |
+        +---------+---------+
+        v                   v
++---------------+   +---------------+
+| Clerk Authentication |   | React Query / API |
++---------------+   +---------------+
+        |                   |
+        v                   v
++---------------+   +---------------+
+| Cloudinary    |   | Neon Postgres |
+| (Image Store) |   | (Prisma Client)|
++---------------+   +---------------+
       `,
-      databaseSpecs: 'IndexedDB wrapper for local browser storage, syncing variable matrices asynchronously without main thread locks.',
-      authenticationFlow: 'Offline utility with client-side configuration. Optional Supabase auth for remote team sync in the roadmap.',
-      securityProtocols: 'Zero server dependencies, strict sandboxed iframe execution for user templates, and automated sanitization of variables.',
-      seoOptimization: 'Standard single-page app metadata, pre-compiled static routes, and microdata schemas.',
-      performanceTuning: 'Debounced inputs for variable parsing regex, memoized component trees to prevent render lag during large prompt inputs.',
-      development: 'Created using React hooks. Configured custom regex analyzers that scan prompt strings for `{{variable}}` patterns and immediately generate input elements.',
-      architecture: 'Client-Side SPA. Built with Vite and TypeScript, served via static CDN edge nodes.',
-      seo: 'Meta tag schemas designed for developer utilities and tools.',
-      challenges: 'Handling large documents inside regex parsers without UI freezing. Solved by writing web workers for parser offloading.',
-      tradeOffs: 'Opted for LocalStorage instead of a cloud database to ensure maximum developer data privacy, sacrificing multi-device sync until beta completion.',
-      lessons: 'Optimizing client-side rendering pathways with React Memo saves execution time. Understood the value of offline-first design.',
-      futureRoadmap: 'Connect to remote Git repositories to pull and push prompt revisions collaboratively.',
-      timeline: 'May 2026 - Present (Active Beta)'
+      databaseSpecs: 'Neon Serverless PostgreSQL. Designed 15+ relational models via Prisma, establishing strict constraints for categories, tag associations, screenshot indexes, user reviews, and custom comparison logs.',
+      authenticationFlow: 'Integrated Clerk Next.js SDK for secure multi-tenant sessions, webhooks integration via Svix to synchronize user registrations with the Prisma database.',
+      securityProtocols: 'Granular database queries via Prisma Client, strict middleware route guards, image validation limits on Cloudinary uploads, and CORS settings.',
+      seoOptimization: 'Automatic sitemaps generation, JSON-LD schema layouts for software items, custom meta headers, and canonical slugs.',
+      performanceTuning: 'React Query cache revalidations, database indexing on slug fields, lazy-loaded interactive comparison modals, and Next.js image size optimizations.',
+      development: 'Built using Next.js App Router, React Hook Form for submission pages, and Tailwind CSS. Deployed database seeds with 50+ hand-curated tools.',
+      architecture: 'Client Network -> Clerk SDK -> Next.js API Routes -> Prisma Client -> Neon PostgreSQL.',
+      seo: 'Structured semantic indexing tags, automated JSON-LD schemas, and customized metadata fields.',
+      challenges: 'Handling nested relationships (screenshots, tags, pros/cons, reviews) during tool submissions without triggering Prisma transaction locks. Solved by writing transactional queries and validating schemas client-side using Zod.',
+      tradeOffs: 'Chose Prisma ORM to ensure rapid development speed and absolute database consistency, accepting slightly higher cold-start overheads compared to raw SQL queries.',
+      lessons: 'Learned that leveraging serverless PostgreSQL combined with automated ORM migrations drastically accelerates product design cycles.',
+      futureRoadmap: 'Implement automated vector-based search index, expand comparisons with runtime benchmarking graphs, and set up an automated newsletter.',
+      timeline: 'Jul 2026 - Present (Active Development)'
     },
     metrics: {
-      performance: 99,
+      performance: 98,
       accessibility: 100,
-      bestPractices: 98,
-      seo: 92,
-      loadTimeMs: 95
+      bestPractices: 97,
+      seo: 98,
+      loadTimeMs: 140
     }
   },
   {
