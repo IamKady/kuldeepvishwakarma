@@ -65,7 +65,8 @@ export default function Cybersecurity() {
         newHistory.push(
           { text: 'Active Products:', type: 'success' },
           { text: '  - StartupWire.in: AI-Powered Tech Startup news summaries with edge runtime indexing.', type: 'output' },
-          { text: '  - AI Prompt Studio: Client-side storage variable testing prompt framework.', type: 'output' }
+          { text: '  - AI Prompt Studio: Client-side storage variable testing prompt framework.', type: 'output' },
+          { text: '  - Bookperia: AI-Powered Book sanctuary and marketplace ecosystem with companion personas.', type: 'output' }
         );
         break;
       case 'contact':

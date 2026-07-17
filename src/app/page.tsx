@@ -82,7 +82,7 @@ export default function Home() {
   "education": "MSc Computer Science (Pursuing) • BTech CSE",
   "tech_stack": ["Next.js", "React", "TypeScript", "Node.js", "PostgreSQL", "Supabase", "Tailwind CSS"],
   "currently_learning": ["Distributed Systems Security", "Ethical Hacking (CTFs)", "LLM Architectures"],
-  "projects": ["StartupWire.in", "AI Prompt Studio"],
+  "projects": ["StartupWire.in", "AI Prompt Studio", "Bookperia"],
   "location": "Uttar Pradesh, India",
   "availability": "Available for hire"
 }`;

@@ -264,6 +264,12 @@ export default function Resume() {
                 Secure, offline-first client application using React, Vite, and LocalStorage variables parsing hooks for template versioning.
               </p>
             </div>
+            <div>
+              <span className={`font-bold block ${isPdf ? 'text-zinc-900' : 'text-white'} print:text-zinc-900`}>Bookperia — AI-Powered Book Sanctuary & E-Commerce</span>
+              <p className={isPdf ? 'text-zinc-700' : 'text-zinc-400 print:text-zinc-700'}>
+                A high-fidelity book discovery sanctuary built with Next.js and Zustand, featuring custom bookshelves, automated AI takeaways generation, and interactive chat companion personas.
+              </p>
+            </div>
           </div>
         </div>
 

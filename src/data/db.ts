@@ -256,6 +256,63 @@ export const projectsData: Project[] = [
       seo: 92,
       loadTimeMs: 95
     }
+  },
+  {
+    id: 'bookperia',
+    title: 'Bookperia',
+    tagline: 'The Ultimate AI-Powered Book Discovery & E-Commerce Sanctuary',
+    status: 'Active',
+    logo: '📚',
+    technologies: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS', 'Zustand', 'Lucide React', 'Framer Motion'],
+    github: 'https://github.com/IamKady/Bookperia.git',
+    summary: 'An AI-powered literary ecosystem featuring interactive bookshelves, daily reading challenges, automated key takeaways generation, and dynamic chatbot companion personas.',
+    caseStudy: {
+      overview: 'Bookperia is a comprehensive sanctuary designed to simplify book discovery and reading tracking. By combining an intuitive local shelf manager with chatbot personas (Head Librarian, Sherlock Holmes, and the Alchemist), Bookperia parses user vibes to deliver highly customized book summaries, key takeaways, and character indices.',
+      problem: 'Readers struggle to find books aligning with their specific emotional and intellectual moods. Most websites rely on standard filters, completely ignoring personal vibes. Additionally, managing shelves, cataloging favorite quotes, and reviewing detailed AI analysis pages are scattered across multiple, slow platforms.',
+      research: 'Audited platforms like Goodreads, Literal, and StoryGraph. Discovered that modern readers value interactive progress trackers, monospaced tech aesthetics, immediate chapter-level summaries, and immersive, context-aware AI dialogue options.',
+      targetUsers: 'Avid book readers tracking their habits, students analyzing classical themes, and communities looking for central discussion circles.',
+      planning: 'Designed a Next.js App Router project leveraging Tailwind CSS v4. Centralized user credentials, badges, shelf lists, and shopping cart records inside a stateful Zustand storage system configured for client-side local storage rehydration.',
+      design: 'Drafted a high-fidelity visual interface featuring dark layouts, custom gradients, soft scale animations on hover, and custom lucide iconography.',
+      architectureDiagram: `
++-----------------------------------+
+|       User Client Interface       |
+|    (Next.js App Router & React)   |
++-----------------------------------+
+                  |
+        +---------+---------+
+        v                   v
++---------------+   +---------------+
+| Zustand Store |   | AI Chat Bot   |
+| (State & L.S.)|   | (Persona Eng.)|
++---------------+   +---------------+
+        |                   |
+        v                   v
++---------------+   +---------------+
+| Local Storage |   | Books Database|
+| (Shelves/Cart)|   | (Thematic/AI) |
++---------------+   +---------------+
+      `,
+      databaseSpecs: 'Custom client-side datasets containing rich metadata, structured theme list collections, key chapter takeaways, and detailed character summaries.',
+      authenticationFlow: 'Mock local login setup mapping user parameters to LocalStorage, serving as a drop-in replacement for production authentication SDKs.',
+      securityProtocols: 'Safe state serialization safeguards, user text input sanitation libraries, and strict same-origin execution contexts.',
+      seoOptimization: 'Precompiled static route directories, customized metadata schemas for each catalog item, and semantic schema-rich markup.',
+      performanceTuning: 'Lazy-loaded non-critical component bundles, debounced search filters, state-selective component re-renders, and optimized SVG icons.',
+      development: 'Built from scratch utilizing Next.js 16 and Tailwind CSS v4. Managed state synchronization across dynamic cart and shelf controls utilizing selective Zustand selectors.',
+      architecture: 'Client SPA Bundle -> Zustand Middleware -> Local Browser Cache. Built to compile to static edge nodes with zero database API latency.',
+      seo: 'Dynamic canonical links, localized metadata objects, and standard schema definitions.',
+      challenges: 'Synchronizing interactive reading milestones with user challenges without UI stutter. Resolved by creating debounced actions inside the store and memoizing badge rendering loops.',
+      tradeOffs: 'Chose a local-first Zustand configuration with LocalStorage fallback over cloud database sync to ensure instant, latency-free page speeds and offline-first accessibility.',
+      lessons: 'Understood that local-first states combined with compiled Tailwind bundles deliver exceptional sub-100ms client interactions.',
+      futureRoadmap: 'Integrate real generative API models, develop WebSocket rooms for real-time book club discussions, and connect to payment APIs.',
+      timeline: 'Jun 2026 - Present (Active Development)'
+    },
+    metrics: {
+      performance: 100,
+      accessibility: 98,
+      bestPractices: 100,
+      seo: 98,
+      loadTimeMs: 120
+    }
   }
 ];
 
