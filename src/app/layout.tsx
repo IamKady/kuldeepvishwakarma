@@ -26,6 +26,11 @@ export const metadata: Metadata = {
   authors: [{ name: "Kuldeep Chandra Vishwakarma", url: "https://kuldeepvishwakarma.com" }],
   creator: "Kuldeep Chandra Vishwakarma",
   publisher: "Kuldeep Chandra Vishwakarma",
+  icons: {
+    icon: "/logo.png",
+    shortcut: "/logo.png",
+    apple: "/logo.png",
+  },
   alternates: {
     canonical: "https://kuldeepvishwakarma.com",
     types: {

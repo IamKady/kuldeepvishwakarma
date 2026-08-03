@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, Search, Sun, Moon } from 'lucide-react';
@@ -52,10 +53,13 @@ export default function Navbar({ onSearchOpen, theme, toggleTheme }: NavbarProps
           
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-2.5 group">
-            <img 
+            <Image 
               src="/logo.png" 
               alt="KCV Logo" 
-              className="w-7 h-7 rounded-lg object-cover border border-slate-200 dark:border-white/10 group-hover:scale-105 transition-transform shadow-xs" 
+              width={28}
+              height={28}
+              priority
+              className="w-7 h-7 rounded-lg object-cover border border-slate-200 dark:border-white/10 group-hover:scale-105 transition-transform shadow-xs flex-shrink-0" 
             />
             <span className="text-xl font-bold font-sans tracking-tight text-slate-900 dark:text-white flex items-center">
               KCV

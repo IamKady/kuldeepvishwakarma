@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Search, 
@@ -138,9 +139,11 @@ export default function CommandPalette({ isOpen, onClose }: CommandPaletteProps)
           >
             {/* Input Bar */}
             <div className="flex items-center px-4 py-3.5 border-b border-slate-200 dark:border-white/5 space-x-3">
-              <img 
+              <Image 
                 src="/logo.png" 
                 alt="KCV Logo" 
+                width={24}
+                height={24}
                 className="w-6 h-6 rounded-md object-cover border border-slate-200 dark:border-white/10 flex-shrink-0" 
               />
               <Search className="w-4 h-4 text-slate-400 dark:text-zinc-400 flex-shrink-0" />
