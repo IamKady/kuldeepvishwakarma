@@ -26,16 +26,30 @@ export async function POST(request: Request) {
     const body = await request.json();
     const { type, name, email, subject, message, date, time } = body;
 
-    // Retrieve credentials from environment variables
+    // 1. Send Telegram Bot Notification FIRST
+    let telegramSent = false;
+    try {
+      telegramSent = await sendTelegramNotification({ type, name, email, subject, message, date, time });
+    } catch (telegramErr) {
+      console.warn('Telegram notification failed:', telegramErr);
+    }
+
+    // Retrieve Gmail credentials from environment variables
     const gmailUser = process.env.GMAIL_USER;
     const clientId = process.env.GMAIL_CLIENT_ID;
     const clientSecret = process.env.GMAIL_CLIENT_SECRET;
     const refreshToken = process.env.GMAIL_REFRESH_TOKEN;
     const receiverEmail = process.env.CONTACT_RECEIVER_EMAIL || gmailUser;
 
-    // Check if configuration is missing
+    // If Gmail API is not configured but Telegram succeeded, return success
     if (!gmailUser || !clientId || !clientSecret || !refreshToken) {
-      console.error('Gmail API configuration parameters are missing from environment variables.');
+      console.warn('Gmail API credentials missing from environment variables.');
+      if (telegramSent) {
+        return NextResponse.json({
+          success: true,
+          message: 'Message delivered via Telegram Bot notification.',
+        });
+      }
       return NextResponse.json(
         {
           error: 'Configuration Error',
@@ -46,7 +60,7 @@ export async function POST(request: Request) {
       );
     }
 
-    // 1. Refresh OAuth2 Access Token
+    // 2. Refresh OAuth2 Access Token for Gmail
     const tokenParams = new URLSearchParams({
       client_id: clientId,
       client_secret: clientSecret,
@@ -65,6 +79,12 @@ export async function POST(request: Request) {
     if (!tokenResponse.ok) {
       const errorText = await tokenResponse.text();
       console.error('Failed to refresh Google OAuth token:', errorText);
+      if (telegramSent) {
+        return NextResponse.json({
+          success: true,
+          message: 'Message delivered via Telegram Bot notification.',
+        });
+      }
       return NextResponse.json(
         {
           error: 'Authentication Error',
@@ -74,6 +94,7 @@ export async function POST(request: Request) {
         { status: 502 }
       );
     }
+
 
     const tokenData = (await tokenResponse.json()) as TokenResponse;
     const accessToken = tokenData.access_token;
@@ -247,13 +268,6 @@ export async function POST(request: Request) {
       console.warn('Auto-confirmation forward failed:', autoErr);
     }
 
-    // 6. Send Telegram Bot Notification if configured
-    try {
-      await sendTelegramNotification({ type, name, email, subject, message, date, time });
-    } catch (telegramErr) {
-      console.warn('Telegram notification failed:', telegramErr);
-    }
-
     const gmailData = (await gmailResponse.json()) as GmailSendResponse;
     return NextResponse.json({
       success: true,
@@ -297,12 +311,13 @@ async function sendTelegramNotification({
   message?: string;
   date?: string;
   time?: string;
-}) {
+}): Promise<boolean> {
   const botToken = process.env.TELEGRAM_BOT_TOKEN;
   const chatId = process.env.TELEGRAM_CHAT_ID;
 
   if (!botToken || !chatId) {
-    return;
+    console.warn('Telegram Bot credentials not configured in environment variables.');
+    return false;
   }
 
   let text = '';
@@ -335,9 +350,13 @@ async function sendTelegramNotification({
     if (!res.ok) {
       const errorText = await res.text();
       console.error('Telegram API error:', errorText);
+      return false;
     }
+    return true;
   } catch (err) {
     console.error('Failed to send Telegram notification:', err);
+    return false;
   }
 }
+
 
