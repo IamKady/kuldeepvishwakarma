@@ -52,7 +52,7 @@ export default function Navbar({ onSearchOpen, theme, toggleTheme }: NavbarProps
           
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-2 group">
-            <span className="text-xl font-bold font-sans tracking-tight text-white dark:text-white light:text-zinc-900 flex items-center">
+            <span className="text-xl font-bold font-sans tracking-tight text-slate-900 dark:text-white flex items-center">
               KCV
               <span className="w-1.5 h-1.5 rounded-full bg-ai ml-1 animate-pulse" />
             </span>
@@ -68,8 +68,8 @@ export default function Navbar({ onSearchOpen, theme, toggleTheme }: NavbarProps
                   href={link.path}
                   className={`relative px-3 py-1.5 text-xs font-medium tracking-wide font-sans rounded-md transition-colors ${
                     isActive 
-                      ? 'text-white' 
-                      : 'text-zinc-400 hover:text-zinc-100 hover:bg-white/5'
+                      ? 'text-slate-900 dark:text-white font-semibold' 
+                      : 'text-slate-600 dark:text-zinc-400 hover:text-slate-900 dark:hover:text-zinc-100 hover:bg-slate-200/60 dark:hover:bg-white/5'
                   }`}
                 >
                   {link.name}
@@ -91,11 +91,11 @@ export default function Navbar({ onSearchOpen, theme, toggleTheme }: NavbarProps
             {/* Command Palette Button */}
             <button 
               onClick={onSearchOpen}
-              className="flex items-center space-x-1.5 px-2.5 py-1.5 text-xs text-zinc-400 hover:text-zinc-100 hover:bg-white/5 rounded-md border border-white/10 glass-panel cursor-pointer transition-colors"
+              className="flex items-center space-x-1.5 px-2.5 py-1.5 text-xs text-slate-600 dark:text-zinc-400 hover:text-slate-900 dark:hover:text-zinc-100 hover:bg-slate-200/60 dark:hover:bg-white/5 rounded-md border border-slate-200 dark:border-white/10 glass-panel cursor-pointer transition-colors"
             >
               <Search className="w-3.5 h-3.5" />
               <span className="hidden sm:inline font-sans">Search</span>
-              <kbd className="hidden sm:inline-flex items-center text-[9px] bg-white/10 px-1 py-0.2 rounded border border-white/5 font-mono">
+              <kbd className="hidden sm:inline-flex items-center text-[9px] bg-slate-200/80 dark:bg-white/10 px-1 py-0.2 rounded border border-slate-300 dark:border-white/5 font-mono text-slate-600 dark:text-zinc-400">
                 ⌘K
               </kbd>
             </button>
@@ -103,7 +103,7 @@ export default function Navbar({ onSearchOpen, theme, toggleTheme }: NavbarProps
             {/* Theme Toggle */}
             <button 
               onClick={toggleTheme}
-              className="p-1.5 rounded-md text-zinc-400 hover:text-zinc-100 hover:bg-white/5 border border-white/10 glass-panel cursor-pointer transition-colors"
+              className="p-1.5 rounded-md text-slate-600 dark:text-zinc-400 hover:text-slate-900 dark:hover:text-zinc-100 hover:bg-slate-200/60 dark:hover:bg-white/5 border border-slate-200 dark:border-white/10 glass-panel cursor-pointer transition-colors"
               aria-label="Toggle theme"
             >
               {theme === 'dark' ? <Sun className="w-3.5 h-3.5" /> : <Moon className="w-3.5 h-3.5" />}
@@ -112,7 +112,7 @@ export default function Navbar({ onSearchOpen, theme, toggleTheme }: NavbarProps
             {/* Hamburger Trigger (Lg and below) */}
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="xl:hidden p-1.5 rounded-md text-zinc-400 hover:text-zinc-100 hover:bg-white/5 border border-white/10 glass-panel cursor-pointer transition-colors"
+              className="xl:hidden p-1.5 rounded-md text-slate-600 dark:text-zinc-400 hover:text-slate-900 dark:hover:text-zinc-100 hover:bg-slate-200/60 dark:hover:bg-white/5 border border-slate-200 dark:border-white/10 glass-panel cursor-pointer transition-colors"
               aria-label="Open main menu"
             >
               {isOpen ? <X className="w-3.5 h-3.5" /> : <Menu className="w-3.5 h-3.5" />}
@@ -130,7 +130,7 @@ export default function Navbar({ onSearchOpen, theme, toggleTheme }: NavbarProps
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.2 }}
-            className="xl:hidden bg-background/95 backdrop-blur-lg border-b border-card-border overflow-hidden"
+            className="xl:hidden bg-white/95 dark:bg-background/95 backdrop-blur-lg border-b border-slate-200 dark:border-card-border overflow-hidden"
           >
             <div className="px-4 pt-3 pb-6 space-y-1">
               {navLinks.map((link) => {
@@ -142,8 +142,8 @@ export default function Navbar({ onSearchOpen, theme, toggleTheme }: NavbarProps
                     onClick={() => setIsOpen(false)}
                     className={`block px-4 py-3 rounded-lg text-sm font-medium transition-colors ${
                       isActive 
-                        ? 'bg-white/10 text-white font-semibold' 
-                        : 'text-zinc-400 hover:bg-white/5 hover:text-zinc-200'
+                        ? 'bg-slate-200/80 dark:bg-white/10 text-slate-900 dark:text-white font-semibold' 
+                        : 'text-slate-600 dark:text-zinc-400 hover:bg-slate-100 dark:hover:bg-white/5 hover:text-slate-900 dark:hover:text-zinc-200'
                     }`}
                   >
                     {link.name}

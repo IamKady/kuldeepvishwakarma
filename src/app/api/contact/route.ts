@@ -90,7 +90,7 @@ export async function POST(request: Request) {
     <h2 style="color: #34d399; margin: 0; font-size: 18px; text-transform: uppercase; letter-spacing: 0.1em;">
       [MEETING TELEMETRY] Consultation Reserved
     </h2>
-    <span style="color: #71717a; font-size: 11px;">Source: kviswakarma.com Meeting Booker</span>
+    <span style="color: #71717a; font-size: 11px;">Source: kuldeepvishwakarma.com Meeting Booker</span>
   </div>
   
   <div style="margin-bottom: 20px;">
@@ -136,7 +136,7 @@ export async function POST(request: Request) {
     <h2 style="color: #818cf8; margin: 0; font-size: 18px; text-transform: uppercase; letter-spacing: 0.1em;">
       [SYSTEM TELEMETRY] New Message Received
     </h2>
-    <span style="color: #71717a; font-size: 11px;">Source: kviswakarma.com Contact Form</span>
+    <span style="color: #71717a; font-size: 11px;">Source: kuldeepvishwakarma.com Contact Form</span>
   </div>
   
   <div style="margin-bottom: 20px;">
@@ -170,36 +170,39 @@ export async function POST(request: Request) {
       `;
     }
 
-    // 3. Format headers according to RFC 2822 (using base64 utf-8 encoding for headers containing arbitrary text)
-    const encodedSubject = `=?utf-8?B?${Buffer.from(emailSubject).toString('base64')}?=`;
-    const encodedFromName = `=?utf-8?B?${Buffer.from(`${name} (via Website)`).toString('base64')}?=`;
+    const forwardTo = process.env.FORWARD_TO_EMAIL;
+    const receiverEmails = [receiverEmail, forwardTo].filter(Boolean).join(', ');
 
-    const emailLines = [
-      `From: ${encodedFromName} <${gmailUser}>`,
-      `To: ${receiverEmail}`,
-      `Reply-To: "${name}" <${email}>`,
-      `Subject: ${encodedSubject}`,
-      `MIME-Version: 1.0`,
-      `Content-Type: text/html; charset=utf-8`,
-      `Content-Transfer-Encoding: 7bit`,
-      ``,
-      emailHtml
-    ];
+    // 4. Send Email via Gmail API to receiver(s)
+    const sendEmail = async (toEmail: string, subjectLine: string, htmlContent: string, replyToEmail?: string) => {
+      const encodedSubj = `=?utf-8?B?${Buffer.from(subjectLine).toString('base64')}?=`;
+      const encodedName = `=?utf-8?B?${Buffer.from(`Kuldeep Chandra Vishwakarma`).toString('base64')}?=`;
 
-    const rawEmail = emailLines.join('\r\n');
-    const base64RawEmail = base64urlEncode(rawEmail);
+      const lines = [
+        `From: ${encodedName} <${gmailUser}>`,
+        `To: ${toEmail}`,
+        replyToEmail ? `Reply-To: "${name}" <${replyToEmail}>` : `Reply-To: ${gmailUser}`,
+        `Subject: ${encodedSubj}`,
+        `MIME-Version: 1.0`,
+        `Content-Type: text/html; charset=utf-8`,
+        `Content-Transfer-Encoding: 7bit`,
+        ``,
+        htmlContent
+      ];
 
-    // 4. Send Email via Gmail API
-    const gmailResponse = await fetch('https://gmail.googleapis.com/gmail/v1/users/me/messages/send', {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${accessToken}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        raw: base64RawEmail,
-      }),
-    });
+      const raw = base64urlEncode(lines.join('\r\n'));
+
+      return fetch('https://gmail.googleapis.com/gmail/v1/users/me/messages/send', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${accessToken}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ raw }),
+      });
+    };
+
+    const gmailResponse = await sendEmail(receiverEmails, emailSubject, emailHtml, email);
 
     if (!gmailResponse.ok) {
       const errorText = await gmailResponse.text();
@@ -214,10 +217,40 @@ export async function POST(request: Request) {
       );
     }
 
+    // 5. Send automated forwarding confirmation copy to the sender (auto-reply)
+    try {
+      const autoReplySubject = `[Received] Copy of your message to Kuldeep Chandra Vishwakarma`;
+      const autoReplyHtml = `
+<div style="font-family: monospace, sans-serif; background-color: #0c0a09; color: #e4e4e7; padding: 24px; border: 1px solid #27272a; border-radius: 12px; max-width: 600px; margin: 0 auto; box-shadow: 0 4px 12px rgba(0,0,0,0.5);">
+  <div style="border-bottom: 1px solid #27272a; padding-bottom: 16px; margin-bottom: 20px;">
+    <h2 style="color: #818cf8; margin: 0; font-size: 16px; text-transform: uppercase; letter-spacing: 0.05em;">
+      Message Received & Forwarded
+    </h2>
+    <span style="color: #71717a; font-size: 11px;">kuldeepvishwakarma.com Automated Confirmation</span>
+  </div>
+  <p style="font-size: 13px; color: #d4d4d8; line-height: 1.6;">Hello ${name},</p>
+  <p style="font-size: 13px; color: #a1a1aa; line-height: 1.6;">
+    Thank you for reaching out. Your transmission has been logged and forwarded directly to <strong>kuldeepvishwakarma3803@gmail.com</strong>. I will review your note and respond shortly.
+  </p>
+  <div style="background-color: #1c1917; border: 1px solid #27272a; border-radius: 8px; padding: 14px; margin: 16px 0;">
+    <span style="color: #71717a; font-size: 10px; display: block; margin-bottom: 6px; text-transform: uppercase;">Your Submitted Details:</span>
+    <p style="color: #e4e4e7; font-size: 12px; margin: 0 0 6px 0;"><strong>Subject:</strong> ${emailSubject}</p>
+    <p style="color: #a1a1aa; font-size: 12px; margin: 0; white-space: pre-wrap;">${message || (type === 'booking' ? `Zoom Booking for ${date} at ${time} (IST)` : '')}</p>
+  </div>
+  <div style="border-top: 1px solid #27272a; padding-top: 12px; text-align: center; color: #71717a; font-size: 11px;">
+    Kuldeep Chandra Vishwakarma • Software & Systems Engineering
+  </div>
+</div>
+      `;
+      await sendEmail(email, autoReplySubject, autoReplyHtml);
+    } catch (autoErr) {
+      console.warn('Auto-confirmation forward failed:', autoErr);
+    }
+
     const gmailData = (await gmailResponse.json()) as GmailSendResponse;
     return NextResponse.json({
       success: true,
-      message: 'Message transmitted successfully.',
+      message: 'Message transmitted & auto-forwarded successfully.',
       id: gmailData.id,
     });
   } catch (error) {

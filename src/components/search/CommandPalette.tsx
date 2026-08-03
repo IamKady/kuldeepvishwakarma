@@ -125,7 +125,7 @@ export default function CommandPalette({ isOpen, onClose }: CommandPaletteProps)
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={onClose}
-            className="fixed inset-0 bg-black/60 backdrop-blur-md"
+            className="fixed inset-0 bg-slate-900/40 dark:bg-black/60 backdrop-blur-md"
           />
 
           {/* Dialog Panel */}
@@ -134,22 +134,22 @@ export default function CommandPalette({ isOpen, onClose }: CommandPaletteProps)
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: -10 }}
             transition={{ duration: 0.2 }}
-            className="relative w-full max-w-2xl mx-4 overflow-hidden border rounded-xl glass-panel shadow-2xl border-white/10"
+            className="relative w-full max-w-2xl mx-4 overflow-hidden border rounded-xl bg-white dark:bg-[#0a0a0f] shadow-2xl border-slate-200 dark:border-white/10"
           >
             {/* Input Bar */}
-            <div className="flex items-center px-4 py-3.5 border-b border-white/5">
-              <Search className="w-5 h-5 mr-3 text-zinc-400" />
+            <div className="flex items-center px-4 py-3.5 border-b border-slate-200 dark:border-white/5">
+              <Search className="w-5 h-5 mr-3 text-slate-400 dark:text-zinc-400" />
               <input
                 ref={inputRef}
                 type="text"
                 placeholder="Search projects, startups, blogs, cyber logs, and tools..."
                 value={query}
                 onChange={e => setQuery(e.target.value)}
-                className="w-full bg-transparent border-0 outline-none text-zinc-100 placeholder-zinc-500 font-sans text-base"
+                className="w-full bg-transparent border-0 outline-none text-slate-900 dark:text-zinc-100 placeholder-slate-400 dark:placeholder-zinc-500 font-sans text-base"
               />
               <button 
                 onClick={onClose}
-                className="p-1 rounded-md text-zinc-400 hover:text-zinc-200 hover:bg-white/5 transition-colors"
+                className="p-1 rounded-md text-slate-400 dark:text-zinc-400 hover:text-slate-700 dark:hover:text-zinc-200 hover:bg-slate-100 dark:hover:bg-white/5 transition-colors"
               >
                 <X className="w-4 h-4" />
               </button>
@@ -159,7 +159,7 @@ export default function CommandPalette({ isOpen, onClose }: CommandPaletteProps)
             <div className="max-h-[360px] overflow-y-auto p-2">
               {results.length > 0 ? (
                 <div>
-                  <div className="px-3 py-1.5 text-xs font-semibold uppercase tracking-wider text-zinc-500 font-sans">
+                  <div className="px-3 py-1.5 text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-zinc-500 font-sans">
                     {query.trim() ? 'Search Results' : 'Suggested Sections'}
                   </div>
                   <ul className="mt-1 space-y-1">
@@ -172,27 +172,27 @@ export default function CommandPalette({ isOpen, onClose }: CommandPaletteProps)
                             onMouseEnter={() => setSelectedIndex(idx)}
                             className={`w-full text-left px-3 py-2.5 rounded-lg flex items-center justify-between transition-colors font-sans ${
                               isSelected 
-                                ? 'bg-white/10 text-white' 
-                                : 'text-zinc-300 hover:bg-white/5 hover:text-zinc-100'
+                                ? 'bg-indigo-50 dark:bg-white/10 text-indigo-950 dark:text-white' 
+                                : 'text-slate-700 dark:text-zinc-300 hover:bg-slate-100 dark:hover:bg-white/5 hover:text-slate-900 dark:hover:text-zinc-100'
                             }`}
                           >
                             <div className="flex items-center space-x-3 overflow-hidden">
-                              <div className="flex-shrink-0 p-1.5 rounded-md bg-white/5 border border-white/5">
+                              <div className="flex-shrink-0 p-1.5 rounded-md bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/5">
                                 {getIcon(item.type)}
                               </div>
                               <div className="truncate">
                                 <span className="block text-sm font-medium">{item.title}</span>
-                                <span className="block text-xs text-zinc-400 truncate mt-0.5">
+                                <span className="block text-xs text-slate-500 dark:text-zinc-400 truncate mt-0.5">
                                   {item.description}
                                 </span>
                               </div>
                             </div>
                             <div className="flex items-center space-x-2 flex-shrink-0 ml-4">
-                              <span className="text-[10px] px-2 py-0.5 rounded-full bg-white/5 text-zinc-400 font-medium border border-white/5">
+                              <span className="text-[10px] px-2 py-0.5 rounded-full bg-slate-100 dark:bg-white/5 text-slate-600 dark:text-zinc-400 font-medium border border-slate-200 dark:border-white/5">
                                 {item.category}
                               </span>
                               {isSelected && (
-                                <span className="text-[10px] text-zinc-500 flex items-center font-mono bg-white/5 px-1 py-0.5 rounded border border-white/5">
+                                <span className="text-[10px] text-slate-500 dark:text-zinc-500 flex items-center font-mono bg-slate-100 dark:bg-white/5 px-1 py-0.5 rounded border border-slate-200 dark:border-white/5">
                                   Go <CornerDownLeft className="w-2.5 h-2.5 ml-1" />
                                 </span>
                               )}
@@ -204,27 +204,27 @@ export default function CommandPalette({ isOpen, onClose }: CommandPaletteProps)
                   </ul>
                 </div>
               ) : (
-                <div className="py-8 text-center text-zinc-500 font-sans text-sm">
-                  No results found for <span className="text-zinc-300">&quot;{query}&quot;</span>
+                <div className="py-8 text-center text-slate-500 dark:text-zinc-500 font-sans text-sm">
+                  No results found for <span className="text-slate-900 dark:text-zinc-300">&quot;{query}&quot;</span>
                 </div>
               )}
             </div>
 
             {/* Footer Help */}
-            <div className="flex justify-between items-center px-4 py-2 bg-black/40 border-t border-white/5 text-[10px] text-zinc-500 font-sans">
+            <div className="flex justify-between items-center px-4 py-2 bg-slate-50 dark:bg-black/40 border-t border-slate-200 dark:border-white/5 text-[10px] text-slate-500 dark:text-zinc-500 font-sans">
               <div className="flex items-center space-x-4">
                 <span>
-                  <kbd className="px-1.5 py-0.5 bg-white/5 border border-white/10 rounded">↑↓</kbd> to navigate
+                  <kbd className="px-1.5 py-0.5 bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded">↑↓</kbd> to navigate
                 </span>
                 <span>
-                  <kbd className="px-1.5 py-0.5 bg-white/5 border border-white/10 rounded">Enter</kbd> to select
+                  <kbd className="px-1.5 py-0.5 bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded">Enter</kbd> to select
                 </span>
                 <span>
-                  <kbd className="px-1.5 py-0.5 bg-white/5 border border-white/10 rounded">ESC</kbd> to close
+                  <kbd className="px-1.5 py-0.5 bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded">ESC</kbd> to close
                 </span>
               </div>
-              <div className="flex items-center text-emerald-400 font-medium">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 mr-1.5 animate-pulse" />
+              <div className="flex items-center text-emerald-600 dark:text-emerald-400 font-medium">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-600 dark:bg-emerald-400 mr-1.5 animate-pulse" />
                 Index Online (2026.07.13)
               </div>
             </div>

@@ -95,11 +95,11 @@ export default function Home() {
   const generateGithubGrid = () => {
     const grid = [];
     const colors = [
-      'bg-zinc-900 border-zinc-950', 
-      'bg-emerald-950/40 border-emerald-950/20', 
-      'bg-emerald-900/60 border-emerald-900/30', 
-      'bg-emerald-700/80 border-emerald-700/40', 
-      'bg-emerald-500 border-emerald-400/50' 
+      'bg-slate-200 border-slate-300 dark:bg-zinc-900 dark:border-zinc-950', 
+      'bg-emerald-200 border-emerald-300 dark:bg-emerald-950/40 dark:border-emerald-950/20', 
+      'bg-emerald-300 border-emerald-400 dark:bg-emerald-900/60 dark:border-emerald-900/30', 
+      'bg-emerald-500 border-emerald-600 dark:bg-emerald-700/80 dark:border-emerald-700/40', 
+      'bg-emerald-600 border-emerald-700 dark:bg-emerald-500 dark:border-emerald-400/50' 
     ];
     for (let i = 0; i < 7 * 26; i++) {
       const seed = Math.sin(i * 0.22) * Math.cos(i * 0.08) + Math.cos(i * 0.15);
@@ -135,10 +135,10 @@ export default function Home() {
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="inline-flex items-center space-x-2 px-3 py-1 rounded-full border border-white/10 glass-panel bg-white/5"
+              className="inline-flex items-center space-x-2 px-3 py-1 rounded-full border border-slate-200 dark:border-white/10 glass-panel bg-white/80 dark:bg-white/5 shadow-xs dark:shadow-none"
             >
               <span className="w-2 h-2 rounded-full bg-ai animate-pulse" />
-              <span className="text-[10px] sm:text-xs font-mono text-zinc-300 tracking-wider">
+              <span className="text-[10px] sm:text-xs font-mono text-slate-700 dark:text-zinc-300 tracking-wider">
                 DEVELOPER OS ACTIVE: VER 1.4.6 [STABLE]
               </span>
             </motion.div>
@@ -149,13 +149,13 @@ export default function Home() {
               transition={{ duration: 0.6, delay: 0.1 }}
               className="space-y-4"
             >
-              <h1 className="text-4xl sm:text-6xl font-black font-sans tracking-tight leading-none text-white">
+              <h1 className="text-4xl sm:text-6xl font-black font-sans tracking-tight leading-none text-slate-900 dark:text-white">
                 Kuldeep Chandra <br/>
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-ai via-startup to-cyber">
                   Vishwakarma
                 </span>
               </h1>
-              <p className="text-base sm:text-xl font-bold tracking-wide font-sans text-indigo-400">
+              <p className="text-base sm:text-xl font-bold tracking-wide font-sans text-indigo-700 dark:text-indigo-400">
                 Software Engineer • AI Builder • Startup Founder
               </p>
             </motion.div>
@@ -164,9 +164,9 @@ export default function Home() {
               initial={{ opacity: 0, y: 25 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-sm sm:text-base text-zinc-400 leading-relaxed font-sans"
+              className="text-sm sm:text-base text-slate-600 dark:text-zinc-400 leading-relaxed font-sans"
             >
-              I build highly scalable software solutions, experiment with neural networks and AI prompting systems, establish digital products, and log cybersecurity notes. I run <span className="text-white font-medium">StartupWire</span>, an automated news pipeline.
+              I build highly scalable software solutions, experiment with neural networks and AI prompting systems, establish digital products, and log cybersecurity notes. I run <span className="text-slate-900 dark:text-white font-semibold">StartupWire</span>, an automated news pipeline.
             </motion.p>
 
             <motion.div
@@ -184,7 +184,7 @@ export default function Home() {
               </Link>
               <Link 
                 href="/blog" 
-                className="px-5 py-2.5 text-xs font-semibold text-zinc-200 hover:text-white bg-white/5 hover:bg-white/10 border border-white/10 rounded-lg hover:-translate-y-0.5 transition-all flex items-center cursor-pointer"
+                className="px-5 py-2.5 text-xs font-semibold text-slate-700 dark:text-zinc-200 hover:text-slate-900 dark:hover:text-white bg-white dark:bg-white/5 hover:bg-slate-100 dark:hover:bg-white/10 border border-slate-200 dark:border-white/10 rounded-lg hover:-translate-y-0.5 transition-all flex items-center cursor-pointer shadow-xs dark:shadow-none"
               >
                 Read Publications
               </Link>
@@ -193,7 +193,7 @@ export default function Home() {
                   triggerConfetti();
                   window.open('/resume', '_blank');
                 }}
-                className="px-5 py-2.5 text-xs font-semibold text-emerald-400 hover:text-emerald-300 bg-emerald-500/5 hover:bg-emerald-500/10 border border-emerald-500/20 rounded-lg hover:-translate-y-0.5 transition-all flex items-center cursor-pointer"
+                className="px-5 py-2.5 text-xs font-semibold text-emerald-700 dark:text-emerald-400 hover:text-emerald-800 dark:hover:text-emerald-300 bg-emerald-500/10 dark:bg-emerald-500/5 hover:bg-emerald-500/20 dark:hover:bg-emerald-500/10 border border-emerald-500/30 dark:border-emerald-500/20 rounded-lg hover:-translate-y-0.5 transition-all flex items-center cursor-pointer"
               >
                 Download Resume 
                 <Download className="w-3.5 h-3.5 ml-2" />
@@ -208,9 +208,9 @@ export default function Home() {
             transition={{ duration: 0.8 }}
             className="w-full lg:w-[450px] relative flex justify-center items-center"
           >
-            <div className="w-full p-6 rounded-xl glass-panel relative z-10 border-white/10 shadow-2xl overflow-hidden group">
+            <div className="w-full p-6 rounded-xl glass-panel relative z-10 border-slate-200 dark:border-white/10 shadow-2xl overflow-hidden group bg-white/80 dark:bg-black/40">
               {/* Window Header */}
-              <div className="flex items-center justify-between border-b border-white/5 pb-4 mb-4 font-mono text-xs text-zinc-500">
+              <div className="flex items-center justify-between border-b border-slate-200 dark:border-white/5 pb-4 mb-4 font-mono text-xs text-slate-500 dark:text-zinc-500">
                 <div className="flex items-center space-x-3">
                   <div className="flex space-x-1.5">
                     <span className="w-2 h-2 rounded-full bg-rose-500/60" />
@@ -218,11 +218,11 @@ export default function Home() {
                     <span className="w-2 h-2 rounded-full bg-emerald-500/60" />
                   </div>
                   {/* Tab toggles */}
-                  <div className="flex items-center space-x-2 border-l border-white/10 pl-3">
+                  <div className="flex items-center space-x-2 border-l border-slate-200 dark:border-white/10 pl-3">
                     <button 
                       onClick={() => setHudView('code')}
                       className={`text-[10px] font-mono tracking-wider uppercase font-semibold transition-colors cursor-pointer ${
-                        hudView === 'code' ? 'text-white border-b border-indigo-500 pb-0.5' : 'text-zinc-500 hover:text-zinc-300'
+                        hudView === 'code' ? 'text-slate-900 dark:text-white border-b border-indigo-600 dark:border-indigo-500 pb-0.5' : 'text-slate-500 dark:text-zinc-500 hover:text-slate-800 dark:hover:text-zinc-300'
                       }`}
                     >
                       Schema
@@ -230,7 +230,7 @@ export default function Home() {
                     <button 
                       onClick={() => setHudView('photo')}
                       className={`text-[10px] font-mono tracking-wider uppercase font-semibold transition-colors cursor-pointer ${
-                        hudView === 'photo' ? 'text-white border-b border-indigo-500 pb-0.5' : 'text-zinc-500 hover:text-zinc-300'
+                        hudView === 'photo' ? 'text-slate-900 dark:text-white border-b border-indigo-600 dark:border-indigo-500 pb-0.5' : 'text-slate-500 dark:text-zinc-500 hover:text-slate-800 dark:hover:text-zinc-300'
                       }`}
                     >
                       Visual
@@ -240,7 +240,7 @@ export default function Home() {
                 {hudView === 'code' ? (
                   <button 
                     onClick={handleCopyProfile}
-                    className="px-2 py-0.5 rounded bg-white/5 hover:bg-white/10 text-[10px] text-zinc-400 hover:text-white transition-colors cursor-pointer"
+                    className="px-2 py-0.5 rounded bg-slate-100 dark:bg-white/5 hover:bg-slate-200 dark:hover:bg-white/10 text-[10px] text-slate-600 dark:text-zinc-400 hover:text-slate-900 dark:hover:text-white transition-colors cursor-pointer border border-slate-200 dark:border-white/5"
                   >
                     {copiedText ? 'Copied!' : 'Copy'}
                   </button>
@@ -337,7 +337,7 @@ export default function Home() {
         </div>
 
         {/* 1.1 TELEMETRY STATS GRID (Expanded stats dashboard) */}
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 border-t border-white/5 pt-10">
+        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 border-t border-slate-200 dark:border-white/5 pt-10">
           {[
             { label: 'Current Focus', value: 'StartupWire Curation' },
             { label: 'Years Learning', value: '10 Yrs (Since 2016)' },
@@ -346,11 +346,11 @@ export default function Home() {
             { label: 'Products Shipped', value: '12 Production' },
             { label: 'Availability', value: 'Hire Opportunity' }
           ].map((stat, idx) => (
-            <div key={idx} className="p-4 rounded-xl border border-white/5 bg-white/[0.02] shadow-sm flex flex-col justify-between space-y-1">
-              <span className="text-[10px] text-zinc-500 font-mono uppercase tracking-wider block">
+            <div key={idx} className="p-4 rounded-xl border border-slate-200 dark:border-white/5 bg-white dark:bg-white/[0.02] shadow-xs dark:shadow-none flex flex-col justify-between space-y-1">
+              <span className="text-[10px] text-slate-500 dark:text-zinc-500 font-mono uppercase tracking-wider block font-medium">
                 {stat.label}
               </span>
-              <span className="text-xs sm:text-sm font-bold text-white font-sans">
+              <span className="text-xs sm:text-sm font-bold text-slate-900 dark:text-white font-sans">
                 {stat.value}
               </span>
             </div>
@@ -360,24 +360,24 @@ export default function Home() {
 
       {/* 2. PERSONAL DASHBOARD SECTION */}
       <section className="space-y-8">
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-white/5 pb-4">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-slate-200 dark:border-white/5 pb-4">
           <div className="space-y-1">
-            <h2 className="text-2xl sm:text-3xl font-black tracking-tight text-white font-sans flex items-center gap-2">
-              <Activity className="w-5 h-5 text-indigo-400" />
+            <h2 className="text-2xl sm:text-3xl font-black tracking-tight text-slate-900 dark:text-white font-sans flex items-center gap-2">
+              <Activity className="w-5 h-5 text-indigo-600 dark:text-indigo-400" />
               Developer telemetry HUD
             </h2>
-            <p className="text-xs sm:text-sm text-zinc-400 font-sans">
+            <p className="text-xs sm:text-sm text-slate-600 dark:text-zinc-400 font-sans">
               System performance stats, deployment pipelines, library checklists, and active codebase indexes.
             </p>
           </div>
-          <span className="text-[10px] sm:text-xs font-mono text-zinc-500 bg-white/5 px-3 py-1.5 rounded-md border border-white/5 flex items-center">
-            <Clock className="w-3.5 h-3.5 mr-1.5 text-zinc-400 animate-spin-slow" />
+          <span className="text-[10px] sm:text-xs font-mono text-slate-600 dark:text-zinc-500 bg-white dark:bg-white/5 px-3 py-1.5 rounded-md border border-slate-200 dark:border-white/5 flex items-center shadow-xs dark:shadow-none">
+            <Clock className="w-3.5 h-3.5 mr-1.5 text-slate-500 dark:text-zinc-400 animate-spin-slow" />
             SYS TIME: {localTime}
           </span>
         </div>
 
         {/* Tab Controls for Dashboard widgets */}
-        <div className="flex flex-wrap gap-1 bg-white/5 p-1 rounded-xl border border-white/5 max-w-fit">
+        <div className="flex flex-wrap gap-1 bg-slate-200/60 dark:bg-white/5 p-1 rounded-xl border border-slate-300 dark:border-white/5 max-w-fit">
           {[
             { id: 'status', label: 'Status & Goals', icon: <Target className="w-3.5 h-3.5" /> },
             { id: 'deployments', label: 'Deployment Logs', icon: <GitBranch className="w-3.5 h-3.5" /> },
@@ -391,7 +391,7 @@ export default function Home() {
               className={`px-4 py-2 text-xs font-semibold rounded-lg transition-all flex items-center space-x-1.5 cursor-pointer ${
                 dashboardTab === tab.id 
                   ? 'bg-indigo-600 text-white shadow-md' 
-                  : 'text-zinc-400 hover:text-zinc-200 hover:bg-white/5'
+                  : 'text-slate-600 dark:text-zinc-400 hover:text-slate-900 dark:hover:text-zinc-200 hover:bg-slate-200/80 dark:hover:bg-white/5'
               }`}
             >
               {tab.icon}
