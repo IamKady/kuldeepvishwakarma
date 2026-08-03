@@ -51,12 +51,12 @@ export default function ClientShell({ children }: { children: React.ReactNode })
   }, []);
 
   return (
-    <div className="min-h-screen flex flex-col bg-background text-foreground transition-colors duration-300 relative overflow-x-hidden">
+    <div className="min-h-screen flex flex-col bg-background text-foreground transition-colors duration-300 relative overflow-hidden">
       
       {/* Mesh/Grid Background Details */}
       <div className="absolute inset-0 grid-bg pointer-events-none z-0" />
-      <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] rounded-full bg-ai/10 blur-[120px] pointer-events-none z-0" />
-      <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] rounded-full bg-startup/5 blur-[120px] pointer-events-none z-0" />
+      <div className="absolute top-0 left-0 w-[50vw] h-[50vh] rounded-full bg-ai/10 blur-[120px] pointer-events-none z-0" />
+      <div className="absolute bottom-0 right-0 w-[50vw] h-[50vh] rounded-full bg-startup/5 blur-[120px] pointer-events-none z-0" />
       
       {/* Navigation */}
       <Navbar 
