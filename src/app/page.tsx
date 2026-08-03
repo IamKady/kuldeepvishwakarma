@@ -260,20 +260,20 @@ export default function Home() {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -10 }}
                     transition={{ duration: 0.2 }}
-                    className="font-mono text-[11px] text-zinc-300 overflow-x-auto space-y-0.5 p-3 rounded bg-black/40 border border-white/5"
+                    className="font-mono text-[11px] text-zinc-200 dark:text-zinc-300 overflow-x-auto space-y-0.5 p-3 rounded bg-slate-900 dark:bg-black/50 border border-slate-800 dark:border-white/5"
                   >
-                    <span className="text-zinc-500">// Personal Identity Schema</span>
+                    <span className="text-zinc-400 dark:text-zinc-500">// Personal Identity Schema</span>
                     <br/>{`{`}
-                    <br/>  <span className="text-indigo-400">"name"</span>: <span className="text-emerald-400">"Kuldeep Chandra Vishwakarma"</span>,
-                    <br/>  <span className="text-indigo-400">"role"</span>: <span className="text-emerald-400">"Software Engineer"</span>,
-                    <br/>  <span className="text-indigo-400">"education"</span>: <span className="text-emerald-400">"MSc CompSci (Pursuing)"</span>,
-                    <br/>  <span className="text-indigo-400">"focus"</span>: <span className="text-emerald-400">"Full-Stack & AI pipelines"</span>,
-                    <br/>  <span className="text-indigo-400">"startup"</span>: <span className="text-emerald-400">"StartupWire.in"</span>,
-                    <br/>  <span className="text-indigo-400">"currently_learning"</span>: [
-                    <br/>    <span className="text-amber-400">"AI Agent Curation"</span>,
-                    <br/>    <span className="text-amber-400">"JWT/CSP Web Security"</span>
+                    <br/>  <span className="text-indigo-300 dark:text-indigo-400">"name"</span>: <span className="text-emerald-300 dark:text-emerald-400">"Kuldeep Chandra Vishwakarma"</span>,
+                    <br/>  <span className="text-indigo-300 dark:text-indigo-400">"role"</span>: <span className="text-emerald-300 dark:text-emerald-400">"Software Engineer"</span>,
+                    <br/>  <span className="text-indigo-300 dark:text-indigo-400">"education"</span>: <span className="text-emerald-300 dark:text-emerald-400">"MSc CompSci (Pursuing)"</span>,
+                    <br/>  <span className="text-indigo-300 dark:text-indigo-400">"focus"</span>: <span className="text-emerald-300 dark:text-emerald-400">"Full-Stack & AI pipelines"</span>,
+                    <br/>  <span className="text-indigo-300 dark:text-indigo-400">"startup"</span>: <span className="text-emerald-300 dark:text-emerald-400">"StartupWire.in"</span>,
+                    <br/>  <span className="text-indigo-300 dark:text-indigo-400">"currently_learning"</span>: [
+                    <br/>    <span className="text-amber-300 dark:text-amber-400">"AI Agent Curation"</span>,
+                    <br/>    <span className="text-amber-300 dark:text-amber-400">"JWT/CSP Web Security"</span>
                     <br/>  ],
-                    <br/>  <span className="text-indigo-400">"status"</span>: <span className="text-emerald-400">"Open to software roles"</span>
+                    <br/>  <span className="text-indigo-300 dark:text-indigo-400">"status"</span>: <span className="text-emerald-300 dark:text-emerald-400">"Open to software roles"</span>
                     <br/>{`}`}
                   </motion.pre>
                 ) : (
@@ -283,7 +283,7 @@ export default function Home() {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -10 }}
                     transition={{ duration: 0.2 }}
-                    className="relative aspect-[4/3] w-full rounded-lg overflow-hidden border border-white/5 bg-black/40 flex items-center justify-center group/img"
+                    className="relative aspect-[4/3] w-full rounded-lg overflow-hidden border border-slate-200 dark:border-white/5 bg-slate-900 dark:bg-black/40 flex items-center justify-center group/img"
                   >
                     <img 
                       src="/kuldeep.jpg" 
@@ -294,12 +294,12 @@ export default function Home() {
                     <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/35 to-transparent pointer-events-none" />
                     
                     {/* Decorative cyber overlays */}
-                    <div className="absolute top-2 left-2 flex items-center space-x-1.5 bg-black/60 backdrop-blur-md border border-white/10 px-2 py-0.5 rounded text-[8px] font-mono tracking-widest text-zinc-300">
+                    <div className="absolute top-2 left-2 flex items-center space-x-1.5 bg-slate-900/80 dark:bg-black/60 backdrop-blur-md border border-white/10 px-2 py-0.5 rounded text-[8px] font-mono tracking-widest text-zinc-300">
                       <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
                       <span>SYS_ACTIVE</span>
                     </div>
 
-                    <div className="absolute top-2 right-2 bg-indigo-500/10 border border-indigo-500/20 text-indigo-300 text-[8px] font-mono uppercase tracking-widest px-2 py-0.5 rounded">
+                    <div className="absolute top-2 right-2 bg-indigo-500/20 text-indigo-200 dark:text-indigo-300 text-[8px] font-mono uppercase tracking-widest px-2 py-0.5 rounded border border-indigo-500/30">
                       Ver: 1.4.6
                     </div>
 
@@ -314,17 +314,17 @@ export default function Home() {
                       <h3 className="text-xs font-bold text-white font-sans tracking-tight">
                         Kuldeep Chandra Vishwakarma
                       </h3>
-                      <p className="text-[9px] text-zinc-400 font-mono flex items-center gap-1">
-                        <span className="text-indigo-400">Node:</span> MSc CS • Full-Stack Developer
+                      <p className="text-[9px] text-zinc-300 font-mono flex items-center gap-1">
+                        <span className="text-indigo-300">Node:</span> MSc CS • Full-Stack Developer
                       </p>
                     </div>
                   </motion.div>
                 )}
               </AnimatePresence>
 
-              <div className="pt-4 flex justify-between items-center text-[10px] text-zinc-500 font-mono">
+              <div className="pt-4 flex justify-between items-center text-[10px] text-slate-500 dark:text-zinc-500 font-mono">
                 <div className="flex items-center space-x-1.5">
-                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
+                  <span className="w-2 h-2 rounded-full bg-emerald-500 dark:bg-emerald-400 animate-ping" />
                   <span>Node: Active</span>
                 </div>
                 <span>SSL: Active</span>
@@ -401,7 +401,7 @@ export default function Home() {
         </div>
 
         {/* Tab contents wrapper */}
-        <div className="glass-panel p-6 rounded-2xl border-white/10 shadow-2xl min-h-[300px] flex flex-col justify-between">
+        <div className="glass-panel p-6 rounded-2xl border border-slate-200 dark:border-white/10 shadow-2xl min-h-[300px] flex flex-col justify-between">
           <AnimatePresence mode="wait">
             <motion.div
               key={dashboardTab}
@@ -416,30 +416,30 @@ export default function Home() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                   <div className="space-y-6">
                     <div className="space-y-2">
-                      <span className="text-[10px] font-mono text-zinc-500 uppercase tracking-widest block">Quarterly Mission</span>
-                      <p className="text-sm text-zinc-200 font-sans leading-relaxed">
+                      <span className="text-[10px] font-mono text-slate-500 dark:text-zinc-500 uppercase tracking-widest block">Quarterly Mission</span>
+                      <p className="text-sm text-slate-700 dark:text-zinc-200 font-sans leading-relaxed">
                         Scale StartupWire.in\'s automated curation algorithms to handle RSS-fetching from 100+ sources while setting up programmatic newsletter digests. Integrate text-to-speech audio logs.
                       </p>
                     </div>
 
                     <div className="space-y-3">
-                      <span className="text-[10px] font-mono text-zinc-500 uppercase tracking-widest block">Operational Metrics</span>
+                      <span className="text-[10px] font-mono text-slate-500 dark:text-zinc-500 uppercase tracking-widest block">Operational Metrics</span>
                       <div className="grid grid-cols-2 gap-4">
-                        <div className="p-3.5 bg-black/40 rounded-lg border border-white/5">
-                          <span className="text-[10px] text-zinc-500 block">Weekly Sprint Target</span>
-                          <span className="text-xs font-bold text-white mt-1 block">Deploy vector similarity filters</span>
+                        <div className="p-3.5 bg-slate-100/90 dark:bg-black/40 rounded-lg border border-slate-200 dark:border-white/5">
+                          <span className="text-[10px] text-slate-500 dark:text-zinc-500 block">Weekly Sprint Target</span>
+                          <span className="text-xs font-bold text-slate-900 dark:text-white mt-1 block">Deploy vector similarity filters</span>
                         </div>
-                        <div className="p-3.5 bg-black/40 rounded-lg border border-white/5">
-                          <span className="text-[10px] text-zinc-500 block">Learning Streak</span>
-                          <span className="text-xs font-bold text-emerald-400 mt-1 block">42 Days Active</span>
+                        <div className="p-3.5 bg-slate-100/90 dark:bg-black/40 rounded-lg border border-slate-200 dark:border-white/5">
+                          <span className="text-[10px] text-slate-500 dark:text-zinc-500 block">Learning Streak</span>
+                          <span className="text-xs font-bold text-emerald-600 dark:text-emerald-400 mt-1 block">42 Days Active</span>
                         </div>
                       </div>
                     </div>
                   </div>
 
-                  <div className="p-5 rounded-xl bg-black/40 border border-white/5 space-y-4">
-                    <span className="text-[10px] font-mono text-indigo-400 uppercase tracking-widest block font-bold">Weekly Progress Checklist</span>
-                    <ul className="space-y-2.5 text-xs font-sans text-zinc-300">
+                  <div className="p-5 rounded-xl bg-slate-100/90 dark:bg-black/40 border border-slate-200 dark:border-white/5 space-y-4">
+                    <span className="text-[10px] font-mono text-indigo-700 dark:text-indigo-400 uppercase tracking-widest block font-bold">Weekly Progress Checklist</span>
+                    <ul className="space-y-2.5 text-xs font-sans text-slate-700 dark:text-zinc-300">
                       {[
                         { text: 'Analyze sitemap indexes and clean canonical page overlaps', done: true },
                         { text: 'Configure Zod validation schemas for all login forms', done: true },
@@ -448,11 +448,11 @@ export default function Home() {
                       ].map((item, idx) => (
                         <li key={idx} className="flex items-center space-x-2.5">
                           {item.done ? (
-                            <CheckCircle2 className="w-4 h-4 text-emerald-400 flex-shrink-0" />
+                            <CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400 flex-shrink-0" />
                           ) : (
-                            <span className="w-4 h-4 rounded-full border border-zinc-600 flex-shrink-0" />
+                            <span className="w-4 h-4 rounded-full border border-slate-400 dark:border-zinc-600 flex-shrink-0" />
                           )}
-                          <span className={item.done ? 'text-zinc-500 line-through' : 'text-zinc-300'}>
+                          <span className={item.done ? 'text-slate-400 dark:text-zinc-500 line-through' : 'text-slate-700 dark:text-zinc-300'}>
                             {item.text}
                           </span>
                         </li>
@@ -465,9 +465,9 @@ export default function Home() {
               {/* Tab 2: Deployment logs */}
               {dashboardTab === 'deployments' && (
                 <div className="space-y-4">
-                  <div className="flex justify-between items-center text-[10px] font-mono text-zinc-500 border-b border-white/5 pb-2">
+                  <div className="flex justify-between items-center text-[10px] font-mono text-slate-500 dark:text-zinc-500 border-b border-slate-200 dark:border-white/5 pb-2">
                     <span>Active Branches: main, dev</span>
-                    <span className="text-emerald-400 font-bold flex items-center gap-1">
+                    <span className="text-emerald-600 dark:text-emerald-400 font-bold flex items-center gap-1">
                       <RefreshCw className="w-3.5 h-3.5 animate-spin" /> pipeline running
                     </span>
                   </div>
@@ -475,7 +475,7 @@ export default function Home() {
                   <div className="overflow-x-auto">
                     <table className="w-full text-left font-mono text-xs border-collapse">
                       <thead>
-                        <tr className="text-zinc-500 border-b border-white/5">
+                        <tr className="text-slate-500 dark:text-zinc-500 border-b border-slate-200 dark:border-white/5">
                           <th className="py-2.5">Commit</th>
                           <th className="py-2.5">Branch</th>
                           <th className="py-2.5">Message / Details</th>
@@ -484,15 +484,15 @@ export default function Home() {
                           <th className="py-2.5 text-right">Status</th>
                         </tr>
                       </thead>
-                      <tbody className="divide-y divide-white/5 text-zinc-300">
+                      <tbody className="divide-y divide-slate-200 dark:divide-white/5 text-slate-700 dark:text-zinc-300">
                         {buildHistory.map((build, idx) => (
-                          <tr key={idx} className="hover:bg-white/[0.02]">
-                            <td className="py-2.5 text-indigo-400 font-bold">{build.commit}</td>
-                            <td className="py-2.5"><span className="px-1.5 py-0.2 rounded bg-white/5 border border-white/5">{build.branch}</span></td>
-                            <td className="py-2.5 max-w-[250px] truncate text-zinc-200">{build.event}</td>
-                            <td className="py-2.5 text-zinc-400">{build.size}</td>
-                            <td className="py-2.5 text-zinc-500">{build.time}</td>
-                            <td className="py-2.5 text-right font-bold text-emerald-400">✓ SUCCESS</td>
+                          <tr key={idx} className="hover:bg-slate-100/50 dark:hover:bg-white/[0.02]">
+                            <td className="py-2.5 text-indigo-600 dark:text-indigo-400 font-bold">{build.commit}</td>
+                            <td className="py-2.5"><span className="px-1.5 py-0.2 rounded bg-slate-200/60 dark:bg-white/5 border border-slate-300 dark:border-white/5 text-slate-800 dark:text-zinc-200">{build.branch}</span></td>
+                            <td className="py-2.5 max-w-[250px] truncate text-slate-900 dark:text-zinc-200">{build.event}</td>
+                            <td className="py-2.5 text-slate-600 dark:text-zinc-400">{build.size}</td>
+                            <td className="py-2.5 text-slate-500 dark:text-zinc-500">{build.time}</td>
+                            <td className="py-2.5 text-right font-bold text-emerald-600 dark:text-emerald-400">✓ SUCCESS</td>
                           </tr>
                         ))}
                       </tbody>
@@ -509,13 +509,13 @@ export default function Home() {
                     { title: 'TRIAL (Active Projects)', items: ['Google Gemini API models', 'pgvector indexing', 'Docker containers', 'Zod validator schemas'] },
                     { title: 'ASSESS (Learning logs)', items: ['LLM agent frameworks', 'Linux CTF writeups', 'AWS serverless worker nodes'] }
                   ].map((radar, idx) => (
-                    <div key={idx} className="p-4 rounded-xl border border-white/5 bg-black/40 space-y-3">
-                      <span className="text-[10px] font-mono text-zinc-500 uppercase tracking-wider block font-bold">
+                    <div key={idx} className="p-4 rounded-xl border border-slate-200 dark:border-white/5 bg-slate-100/90 dark:bg-black/40 space-y-3">
+                      <span className="text-[10px] font-mono text-slate-500 dark:text-zinc-500 uppercase tracking-wider block font-bold">
                         {radar.title}
                       </span>
                       <div className="flex flex-wrap gap-1.5">
                         {radar.items.map((item) => (
-                          <span key={item} className="text-[10px] font-mono px-2 py-0.8 rounded bg-white/5 text-zinc-300 border border-white/5 hover:border-white/20 transition-all cursor-default">
+                          <span key={item} className="text-[10px] font-mono px-2 py-0.8 rounded bg-white dark:bg-white/5 text-slate-700 dark:text-zinc-300 border border-slate-200 dark:border-white/5 hover:border-slate-400 dark:hover:border-white/20 transition-all cursor-default shadow-xs dark:shadow-none">
                             {item}
                           </span>
                         ))}
@@ -529,30 +529,30 @@ export default function Home() {
               {dashboardTab === 'oss' && (
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                   <div className="space-y-4">
-                    <span className="text-[10px] font-mono text-indigo-400 uppercase tracking-widest block font-bold">Open Source Submissions</span>
+                    <span className="text-[10px] font-mono text-indigo-700 dark:text-indigo-400 uppercase tracking-widest block font-bold">Open Source Submissions</span>
                     <div className="space-y-3.5">
                       {openSourceContributions.map((pr) => (
-                        <div key={pr.id} className="p-3.5 rounded-lg border border-white/5 bg-black/30 space-y-1.5">
+                        <div key={pr.id} className="p-3.5 rounded-lg border border-slate-200 dark:border-white/5 bg-slate-100/90 dark:bg-black/30 space-y-1.5">
                           <div className="flex justify-between items-center text-xs font-semibold">
-                            <span className="text-white font-mono">{pr.repoName}</span>
-                            <span className="text-emerald-400 text-[10px] font-mono bg-emerald-500/10 px-2 py-0.5 border border-emerald-500/20 rounded-full">{pr.status}</span>
+                            <span className="text-slate-900 dark:text-white font-mono">{pr.repoName}</span>
+                            <span className="text-emerald-700 dark:text-emerald-400 text-[10px] font-mono bg-emerald-500/10 px-2 py-0.5 border border-emerald-500/20 rounded-full">{pr.status}</span>
                           </div>
-                          <p className="text-xs text-zinc-400 leading-snug">{pr.prTitle}</p>
-                          <span className="text-[10px] text-zinc-500 block font-mono">{pr.impact}</span>
+                          <p className="text-xs text-slate-600 dark:text-zinc-400 leading-snug">{pr.prTitle}</p>
+                          <span className="text-[10px] text-slate-500 dark:text-zinc-500 block font-mono">{pr.impact}</span>
                         </div>
                       ))}
                     </div>
                   </div>
 
-                  <div className="p-5 rounded-xl bg-black/40 border border-white/5 space-y-4 flex flex-col justify-between">
+                  <div className="p-5 rounded-xl bg-slate-100/90 dark:bg-black/40 border border-slate-200 dark:border-white/5 space-y-4 flex flex-col justify-between">
                     <div>
-                      <span className="text-[10px] font-mono text-emerald-400 uppercase tracking-widest block font-bold mb-2">Research abstract</span>
-                      <h4 className="text-xs font-bold text-white">On the Reliability of AI Agent Curation Pipelines</h4>
-                      <p className="text-[11px] text-zinc-400 leading-relaxed font-sans mt-2">
+                      <span className="text-[10px] font-mono text-emerald-700 dark:text-emerald-400 uppercase tracking-widest block font-bold mb-2">Research abstract</span>
+                      <h4 className="text-xs font-bold text-slate-900 dark:text-white">On the Reliability of AI Agent Curation Pipelines</h4>
+                      <p className="text-[11px] text-slate-600 dark:text-zinc-400 leading-relaxed font-sans mt-2">
                         Investigating prompt limits and vector search indexing configurations to achieve deterministic structured JSON outputs from news datasets. Implementing pgvector cosine distance filters.
                       </p>
                     </div>
-                    <Link href="/research" className="text-[10px] text-indigo-400 hover:text-indigo-300 font-mono flex items-center mt-3">
+                    <Link href="/research" className="text-[10px] text-indigo-700 dark:text-indigo-400 hover:text-indigo-900 dark:hover:text-indigo-300 font-mono flex items-center mt-3">
                       Read full report <ChevronRight className="w-3.5 h-3.5 ml-1" />
                     </Link>
                   </div>
@@ -563,25 +563,25 @@ export default function Home() {
               {dashboardTab === 'books' && (
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   {booksData.slice(0, 4).map((book) => (
-                    <div key={book.id} className="p-4 rounded-xl border border-white/5 bg-black/30 flex flex-col justify-between space-y-3.5">
+                    <div key={book.id} className="p-4 rounded-xl border border-slate-200 dark:border-white/5 bg-slate-100/90 dark:bg-black/30 flex flex-col justify-between space-y-3.5">
                       <div className="space-y-1">
                         <div className="flex justify-between items-center">
-                          <h4 className="text-xs font-bold text-white truncate pr-2">{book.title}</h4>
+                          <h4 className="text-xs font-bold text-slate-900 dark:text-white truncate pr-2">{book.title}</h4>
                           <span className={`text-[8px] font-mono px-2 py-0.5 border rounded uppercase ${
-                            book.status === 'Completed' ? 'bg-emerald-500/10 border-emerald-500/20 text-emerald-400' : 'bg-indigo-500/10 border-indigo-500/20 text-indigo-400 animate-pulse'
+                            book.status === 'Completed' ? 'bg-emerald-500/10 border-emerald-500/20 text-emerald-700 dark:text-emerald-400' : 'bg-indigo-500/10 border-indigo-500/20 text-indigo-700 dark:text-indigo-400 animate-pulse'
                           }`}>{book.status}</span>
                         </div>
-                        <span className="text-[10px] text-zinc-500 font-mono">By {book.author} • {book.category}</span>
+                        <span className="text-[10px] text-slate-500 dark:text-zinc-500 font-mono">By {book.author} • {book.category}</span>
                       </div>
 
                       <div className="space-y-1">
-                        <div className="flex justify-between text-[10px] text-zinc-400 font-mono">
+                        <div className="flex justify-between text-[10px] text-slate-600 dark:text-zinc-400 font-mono">
                           <span>Completion progress:</span>
                           <span>{book.progress}%</span>
                         </div>
-                        <div className="w-full h-1 bg-white/5 rounded-full overflow-hidden">
+                        <div className="w-full h-1 bg-slate-200 dark:bg-white/5 rounded-full overflow-hidden">
                           <div 
-                            className={`h-full rounded-full ${book.status === 'Completed' ? 'bg-emerald-400' : 'bg-indigo-500'}`} 
+                            className={`h-full rounded-full ${book.status === 'Completed' ? 'bg-emerald-500' : 'bg-indigo-600'}`} 
                             style={{ width: `${book.progress}%` }}
                           />
                         </div>
@@ -596,11 +596,11 @@ export default function Home() {
       </section>
 
       {/* 2.5 INTERACTIVE GITHUB CONTRIBUTION PANEL */}
-      <section className="glass-panel p-5 rounded-2xl border-white/10 shadow-xl space-y-3">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-white/5 pb-3">
+      <section className="glass-panel p-5 rounded-2xl border border-slate-200 dark:border-white/10 shadow-xl space-y-3 bg-white/80 dark:bg-black/40">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-200 dark:border-white/5 pb-3">
           <div className="flex items-center space-x-2">
-            <Code className="w-4 h-4 text-emerald-400" />
-            <span className="text-xs font-bold uppercase tracking-wider text-zinc-200 font-sans">
+            <Code className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
+            <span className="text-xs font-bold uppercase tracking-wider text-slate-900 dark:text-zinc-200 font-sans">
               GitHub core contributions logs (YTD)
             </span>
           </div>
@@ -608,7 +608,7 @@ export default function Home() {
             href="https://github.com/IamKady" 
             target="_blank" 
             rel="noopener noreferrer" 
-            className="text-[10px] text-zinc-400 hover:text-emerald-400 transition-colors font-mono flex items-center"
+            className="text-[10px] text-slate-500 dark:text-zinc-400 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors font-mono flex items-center"
           >
             github.com/IamKady <ChevronRight className="w-3.5 h-3.5 ml-0.5" />
           </a>
@@ -621,7 +621,7 @@ export default function Home() {
               {githubCells.map((color, index) => (
                 <div 
                   key={index} 
-                  className={`w-[10px] h-[10px] rounded-[1px] border ${color} hover:scale-125 hover:border-white/40 transition-all duration-100 cursor-pointer`}
+                  className={`w-[10px] h-[10px] rounded-[1px] border ${color} hover:scale-125 hover:border-slate-400 dark:hover:border-white/40 transition-all duration-100 cursor-pointer`}
                   title="GitHub contribution activity log block"
                 />
               ))}
@@ -629,64 +629,64 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="flex justify-between items-center text-[10px] text-zinc-500 font-sans">
+        <div className="flex justify-between items-center text-[10px] text-slate-500 dark:text-zinc-500 font-sans">
           <span>Track automated releases and scripts cataloged publically</span>
           <div className="flex items-center space-x-2">
             <span>Less</span>
-            <span className="w-2.5 h-2.5 bg-zinc-900 border border-zinc-950 rounded-[1px]" />
-            <span className="w-2.5 h-2.5 bg-emerald-950 border border-emerald-950/20 rounded-[1px]" />
-            <span className="w-2.5 h-2.5 bg-emerald-900 border border-emerald-900/30 rounded-[1px]" />
-            <span className="w-2.5 h-2.5 bg-emerald-700 border border-emerald-700/40 rounded-[1px]" />
-            <span className="w-2.5 h-2.5 bg-emerald-500 border border-emerald-400/50 rounded-[1px]" />
+            <span className="w-2.5 h-2.5 bg-slate-200 border border-slate-300 dark:bg-zinc-900 dark:border-zinc-950 rounded-[1px]" />
+            <span className="w-2.5 h-2.5 bg-emerald-200 border border-emerald-300 dark:bg-emerald-950 dark:border-emerald-950/20 rounded-[1px]" />
+            <span className="w-2.5 h-2.5 bg-emerald-300 border border-emerald-400 dark:bg-emerald-900 dark:border-emerald-900/30 rounded-[1px]" />
+            <span className="w-2.5 h-2.5 bg-emerald-500 border border-emerald-600 dark:bg-emerald-700 dark:border-emerald-700/40 rounded-[1px]" />
+            <span className="w-2.5 h-2.5 bg-emerald-600 border border-emerald-700 dark:bg-emerald-500 dark:border-emerald-400/50 rounded-[1px]" />
             <span>More</span>
           </div>
         </div>
       </section>
 
       {/* 3. RECRUITER EVIDENCE CONSOLE */}
-      <section className="glass-panel p-6 sm:p-8 rounded-2xl border-white/10 shadow-2xl relative overflow-hidden bg-black/60">
+      <section className="glass-panel p-6 sm:p-8 rounded-2xl border border-slate-200 dark:border-white/10 shadow-2xl relative overflow-hidden bg-white/80 dark:bg-black/60">
         <div className="absolute top-1/2 left-1/2 w-72 h-72 rounded-full bg-emerald-500/5 blur-[100px] -translate-x-1/2 -translate-y-1/2 -z-10" />
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
           {/* Left Column: Evidence Checklist */}
           <div className="lg:col-span-7 space-y-6 text-left flex flex-col justify-between">
             <div className="space-y-4">
-              <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full border border-emerald-500/20 bg-emerald-500/5">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping" />
-                <span className="text-[10px] font-mono text-emerald-400 tracking-wider uppercase font-semibold">
+              <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full border border-emerald-500/30 dark:border-emerald-500/20 bg-emerald-500/10 dark:bg-emerald-500/5">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-600 dark:bg-emerald-400 animate-ping" />
+                <span className="text-[10px] font-mono text-emerald-700 dark:text-emerald-400 tracking-wider uppercase font-semibold">
                   Credentials Verified: Available for Hire
                 </span>
               </div>
 
-              <h3 className="text-2xl sm:text-3xl font-black text-white font-sans tracking-tight">
+              <h3 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white font-sans tracking-tight">
                 Recruiter Evidence Console
               </h3>
               
-              <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed font-sans">
+              <p className="text-xs sm:text-sm text-slate-600 dark:text-zinc-400 leading-relaxed font-sans">
                 Below is structured proof mapping education, professional freelance sweeps, and production achievements:
               </p>
             </div>
 
-            <ul className="space-y-4 text-xs sm:text-sm text-zinc-300 font-sans">
+            <ul className="space-y-4 text-xs sm:text-sm text-slate-700 dark:text-zinc-300 font-sans">
               <li className="flex items-start">
-                <CheckCircle2 className="w-4 h-4 text-emerald-400 mr-2.5 flex-shrink-0 mt-0.5" />
+                <CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400 mr-2.5 flex-shrink-0 mt-0.5" />
                 <div>
-                  <span className="font-bold text-white block">Academic Credentials</span>
-                  <span className="text-xs text-zinc-400">B.Tech Computer Science graduate (Honors, 7.29 CGPA). Pursuing MSc Computer Science (Distance Mode, UPRTOU Prayagraj) with research targeting distributed systems security.</span>
+                  <span className="font-bold text-slate-900 dark:text-white block">Academic Credentials</span>
+                  <span className="text-xs text-slate-600 dark:text-zinc-400">B.Tech Computer Science graduate (Honors, 7.29 CGPA). Pursuing MSc Computer Science (Distance Mode, UPRTOU Prayagraj) with research targeting distributed systems security.</span>
                 </div>
               </li>
               <li className="flex items-start">
-                <CheckCircle2 className="w-4 h-4 text-emerald-400 mr-2.5 flex-shrink-0 mt-0.5" />
+                <CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400 mr-2.5 flex-shrink-0 mt-0.5" />
                 <div>
-                  <span className="font-bold text-white block">Next.js & Frontend Competency</span>
-                  <span className="text-xs text-zinc-400">Shipped StartupWire (AI Aggregator MVP) achieving 100/100 Lighthouse performance metrics, programmatic sitemaps, and edge-caches.</span>
+                  <span className="font-bold text-slate-900 dark:text-white block">Next.js & Frontend Competency</span>
+                  <span className="text-xs text-slate-600 dark:text-zinc-400">Shipped StartupWire (AI Aggregator MVP) achieving 100/100 Lighthouse performance metrics, programmatic sitemaps, and edge-caches.</span>
                 </div>
               </li>
               <li className="flex items-start">
-                <CheckCircle2 className="w-4 h-4 text-emerald-400 mr-2.5 flex-shrink-0 mt-0.5" />
+                <CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400 mr-2.5 flex-shrink-0 mt-0.5" />
                 <div>
-                  <span className="font-bold text-white block">Backend Data Workers & Security</span>
-                  <span className="text-xs text-zinc-400">Written Node.js RSS scrapers and pgvector cosine similarity algorithms in Supabase. Managed secure endpoints sanitized using Zod schemas.</span>
+                  <span className="font-bold text-slate-900 dark:text-white block">Backend Data Workers & Security</span>
+                  <span className="text-xs text-slate-600 dark:text-zinc-400">Written Node.js RSS scrapers and pgvector cosine similarity algorithms in Supabase. Managed secure endpoints sanitized using Zod schemas.</span>
                 </div>
               </li>
             </ul>
@@ -694,13 +694,13 @@ export default function Home() {
             <div className="pt-4 flex flex-wrap gap-3">
               <Link 
                 href="/contact" 
-                className="px-5 py-2.5 text-xs font-semibold text-zinc-950 bg-white hover:bg-zinc-200 rounded-lg shadow-md hover:-translate-y-0.5 transition-all flex items-center cursor-pointer"
+                className="px-5 py-2.5 text-xs font-semibold text-white dark:text-zinc-950 bg-indigo-600 dark:bg-white hover:bg-indigo-700 dark:hover:bg-zinc-200 rounded-lg shadow-md hover:-translate-y-0.5 transition-all flex items-center cursor-pointer"
               >
                 Schedule Zoom Meeting
               </Link>
               <Link 
                 href="/resume" 
-                className="px-5 py-2.5 text-xs font-semibold text-white bg-white/5 hover:bg-white/10 border border-white/10 rounded-lg hover:-translate-y-0.5 transition-all flex items-center cursor-pointer"
+                className="px-5 py-2.5 text-xs font-semibold text-slate-700 dark:text-white bg-white dark:bg-white/5 hover:bg-slate-100 dark:hover:bg-white/10 border border-slate-200 dark:border-white/10 rounded-lg hover:-translate-y-0.5 transition-all flex items-center cursor-pointer shadow-xs dark:shadow-none"
               >
                 Inspect Credentials File
               </Link>
@@ -708,56 +708,56 @@ export default function Home() {
           </div>
 
           {/* Right Column: Tiers & Proof metrics (NO fake percentages) */}
-          <div className="lg:col-span-5 p-6 rounded-xl border border-white/10 bg-black/40 flex flex-col justify-between space-y-6">
-            <h4 className="text-xs font-bold text-white uppercase tracking-wider font-mono border-b border-white/5 pb-2">
+          <div className="lg:col-span-5 p-6 rounded-xl border border-slate-200 dark:border-white/10 bg-slate-100/90 dark:bg-black/40 flex flex-col justify-between space-y-6">
+            <h4 className="text-xs font-bold text-slate-900 dark:text-white uppercase tracking-wider font-mono border-b border-slate-200 dark:border-white/5 pb-2">
               Credibility Ratings Matrix
             </h4>
             
-            <div className="space-y-4 font-mono text-[11px] text-zinc-400">
+            <div className="space-y-4 font-mono text-[11px] text-slate-600 dark:text-zinc-400">
               
               <div className="space-y-1">
-                <div className="flex justify-between text-zinc-300">
+                <div className="flex justify-between text-slate-800 dark:text-zinc-300">
                   <span>LANGUAGES (JS/TS, Python, C++)</span>
-                  <span className="text-emerald-400 font-bold">Advanced</span>
+                  <span className="text-emerald-700 dark:text-emerald-400 font-bold">Advanced</span>
                 </div>
-                <p className="text-[10px] text-zinc-500">2+ Years writing Node workers, analyzers, data structures.</p>
+                <p className="text-[10px] text-slate-500 dark:text-zinc-500">2+ Years writing Node workers, analyzers, data structures.</p>
               </div>
 
               <div className="space-y-1">
-                <div className="flex justify-between text-zinc-300">
+                <div className="flex justify-between text-slate-800 dark:text-zinc-300">
                   <span>FRAMEWORKS (Next.js, React, Node)</span>
-                  <span className="text-emerald-400 font-bold">Production Experience</span>
+                  <span className="text-emerald-700 dark:text-emerald-400 font-bold">Production Experience</span>
                 </div>
-                <p className="text-[10px] text-zinc-500">Deployed dynamic edge cache routing systems to production.</p>
+                <p className="text-[10px] text-slate-500 dark:text-zinc-500">Deployed dynamic edge cache routing systems to production.</p>
               </div>
 
               <div className="space-y-1">
-                <div className="flex justify-between text-zinc-300">
+                <div className="flex justify-between text-slate-800 dark:text-zinc-300">
                   <span>DATABASES (SQL, pgvector, Supabase)</span>
-                  <span className="text-emerald-400 font-bold">Production Experience</span>
+                  <span className="text-emerald-700 dark:text-emerald-400 font-bold">Production Experience</span>
                 </div>
-                <p className="text-[10px] text-zinc-500">Structured cosine vector calculations and indexes.</p>
+                <p className="text-[10px] text-slate-500 dark:text-zinc-500">Structured cosine vector calculations and indexes.</p>
               </div>
 
               <div className="space-y-1">
-                <div className="flex justify-between text-zinc-300">
+                <div className="flex justify-between text-slate-800 dark:text-zinc-300">
                   <span>AI PIPELINES & PROMPTING WORKFLOWS</span>
-                  <span className="text-indigo-400 font-bold">Working Knowledge</span>
+                  <span className="text-indigo-700 dark:text-indigo-400 font-bold">Working Knowledge</span>
                 </div>
-                <p className="text-[10px] text-zinc-500">Fine-tuning prompts for deterministic structured output JSON schemas.</p>
+                <p className="text-[10px] text-slate-500 dark:text-zinc-500">Fine-tuning prompts for deterministic structured output JSON schemas.</p>
               </div>
 
               <div className="space-y-1">
-                <div className="flex justify-between text-zinc-300">
+                <div className="flex justify-between text-slate-800 dark:text-zinc-300">
                   <span>API SECURITY & NETWORKING (CSP, JWT)</span>
-                  <span className="text-amber-400 font-bold">Working Knowledge</span>
+                  <span className="text-amber-700 dark:text-amber-400 font-bold">Working Knowledge</span>
                 </div>
-                <p className="text-[10px] text-zinc-500">Implementing JWT cookies and CTF security logs.</p>
+                <p className="text-[10px] text-slate-500 dark:text-zinc-500">Implementing JWT cookies and CTF security logs.</p>
               </div>
             </div>
 
-            <div className="border-t border-white/5 pt-4 flex items-center text-zinc-500 space-x-2 font-mono text-[10px]">
-              <Clock className="w-3.5 h-3.5 text-zinc-400 animate-pulse" />
+            <div className="border-t border-slate-200 dark:border-white/5 pt-4 flex items-center text-slate-500 dark:text-zinc-500 space-x-2 font-mono text-[10px]">
+              <Clock className="w-3.5 h-3.5 text-slate-500 dark:text-zinc-400 animate-pulse" />
               <span>Response latency: &lt; 2 hours | SSL Encryption verified</span>
             </div>
           </div>
