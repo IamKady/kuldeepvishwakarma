@@ -18,6 +18,8 @@ export interface Project {
   github?: string;
   live?: string;
   summary: string;
+  whatIAmDoingAndLearning: string;
+  categoryTag?: 'SaaS & AI' | 'Full-Stack' | 'Systems & Open Source' | 'Learning Labs';
   caseStudy: {
     overview: string;
     problem: string;
@@ -162,10 +164,12 @@ export const projectsData: Project[] = [
     tagline: 'The Autonomous AI-Powered Tech Startup News Platform',
     status: 'Active',
     logo: '⚡',
+    categoryTag: 'SaaS & AI',
     technologies: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS', 'Supabase', 'Gemini API', 'PostgreSQL'],
     github: 'https://github.com/IamKady/startupwire',
     live: 'https://startupwire.in',
     summary: 'An automated, SEO-optimized tech startup and AI news aggregation platform that uses background agents to crawl RSS feeds, run deduplication, parse summaries, and deploy updates.',
+    whatIAmDoingAndLearning: 'Building autonomous RSS background crawlers with Gemini 1.5 Flash API for topic curation, designing vector similarity search (pgvector) in Supabase PostgreSQL to prevent duplicate press releases, and mastering edge caching with Next.js App Router.',
     caseStudy: {
       overview: 'StartupWire was designed to solve the clutter and human latencies in modern startup news curation. By utilizing Google\'s Gemini API to filter noise and programmatically index relevant articles, StartupWire achieves automated, high-quality publication with zero human intervention.',
       problem: 'Founders, developers, and investors face information overload. Major news portals are often slow to report niche updates, manually summarizing tech breakthroughs is extremely time-consuming, and programmatic content engines typically lack human-like verification or produce repetitive, duplicate topics.',
@@ -213,10 +217,12 @@ export const projectsData: Project[] = [
     tagline: 'AI Tools Discovery, Comparison, and Review Ecosystem',
     status: 'Active',
     logo: '🛠️',
+    categoryTag: 'Full-Stack',
     technologies: ['Next.js', 'React', 'TypeScript', 'Prisma', 'PostgreSQL', 'Tailwind CSS', 'Clerk', 'Cloudinary', 'Zustand', 'React Query'],
     github: 'https://github.com/IamKady/aitoolswebsite',
-    live: 'https://aitoolswebsite-sigma.vercel.app',
+    live: 'https://aitoolswebsite-psi.vercel.app/',
     summary: 'A comprehensive platform for discovering, reviewing, and comparing artificial intelligence utilities and workflows, powered by Next.js and Prisma PostgreSQL.',
+    whatIAmDoingAndLearning: 'Engineering multi-tenant user authentication with Clerk SDK, modeling 15+ relational database entities using Prisma ORM with Neon Serverless Postgres, and building side-by-side product comparison algorithms.',
     caseStudy: {
       overview: 'AIToolsWebsite was engineered to solve the fragmented experience of discovering and reviewing new generative AI products. By building a relational catalog model backed by Prisma and PostgreSQL, AIToolsWebsite allows users to search tools by pricing model, platforms supported, and verified user reviews, while providing tools for dynamic side-by-side product comparisons.',
       problem: 'The rapid expansion of AI services has left developers and enterprises with no single source of truth for tool specifications. Existing listing directories are static, lack robust comparative metrics, contain unverified spam reviews, and offer no structured workflows to guide tool integration.',
@@ -270,9 +276,12 @@ export const projectsData: Project[] = [
     tagline: 'The Ultimate AI-Powered Book Discovery & E-Commerce Sanctuary',
     status: 'Active',
     logo: '📚',
+    categoryTag: 'Full-Stack',
     technologies: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS', 'Zustand', 'Lucide React', 'Framer Motion'],
     github: 'https://github.com/IamKady/Bookperia.git',
+    live: 'https://bookperia.com',
     summary: 'An AI-powered literary ecosystem featuring interactive bookshelves, daily reading challenges, automated key takeaways generation, and dynamic chatbot companion personas.',
+    whatIAmDoingAndLearning: 'Designing local-first state management using Zustand with LocalStorage rehydration, implementing AI librarian chatbot persona engineering, and building dynamic reading progress trackers.',
     caseStudy: {
       overview: 'Bookperia is a comprehensive sanctuary designed to simplify book discovery and reading tracking. By combining an intuitive local shelf manager with chatbot personas (Head Librarian, Sherlock Holmes, and the Alchemist), Bookperia parses user vibes to deliver highly customized book summaries, key takeaways, and character indices.',
       problem: 'Readers struggle to find books aligning with their specific emotional and intellectual moods. Most websites rely on standard filters, completely ignoring personal vibes. Additionally, managing shelves, cataloging favorite quotes, and reviewing detailed AI analysis pages are scattered across multiple, slow platforms.',
@@ -319,6 +328,257 @@ export const projectsData: Project[] = [
       bestPractices: 100,
       seo: 98,
       loadTimeMs: 120
+    }
+  },
+  {
+    id: 'portfolio-os',
+    title: 'Personal Portfolio Operating System',
+    tagline: 'Developer Telemetry System, Theme Adaptive Engine & Live REST Pipelines',
+    status: 'Active',
+    logo: '💻',
+    categoryTag: 'Full-Stack',
+    technologies: ['Next.js 16', 'React 19', 'TypeScript', 'Tailwind CSS v4', 'Framer Motion', 'GitHub REST API', 'Vercel Edge'],
+    github: 'https://github.com/IamKady/kuldeepvishwakarma',
+    live: 'https://kuldeepvishwakarma.com',
+    summary: 'Personal developer portfolio OS built with Next.js App Router, featuring site-wide light/dark mode contrast, real-time GitHub commit feeds, LinkedIn live work streams, and 29 subpage architectures.',
+    whatIAmDoingAndLearning: 'Mastering Next.js App Router compilation, Tailwind CSS v4 `@variant dark` custom directives, dynamic sitemaps generation, structured JSON-LD Schema.org metadata, and real-time GitHub/LinkedIn REST API integrations.',
+    caseStudy: {
+      overview: 'Engineered as a personal operating system to showcase verified technical skills, live commit activity, and detailed system architecture case studies.',
+      problem: 'Generic portfolios look static, lack real empirical commit evidence, and often break in light/dark mode transitions.',
+      research: 'Audited modern developer sites. Built a monospaced terminal aesthetic with interactive HUD dashboards.',
+      targetUsers: 'Recruiters, founders, technical leaders, and software engineering collaborators.',
+      planning: 'Structured 29 dynamic routes with clean layout docking, client shells, and zero bottom viewport overflow.',
+      design: 'Vibrant indigo and emerald glowing accents with glassmorphism panels and responsive CSS grid math.',
+      architectureDiagram: `
++-----------------------------------+
+|        Client Viewport Edge       |
+|    (Next.js App Router Node)     |
++-----------------------------------+
+                  |
+        +---------+---------+
+        v                   v
++---------------+   +---------------+
+| GitHub API    |   | LinkedIn API  |
+| (Live Commits)|   | (Work Stream) |
++---------------+   +---------------+
+      `,
+      databaseSpecs: 'Structured TypeScript database tables with JSON-LD schema generators for Person and WebSite objects.',
+      authenticationFlow: 'Client-side local state hydration with serverless API route handlers.',
+      securityProtocols: 'Strict Content Security Policies, sanitized inputs, and sanitized meta tags.',
+      seoOptimization: 'Achieved 100/100 Lighthouse SEO score with custom OpenGraph banners and canonical routes.',
+      performanceTuning: 'Fast 150ms page transitions using Turbopack compiler optimizations and Vercel Edge caching.',
+      development: 'Iteratively refactored 29 routes for WCAG contrast compliance and clean layout flex docking.',
+      architecture: 'Client Shell -> Next.js API Routes -> GitHub/LinkedIn APIs.',
+      seo: 'Full OpenGraph, Twitter card tags, and dynamic sitemap.xml route generation.',
+      challenges: 'Eliminating extraneous vertical scroll whitespace below the footer. Fixed using strict overflow clipping.',
+      tradeOffs: 'Favored Tailwind 4 custom variants over heavy UI libraries to maintain minimal bundle weight.',
+      lessons: 'Continuous iteration and empirical runtime verification ensure rock-solid production web applications.',
+      futureRoadmap: 'Expose public GraphQL endpoint for personal tech telemetry data.',
+      timeline: 'Jul 2026 - Present (Active Development)'
+    },
+    metrics: {
+      performance: 100,
+      accessibility: 100,
+      bestPractices: 100,
+      seo: 100,
+      loadTimeMs: 110
+    }
+  },
+  {
+    id: 'ai-social-agent',
+    title: 'AI Social Media Database Agent',
+    tagline: 'Autonomous AI Content Scraping & Relational Database Pipeline',
+    status: 'Active',
+    logo: '🤖',
+    categoryTag: 'SaaS & AI',
+    technologies: ['Python', 'Node.js', 'PostgreSQL', 'LLM Agents', 'Vector Indexing'],
+    github: 'https://github.com/IamKady/AI-agent-for-social-media-database',
+    summary: 'Autonomous AI agent system designed to scrape social media metrics, process unstructured text, generate embeddings, and persist records in a structured database.',
+    whatIAmDoingAndLearning: 'Developing autonomous AI agent execution loops, parsing un-structured social media feeds, mapping JSON schemas to relational database tables, and implementing rate-limit resilient retry handlers.',
+    caseStudy: {
+      overview: 'Built an autonomous background worker that collects public social media data, uses LLM models to categorize content trends, and stores metrics in PostgreSQL.',
+      problem: 'Manually tracking social media trends and metrics across channels is inefficient and error-prone.',
+      research: 'Evaluated LLM scraping frameworks and vector database indexing options.',
+      targetUsers: 'Digital marketers, startup founders, and data analysts monitoring tech trends.',
+      planning: 'Designed agent prompt constraints and automated cron execution loops.',
+      design: 'Console-based logs and structured API endpoints for analytics dashboards.',
+      architectureDiagram: `
++------------------+     +-------------------+     +------------------+
+|  Social Feeds    | --> | Python LLM Agent  | --> | PostgreSQL DB    |
+| (API / Web Scrape)|    | (Format JSON)     |     | (Vector Indexes) |
++------------------+     +-------------------+     +------------------+
+      `,
+      databaseSpecs: 'PostgreSQL with relational tables for posts, engagement metrics, and vector embeddings.',
+      authenticationFlow: 'API key authorization for secure worker access.',
+      securityProtocols: 'Encrypted API keys and rate-limit backoff handling.',
+      seoOptimization: 'N/A (Backend service engine).',
+      performanceTuning: 'Parallelized worker threads to process multiple feeds concurrently.',
+      development: 'Built with Python and Node.js for high-speed async I/O.',
+      architecture: 'Worker Daemon -> Agent Prompt Engine -> PostgreSQL Storage.',
+      seo: 'N/A',
+      challenges: 'Handling unexpected API response schemas. Resolved with strict Zod/Pydantic validation.',
+      tradeOffs: 'Chose relational SQL over document stores for strict analytical query capability.',
+      lessons: 'Structured prompt design is critical for reliable AI agent database persistence.',
+      futureRoadmap: 'Add real-time sentiment analysis graphs and webhook alerts.',
+      timeline: 'Jul 2026'
+    },
+    metrics: {
+      performance: 96,
+      accessibility: 95,
+      bestPractices: 98,
+      seo: 90,
+      loadTimeMs: 160
+    }
+  },
+  {
+    id: 'gate-cse-resources',
+    title: 'GATE & CSE Academic Engine',
+    tagline: 'Comprehensive Computer Science Engineering & GATE Exam Knowledge Repository',
+    status: 'Active',
+    logo: '🎓',
+    categoryTag: 'Systems & Open Source',
+    technologies: ['Markdown', 'Git', 'Algorithms', 'Data Structures', 'Operating Systems', 'DBMS'],
+    github: 'https://github.com/IamKady/GATE-and-CSE-Resources-for-Students',
+    summary: 'A curated open-source repository containing exhaustive study guides, subject notes, algorithms, data structures, and computer architecture references for CSE students.',
+    whatIAmDoingAndLearning: 'Consolidating core Computer Science theory (Operating Systems, Database Systems, Computer Networks, Data Structures & Algorithms), writing technical documentation, and organizing structured student study repositories.',
+    caseStudy: {
+      overview: 'Created an open-source knowledge repository to help Computer Science students prepare for GATE exams and technical interviews.',
+      problem: 'High-quality computer science core subject notes are fragmented across disparate websites and paid platforms.',
+      research: 'Audited university syllabi and GATE exam patterns to structure subject modules.',
+      targetUsers: 'Computer Science students, GATE aspirants, and software engineering interview candidates.',
+      planning: 'Organized topic folders covering OS, DBMS, Networks, Data Structures, Algorithms, and Theory of Computation.',
+      design: 'Clean GitHub Markdown document layouts with Mermaid diagrams and code snippets.',
+      architectureDiagram: `
++-------------------------------------------------------+
+|              GATE & CSE Resource Hub                  |
++-------------------------------------------------------+
+| [OS] | [DBMS] | [CN] | [DSA] | [TOC] | [Architecture] |
++-------------------------------------------------------+
+      `,
+      databaseSpecs: 'Structured Git repository with modular Markdown chapters.',
+      authenticationFlow: 'Open Source Public Access.',
+      securityProtocols: 'Git commit verification and community pull request reviews.',
+      seoOptimization: 'High GitHub search discoverability with targeted keywords.',
+      performanceTuning: 'Lightweight static Markdown files for instant rendering.',
+      development: 'Curated and maintained using Git version control.',
+      architecture: 'GitHub Open Source Repository Engine.',
+      seo: 'Optimized README metadata and topic tags.',
+      challenges: 'Structuring complex subject concepts cleanly. Resolved by using Mermaid flowcharts.',
+      tradeOffs: 'Chose Markdown Git repo over custom site for instant community contributions.',
+      lessons: 'Clear technical documentation is invaluable for computer science learners.',
+      futureRoadmap: 'Add interactive practice quizzes and video walkthrough links.',
+      timeline: 'Apr 2024 - Present'
+    },
+    metrics: {
+      performance: 100,
+      accessibility: 100,
+      bestPractices: 100,
+      seo: 95,
+      loadTimeMs: 90
+    }
+  },
+  {
+    id: 'cpp20-masterclass',
+    title: 'Modern C++20 Systems Programming',
+    tagline: 'Low-Level Memory Labs, Concepts, Coroutines & High-Performance C++',
+    status: 'Active',
+    logo: '⚙️',
+    categoryTag: 'Systems & Open Source',
+    technologies: ['C++20', 'GCC/Clang', 'CMake', 'Memory Management', 'Pointers', 'Templates'],
+    github: 'https://github.com/IamKady/The-C-20-Masterclass-Source-Code',
+    summary: 'Comprehensive C++20 systems programming repository featuring low-level memory labs, smart pointers, template metaprogramming, concepts, and coroutines.',
+    whatIAmDoingAndLearning: 'Studying C++20 language features (Concepts, Ranges, Coroutines, Modules), mastering raw and smart pointer memory allocation, benchmarking execution speed, and designing low-level systems algorithms.',
+    caseStudy: {
+      overview: 'Practical hands-on repository exploring C++20 systems features, memory management, and high-performance algorithms.',
+      problem: 'Understanding low-level memory allocation and modern C++20 abstractions requires hands-on code labs.',
+      research: 'Studied modern C++20 standards, ISO guidelines, and compiler optimizations.',
+      targetUsers: 'Systems engineers, game developers, and performance-focused coders.',
+      planning: 'Organized code modules by topic: Pointers, Memory Allocators, Concepts, Ranges, and Coroutines.',
+      design: 'Clean, well-commented C++ source files with CMake build targets.',
+      architectureDiagram: `
++-----------------------------------+
+|      C++20 Systems Executable     |
++-----------------------------------+
+                  |
+        +---------+---------+
+        v                   v
++---------------+   +---------------+
+| Custom Memory |   | C++20 Ranges  |
+| Allocators    |   | & Coroutines  |
++---------------+   +---------------+
+      `,
+      databaseSpecs: 'N/A (C++ compiled binaries and source files).',
+      authenticationFlow: 'N/A',
+      securityProtocols: 'AddressSanitizer and Valgrind memory leak checks.',
+      seoOptimization: 'N/A',
+      performanceTuning: 'Compiled with `-O3` optimization flags and strict zero-cost abstractions.',
+      development: 'Written in modern C++20 compiled with GCC and Clang.',
+      architecture: 'C++ Source -> CMake -> Native Native Machine Code.',
+      seo: 'N/A',
+      challenges: 'Debugging memory leaks and pointer arithmetic. Fixed using Valgrind and smart pointers.',
+      tradeOffs: 'Chose C++20 over higher-level languages to achieve absolute memory control and maximum speed.',
+      lessons: 'Low-level memory management knowledge greatly enhances overall software architecture skills.',
+      futureRoadmap: 'Add lock-free multithreaded queue benchmarks.',
+      timeline: 'Dec 2023 - Present'
+    },
+    metrics: {
+      performance: 100,
+      accessibility: 100,
+      bestPractices: 100,
+      seo: 90,
+      loadTimeMs: 80
+    }
+  },
+  {
+    id: 'web-standards-css',
+    title: 'Web Standards & CSS Architecture',
+    tagline: 'Semantic HTML5, Flexbox/Grid Systems, and Responsive UI Standards',
+    status: 'Active',
+    logo: '🎨',
+    categoryTag: 'Learning Labs',
+    technologies: ['HTML5', 'CSS3', 'Flexbox', 'CSS Grid', 'Responsive Design', 'Accessibility'],
+    github: 'https://github.com/IamKady/HTML-COMPLETE',
+    summary: 'An extensive reference and practice repository covering semantic HTML5 structure, modern CSS flexbox & grid design systems, and responsive layout standards.',
+    whatIAmDoingAndLearning: 'Deepening knowledge of semantic HTML5 element hierarchies, web accessibility (WCAG), CSS grid layout algorithms, and modern CSS custom property design systems.',
+    caseStudy: {
+      overview: 'Built a foundational web development guide and code repository mastering modern layout algorithms and design tokens.',
+      problem: 'Many web developers rely on heavy frameworks without understanding core CSS layout mechanics.',
+      research: 'Audited W3C HTML5 specifications and MDN web docs.',
+      targetUsers: 'Frontend developers wanting rock-solid mastery of HTML5 and CSS3.',
+      planning: 'Structured lessons covering selectors, flexbox, grid, animations, and accessibility.',
+      design: 'High-contrast responsive UI components with clean CSS custom properties.',
+      architectureDiagram: `
++-----------------------------------+
+|      Semantic HTML5 Document     |
++-----------------------------------+
+                  |
+        +---------+---------+
+        v                   v
++---------------+   +---------------+
+| CSS Grid      |   | Flexbox       |
+| Layout System |   | Components    |
++---------------+   +---------------+
+      `,
+      databaseSpecs: 'N/A',
+      authenticationFlow: 'N/A',
+      securityProtocols: 'WCAG 2.1 accessibility compliance guidelines.',
+      seoOptimization: 'Semantic tag hierarchy (h1-h6, main, section, nav, footer).',
+      performanceTuning: 'Pure CSS rendering with zero JavaScript overhead.',
+      development: 'Written in pure HTML5 and vanilla CSS3.',
+      architecture: 'HTML5 Semantic Tree -> CSS Custom Property Design Tokens.',
+      seo: 'High semantic score.',
+      challenges: 'Ensuring 100% responsive behavior on all viewport sizes. Solved using fluid CSS clamp() function.',
+      tradeOffs: 'Used pure CSS without frameworks to gain complete mastery over browser layout engines.',
+      lessons: 'Solid CSS fundamentals make framework adoption effortless.',
+      futureRoadmap: 'Add CSS container query examples.',
+      timeline: 'May 2024 - Present'
+    },
+    metrics: {
+      performance: 100,
+      accessibility: 100,
+      bestPractices: 100,
+      seo: 100,
+      loadTimeMs: 70
     }
   }
 ];

@@ -23,6 +23,13 @@ import { projectsData, Project } from '@/data/db';
 export default function Projects() {
   const [selectedProjectId, setSelectedProjectId] = useState<string | null>(null);
   const [caseStudyTab, setCaseStudyTab] = useState<'story' | 'engineering' | 'seo' | 'lessons'>('story');
+  const [selectedCategory, setSelectedCategory] = useState<string>('All');
+
+  const categories = ['All', 'SaaS & AI', 'Full-Stack', 'Systems & Open Source', 'Learning Labs'];
+
+  const filteredProjects = selectedCategory === 'All'
+    ? projectsData
+    : projectsData.filter(p => p.categoryTag === selectedCategory);
 
   const getStatusColor = (status: Project['status']) => {
     switch (status) {
@@ -44,17 +51,49 @@ export default function Projects() {
       
       {/* Header */}
       <div className="space-y-3">
-        <h1 className="text-3xl sm:text-5xl font-black text-slate-900 dark:text-white tracking-tight">
-          Engineering Case Studies
-        </h1>
-        <p className="text-sm text-slate-600 dark:text-zinc-400 font-sans max-w-xl">
-          Deep structural reviews of systems I built, explaining business problems, architecture flowcharts, database schema choices, and trade-offs.
-        </p>
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div>
+            <h1 className="text-3xl sm:text-5xl font-black text-slate-900 dark:text-white tracking-tight flex items-center gap-3">
+              <FolderCode className="w-8 h-8 text-indigo-600 dark:text-indigo-400" /> Engineering Projects
+            </h1>
+            <p className="text-sm text-slate-600 dark:text-zinc-400 font-sans max-w-xl mt-1">
+              Exhaustive collection of all projects and repositories from my GitHub account with active learnings, architecture diagrams, and source code links.
+            </p>
+          </div>
+
+          <a 
+            href="https://github.com/IamKady?tab=repositories" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="px-4 py-2 rounded-xl bg-slate-900 dark:bg-white/10 hover:bg-slate-800 dark:hover:bg-white/20 text-white font-mono text-xs font-semibold flex items-center space-x-2 transition-all w-fit shadow-md"
+          >
+            <Github className="w-4 h-4" />
+            <span>GitHub Repositories</span>
+            <ExternalLink className="w-3 h-3 ml-1" />
+          </a>
+        </div>
+      </div>
+
+      {/* Category Filter Pills */}
+      <div className="flex flex-wrap gap-2 border-b border-slate-200 dark:border-white/5 pb-4">
+        {categories.map((cat) => (
+          <button
+            key={cat}
+            onClick={() => setSelectedCategory(cat)}
+            className={`px-3.5 py-1.5 rounded-full text-xs font-mono transition-all cursor-pointer ${
+              selectedCategory === cat
+                ? 'bg-indigo-600 text-white shadow-md font-bold'
+                : 'bg-slate-100 dark:bg-white/5 text-slate-700 dark:text-zinc-400 hover:bg-slate-200 dark:hover:bg-white/10 border border-slate-200 dark:border-white/5'
+            }`}
+          >
+            {cat} {cat === 'All' ? `(${projectsData.length})` : `(${projectsData.filter(p => p.categoryTag === cat).length})`}
+          </button>
+        ))}
       </div>
 
       {/* Projects List Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        {projectsData.map((project) => (
+        {filteredProjects.map((project) => (
           <div 
             key={project.id}
             className="glass-panel p-6 rounded-2xl border border-slate-200 dark:border-white/10 flex flex-col justify-between space-y-6 shadow-xl relative overflow-hidden group bg-white/80 dark:bg-black/40"
@@ -69,9 +108,16 @@ export default function Projects() {
                   <span className="text-3xl">{project.logo}</span>
                   <div>
                     <h2 className="text-lg font-bold text-slate-900 dark:text-white font-sans">{project.title}</h2>
-                    <span className={`text-[9px] px-2 py-0.5 rounded-full border font-mono ${getStatusColor(project.status)}`}>
-                      {project.status}
-                    </span>
+                    <div className="flex items-center gap-2 mt-0.5">
+                      <span className={`text-[9px] px-2 py-0.5 rounded-full border font-mono ${getStatusColor(project.status)}`}>
+                        {project.status}
+                      </span>
+                      {project.categoryTag && (
+                        <span className="text-[9px] px-2 py-0.5 rounded-full bg-slate-200/70 dark:bg-white/5 text-slate-600 dark:text-zinc-400 font-mono border border-slate-300 dark:border-white/5">
+                          {project.categoryTag}
+                        </span>
+                      )}
+                    </div>
                   </div>
                 </div>
                 
@@ -81,10 +127,10 @@ export default function Projects() {
                       href={project.github} 
                       target="_blank" 
                       rel="noopener noreferrer"
-                      className="p-2 rounded-md hover:bg-slate-100 dark:hover:bg-white/5 border border-transparent text-slate-500 dark:text-zinc-400 hover:text-slate-900 dark:hover:text-white transition-all"
-                      title="View source code repository"
+                      className="p-2 rounded-md bg-slate-100 dark:bg-white/5 hover:bg-slate-200 dark:hover:bg-white/10 border border-slate-200 dark:border-white/10 text-slate-700 dark:text-zinc-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-all shadow-xs"
+                      title="View GitHub Repository Source Code"
                     >
-                      <Github className="w-4.5 h-4.5" />
+                      <Github className="w-4 h-4" />
                     </a>
                   )}
                   {project.live && (
@@ -92,10 +138,10 @@ export default function Projects() {
                       href={project.live} 
                       target="_blank" 
                       rel="noopener noreferrer"
-                      className="p-2 rounded-md hover:bg-slate-100 dark:hover:bg-white/5 border border-transparent text-slate-500 dark:text-zinc-400 hover:text-slate-900 dark:hover:text-white transition-all"
+                      className="p-2 rounded-md bg-slate-100 dark:bg-white/5 hover:bg-slate-200 dark:hover:bg-white/10 border border-slate-200 dark:border-white/10 text-slate-700 dark:text-zinc-300 hover:text-emerald-600 dark:hover:text-emerald-400 transition-all shadow-xs"
                       title="Visit Live Application"
                     >
-                      <ExternalLink className="w-4.5 h-4.5" />
+                      <ExternalLink className="w-4 h-4" />
                     </a>
                   )}
                 </div>
@@ -109,6 +155,17 @@ export default function Projects() {
                 {project.summary}
               </p>
 
+              {/* What I am Doing & Learning */}
+              <div className="p-3.5 rounded-xl border border-indigo-500/20 bg-indigo-500/5 dark:bg-indigo-500/10 space-y-1.5 font-sans">
+                <span className="text-[10px] font-mono font-bold text-indigo-700 dark:text-indigo-400 uppercase tracking-wider flex items-center gap-1.5">
+                  <Lightbulb className="w-3.5 h-3.5 text-indigo-600 dark:text-indigo-400 flex-shrink-0" />
+                  What I am Doing & Learning
+                </span>
+                <p className="text-xs text-slate-700 dark:text-zinc-300 leading-relaxed">
+                  {project.whatIAmDoingAndLearning}
+                </p>
+              </div>
+
               {/* Technology tags */}
               <div className="flex flex-wrap gap-1.5 pt-1">
                 {project.technologies.map(tech => (
@@ -120,17 +177,30 @@ export default function Projects() {
             </div>
 
             {/* Case Study Trigger */}
-            <div className="pt-6 relative z-10 border-t border-slate-200 dark:border-white/5">
+            <div className="pt-4 relative z-10 border-t border-slate-200 dark:border-white/5 flex gap-2">
               <button
                 onClick={() => {
                   setSelectedProjectId(project.id);
                   setCaseStudyTab('story');
                 }}
-                className="w-full py-2.5 bg-slate-100 dark:bg-white/5 hover:bg-slate-200 dark:hover:bg-white/10 text-slate-900 dark:text-white rounded-lg border border-slate-200 dark:border-white/10 text-xs font-semibold tracking-wide transition-all hover:border-indigo-500/30 cursor-pointer flex items-center justify-center space-x-1.5"
+                className="flex-1 py-2.5 bg-slate-100 dark:bg-white/5 hover:bg-slate-200 dark:hover:bg-white/10 text-slate-900 dark:text-white rounded-lg border border-slate-200 dark:border-white/10 text-xs font-semibold tracking-wide transition-all hover:border-indigo-500/30 cursor-pointer flex items-center justify-center space-x-1.5"
               >
                 <span>Inspect System Case Study</span>
                 <ArrowUpRight className="w-3.5 h-3.5" />
               </button>
+
+              {project.github && (
+                <a
+                  href={project.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-3.5 py-2.5 rounded-lg border border-slate-200 dark:border-white/10 bg-white dark:bg-white/5 hover:bg-slate-100 dark:hover:bg-white/10 text-slate-700 dark:text-zinc-300 hover:text-indigo-600 dark:hover:text-white text-xs font-mono flex items-center gap-1 transition-all"
+                  title="View GitHub Repository"
+                >
+                  <Github className="w-3.5 h-3.5" />
+                  <span className="hidden sm:inline">GitHub</span>
+                </a>
+              )}
             </div>
           </div>
         ))}
