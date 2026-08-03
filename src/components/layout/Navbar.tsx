@@ -51,7 +51,12 @@ export default function Navbar({ onSearchOpen, theme, toggleTheme }: NavbarProps
         <div className="flex items-center justify-between">
           
           {/* Logo */}
-          <Link href="/" className="flex items-center space-x-2 group">
+          <Link href="/" className="flex items-center space-x-2.5 group">
+            <img 
+              src="/logo.png" 
+              alt="KCV Logo" 
+              className="w-7 h-7 rounded-lg object-cover border border-slate-200 dark:border-white/10 group-hover:scale-105 transition-transform shadow-xs" 
+            />
             <span className="text-xl font-bold font-sans tracking-tight text-slate-900 dark:text-white flex items-center">
               KCV
               <span className="w-1.5 h-1.5 rounded-full bg-ai ml-1 animate-pulse" />

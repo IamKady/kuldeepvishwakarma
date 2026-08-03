@@ -137,8 +137,13 @@ export default function CommandPalette({ isOpen, onClose }: CommandPaletteProps)
             className="relative w-full max-w-2xl mx-4 overflow-hidden border rounded-xl bg-white dark:bg-[#0a0a0f] shadow-2xl border-slate-200 dark:border-white/10"
           >
             {/* Input Bar */}
-            <div className="flex items-center px-4 py-3.5 border-b border-slate-200 dark:border-white/5">
-              <Search className="w-5 h-5 mr-3 text-slate-400 dark:text-zinc-400" />
+            <div className="flex items-center px-4 py-3.5 border-b border-slate-200 dark:border-white/5 space-x-3">
+              <img 
+                src="/logo.png" 
+                alt="KCV Logo" 
+                className="w-6 h-6 rounded-md object-cover border border-slate-200 dark:border-white/10 flex-shrink-0" 
+              />
+              <Search className="w-4 h-4 text-slate-400 dark:text-zinc-400 flex-shrink-0" />
               <input
                 ref={inputRef}
                 type="text"
@@ -149,7 +154,7 @@ export default function CommandPalette({ isOpen, onClose }: CommandPaletteProps)
               />
               <button 
                 onClick={onClose}
-                className="p-1 rounded-md text-slate-400 dark:text-zinc-400 hover:text-slate-700 dark:hover:text-zinc-200 hover:bg-slate-100 dark:hover:bg-white/5 transition-colors"
+                className="p-1 rounded-md text-slate-400 dark:text-zinc-400 hover:text-slate-700 dark:hover:text-zinc-200 hover:bg-slate-100 dark:hover:bg-white/5 transition-colors cursor-pointer"
               >
                 <X className="w-4 h-4" />
               </button>
