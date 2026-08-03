@@ -66,22 +66,22 @@ export default function Startups() {
       
       {/* Page Header */}
       <div className="space-y-3">
-        <h1 className="text-3xl sm:text-5xl font-black text-white tracking-tight">
+        <h1 className="text-3xl sm:text-5xl font-black text-slate-900 dark:text-white tracking-tight">
           Startup Journal
         </h1>
-        <p className="text-sm text-zinc-400 font-sans max-w-xl">
+        <p className="text-sm text-slate-600 dark:text-zinc-400 font-sans max-w-xl">
           Logging my thoughts, experiments, metrics, and failures building digital products like StartupWire.
         </p>
       </div>
 
       {/* Part 1: Interactive Roadmap Kanban */}
       <div className="space-y-6">
-        <div className="border-b border-white/5 pb-4">
-          <h2 className="text-xl sm:text-2xl font-black text-white tracking-tight font-sans flex items-center">
-            <Map className="w-5 h-5 text-indigo-400 mr-2" />
+        <div className="border-b border-slate-200 dark:border-white/5 pb-4">
+          <h2 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white tracking-tight font-sans flex items-center">
+            <Map className="w-5 h-5 text-indigo-600 dark:text-indigo-400 mr-2" />
             Startup Roadmap Board
           </h2>
-          <p className="text-xs text-zinc-400 font-sans mt-1">
+          <p className="text-xs text-slate-600 dark:text-zinc-400 font-sans mt-1">
             Current stages, milestones, and development sprint statuses for StartupWire.
           </p>
         </div>
@@ -93,13 +93,13 @@ export default function Startups() {
             return (
               <div 
                 key={stage}
-                className="p-4 rounded-xl glass-panel border-white/5 flex flex-col space-y-3 min-w-[200px]"
+                className="p-4 rounded-xl glass-panel border border-slate-200 dark:border-white/5 flex flex-col space-y-3 min-w-[200px] bg-white/80 dark:bg-black/40"
               >
-                <div className="flex items-center justify-between border-b border-white/5 pb-2">
-                  <span className="text-xs font-bold text-white uppercase tracking-wider font-mono">
+                <div className="flex items-center justify-between border-b border-slate-200 dark:border-white/5 pb-2">
+                  <span className="text-xs font-bold text-slate-900 dark:text-white uppercase tracking-wider font-mono">
                     {stage}
                   </span>
-                  <span className="text-[10px] bg-white/5 text-zinc-400 px-2 py-0.2 border border-white/5 rounded-full font-mono font-bold">
+                  <span className="text-[10px] bg-slate-100 dark:bg-white/5 text-slate-600 dark:text-zinc-400 px-2 py-0.2 border border-slate-200 dark:border-white/5 rounded-full font-mono font-bold">
                     {stageTasks.length}
                   </span>
                 </div>
@@ -110,30 +110,30 @@ export default function Startups() {
                       key={task.id}
                       onMouseEnter={() => setHoveredCard(task.id)}
                       onMouseLeave={() => setHoveredCard(null)}
-                      className="p-3 rounded-lg border bg-zinc-950/40 hover:bg-zinc-900/60 transition-all border-white/5 hover:border-white/10 space-y-2 relative"
+                      className="p-3 rounded-lg border bg-slate-50 dark:bg-zinc-950/40 hover:bg-slate-100 dark:hover:bg-zinc-900/60 transition-all border-slate-200 dark:border-white/5 hover:border-slate-300 dark:hover:border-white/10 space-y-2 relative"
                     >
                       <div className="flex justify-between items-start">
-                        <h4 className="text-[11px] font-semibold text-zinc-200 font-sans leading-tight">
+                        <h4 className="text-[11px] font-semibold text-slate-800 dark:text-zinc-200 font-sans leading-tight">
                           {task.task}
                         </h4>
                       </div>
                       
-                      <p className="text-[10px] text-zinc-500 font-sans leading-tight line-clamp-2">
+                      <p className="text-[10px] text-slate-500 dark:text-zinc-500 font-sans leading-tight line-clamp-2">
                         {task.details}
                       </p>
 
                       <div className="flex items-center justify-between pt-1">
                         <span className={`text-[8px] font-mono px-1.5 py-0.2 rounded border uppercase ${
                           task.status === 'Completed'
-                            ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20'
+                            ? 'bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border-emerald-500/20'
                             : task.status === 'In Progress'
-                            ? 'bg-indigo-500/10 text-indigo-400 border-indigo-500/20 animate-pulse'
-                            : 'bg-zinc-500/10 text-zinc-400 border-zinc-500/20'
+                            ? 'bg-indigo-500/10 text-indigo-700 dark:text-indigo-400 border-indigo-500/20 animate-pulse'
+                            : 'bg-slate-200 dark:bg-zinc-500/10 text-slate-600 dark:text-zinc-400 border-slate-300 dark:border-zinc-500/20'
                         }`}>
                           {task.status}
                         </span>
                         {task.status === 'Completed' && (
-                          <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
+                          <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
                         )}
                       </div>
                     </div>
@@ -147,19 +147,19 @@ export default function Startups() {
 
       {/* Part 2: Founder Diary log list */}
       <div className="space-y-6">
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-white/5 pb-4">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-slate-200 dark:border-white/5 pb-4">
           <div className="space-y-1">
-            <h2 className="text-xl sm:text-2xl font-black text-white tracking-tight font-sans flex items-center">
-              <Rocket className="w-5 h-5 text-emerald-400 mr-2" />
+            <h2 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white tracking-tight font-sans flex items-center">
+              <Rocket className="w-5 h-5 text-emerald-600 dark:text-emerald-400 mr-2" />
               Founder Diary
             </h2>
-            <p className="text-xs text-zinc-400 font-sans">
+            <p className="text-xs text-slate-600 dark:text-zinc-400 font-sans">
               Chronological log updates mapping challenges, lessons, and SEO wins.
             </p>
           </div>
 
           {/* Category Filters */}
-          <div className="flex flex-wrap gap-1 bg-white/5 p-1 rounded-lg border border-white/5">
+          <div className="flex flex-wrap gap-1 bg-slate-200/60 dark:bg-white/5 p-1 rounded-lg border border-slate-300 dark:border-white/5">
             {categories.map((cat) => (
               <button
                 key={cat}
@@ -167,7 +167,7 @@ export default function Startups() {
                 className={`px-3 py-1.5 text-[10px] uppercase tracking-wider font-semibold rounded-md transition-all cursor-pointer ${
                   activeCategory === cat 
                     ? 'bg-indigo-600 text-white shadow-md' 
-                    : 'text-zinc-400 hover:text-zinc-200'
+                    : 'text-slate-600 dark:text-zinc-400 hover:text-slate-900 dark:hover:text-zinc-200'
                 }`}
               >
                 {cat}
@@ -187,14 +187,14 @@ export default function Startups() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: 10 }}
                 transition={{ duration: 0.2 }}
-                className="glass-panel p-6 rounded-xl border-white/10 space-y-4 shadow-lg hover:border-white/20 transition-colors"
+                className="glass-panel p-6 rounded-xl border border-slate-200 dark:border-white/10 space-y-4 shadow-lg hover:border-slate-300 dark:hover:border-white/20 transition-colors bg-white/80 dark:bg-black/40"
               >
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-white/5 pb-3">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-200 dark:border-white/5 pb-3">
                   <div className="flex items-center space-x-2.5">
-                    <div className="p-1.5 rounded-md bg-white/5 border border-white/5">
+                    <div className="p-1.5 rounded-md bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/5">
                       {getCategoryIcon(log.category)}
                     </div>
-                    <h3 className="text-sm font-bold text-white font-sans">
+                    <h3 className="text-sm font-bold text-slate-900 dark:text-white font-sans">
                       {log.title}
                     </h3>
                   </div>
@@ -203,14 +203,14 @@ export default function Startups() {
                     <span className={`text-[9px] font-mono px-2 py-0.5 rounded border ${getCategoryBadgeColor(log.category)}`}>
                       {log.category}
                     </span>
-                    <span className="text-[10px] font-mono text-zinc-500 flex items-center">
+                    <span className="text-[10px] font-mono text-slate-500 dark:text-zinc-500 flex items-center">
                       <Calendar className="w-3.5 h-3.5 mr-1" />
                       {log.date}
                     </span>
                   </div>
                 </div>
 
-                <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed font-sans">
+                <p className="text-xs sm:text-sm text-slate-600 dark:text-zinc-400 leading-relaxed font-sans">
                   {log.content}
                 </p>
               </motion.div>
@@ -218,7 +218,7 @@ export default function Startups() {
           </AnimatePresence>
 
           {filteredLogs.length === 0 && (
-            <div className="text-center py-12 text-zinc-500 font-sans text-xs">
+            <div className="text-center py-12 text-slate-500 dark:text-zinc-500 font-sans text-xs">
               No diary entries catalogued under this category tag.
             </div>
           )}

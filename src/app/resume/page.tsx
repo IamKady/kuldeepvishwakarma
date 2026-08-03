@@ -48,29 +48,29 @@ export default function Resume() {
     <div className="max-w-4xl mx-auto px-4 space-y-10 py-6 print:py-0 print:px-0">
       
       {/* PDF Toolbar */}
-      <div className="flex flex-col md:flex-row justify-between items-stretch md:items-center gap-4 bg-zinc-950/70 p-4 rounded-xl border border-white/10 print:hidden backdrop-blur-md">
+      <div className="flex flex-col md:flex-row justify-between items-stretch md:items-center gap-4 bg-slate-100 dark:bg-zinc-950/70 p-4 rounded-xl border border-slate-200 dark:border-white/10 print:hidden backdrop-blur-md shadow-xs dark:shadow-none">
         <div className="flex items-center space-x-3">
           <div className="p-2 bg-rose-500/10 rounded border border-rose-500/20">
             <FileText className="w-5 h-5 text-rose-500" />
           </div>
           <div>
-            <h1 className="text-xs font-bold text-white font-mono uppercase tracking-wider flex items-center gap-1.5">
-              resume_kuldeep_vishwakarma.pdf <span className="text-[9px] text-zinc-500 normal-case">(A4 Render)</span>
+            <h1 className="text-xs font-bold text-slate-900 dark:text-white font-mono uppercase tracking-wider flex items-center gap-1.5">
+              resume_kuldeep_vishwakarma.pdf <span className="text-[9px] text-slate-500 dark:text-zinc-500 normal-case">(A4 Render)</span>
             </h1>
-            <p className="text-[10px] text-zinc-500 font-mono mt-0.5">
+            <p className="text-[10px] text-slate-500 dark:text-zinc-500 font-mono mt-0.5">
               Size: ~135 KB | Ver: 1.4.8 | Systems Active
             </p>
           </div>
         </div>
         
         {/* Toggle between Web dark mode and A4 white sheet preview */}
-        <div className="flex items-center bg-black/40 p-1 rounded-lg border border-white/5 self-center">
+        <div className="flex items-center bg-slate-200/60 dark:bg-black/40 p-1 rounded-lg border border-slate-300 dark:border-white/5 self-center">
           <button
             onClick={() => setViewMode('digital')}
             className={`px-3 py-1.5 rounded text-[10px] font-mono font-bold tracking-wider transition-all cursor-pointer ${
               !isPdf
                 ? 'bg-indigo-600 text-white shadow'
-                : 'text-zinc-400 hover:text-zinc-200'
+                : 'text-slate-600 dark:text-zinc-400 hover:text-slate-900 dark:hover:text-zinc-200'
             }`}
           >
             Digital View
@@ -80,7 +80,7 @@ export default function Resume() {
             className={`px-3 py-1.5 rounded text-[10px] font-mono font-bold tracking-wider transition-all cursor-pointer ${
               isPdf
                 ? 'bg-indigo-600 text-white shadow'
-                : 'text-zinc-400 hover:text-zinc-200'
+                : 'text-slate-600 dark:text-zinc-400 hover:text-slate-900 dark:hover:text-zinc-200'
             }`}
           >
             A4 Print View
@@ -100,7 +100,7 @@ export default function Resume() {
       <div className={`p-8 sm:p-12 rounded-xl border transition-all duration-300 space-y-8 ${
         isPdf
           ? 'bg-white text-zinc-800 border-zinc-300 shadow-2xl font-sans'
-          : 'bg-black/60 text-zinc-300 border-white/10 shadow-2xl font-sans'
+          : 'bg-white/90 dark:bg-black/60 text-slate-700 dark:text-zinc-300 border-slate-200 dark:border-white/10 shadow-2xl font-sans'
       } print:p-0 print:border-0 print:bg-white print:text-black print:shadow-none`}>
         
         {/* Name / Contact Header */}

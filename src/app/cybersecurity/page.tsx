@@ -116,19 +116,19 @@ export default function Cybersecurity() {
       
       {/* Header */}
       <div className="space-y-3">
-        <h1 className="text-3xl sm:text-5xl font-black text-white tracking-tight flex items-center">
+        <h1 className="text-3xl sm:text-5xl font-black text-slate-900 dark:text-white tracking-tight flex items-center">
           Cybersecurity Log
         </h1>
-        <p className="text-sm text-zinc-400 font-sans max-w-xl">
+        <p className="text-sm text-slate-600 dark:text-zinc-400 font-sans max-w-xl">
           CTF writeups, vulnerability mitigations, networking reviews, and a live terminal console.
         </p>
       </div>
 
       {/* Part 1: Interactive Terminal Console */}
       <div className="space-y-4">
-        <div className="flex items-center space-x-2 border-b border-white/5 pb-2">
-          <TerminalIcon className="w-5 h-5 text-amber-500" />
-          <h2 className="text-base font-bold text-white uppercase tracking-wider font-mono">
+        <div className="flex items-center space-x-2 border-b border-slate-200 dark:border-white/5 pb-2">
+          <TerminalIcon className="w-5 h-5 text-amber-600 dark:text-amber-500" />
+          <h2 className="text-base font-bold text-slate-900 dark:text-white uppercase tracking-wider font-mono">
             Interactive Diagnostics Terminal
           </h2>
         </div>
@@ -136,17 +136,17 @@ export default function Cybersecurity() {
         {/* Terminal Frame */}
         <div 
           onClick={focusTerminal}
-          className="w-full h-80 rounded-xl bg-black border border-white/10 shadow-2xl overflow-hidden flex flex-col font-mono text-[11px] sm:text-xs cursor-text"
+          className="w-full h-80 rounded-xl bg-black border border-slate-800 dark:border-white/10 shadow-2xl overflow-hidden flex flex-col font-mono text-[11px] sm:text-xs cursor-text"
         >
           {/* Top Title Bar */}
-          <div className="flex items-center justify-between px-4 py-2.5 bg-zinc-900 border-b border-white/5 select-none">
+          <div className="flex items-center justify-between px-4 py-2.5 bg-slate-900 border-b border-slate-800 dark:border-white/5 select-none">
             <div className="flex space-x-1.5">
               <span className="w-2.5 h-2.5 rounded-full bg-rose-500/60" />
               <span className="w-2.5 h-2.5 rounded-full bg-amber-500/60" />
               <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/60" />
             </div>
-            <span className="text-zinc-500 font-medium">guest@kcv-security-ops:~</span>
-            <Lock className="w-3.5 h-3.5 text-zinc-600" />
+            <span className="text-zinc-400 font-medium">guest@kcv-security-ops:~</span>
+            <Lock className="w-3.5 h-3.5 text-zinc-500" />
           </div>
 
           {/* Terminal Screen (Scrollable) */}
@@ -167,7 +167,7 @@ export default function Cybersecurity() {
           </div>
 
           {/* Terminal Input Row */}
-          <form onSubmit={handleCommand} className="flex items-center px-4 py-2 border-t border-white/5 bg-zinc-950">
+          <form onSubmit={handleCommand} className="flex items-center px-4 py-2 border-t border-slate-800 dark:border-white/5 bg-zinc-950">
             <span className="text-emerald-400 mr-2 font-bold">guest@kcv-security-ops:~$</span>
             <input
               ref={inputRef}
@@ -184,12 +184,12 @@ export default function Cybersecurity() {
 
       {/* Part 2: Security & Hacking writeups */}
       <div className="space-y-8">
-        <div className="border-b border-white/5 pb-4">
-          <h2 className="text-xl sm:text-2xl font-black text-white tracking-tight font-sans flex items-center">
-            <ShieldAlert className="w-5 h-5 text-rose-400 mr-2" />
+        <div className="border-b border-slate-200 dark:border-white/5 pb-4">
+          <h2 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white tracking-tight font-sans flex items-center">
+            <ShieldAlert className="w-5 h-5 text-rose-600 dark:text-rose-400 mr-2" />
             Security & CTF Logs
           </h2>
-          <p className="text-xs text-zinc-400 font-sans mt-1">
+          <p className="text-xs text-slate-600 dark:text-zinc-400 font-sans mt-1">
             Writeups on vulnerability exploitation, secure coding, and linux server logs.
           </p>
         </div>
@@ -199,15 +199,15 @@ export default function Cybersecurity() {
             <div 
               key={log.id} 
               id={log.id}
-              className="glass-panel p-6 rounded-xl border-white/10 space-y-4 shadow-lg"
+              className="glass-panel p-6 rounded-xl border border-slate-200 dark:border-white/10 space-y-4 shadow-lg bg-white/80 dark:bg-black/40"
             >
               {/* Header row */}
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-white/5 pb-3">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-200 dark:border-white/5 pb-3">
                 <div className="space-y-1">
-                  <h3 className="text-base font-bold text-white font-sans">
+                  <h3 className="text-base font-bold text-slate-900 dark:text-white font-sans">
                     {log.title}
                   </h3>
-                  <div className="flex items-center space-x-3 text-[10px] font-mono text-zinc-500">
+                  <div className="flex items-center space-x-3 text-[10px] font-mono text-slate-500 dark:text-zinc-500">
                     <span className="flex items-center">
                       <Calendar className="w-3.5 h-3.5 mr-1" />
                       {log.date}
@@ -225,12 +225,12 @@ export default function Cybersecurity() {
               </div>
 
               {/* Summary */}
-              <p className="text-xs sm:text-sm text-zinc-400 italic leading-relaxed font-sans">
+              <p className="text-xs sm:text-sm text-slate-600 dark:text-zinc-400 italic leading-relaxed font-sans">
                 {log.summary}
               </p>
 
-              {/* Markdown Content formatted (simulated parser output) */}
-              <div className="p-4 rounded-lg bg-zinc-950 border border-white/5 font-mono text-xs text-zinc-300 leading-relaxed overflow-x-auto whitespace-pre-wrap">
+              {/* Markdown Content formatted */}
+              <div className="p-4 rounded-lg bg-slate-900 dark:bg-zinc-950 border border-slate-800 dark:border-white/5 font-mono text-xs text-zinc-200 dark:text-zinc-300 leading-relaxed overflow-x-auto whitespace-pre-wrap">
                 {log.content}
               </div>
             </div>

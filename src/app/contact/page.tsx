@@ -164,10 +164,10 @@ export default function Contact() {
       
       {/* Header */}
       <div className="space-y-3">
-        <h1 className="text-3xl sm:text-5xl font-black text-white tracking-tight">
+        <h1 className="text-3xl sm:text-5xl font-black text-slate-900 dark:text-white tracking-tight">
           Establish Contact
         </h1>
-        <p className="text-sm text-zinc-400 font-sans max-w-xl">
+        <p className="text-sm text-slate-600 dark:text-zinc-400 font-sans max-w-xl">
           Submit queries, download resumes, or schedule quick Zoom consultations via my interactive scheduler.
         </p>
       </div>
@@ -185,14 +185,14 @@ export default function Contact() {
                 href={ch.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-4 rounded-xl border border-white/10 bg-black/40 hover:bg-white/5 transition-all flex items-center space-x-3.5 group shadow-md"
+                className="p-4 rounded-xl border border-slate-200 dark:border-white/10 bg-white/80 dark:bg-black/40 hover:bg-slate-50 dark:hover:bg-white/5 transition-all flex items-center space-x-3.5 group shadow-md"
               >
-                <div className="p-2 rounded-lg bg-white/5 border border-white/5 group-hover:border-white/15 transition-all">
+                <div className="p-2 rounded-lg bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/5 group-hover:border-slate-300 dark:group-hover:border-white/15 transition-all">
                   {ch.icon}
                 </div>
                 <div className="overflow-hidden">
-                  <span className="text-[10px] text-zinc-500 font-mono block uppercase">{ch.name}</span>
-                  <span className="text-xs font-semibold text-zinc-300 group-hover:text-white transition-colors truncate block">
+                  <span className="text-[10px] text-slate-500 dark:text-zinc-500 font-mono block uppercase">{ch.name}</span>
+                  <span className="text-xs font-semibold text-slate-700 dark:text-zinc-300 group-hover:text-slate-900 dark:group-hover:text-white transition-colors truncate block">
                     {ch.value}
                   </span>
                 </div>
@@ -201,57 +201,57 @@ export default function Contact() {
           </div>
 
           {/* Contact Message Form */}
-          <div className="p-6 rounded-xl border border-white/10 glass-panel shadow-xl space-y-4">
-            <h3 className="text-sm font-bold text-white uppercase tracking-wider font-mono border-b border-white/5 pb-2">
+          <div className="p-6 rounded-xl border border-slate-200 dark:border-white/10 glass-panel shadow-xl space-y-4 bg-white/80 dark:bg-black/40">
+            <h3 className="text-sm font-bold text-slate-900 dark:text-white uppercase tracking-wider font-mono border-b border-slate-200 dark:border-white/5 pb-2">
               Send Console Message
             </h3>
 
             <form onSubmit={handleFormSubmit} className="space-y-4 font-sans text-xs">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="space-y-1">
-                  <label className="text-[10px] font-mono text-zinc-500 uppercase">Your Name</label>
+                  <label className="text-[10px] font-mono text-slate-500 dark:text-zinc-500 uppercase">Your Name</label>
                   <input
                     type="text"
                     required
                     value={formData.name}
                     onChange={e => setFormData({ ...formData, name: e.target.value })}
-                    className="w-full px-3 py-2 bg-white/5 border border-white/10 rounded-lg outline-none text-white focus:border-indigo-500 transition-colors"
+                    className="w-full px-3 py-2 bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-lg outline-none text-slate-900 dark:text-white focus:border-indigo-500 transition-colors shadow-xs dark:shadow-none"
                     placeholder="Guest Administrator"
                   />
                 </div>
                 <div className="space-y-1">
-                  <label className="text-[10px] font-mono text-zinc-500 uppercase">Your Email</label>
+                  <label className="text-[10px] font-mono text-slate-500 dark:text-zinc-500 uppercase">Your Email</label>
                   <input
                     type="email"
                     required
                     value={formData.email}
                     onChange={e => setFormData({ ...formData, email: e.target.value })}
-                    className="w-full px-3 py-2 bg-white/5 border border-white/10 rounded-lg outline-none text-white focus:border-indigo-500 transition-colors"
+                    className="w-full px-3 py-2 bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-lg outline-none text-slate-900 dark:text-white focus:border-indigo-500 transition-colors shadow-xs dark:shadow-none"
                     placeholder="guest_user@host.com"
                   />
                 </div>
               </div>
 
               <div className="space-y-1">
-                <label className="text-[10px] font-mono text-zinc-500 uppercase">Subject</label>
+                <label className="text-[10px] font-mono text-slate-500 dark:text-zinc-500 uppercase">Subject</label>
                 <input
                   type="text"
                   required
                   value={formData.subject}
                   onChange={e => setFormData({ ...formData, subject: e.target.value })}
-                  className="w-full px-3 py-2 bg-white/5 border border-white/10 rounded-lg outline-none text-white focus:border-indigo-500 transition-colors"
+                  className="w-full px-3 py-2 bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-lg outline-none text-slate-900 dark:text-white focus:border-indigo-500 transition-colors shadow-xs dark:shadow-none"
                   placeholder="System Integration / Full-stack Opportunity"
                 />
               </div>
 
               <div className="space-y-1">
-                <label className="text-[10px] font-mono text-zinc-500 uppercase">Message</label>
+                <label className="text-[10px] font-mono text-slate-500 dark:text-zinc-500 uppercase">Message</label>
                 <textarea
                   required
                   rows={4}
                   value={formData.message}
                   onChange={e => setFormData({ ...formData, message: e.target.value })}
-                  className="w-full px-3 py-2 bg-white/5 border border-white/10 rounded-lg outline-none text-white focus:border-indigo-500 transition-colors resize-none"
+                  className="w-full px-3 py-2 bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-lg outline-none text-slate-900 dark:text-white focus:border-indigo-500 transition-colors resize-none shadow-xs dark:shadow-none"
                   placeholder="Write message details..."
                 />
               </div>
@@ -281,13 +281,13 @@ export default function Contact() {
 
         {/* Right Column: Calendly-Style Meeting Scheduler */}
         <div className="lg:col-span-6">
-          <div className="p-6 rounded-xl border border-white/10 glass-panel shadow-xl space-y-5">
-            <div className="flex items-center justify-between border-b border-white/5 pb-2.5">
-              <h3 className="text-sm font-bold text-white uppercase tracking-wider font-mono flex items-center">
-                <Calendar className="w-4 h-4 mr-2 text-indigo-400" />
+          <div className="p-6 rounded-xl border border-slate-200 dark:border-white/10 glass-panel shadow-xl space-y-5 bg-white/80 dark:bg-black/40">
+            <div className="flex items-center justify-between border-b border-slate-200 dark:border-white/5 pb-2.5">
+              <h3 className="text-sm font-bold text-slate-900 dark:text-white uppercase tracking-wider font-mono flex items-center">
+                <Calendar className="w-4 h-4 mr-2 text-indigo-600 dark:text-indigo-400" />
                 Telemetry Meeting Booker
               </h3>
-              <span className="text-[9px] bg-white/5 px-2 py-0.5 border border-white/5 rounded-full font-mono text-emerald-400">
+              <span className="text-[9px] bg-slate-100 dark:bg-white/5 px-2 py-0.5 border border-slate-200 dark:border-white/5 rounded-full font-mono text-emerald-700 dark:text-emerald-400">
                 Live Scheduler
               </span>
             </div>
@@ -305,7 +305,7 @@ export default function Contact() {
                   
                   {/* Step 1: Select Day */}
                   <div className="space-y-2">
-                    <label className="text-[10px] font-mono text-zinc-500 uppercase tracking-wider block">
+                    <label className="text-[10px] font-mono text-slate-500 dark:text-zinc-500 uppercase tracking-wider block">
                       Step 1: Choose Operational Date
                     </label>
                     <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
@@ -316,8 +316,8 @@ export default function Contact() {
                           onClick={() => { setSelectedDay(day.value); setSelectedTime(null); }}
                           className={`py-2 rounded-lg border text-center transition-all cursor-pointer ${
                             selectedDay === day.value 
-                              ? 'bg-indigo-600 border-indigo-400 text-white font-semibold' 
-                              : 'bg-zinc-950/40 border-white/5 text-zinc-400 hover:border-white/10'
+                              ? 'bg-indigo-600 border-indigo-500 text-white font-semibold shadow-md' 
+                              : 'bg-white dark:bg-zinc-950/40 border-slate-200 dark:border-white/5 text-slate-700 dark:text-zinc-400 hover:border-slate-300 dark:hover:border-white/10'
                           }`}
                         >
                           {day.label}
@@ -333,7 +333,7 @@ export default function Contact() {
                       animate={{ opacity: 1, y: 0 }}
                       className="space-y-2"
                     >
-                      <label className="text-[10px] font-mono text-zinc-500 uppercase tracking-wider block">
+                      <label className="text-[10px] font-mono text-slate-500 dark:text-zinc-500 uppercase tracking-wider block">
                         Step 2: Choose Slot Time (IST)
                       </label>
                       <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
@@ -344,8 +344,8 @@ export default function Contact() {
                             onClick={() => setSelectedTime(slot)}
                             className={`py-2 rounded-lg border text-center transition-all cursor-pointer flex items-center justify-center space-x-1.5 ${
                               selectedTime === slot 
-                                ? 'bg-indigo-600 border-indigo-400 text-white font-semibold' 
-                                : 'bg-zinc-950/40 border-white/5 text-zinc-400 hover:border-white/10'
+                                ? 'bg-indigo-600 border-indigo-500 text-white font-semibold shadow-md' 
+                                : 'bg-white dark:bg-zinc-950/40 border-slate-200 dark:border-white/5 text-slate-700 dark:text-zinc-400 hover:border-slate-300 dark:hover:border-white/10'
                             }`}
                           >
                             <Clock className="w-3 h-3 opacity-60" />
@@ -363,8 +363,8 @@ export default function Contact() {
                       animate={{ opacity: 1, y: 0 }}
                       className="space-y-4"
                     >
-                      <div className="border-t border-white/5 pt-3 space-y-3">
-                        <label className="text-[10px] font-mono text-zinc-500 uppercase tracking-wider block">
+                      <div className="border-t border-slate-200 dark:border-white/5 pt-3 space-y-3">
+                        <label className="text-[10px] font-mono text-slate-500 dark:text-zinc-500 uppercase tracking-wider block">
                           Step 3: Account Verification Coordinates
                         </label>
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -375,7 +375,7 @@ export default function Contact() {
                               placeholder="Your Name"
                               value={schedulerName}
                               onChange={e => setSchedulerName(e.target.value)}
-                              className="w-full px-3 py-2 bg-white/5 border border-white/10 rounded-lg outline-none text-white focus:border-indigo-500 transition-colors"
+                              className="w-full px-3 py-2 bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-lg outline-none text-slate-900 dark:text-white focus:border-indigo-500 transition-colors shadow-xs dark:shadow-none"
                             />
                           </div>
                           <div className="space-y-1">
@@ -385,7 +385,7 @@ export default function Contact() {
                               placeholder="Your Email"
                               value={schedulerEmail}
                               onChange={e => setSchedulerEmail(e.target.value)}
-                              className="w-full px-3 py-2 bg-white/5 border border-white/10 rounded-lg outline-none text-white focus:border-indigo-500 transition-colors"
+                              className="w-full px-3 py-2 bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-lg outline-none text-slate-900 dark:text-white focus:border-indigo-500 transition-colors shadow-xs dark:shadow-none"
                             />
                           </div>
                         </div>
@@ -407,13 +407,13 @@ export default function Contact() {
                   key="scheduler-success"
                   initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  className="py-8 text-center space-y-4 font-sans text-xs text-zinc-400"
+                  className="py-8 text-center space-y-4 font-sans text-xs text-slate-600 dark:text-zinc-400"
                 >
                   <div className="mx-auto w-12 h-12 rounded-full bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center">
-                    <Check className="w-6 h-6 text-emerald-400 stroke-[3]" />
+                    <Check className="w-6 h-6 text-emerald-600 dark:text-emerald-400 stroke-[3]" />
                   </div>
                   <div className="space-y-1">
-                    <h4 className="text-sm font-bold text-white uppercase tracking-wider font-mono">
+                    <h4 className="text-sm font-bold text-slate-900 dark:text-white uppercase tracking-wider font-mono">
                       Meeting Reserved!
                     </h4>
                     <p className="max-w-xs mx-auto leading-relaxed">
@@ -423,7 +423,7 @@ export default function Contact() {
                   <div className="pt-2">
                     <button
                       onClick={resetMeeting}
-                      className="px-4 py-2 bg-white/5 hover:bg-white/10 text-white border border-white/10 rounded-lg font-semibold cursor-pointer"
+                      className="px-4 py-2 bg-slate-100 dark:bg-white/5 hover:bg-slate-200 dark:hover:bg-white/10 text-slate-900 dark:text-white border border-slate-200 dark:border-white/10 rounded-lg font-semibold cursor-pointer"
                     >
                       Book Another Slot
                     </button>

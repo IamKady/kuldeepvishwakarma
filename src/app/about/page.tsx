@@ -88,26 +88,26 @@ export default function About() {
     <div className="max-w-5xl mx-auto px-4 space-y-16 py-6">
       
       {/* Page Title & Profile Badge */}
-      <div className="flex flex-col md:flex-row gap-8 items-start justify-between border-b border-white/5 pb-10">
+      <div className="flex flex-col md:flex-row gap-8 items-start justify-between border-b border-slate-200 dark:border-white/5 pb-10">
         <div className="space-y-4 text-left max-w-2xl flex-grow">
-          <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full border border-white/10 glass-panel bg-white/5">
-            <span className="w-1.5 h-1.5 rounded-full bg-indigo-400 animate-pulse" />
-            <span className="text-[10px] font-mono text-zinc-300 tracking-wider">
+          <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full border border-slate-200 dark:border-white/10 glass-panel bg-white/80 dark:bg-white/5 shadow-xs dark:shadow-none">
+            <span className="w-1.5 h-1.5 rounded-full bg-indigo-600 dark:bg-indigo-400 animate-pulse" />
+            <span className="text-[10px] font-mono text-slate-700 dark:text-zinc-300 tracking-wider">
               OPERATOR BIO // IDENT: KCV-77
             </span>
           </div>
-          <h1 className="text-3xl sm:text-5xl font-black text-white tracking-tight leading-none">
+          <h1 className="text-3xl sm:text-5xl font-black text-slate-900 dark:text-white tracking-tight leading-none">
             Systems Developer Narrative
           </h1>
-          <p className="text-sm text-zinc-400 font-sans leading-relaxed max-w-xl">
+          <p className="text-sm text-slate-600 dark:text-zinc-400 font-sans leading-relaxed max-w-xl">
             Tracing my transition from physics drafting into distributed systems, coding philosophies, and academic benchmarks.
           </p>
         </div>
 
         {/* Operator Badge Photo Card */}
         <div className="w-full md:w-60 flex-shrink-0">
-          <div className="relative p-2 rounded-2xl glass-panel border-white/10 shadow-xl group overflow-hidden bg-white/[0.01]">
-            <div className="relative aspect-[3/4] rounded-xl overflow-hidden border border-white/5 bg-black/40">
+          <div className="relative p-2 rounded-2xl glass-panel border border-slate-200 dark:border-white/10 shadow-xl group overflow-hidden bg-white/80 dark:bg-white/[0.01]">
+            <div className="relative aspect-[3/4] rounded-xl overflow-hidden border border-slate-200 dark:border-white/5 bg-slate-900 dark:bg-black/40">
               <img 
                 src="/kuldeep.jpg" 
                 alt="Kuldeep Chandra Vishwakarma" 
@@ -115,16 +115,16 @@ export default function About() {
                 style={{ objectPosition: 'center 20%' }}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/80 via-transparent to-transparent pointer-events-none" />
-              <div className="absolute top-2 right-2 bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-[8px] font-mono uppercase tracking-widest px-2 py-0.5 rounded">
+              <div className="absolute top-2 right-2 bg-emerald-500/20 text-emerald-700 dark:text-emerald-400 border border-emerald-500/30 text-[8px] font-mono uppercase tracking-widest px-2 py-0.5 rounded">
                 Active
               </div>
             </div>
             <div className="pt-3 px-1 flex items-center justify-between">
               <div className="space-y-0.5">
-                <span className="text-[11px] font-bold text-white block">Kuldeep Chandra V.</span>
-                <span className="text-[9px] font-mono text-zinc-500 block">kcv-node-0</span>
+                <span className="text-[11px] font-bold text-slate-900 dark:text-white block">Kuldeep Chandra V.</span>
+                <span className="text-[9px] font-mono text-slate-500 dark:text-zinc-500 block">kcv-node-0</span>
               </div>
-              <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse border border-emerald-500/50" />
+              <div className="w-2 h-2 rounded-full bg-emerald-500 dark:bg-emerald-400 animate-pulse border border-emerald-500/50" />
             </div>
           </div>
         </div>
@@ -135,19 +135,19 @@ export default function About() {
         {storySections.map((sec, idx) => (
           <div 
             key={sec.id}
-            className={`glass-panel p-6 rounded-2xl border-white/10 flex flex-col space-y-3.5 shadow-lg ${
+            className={`glass-panel p-6 rounded-2xl border border-slate-200 dark:border-white/10 flex flex-col space-y-3.5 shadow-lg bg-white/80 dark:bg-black/40 ${
               idx === 0 ? 'md:col-span-2' : ''
             }`}
           >
             <div className="flex items-center space-x-2.5">
-              <div className="p-2 rounded-lg bg-white/5 border border-white/5">
+              <div className="p-2 rounded-lg bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/5">
                 {sec.icon}
               </div>
-              <h2 className="text-sm font-bold tracking-wider uppercase text-white font-sans">
+              <h2 className="text-sm font-bold tracking-wider uppercase text-slate-900 dark:text-white font-sans">
                 {sec.title}
               </h2>
             </div>
-            <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed font-sans">
+            <p className="text-xs sm:text-sm text-slate-600 dark:text-zinc-400 leading-relaxed font-sans">
               {sec.content}
             </p>
           </div>
@@ -156,19 +156,19 @@ export default function About() {
 
       {/* Beautiful Animated Vertical Timeline */}
       <div className="space-y-8">
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-white/5 pb-4">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-slate-200 dark:border-white/5 pb-4">
           <div className="space-y-1">
-            <h2 className="text-xl sm:text-2xl font-black text-white tracking-tight font-sans flex items-center">
-              <History className="w-5 h-5 text-indigo-400 mr-2" />
+            <h2 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white tracking-tight font-sans flex items-center">
+              <History className="w-5 h-5 text-indigo-600 dark:text-indigo-400 mr-2" />
               Career timeline logs
             </h2>
-            <p className="text-xs text-zinc-400 font-sans">
+            <p className="text-xs text-slate-600 dark:text-zinc-400 font-sans">
               Filter my chronological milestones from high school through engineering transition to software systems.
             </p>
           </div>
 
           {/* Timeline Filters */}
-          <div className="flex flex-wrap gap-1 bg-white/5 p-1 rounded-lg border border-white/5">
+          <div className="flex flex-wrap gap-1 bg-slate-200/60 dark:bg-white/5 p-1 rounded-lg border border-slate-300 dark:border-white/5">
             {(['all', 'work', 'education', 'transition'] as const).map((filter) => (
               <button
                 key={filter}
@@ -176,7 +176,7 @@ export default function About() {
                 className={`px-3 py-1.5 text-[10px] uppercase tracking-wider font-semibold rounded-md transition-all cursor-pointer ${
                   activeFilter === filter 
                     ? 'bg-indigo-600 text-white shadow-md' 
-                    : 'text-zinc-400 hover:text-zinc-200'
+                    : 'text-slate-600 dark:text-zinc-400 hover:text-slate-900 dark:hover:text-zinc-200'
                 }`}
               >
                 {filter}
@@ -186,7 +186,7 @@ export default function About() {
         </div>
 
         {/* Timeline Event list */}
-        <div className="relative border-l border-white/10 pl-8 ml-4 space-y-10">
+        <div className="relative border-l border-slate-300 dark:border-white/10 pl-8 ml-4 space-y-10">
           <AnimatePresence mode="popLayout">
             {filteredEvents.map((evt, idx) => (
               <motion.div
@@ -199,13 +199,13 @@ export default function About() {
                 className="relative"
               >
                 {/* Timeline Marker Dot */}
-                <div className="absolute top-1.5 -left-[45px] w-8 h-8 rounded-full glass-panel border-white/10 flex items-center justify-center bg-zinc-950 shadow-md">
+                <div className="absolute top-1.5 -left-[45px] w-8 h-8 rounded-full glass-panel border border-slate-200 dark:border-white/10 flex items-center justify-center bg-white dark:bg-zinc-950 shadow-md">
                   {getTimelineIcon(evt.category)}
                 </div>
 
-                <div className="space-y-3 p-5 rounded-xl border border-white/5 bg-white/[0.01] hover:bg-white/[0.02] hover:border-white/10 transition-all">
+                <div className="space-y-3 p-5 rounded-xl border border-slate-200 dark:border-white/5 bg-white dark:bg-white/[0.01] hover:bg-slate-50 dark:hover:bg-white/[0.02] transition-all shadow-xs dark:shadow-none">
                   <div className="flex flex-wrap items-center justify-between gap-2">
-                    <span className="text-[10px] font-mono text-zinc-500 uppercase tracking-wider bg-white/5 px-2.5 py-0.8 rounded border border-white/5">
+                    <span className="text-[10px] font-mono text-slate-600 dark:text-zinc-500 uppercase tracking-wider bg-slate-100 dark:bg-white/5 px-2.5 py-0.8 rounded border border-slate-200 dark:border-white/5">
                       {evt.year}
                     </span>
                     <span className={`text-[9px] font-mono px-2 py-0.5 rounded border uppercase ${getCategoryBadgeColor(evt.category)}`}>
@@ -214,17 +214,17 @@ export default function About() {
                   </div>
 
                   <div>
-                    <h3 className="text-base font-bold text-white font-sans">{evt.title}</h3>
-                    <span className="text-xs text-zinc-400 font-sans font-medium block mt-0.5">{evt.organization}</span>
+                    <h3 className="text-base font-bold text-slate-900 dark:text-white font-sans">{evt.title}</h3>
+                    <span className="text-xs text-slate-600 dark:text-zinc-400 font-sans font-medium block mt-0.5">{evt.organization}</span>
                   </div>
 
-                  <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed font-sans max-w-3xl">
+                  <p className="text-xs sm:text-sm text-slate-600 dark:text-zinc-400 leading-relaxed font-sans max-w-3xl">
                     {evt.description}
                   </p>
 
                   {/* Bullet details */}
                   {evt.details && (
-                    <ul className="list-disc pl-5 space-y-1.5 text-xs text-zinc-500 font-sans">
+                    <ul className="list-disc pl-5 space-y-1.5 text-xs text-slate-500 dark:text-zinc-500 font-sans">
                       {evt.details.map((detail, dIdx) => (
                         <li key={dIdx}>{detail}</li>
                       ))}
@@ -236,7 +236,7 @@ export default function About() {
           </AnimatePresence>
 
           {filteredEvents.length === 0 && (
-            <div className="text-center py-8 text-zinc-500 font-sans text-xs">
+            <div className="text-center py-8 text-slate-500 dark:text-zinc-500 font-sans text-xs">
               No milestones found in this category.
             </div>
           )}
@@ -245,26 +245,26 @@ export default function About() {
 
       {/* Capabilities Matrix Section */}
       <div className="space-y-6">
-        <div className="border-b border-white/5 pb-4">
-          <h2 className="text-xl sm:text-2xl font-black text-white tracking-tight font-sans flex items-center">
-            <Code className="w-5 h-5 text-emerald-400 mr-2" />
+        <div className="border-b border-slate-200 dark:border-white/5 pb-4">
+          <h2 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white tracking-tight font-sans flex items-center">
+            <Code className="w-5 h-5 text-emerald-600 dark:text-emerald-400 mr-2" />
             Capabilities & Credibility Map
           </h2>
-          <p className="text-xs text-zinc-400 font-sans mt-1">
+          <p className="text-xs text-slate-600 dark:text-zinc-400 font-sans mt-1">
             Technology structures grouped by verified competence tiers (No fake percentages).
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {/* Core Stack */}
-          <div className="glass-panel p-5 rounded-xl border-white/10 space-y-4">
-            <div className="flex items-center space-x-2 text-indigo-400 font-semibold font-mono text-xs border-b border-white/5 pb-2">
+          <div className="glass-panel p-5 rounded-xl border border-slate-200 dark:border-white/10 space-y-4 bg-white/80 dark:bg-black/40">
+            <div className="flex items-center space-x-2 text-indigo-700 dark:text-indigo-400 font-semibold font-mono text-xs border-b border-slate-200 dark:border-white/5 pb-2">
               <Layers className="w-4 h-4" />
               <span>FRONTEND (PRODUCTION)</span>
             </div>
             <div className="flex flex-wrap gap-1.5">
               {['Next.js App Router', 'React 19', 'TypeScript', 'Tailwind CSS v4', 'Vite compiler', 'Framer Motion animations'].map((tech) => (
-                <span key={tech} className="text-[10px] font-mono px-2 py-1 rounded bg-indigo-500/5 text-indigo-300 border border-indigo-500/10 transition-colors">
+                <span key={tech} className="text-[10px] font-mono px-2 py-1 rounded bg-indigo-50 dark:bg-indigo-500/5 text-indigo-800 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-500/10 transition-colors">
                   {tech}
                 </span>
               ))}
@@ -272,14 +272,14 @@ export default function About() {
           </div>
 
           {/* Database / Backend */}
-          <div className="glass-panel p-5 rounded-xl border-white/10 space-y-4">
-            <div className="flex items-center space-x-2 text-emerald-400 font-semibold font-mono text-xs border-b border-white/5 pb-2">
+          <div className="glass-panel p-5 rounded-xl border border-slate-200 dark:border-white/10 space-y-4 bg-white/80 dark:bg-black/40">
+            <div className="flex items-center space-x-2 text-emerald-700 dark:text-emerald-400 font-semibold font-mono text-xs border-b border-slate-200 dark:border-white/5 pb-2">
               <TerminalIcon className="w-4 h-4" />
               <span>BACKEND (PRODUCTION)</span>
             </div>
             <div className="flex flex-wrap gap-1.5">
               {['PostgreSQL databases', 'Supabase APIs', 'Node.js crons', 'pgvector embeddings', 'API routing endpoints', 'Zod validation'].map((tech) => (
-                <span key={tech} className="text-[10px] font-mono px-2 py-1 rounded bg-emerald-500/5 text-emerald-300 border border-emerald-500/10 transition-colors">
+                <span key={tech} className="text-[10px] font-mono px-2 py-1 rounded bg-emerald-50 dark:bg-emerald-500/5 text-emerald-800 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-500/10 transition-colors">
                   {tech}
                 </span>
               ))}
@@ -287,14 +287,14 @@ export default function About() {
           </div>
 
           {/* Infrastructure / Security */}
-          <div className="glass-panel p-5 rounded-xl border-white/10 space-y-4">
-            <div className="flex items-center space-x-2 text-amber-400 font-semibold font-mono text-xs border-b border-white/5 pb-2">
+          <div className="glass-panel p-5 rounded-xl border border-slate-200 dark:border-white/10 space-y-4 bg-white/80 dark:bg-black/40">
+            <div className="flex items-center space-x-2 text-amber-700 dark:text-amber-400 font-semibold font-mono text-xs border-b border-slate-200 dark:border-white/5 pb-2">
               <Shield className="w-4 h-4" />
               <span>SECURITY (WORKING KNOWLEDGE)</span>
             </div>
             <div className="flex flex-wrap gap-1.5">
               {['Linux administration', 'Git flow models', 'JWT sessions', 'API rate-limiting', 'CTF vulnerability writeups', 'C++ algorithms'].map((tech) => (
-                <span key={tech} className="text-[10px] font-mono px-2 py-1 rounded bg-amber-500/5 text-amber-300 border border-amber-500/10 transition-colors">
+                <span key={tech} className="text-[10px] font-mono px-2 py-1 rounded bg-amber-50 dark:bg-amber-500/5 text-amber-800 dark:text-amber-300 border border-amber-200 dark:border-amber-500/10 transition-colors">
                   {tech}
                 </span>
               ))}

@@ -24,10 +24,10 @@ export default function UsesPage() {
   return (
     <div className="max-w-4xl mx-auto px-4 space-y-12 py-6">
       <div className="space-y-3">
-        <h1 className="text-3xl sm:text-5xl font-black text-white tracking-tight flex items-center gap-2">
-          <Settings className="w-8 h-8 text-indigo-400" /> Uses
+        <h1 className="text-3xl sm:text-5xl font-black text-slate-900 dark:text-white tracking-tight flex items-center gap-2">
+          <Settings className="w-8 h-8 text-indigo-600 dark:text-indigo-400" /> Uses
         </h1>
-        <p className="text-sm text-zinc-400 font-sans">
+        <p className="text-sm text-slate-600 dark:text-zinc-400 font-sans">
           A checklist detailing the hardware, software utilities, and local server configurations I use daily.
         </p>
       </div>
@@ -35,14 +35,14 @@ export default function UsesPage() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {/* Hardware Column */}
         <div className="space-y-4">
-          <h2 className="text-base font-bold text-white uppercase tracking-wider font-mono border-b border-white/5 pb-2 flex items-center gap-2">
-            <Laptop className="w-4.5 h-4.5 text-indigo-400" /> Hardware Specs
+          <h2 className="text-base font-bold text-slate-900 dark:text-white uppercase tracking-wider font-mono border-b border-slate-200 dark:border-white/5 pb-2 flex items-center gap-2">
+            <Laptop className="w-4.5 h-4.5 text-indigo-600 dark:text-indigo-400" /> Hardware Specs
           </h2>
           <div className="space-y-3.5">
             {hardware.map((item, idx) => (
-              <div key={idx} className="p-4 rounded-xl border border-white/5 bg-white/[0.01]">
-                <span className="text-xs font-bold text-white block">{item.name}</span>
-                <span className="text-xs text-zinc-400 block mt-1 leading-relaxed">{item.desc}</span>
+              <div key={idx} className="p-4 rounded-xl border border-slate-200 dark:border-white/5 bg-white dark:bg-white/[0.01] shadow-xs dark:shadow-none">
+                <span className="text-xs font-bold text-slate-900 dark:text-white block">{item.name}</span>
+                <span className="text-xs text-slate-600 dark:text-zinc-400 block mt-1 leading-relaxed">{item.desc}</span>
               </div>
             ))}
           </div>
@@ -50,14 +50,14 @@ export default function UsesPage() {
 
         {/* Software Column */}
         <div className="space-y-4">
-          <h2 className="text-base font-bold text-white uppercase tracking-wider font-mono border-b border-white/5 pb-2 flex items-center gap-2">
-            <Terminal className="w-4.5 h-4.5 text-emerald-400" /> IDE & Software Console
+          <h2 className="text-base font-bold text-slate-900 dark:text-white uppercase tracking-wider font-mono border-b border-slate-200 dark:border-white/5 pb-2 flex items-center gap-2">
+            <Terminal className="w-4.5 h-4.5 text-emerald-600 dark:text-emerald-400" /> IDE & Software Console
           </h2>
           <div className="space-y-3.5">
             {software.map((item, idx) => (
-              <div key={idx} className="p-4 rounded-xl border border-white/5 bg-white/[0.01]">
-                <span className="text-xs font-bold text-white block">{item.name}</span>
-                <span className="text-xs text-zinc-400 block mt-1 leading-relaxed">{item.desc}</span>
+              <div key={idx} className="p-4 rounded-xl border border-slate-200 dark:border-white/5 bg-white dark:bg-white/[0.01] shadow-xs dark:shadow-none">
+                <span className="text-xs font-bold text-slate-900 dark:text-white block">{item.name}</span>
+                <span className="text-xs text-slate-600 dark:text-zinc-400 block mt-1 leading-relaxed">{item.desc}</span>
               </div>
             ))}
           </div>
@@ -66,14 +66,14 @@ export default function UsesPage() {
 
       {/* Local Server Stack */}
       <div className="space-y-4">
-        <h2 className="text-base font-bold text-white uppercase tracking-wider font-mono border-b border-white/5 pb-2 flex items-center gap-2">
-          <Server className="w-4.5 h-4.5 text-amber-500" /> Local Server & Dev stacks
+        <h2 className="text-base font-bold text-slate-900 dark:text-white uppercase tracking-wider font-mono border-b border-slate-200 dark:border-white/5 pb-2 flex items-center gap-2">
+          <Server className="w-4.5 h-4.5 text-amber-600 dark:text-amber-500" /> Local Server & Dev stacks
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {stack.map((item, idx) => (
-            <div key={idx} className="p-4 rounded-xl border border-white/5 bg-white/[0.01]">
-              <span className="text-xs font-bold text-white block">{item.name}</span>
-              <span className="text-xs text-zinc-400 block mt-1 leading-relaxed">{item.desc}</span>
+            <div key={idx} className="p-4 rounded-xl border border-slate-200 dark:border-white/5 bg-white dark:bg-white/[0.01] shadow-xs dark:shadow-none">
+              <span className="text-xs font-bold text-slate-900 dark:text-white block">{item.name}</span>
+              <span className="text-xs text-slate-600 dark:text-zinc-400 block mt-1 leading-relaxed">{item.desc}</span>
             </div>
           ))}
         </div>
