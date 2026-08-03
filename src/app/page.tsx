@@ -91,6 +91,28 @@ export default function Home() {
     setTimeout(() => setCopiedText(false), 2000);
   };
 
+  // State for Real-Time GitHub Commits
+  const [realCommits, setRealCommits] = useState([
+    { commit: 'b9cdda2', branch: 'main', event: 'fix(layout): fix footer positioning and eliminate bottom viewport overflow whitespace', size: '142 kB', status: 'success', time: 'Recently', url: 'https://github.com/IamKady/kuldeepvishwakarma/commit/b9cdda25925320de4adb74f4672a614f8f480f37' },
+    { commit: '8eeaeed', branch: 'main', event: 'fix(theme): overhaul light mode contrast across all subpages', size: '142 kB', status: 'success', time: 'Today', url: 'https://github.com/IamKady/kuldeepvishwakarma/commit/8eeaeedf77706786378c58a23ad5deb8eacbd3d5' },
+    { commit: '5fc4616', branch: 'main', event: 'fix(theme): remove hardcoded dark panel backgrounds and fix light mode contrast', size: '141 kB', status: 'success', time: 'Today', url: 'https://github.com/IamKady/kuldeepvishwakarma/commit/5fc4616b0c86261dbc76bd2e5682e2bb6fc230b9' },
+    { commit: '1ea7a9f', branch: 'main', event: 'fix(theme): overhaul light mode styling, typography contrast, and Tailwind 4 dark variants', size: '140 kB', status: 'success', time: 'Today', url: 'https://github.com/IamKady/kuldeepvishwakarma/commit/1ea7a9fc7b6d18863526830e236c7921c9eceae0' }
+  ]);
+  const [isLiveSync, setIsLiveSync] = useState(false);
+
+  // Fetch real-time GitHub commits from API route
+  useEffect(() => {
+    fetch('/api/github-commits')
+      .then((res) => res.json())
+      .then((data) => {
+        if (data && data.commits && data.commits.length > 0) {
+          setRealCommits(data.commits);
+          setIsLiveSync(data.live);
+        }
+      })
+      .catch((err) => console.error('Failed to sync live GitHub commits:', err));
+  }, []);
+
   // Generate dynamic-looking GitHub activity grid
   const generateGithubGrid = () => {
     const grid = [];
@@ -114,14 +136,6 @@ export default function Home() {
   };
 
   const githubCells = generateGithubGrid();
-
-  // Simulated build history
-  const buildHistory = [
-    { commit: 'da215a8', branch: 'main', event: 'Programmatic sitemaps generation logic refined', size: '142 kB', status: 'success', time: '12 mins ago' },
-    { commit: '0fa28d1', branch: 'main', event: 'Deduplication threshold tuning (pgvector <=> 0.85)', size: '141 kB', status: 'success', time: '4 hours ago' },
-    { commit: '77b81ea', branch: 'dev', event: 'Gemini structured output fallback schema definitions', size: '139 kB', status: 'success', time: '1 day ago' },
-    { commit: '44f128c', branch: 'main', event: 'Fixed robots.txt permissions crawl index block', size: '135 kB', status: 'success', time: '5 days ago' }
-  ];
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-24 relative">
@@ -466,9 +480,9 @@ export default function Home() {
               {dashboardTab === 'deployments' && (
                 <div className="space-y-4">
                   <div className="flex justify-between items-center text-[10px] font-mono text-slate-500 dark:text-zinc-500 border-b border-slate-200 dark:border-white/5 pb-2">
-                    <span>Active Branches: main, dev</span>
+                    <span>Active Branches: main (IamKady/kuldeepvishwakarma)</span>
                     <span className="text-emerald-600 dark:text-emerald-400 font-bold flex items-center gap-1">
-                      <RefreshCw className="w-3.5 h-3.5 animate-spin" /> pipeline running
+                      <RefreshCw className={`w-3.5 h-3.5 ${isLiveSync ? 'animate-spin' : ''}`} /> {isLiveSync ? 'Live GitHub Sync' : 'Real Commit Feed'}
                     </span>
                   </div>
 
@@ -485,11 +499,20 @@ export default function Home() {
                         </tr>
                       </thead>
                       <tbody className="divide-y divide-slate-200 dark:divide-white/5 text-slate-700 dark:text-zinc-300">
-                        {buildHistory.map((build, idx) => (
+                        {realCommits.slice(0, 5).map((build, idx) => (
                           <tr key={idx} className="hover:bg-slate-100/50 dark:hover:bg-white/[0.02]">
-                            <td className="py-2.5 text-indigo-600 dark:text-indigo-400 font-bold">{build.commit}</td>
+                            <td className="py-2.5 font-bold">
+                              <a 
+                                href={build.url} 
+                                target="_blank" 
+                                rel="noopener noreferrer" 
+                                className="text-indigo-600 dark:text-indigo-400 hover:underline flex items-center gap-1"
+                              >
+                                {build.commit} <ExternalLink className="w-3 h-3" />
+                              </a>
+                            </td>
                             <td className="py-2.5"><span className="px-1.5 py-0.2 rounded bg-slate-200/60 dark:bg-white/5 border border-slate-300 dark:border-white/5 text-slate-800 dark:text-zinc-200">{build.branch}</span></td>
-                            <td className="py-2.5 max-w-[250px] truncate text-slate-900 dark:text-zinc-200">{build.event}</td>
+                            <td className="py-2.5 max-w-[280px] truncate text-slate-900 dark:text-zinc-200">{build.event}</td>
                             <td className="py-2.5 text-slate-600 dark:text-zinc-400">{build.size}</td>
                             <td className="py-2.5 text-slate-500 dark:text-zinc-500">{build.time}</td>
                             <td className="py-2.5 text-right font-bold text-emerald-600 dark:text-emerald-400">✓ SUCCESS</td>
@@ -629,7 +652,35 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="flex justify-between items-center text-[10px] text-slate-500 dark:text-zinc-500 font-sans">
+        {/* Live Commits Ticker */}
+        <div className="pt-2 border-t border-slate-200 dark:border-white/5 space-y-2">
+          <span className="text-[10px] font-mono text-slate-500 dark:text-zinc-500 uppercase tracking-wider block font-bold">
+            Real-Time Commit Activity Stream
+          </span>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
+            {realCommits.slice(0, 3).map((item, idx) => (
+              <a
+                key={idx}
+                href={item.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-2.5 rounded-lg border border-slate-200 dark:border-white/5 bg-slate-100/80 dark:bg-white/[0.02] hover:bg-slate-200/60 dark:hover:bg-white/[0.05] transition-all flex flex-col justify-between space-y-1 group"
+              >
+                <div className="flex justify-between items-center text-[10px] font-mono">
+                  <span className="font-bold text-indigo-600 dark:text-indigo-400 group-hover:underline flex items-center gap-1">
+                    {item.commit} <ExternalLink className="w-2.5 h-2.5" />
+                  </span>
+                  <span className="text-slate-500 dark:text-zinc-500">{item.time}</span>
+                </div>
+                <p className="text-[11px] font-sans text-slate-800 dark:text-zinc-300 truncate leading-snug">
+                  {item.event}
+                </p>
+              </a>
+            ))}
+          </div>
+        </div>
+
+        <div className="flex justify-between items-center text-[10px] text-slate-500 dark:text-zinc-500 font-sans pt-1">
           <span>Track automated releases and scripts cataloged publically</span>
           <div className="flex items-center space-x-2">
             <span>Less</span>
