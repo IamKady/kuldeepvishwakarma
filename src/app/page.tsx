@@ -40,6 +40,8 @@ import {
   researchNotes 
 } from '@/data/db';
 import confetti from 'canvas-confetti';
+import TelegramFeed from '@/components/TelegramFeed';
+
 
 export default function Home() {
   const [localTime, setLocalTime] = useState('13:36 PM');
@@ -815,6 +817,12 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Telegram Channel Live Feed Section */}
+      <section className="mb-20">
+        <TelegramFeed channelUsername="KCVOS" />
+      </section>
+
     </div>
   );
 }
+

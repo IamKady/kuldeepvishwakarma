@@ -247,6 +247,13 @@ export async function POST(request: Request) {
       console.warn('Auto-confirmation forward failed:', autoErr);
     }
 
+    // 6. Send Telegram Bot Notification if configured
+    try {
+      await sendTelegramNotification({ type, name, email, subject, message, date, time });
+    } catch (telegramErr) {
+      console.warn('Telegram notification failed:', telegramErr);
+    }
+
     const gmailData = (await gmailResponse.json()) as GmailSendResponse;
     return NextResponse.json({
       success: true,
@@ -265,3 +272,72 @@ export async function POST(request: Request) {
     );
   }
 }
+
+function escapeHtml(str: string): string {
+  if (!str) return '';
+  return str
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+}
+
+async function sendTelegramNotification({
+  type,
+  name,
+  email,
+  subject,
+  message,
+  date,
+  time,
+}: {
+  type?: string;
+  name: string;
+  email: string;
+  subject?: string;
+  message?: string;
+  date?: string;
+  time?: string;
+}) {
+  const botToken = process.env.TELEGRAM_BOT_TOKEN;
+  const chatId = process.env.TELEGRAM_CHAT_ID;
+
+  if (!botToken || !chatId) {
+    return;
+  }
+
+  let text = '';
+  if (type === 'booking') {
+    text = `🚨 <b>New Consultation Booking</b>\n\n` +
+           `👤 <b>Name:</b> ${escapeHtml(name)}\n` +
+           `📧 <b>Email:</b> ${escapeHtml(email)}\n` +
+           `📅 <b>Date:</b> ${escapeHtml(date || 'N/A')}\n` +
+           `⏰ <b>Time:</b> ${escapeHtml(time || 'N/A')} (IST)\n\n` +
+           `🌐 <i>Sent from kuldeepvishwakarma.com</i>`;
+  } else {
+    text = `📩 <b>New Contact Message</b>\n\n` +
+           `👤 <b>Name:</b> ${escapeHtml(name)}\n` +
+           `📧 <b>Email:</b> ${escapeHtml(email)}\n` +
+           `📌 <b>Subject:</b> ${escapeHtml(subject || 'Console Contact')}\n\n` +
+           `💬 <b>Message:</b>\n${escapeHtml(message || 'N/A')}\n\n` +
+           `🌐 <i>Sent from kuldeepvishwakarma.com</i>`;
+  }
+
+  try {
+    const res = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        chat_id: chatId,
+        text,
+        parse_mode: 'HTML',
+      }),
+    });
+    if (!res.ok) {
+      const errorText = await res.text();
+      console.error('Telegram API error:', errorText);
+    }
+  } catch (err) {
+    console.error('Failed to send Telegram notification:', err);
+  }
+}
+
