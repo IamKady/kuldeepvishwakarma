@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import { getCapturedPosts } from './store';
 
 export interface TelegramPost {
   id: string;
@@ -7,6 +8,8 @@ export interface TelegramPost {
   views?: string;
   link: string;
   photo?: string;
+  chatTitle?: string;
+  senderName?: string;
 }
 
 export async function GET(request: Request) {
@@ -15,11 +18,22 @@ export async function GET(request: Request) {
     let channel = searchParams.get('channel') || process.env.TELEGRAM_CHANNEL_USERNAME || process.env.NEXT_PUBLIC_TELEGRAM_CHANNEL;
 
     if (!channel) {
-      channel = 'KCVOS'; // Default channel placeholder
+      channel = 'KCVOS_bot';
+    }
+
+    // First check captured posts from @KCVOS_bot webhook
+    const captured = getCapturedPosts();
+    if (captured && captured.length > 0) {
+      return NextResponse.json({
+        success: true,
+        channel,
+        posts: captured,
+      });
     }
 
     // Clean channel handle (remove @ or url prefixes)
     channel = channel.replace(/^https?:\/\/t\.me\//, '').replace(/^@/, '').replace(/\/$/, '');
+
 
     const res = await fetch(`https://t.me/s/${channel}`, {
       headers: {

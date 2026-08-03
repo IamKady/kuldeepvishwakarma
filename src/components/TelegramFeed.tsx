@@ -11,7 +11,10 @@ export interface TelegramPost {
   views?: string;
   link: string;
   photo?: string;
+  chatTitle?: string;
+  senderName?: string;
 }
+
 
 interface TelegramFeedProps {
   channelUsername?: string;
@@ -119,7 +122,14 @@ export default function TelegramFeed({
               transition={{ duration: 0.2, delay: idx * 0.05 }}
               className="bg-stone-900/80 hover:bg-stone-850 border border-stone-800/80 hover:border-stone-700/80 rounded-xl p-4 transition-all group"
             >
+              {post.chatTitle && (
+                <div className="flex items-center justify-between mb-2 pb-1.5 border-b border-stone-800/40 font-mono text-[10px] text-sky-400">
+                  <span className="truncate">📍 {post.chatTitle}</span>
+                  {post.senderName && <span className="text-zinc-500">by {post.senderName}</span>}
+                </div>
+              )}
               {post.photo && (
+
                 <div className="mb-3 overflow-hidden rounded-lg border border-stone-800 max-h-56">
                   <img
                     src={post.photo}
