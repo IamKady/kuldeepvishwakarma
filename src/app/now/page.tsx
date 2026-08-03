@@ -1,9 +1,25 @@
 'use client';
 
-import React from 'react';
-import { Clock, MapPin, Radio, Target, BookOpen } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Clock, MapPin, Radio, Target, BookOpen, Linkedin, ExternalLink, RefreshCw } from 'lucide-react';
+import { LinkedInPostItem } from '@/app/api/linkedin-activity/route';
 
 export default function NowPage() {
+  const [linkedinPosts, setLinkedinPosts] = useState<LinkedInPostItem[]>([]);
+  const [isLiveConnected, setIsLiveConnected] = useState(false);
+
+  useEffect(() => {
+    fetch('/api/linkedin-activity')
+      .then((res) => res.json())
+      .then((data) => {
+        if (data && data.posts) {
+          setLinkedinPosts(data.posts);
+          setIsLiveConnected(data.liveConnected);
+        }
+      })
+      .catch((err) => console.error('Failed to load LinkedIn posts:', err));
+  }, []);
+
   return (
     <div className="max-w-3xl mx-auto px-4 space-y-12 py-6">
       <div className="space-y-3">
@@ -33,6 +49,49 @@ export default function NowPage() {
             <p className="text-xs text-slate-600 dark:text-zinc-400 leading-relaxed">
               Focusing on monospaced layouts, terminal utilities, and reading Martin Kleppmann's reviews of database indexes.
             </p>
+          </div>
+        </div>
+
+        {/* Real-Time LinkedIn Work Activity Feed */}
+        <div className="p-6 rounded-2xl border border-slate-200 dark:border-white/10 glass-panel space-y-4 bg-white/80 dark:bg-black/40">
+          <div className="flex justify-between items-center border-b border-slate-200 dark:border-white/5 pb-3">
+            <h2 className="text-base font-bold text-slate-900 dark:text-white uppercase tracking-wider font-mono flex items-center gap-2">
+              <Linkedin className="w-4 h-4 text-sky-600 dark:text-sky-400" /> LinkedIn & Running Work Stream
+            </h2>
+            <a
+              href="https://www.linkedin.com/in/iamkady/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[10px] text-sky-600 dark:text-sky-400 hover:underline font-mono flex items-center gap-1"
+            >
+              linkedin.com/in/iamkady <ExternalLink className="w-3 h-3" />
+            </a>
+          </div>
+
+          <div className="space-y-3">
+            {linkedinPosts.map((post) => (
+              <a
+                key={post.id}
+                href={post.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-4 rounded-xl border border-slate-200 dark:border-white/5 bg-slate-100/90 dark:bg-black/30 hover:bg-slate-200/50 dark:hover:bg-white/[0.03] transition-all block space-y-2 group"
+              >
+                <div className="flex justify-between items-center text-[10px] font-mono text-slate-500 dark:text-zinc-500">
+                  <span className="font-bold text-slate-900 dark:text-white flex items-center gap-1.5">
+                    <span className="w-2 h-2 rounded-full bg-sky-500 inline-block" />
+                    {post.category} Update
+                  </span>
+                  <span>{post.relativeTime}</span>
+                </div>
+                <p className="text-xs text-slate-700 dark:text-zinc-300 font-sans leading-relaxed">
+                  {post.text}
+                </p>
+                <div className="text-[10px] font-mono text-sky-600 dark:text-sky-400 flex items-center gap-1 pt-1 group-hover:underline">
+                  View post on LinkedIn <ExternalLink className="w-2.5 h-2.5" />
+                </div>
+              </a>
+            ))}
           </div>
         </div>
 
