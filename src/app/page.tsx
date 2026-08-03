@@ -819,8 +819,9 @@ export default function Home() {
 
       {/* Telegram Channel Live Feed Section */}
       <section className="mb-20">
-        <TelegramFeed channelUsername="KCVOS" />
+        <TelegramFeed channelUsername="KCVOS_bot" />
       </section>
+
 
     </div>
   );

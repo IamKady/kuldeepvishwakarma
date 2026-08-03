@@ -20,8 +20,9 @@ interface TelegramFeedProps {
 }
 
 export default function TelegramFeed({
-  channelUsername = 'KCVOS',
+  channelUsername = 'KCVOS_bot',
   title = 'Telegram Live Channel Feed',
+
   subtitle = 'Real-time updates, announcements & technical logs'
 }: TelegramFeedProps) {
   const [posts, setPosts] = useState<TelegramPost[]>([]);
