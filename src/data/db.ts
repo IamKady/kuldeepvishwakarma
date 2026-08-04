@@ -159,6 +159,59 @@ export interface ResearchNote {
 
 export const projectsData: Project[] = [
   {
+    id: 'telegram-ai-bot',
+    title: 'AI Telegram Watchdog & Live Feed System',
+    tagline: 'Autonomous Security Alert System, Webhook Relay & Channel Feed Processor',
+    status: 'Active',
+    logo: '📡',
+    categoryTag: 'SaaS & AI',
+    technologies: ['Next.js 16', 'Telegram Bot API', 'TypeScript', 'Node.js', 'Webhooks', 'Zustand', 'Tailwind CSS v4'],
+    github: 'https://github.com/IamKady/kuldeepvishwakarma',
+    live: '/contact',
+    summary: 'A real-time security watchdog and broadcast engine powered by Telegram webhooks, delivering instantaneous site contact alerts, channel post relays, and threat monitoring.',
+    whatIAmDoingAndLearning: 'Engineering secure Telegram Webhook SSL routing, handling asynchronous message dispatchers with zero-delay UX fallbacks, and creating stateful live broadcast feeds inside Next.js App Router.',
+    caseStudy: {
+      overview: 'Engineered a full-duplex Telegram bot integration to bridge instant site telemetry with custom mobile notifications. It serves as both an inbound watchdog for user contact inquiries and an outbound channel broadcast feed on the developer portfolio.',
+      problem: 'Traditional email contact forms suffer from spam, high latency, and delivery failures. Additionally, updating site visitors on active software releases requires manual CMS posts or costly third-party push notification services.',
+      research: 'Audited Telegram Bot API webhooks and Long Polling mechanisms. Selected webhook routing via Next.js serverless API handlers (/api/telegram-webhook) for sub-second execution speeds and zero server overhead when idle.',
+      targetUsers: 'Recruiters seeking immediate responses, site administrators requiring real-time threat/contact alerts, and subscribers following live tech updates.',
+      planning: 'Designed a dual-channel architecture: Inbound user contact submissions automatically format Markdown alerts to the admin Telegram ID, while inbound channel messages parse structured events into a stateful client broadcast feed.',
+      design: 'Clean monospaced HUD panels with emerald pulse indicators, channel post cards, and instantaneous feedback badges.',
+      architectureDiagram: `
++-----------------------+     +------------------------+     +-------------------+
+|  Contact Form & Site  | --> | Next.js API Route      | --> | Telegram Bot API  |
+|  (User Inquiries)     |     | (/api/contact)         |     | (Admin Alert Chat)|
++-----------------------+     +------------------------+     +-------------------+
+                                                                       |
+                                                                       v
++-----------------------+     +------------------------+     +-------------------+
+|  Client Portfolio     | <-- | Live Zustand Feed Store| <-- | Next.js Webhook   |
+|  (Live UI Component)  |     | (/api/telegram-feed)   |     | (/telegram-webhook)|
++-----------------------+     +------------------------+     +-------------------+
+      `,
+      databaseSpecs: 'In-memory stateful store (store.ts) with LocalStorage client rehydration fallback, guaranteeing instantaneous UI updates without database latency.',
+      authenticationFlow: 'Telegram Bot Token authentication with chat ID authorization guards and secret token validation on webhook callbacks.',
+      securityProtocols: 'Strict webhook secret header validation, sanitization of HTML/Markdown entities, input schema validation via TypeScript, and fallback to Gmail SMTP on network failure.',
+      seoOptimization: 'Structured micro-data headers, clean semantic markup, and static page hydration for fast crawler evaluation.',
+      performanceTuning: 'Non-blocking async message dispatchers, background execution loops, and zero DOM layout thrashing using CSS transform animations.',
+      development: 'Developed using Next.js 16 App Router, TypeScript, and Zustand for state synchronization.',
+      architecture: 'Client UI -> Next.js API Routes -> Telegram Webhook Gateway -> Zustand Live Feed Engine.',
+      seo: 'Semantic HTML markup and clean component boundaries.',
+      challenges: 'Preventing contact submission blocking if Telegram API encounters network timeouts. Solved by firing the Telegram notification first and wrapping it in an isolated try-catch fallback block.',
+      tradeOffs: 'Chose an in-memory state store with client-side cache fallback over external DB tables for zero latency during live demo interactions.',
+      lessons: 'Direct webhook integrations provide vastly superior real-time notification UX compared to legacy polling or email notifications.',
+      futureRoadmap: 'Implement LLM auto-replies to user inquiries directly via Telegram Admin bot commands.',
+      timeline: 'Aug 2026'
+    },
+    metrics: {
+      performance: 100,
+      accessibility: 100,
+      bestPractices: 100,
+      seo: 100,
+      loadTimeMs: 95
+    }
+  },
+  {
     id: 'startupwire',
     title: 'StartupWire',
     tagline: 'The Autonomous AI-Powered Tech Startup News Platform',
