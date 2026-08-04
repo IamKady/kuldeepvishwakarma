@@ -159,6 +159,59 @@ export interface ResearchNote {
 
 export const projectsData: Project[] = [
   {
+    id: 'candidbot',
+    title: 'CandidBot - Autonomous AI Assistant Bot',
+    tagline: 'Autonomous AI Bot Engine, Telemetry Relay & Workflow Automation Platform',
+    status: 'Active',
+    logo: '🤖',
+    categoryTag: 'SaaS & AI',
+    technologies: ['TypeScript', 'Node.js', 'Python', 'Telegram API', 'LLM Agents', 'Next.js', 'Tailwind CSS'],
+    github: 'https://github.com/IamKady/candidbot',
+    live: 'https://github.com/IamKady/candidbot',
+    summary: 'An autonomous AI bot engine engineered for automated candidate screening, telemetry notifications, conversational query processing, and intelligent workflow execution.',
+    whatIAmDoingAndLearning: 'Engineering asynchronous AI prompt pipelines, developing robust rate-limit retry handlers, structuring JSON schemas for LLM agent outputs, and building stateful bot webhooks with sub-100ms execution speeds.',
+    caseStudy: {
+      overview: 'CandidBot was designed to simplify interactive user query processing, automated candidate screening, and instant notification dispatching via intelligent LLM agent pipelines.',
+      problem: 'Manual candidate evaluation and system alert tracking suffer from human delays and fragmented tools. Standard bots lack structured schema outputs and fail to handle rate limits during high-concurrency event bursts.',
+      research: 'Audited Telegram Bot API, OpenAI/Gemini SDKs, and async message queue dispatchers. Built a lightweight event-driven pipeline that formats unstructured user prompts into actionable JSON data.',
+      targetUsers: 'Founders, recruiting teams, and developers looking for automated candidate screening and instant system notification bots.',
+      planning: 'Structured a dual-layer architecture: Webhook event listener parsing inbound triggers, and an LLM prompt engine evaluating inputs against pre-defined qualification matrices.',
+      design: 'Clean monospaced telemetry dashboard interface with real-time status indicators, execution timers, and structured logging tables.',
+      architectureDiagram: `
++-----------------------+     +------------------------+     +-------------------+
+|  User / Client Event  | --> | Webhook Relay Server   | --> | LLM Agent Engine  |
+|  (Inbound Trigger)    |     | (Node.js / Next.js)    |     | (Gemini / OpenAI) |
++-----------------------+     +------------------------+     +-------------------+
+                                                                       |
+                                                                       v
++-----------------------+     +------------------------+     +-------------------+
+|  Telemetry UI         | <-- | Notification Relay     | <-- | Structured JSON   |
+|  (Live Activity Feed) |     | (Telegram / Discord)   |     | (Output Parser)   |
++-----------------------+     +------------------------+     +-------------------+
+      `,
+      databaseSpecs: 'PostgreSQL / Supabase storage schema for prompt logs, bot session tokens, and user query evaluation histories.',
+      authenticationFlow: 'Bot Token secret verification, HMAC secret header validation on webhook callbacks, and chat ID authorization guards.',
+      securityProtocols: 'Sanitized prompt inputs, encrypted token management via environment secrets, and strict CORS configuration.',
+      seoOptimization: 'Structured JSON-LD schema objects and clean semantic markup for discoverability.',
+      performanceTuning: 'Asynchronous non-blocking message processing queue with exponential backoff handling to prevent rate limiting.',
+      development: 'Developed from scratch using TypeScript, Node.js, Python, and Next.js App Router.',
+      architecture: 'Client Gateway -> Webhook Daemon -> LLM Engine -> Notification Relay.',
+      seo: 'Semantic HTML5 structure and clean URL parameters.',
+      challenges: 'Handling LLM schema hallucinations during complex query evaluation. Resolved by enforcing Zod validation schemas and strict system prompts.',
+      tradeOffs: 'Chose serverless webhook handlers over persistent background daemons to maintain minimal idle cost and zero server maintenance overhead.',
+      lessons: 'Structured JSON validation on AI outputs is essential for deterministic bot workflow execution.',
+      futureRoadmap: 'Expand multi-channel integration (Discord, Slack, Teams) and implement voice note parsing.',
+      timeline: 'Aug 2026'
+    },
+    metrics: {
+      performance: 100,
+      accessibility: 100,
+      bestPractices: 100,
+      seo: 100,
+      loadTimeMs: 90
+    }
+  },
+  {
     id: 'telegram-ai-bot',
     title: 'AI Telegram Watchdog & Live Feed System',
     tagline: 'Autonomous Security Alert System, Webhook Relay & Channel Feed Processor',
