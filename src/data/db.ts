@@ -305,9 +305,9 @@ export const projectsData: Project[] = [
       seo: 'Structured semantic markup with unified canonical anchors and automated JSON-LD schemas.',
       challenges: 'LLM Hallucinations and duplicate feeds. Solved by writing strict system instructions for the Gemini model, validating JSON output formatting, and maintaining vector indexes to filter duplicate topics.',
       tradeOffs: 'Chose a relational DB (Supabase) instead of a NoSQL database to enforce schema-level integrity, accepting minor load overhead for absolute relational confidence.',
-      lessons: ' Programmatic SEO combined with structured LLM pipelines yields high-leverage SaaS products. Mastered edge cache revalidation schedules.',
+      lessons: 'Programmatic SEO combined with structured LLM pipelines yields high-leverage SaaS products. Mastered edge cache revalidation schedules.',
       futureRoadmap: 'Implement text-to-speech podcasts for newsletter subscribers and expose a developer API endpoint.',
-      timeline: 'Mar 2026 - Jun 2026 (4 Months)'
+      timeline: 'Mar 2026 - Aug 2026 (Active Publishing)'
     },
     metrics: {
       performance: 100,
