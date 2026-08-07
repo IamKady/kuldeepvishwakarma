@@ -17,11 +17,12 @@ import {
 import { blogsData } from '@/data/db';
 
 export default function Blog() {
+  const [activeTab, setActiveTab] = useState<'tech' | 'non-tech'>('tech');
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [readingBlogId, setReadingBlogId] = useState<string | null>(null);
 
-  const categories = [
+  const techCategories = [
     'All', 
     'Artificial Intelligence', 
     'Programming', 
@@ -33,29 +34,41 @@ export default function Blog() {
     'Linux', 
     'Automation', 
     'Open Source', 
-    'Career', 
-    'Books', 
-    'Engineering', 
-    'Startup Building', 
-    'Deep Dives', 
-    'Tutorials'
+    'Career'
   ];
 
+  const nonTechCategories = [
+    'All',
+    'Art & Creativity',
+    'Books & Reading',
+    'Writing & Prose',
+    'Hobbies & Lifestyle'
+  ];
+
+  const currentCategories = activeTab === 'tech' ? techCategories : nonTechCategories;
+
   const filteredBlogs = blogsData.filter(blog => {
+    // Tab match
+    const blogType = blog.type || 'tech';
+    const matchesTab = blogType === activeTab;
+
     const matchesSearch = blog.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
                           blog.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
                           blog.content.toLowerCase().includes(searchQuery.toLowerCase());
     
-    // Exact category match or All
+    // Category match or All
     const matchesCategory = selectedCategory === 'All' || blog.category === selectedCategory;
 
-    return matchesSearch && matchesCategory;
+    return matchesTab && matchesSearch && matchesCategory;
   });
 
   const activeBlog = blogsData.find(b => b.id === readingBlogId);
 
+  const techCount = blogsData.filter(b => (b.type || 'tech') === 'tech').length;
+  const nonTechCount = blogsData.filter(b => b.type === 'non-tech').length;
+
   return (
-    <div className="max-w-4xl mx-auto px-4 space-y-12 py-6">
+    <div className="max-w-4xl mx-auto px-4 space-y-10 py-6">
       
       <AnimatePresence mode="wait">
         {!readingBlogId ? (
@@ -64,16 +77,18 @@ export default function Blog() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="space-y-12"
+            className="space-y-8"
           >
             {/* Header */}
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-              <div className="space-y-3">
+              <div className="space-y-2">
                 <h1 className="text-3xl sm:text-5xl font-black text-slate-900 dark:text-white tracking-tight">
-                  Engineering Publications
+                  {activeTab === 'tech' ? 'Engineering & Tech Journal' : 'Creative & Non-Tech Corner'}
                 </h1>
                 <p className="text-sm text-slate-600 dark:text-zinc-400 font-sans max-w-md">
-                  Deep dives into systems architecture, rate-limiting, programmatic SEO, and AI agents workflows.
+                  {activeTab === 'tech' 
+                    ? 'Deep dives into systems architecture, rate-limiting, programmatic SEO, and AI agents workflows.'
+                    : 'Personal reflections on art, hobbies, literature, book reviews, and creative prose.'}
                 </p>
               </div>
 
@@ -86,15 +101,52 @@ export default function Blog() {
               </a>
             </div>
 
+            {/* Dual Main Section Tabs (Tech vs Non-Tech) */}
+            <div className="flex p-1 bg-slate-200/80 dark:bg-white/5 border border-slate-300 dark:border-white/10 rounded-2xl max-w-md">
+              <button
+                onClick={() => {
+                  setActiveTab('tech');
+                  setSelectedCategory('All');
+                }}
+                className={`flex-1 py-2.5 px-4 rounded-xl text-xs font-mono font-bold flex items-center justify-center gap-2 transition-all cursor-pointer ${
+                  activeTab === 'tech'
+                    ? 'bg-white dark:bg-indigo-600 text-slate-900 dark:text-white shadow-md'
+                    : 'text-slate-600 dark:text-zinc-400 hover:text-slate-900 dark:hover:text-white'
+                }`}
+              >
+                <span>💻 Tech Publications</span>
+                <span className="px-2 py-0.5 rounded-full text-[10px] bg-indigo-500/10 dark:bg-white/20 text-indigo-700 dark:text-white font-mono">
+                  {techCount}
+                </span>
+              </button>
+
+              <button
+                onClick={() => {
+                  setActiveTab('non-tech');
+                  setSelectedCategory('All');
+                }}
+                className={`flex-1 py-2.5 px-4 rounded-xl text-xs font-mono font-bold flex items-center justify-center gap-2 transition-all cursor-pointer ${
+                  activeTab === 'non-tech'
+                    ? 'bg-white dark:bg-rose-600 text-slate-900 dark:text-white shadow-md'
+                    : 'text-slate-600 dark:text-zinc-400 hover:text-slate-900 dark:hover:text-white'
+                }`}
+              >
+                <span>🎨 Non-Tech Corner</span>
+                <span className="px-2 py-0.5 rounded-full text-[10px] bg-rose-500/10 dark:bg-white/20 text-rose-700 dark:text-white font-mono">
+                  {nonTechCount}
+                </span>
+              </button>
+            </div>
+
             {/* Filters Row */}
-            <div className="flex flex-col gap-6 border-b border-slate-200 dark:border-white/5 pb-6">
+            <div className="flex flex-col gap-5 border-b border-slate-200 dark:border-white/5 pb-6">
               
               {/* Search input */}
               <div className="relative w-full max-w-md">
                 <Search className="absolute left-3 top-3 w-4 h-4 text-slate-400 dark:text-zinc-500" />
                 <input
                   type="text"
-                  placeholder="Search articles indexing..."
+                  placeholder={`Search ${activeTab === 'tech' ? 'technical articles' : 'creative writings'}...`}
                   value={searchQuery}
                   onChange={e => setSearchQuery(e.target.value)}
                   className="pl-9 pr-4 py-2 text-xs bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-lg outline-none text-slate-900 dark:text-white focus:border-indigo-500 transition-colors w-full font-sans shadow-xs dark:shadow-none"
@@ -103,15 +155,17 @@ export default function Blog() {
 
               {/* Categories Scroll Grid */}
               <div className="space-y-2">
-                <span className="text-[10px] font-mono text-slate-500 dark:text-zinc-500 uppercase tracking-wider block">Filter by Category Taxonomy</span>
+                <span className="text-[10px] font-mono text-slate-500 dark:text-zinc-500 uppercase tracking-wider block">Filter by Category</span>
                 <div className="flex flex-wrap gap-1.5">
-                  {categories.map((cat) => (
+                  {currentCategories.map((cat) => (
                     <button
                       key={cat}
                       onClick={() => setSelectedCategory(cat)}
                       className={`px-3 py-1.5 rounded-lg text-[9px] font-mono uppercase tracking-wider transition-all cursor-pointer border ${
                         selectedCategory === cat 
-                          ? 'bg-indigo-600 border-indigo-500 text-white shadow-md' 
+                          ? activeTab === 'tech'
+                            ? 'bg-indigo-600 border-indigo-500 text-white shadow-md'
+                            : 'bg-rose-600 border-rose-500 text-white shadow-md'
                           : 'text-slate-600 dark:text-zinc-400 hover:text-slate-900 dark:hover:text-zinc-200 hover:bg-slate-100 dark:hover:bg-white/5 border-slate-200 dark:border-white/5 bg-white dark:bg-zinc-950/40'
                       }`}
                     >
@@ -132,10 +186,14 @@ export default function Blog() {
                   onClick={() => setReadingBlogId(blog.id)}
                   className="glass-panel p-6 rounded-2xl border border-slate-200 dark:border-white/10 space-y-4 hover:border-slate-300 dark:hover:border-white/20 transition-all cursor-pointer shadow-lg group relative overflow-hidden bg-white/80 dark:bg-black/40"
                 >
-                  <div className="absolute inset-0 bg-gradient-to-r from-rose-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
+                  <div className={`absolute inset-0 bg-gradient-to-r ${blog.type === 'non-tech' ? 'from-rose-500/10' : 'from-indigo-500/10'} to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none`} />
 
                   <div className="flex flex-wrap items-center justify-between gap-2">
-                    <span className="text-[9px] font-mono text-rose-700 dark:text-rose-400 uppercase bg-rose-50 dark:bg-rose-500/5 px-2.5 py-0.8 rounded border border-rose-200 dark:border-rose-500/10 flex items-center gap-1">
+                    <span className={`text-[9px] font-mono uppercase px-2.5 py-0.8 rounded border flex items-center gap-1 ${
+                      blog.type === 'non-tech'
+                        ? 'text-rose-700 dark:text-rose-400 bg-rose-50 dark:bg-rose-500/5 border-rose-200 dark:border-rose-500/10'
+                        : 'text-indigo-700 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-500/5 border-indigo-200 dark:border-indigo-500/10'
+                    }`}>
                       <Hash className="w-3 h-3" />
                       {blog.category}
                     </span>
@@ -153,7 +211,11 @@ export default function Blog() {
                   </div>
 
                   <div className="space-y-1.5">
-                    <h3 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white group-hover:text-rose-600 dark:group-hover:text-rose-400 transition-colors font-sans">
+                    <h3 className={`text-base sm:text-lg font-bold text-slate-900 dark:text-white transition-colors font-sans ${
+                      blog.type === 'non-tech'
+                        ? 'group-hover:text-rose-600 dark:group-hover:text-rose-400'
+                        : 'group-hover:text-indigo-600 dark:group-hover:text-indigo-400'
+                    }`}>
                       {blog.title}
                     </h3>
                     <p className="text-xs sm:text-sm text-slate-600 dark:text-zinc-400 leading-relaxed font-sans line-clamp-2">
@@ -161,8 +223,10 @@ export default function Blog() {
                     </p>
                   </div>
 
-                  <div className="pt-2 text-xs font-semibold text-rose-600 dark:text-rose-400 flex items-center space-x-1 font-sans">
-                    <span>Inspect Publication</span>
+                  <div className={`pt-2 text-xs font-semibold flex items-center space-x-1 font-sans ${
+                    blog.type === 'non-tech' ? 'text-rose-600 dark:text-rose-400' : 'text-indigo-600 dark:text-indigo-400'
+                  }`}>
+                    <span>Read Article</span>
                     <span className="group-hover:translate-x-1 transition-transform">→</span>
                   </div>
                 </div>

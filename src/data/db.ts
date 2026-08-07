@@ -153,6 +153,17 @@ export interface ResearchNote {
   content: string;
 }
 
+export interface BlogPost {
+  id: string;
+  title: string;
+  description: string;
+  date: string;
+  category: string;
+  readTime: string;
+  type: 'tech' | 'non-tech';
+  content: string;
+}
+
 // ----------------------------------------------------
 // THE DATABASE
 // ----------------------------------------------------
@@ -1080,7 +1091,7 @@ Empirical testing shows that a cosine similarity threshold of \`0.85\` accuratel
   }
 ];
 
-export const blogsData = [
+export const blogsData: BlogPost[] = [
   {
     id: 'ai-news-automation',
     title: 'Building an Automated AI News Feed using Next.js & Gemini',
@@ -1088,6 +1099,7 @@ export const blogsData = [
     date: '2026-07-11',
     category: 'Artificial Intelligence',
     readTime: '6 min read',
+    type: 'tech',
     content: `Building news feed sites has historically required manual editing or resulted in spam-filled RSS aggregators. In this post, we discuss building a self-moderating news portal: StartupWire.in.
 
 ### The Pipeline Architecture
@@ -1117,6 +1129,7 @@ By offloading content scraping to background workers and using edge CDNs to serv
     date: '2026-07-09',
     category: 'System Design',
     readTime: '5 min read',
+    type: 'tech',
     content: `Google Search ranking algorithms heavily prioritize page performance and accessibility (Core Web Vitals). Achieving 100/100 scores in Lighthouse requires addressing specific front-end metrics:
 
 ### 1. Cumulative Layout Shift (CLS)
@@ -1145,6 +1158,7 @@ Using Tailwind CSS v4's compiled build system further reduces package payloads, 
     date: '2026-07-04',
     category: 'Cybersecurity',
     readTime: '8 min read',
+    type: 'tech',
     content: `Web application security can no longer be treated as a post-launch audit step. Here is a developer security checklist:
 
 ### 1. Direct Input Sanitization
@@ -1166,6 +1180,77 @@ CREATE POLICY "Admin Write Access" ON articles FOR ALL TO authenticated USING (a
 \`\`\`
 
 Deploy HTTP-only SameSite cookies and maintain clean Content-Security-Policy (CSP) headers inside Next.js config routing.`
+  },
+  {
+    id: 'art-visual-thinking',
+    title: 'The Art of Visual Thinking: Sketching Beyond Code',
+    description: 'Exploring pencil drawing, architectural blueprints, and how physical sketching sharpens abstract system design skills.',
+    date: '2026-08-02',
+    category: 'Art & Creativity',
+    readTime: '5 min read',
+    type: 'non-tech',
+    content: `Before I ever wrote a line of code or deployed a serverless API, I spent years studying civil engineering blueprints and freehand drawing. Visual thinking is the secret superpower behind effective software architecture.
+
+### Why Physical Sketching Matters
+In an era dominated by Figma, digital wireframes, and automated code generators, picking up a pen and a blank sheet of paper creates an unconstrained sandbox for the mind:
+- **Zero Syntax Constraints**: Paper forces you to think about spatial flow and conceptual boundaries without worrying about compiler rules or CSS flexbox alignments.
+- **Micro-Focus & Meditation**: Drawing complex perspective lines or freehand sketches calms cognitive noise, allowing solutions to difficult engineering problems to surface naturally.
+- **Blueprint Mental Models**: Physical drafting teaches you that complex structures are simply assemblies of primitive geometric blocks—just like modular software components.
+
+When stuck on a tricky asynchronous loop or database schema, step away from the monitor, grab a pencil, and draw the data flow.`
+  },
+  {
+    id: 'reading-books-wisdom',
+    title: '20 Books That Shaped My Mind: From Philosophy to Fiction',
+    description: 'A curated reflection on foundational books across Stoicism, science, literature, and personal growth that changed my worldview.',
+    date: '2026-07-28',
+    category: 'Books & Reading',
+    readTime: '7 min read',
+    type: 'non-tech',
+    content: `Reading is the ultimate asynchronous knowledge transfer protocol. By opening a book, you get direct low-latency access to the compressed lifetime insights of thinkers across centuries.
+
+### Key Literary Pillars
+1. **Meditation & Stoic Principles**: Learning to distinguish between what is strictly within our control (our reactions, effort, code quality) and what is external (market shifts, algorithm updates).
+2. **Deep Work & Focus**: How deep uninterrupted focus builds real competitive leverage in a noisy, notification-driven society.
+3. **Classical Literature**: Reading timeless stories reminds us that human nature, ambitions, and struggles remain remarkably constant regardless of technological shifts.
+
+### Developing a Daily Reading Habit
+* Dedicate 30 minutes every morning before opening email or social feeds.
+* Take notes in a dedicated journal—summarizing key takeaways in your own prose cements understanding.`
+  },
+  {
+    id: 'everyday-prose-writing',
+    title: 'On Writing: How Daily Journaling Clears Cognitive Noise',
+    description: 'Why drafting personal essays, prose, and daily reflections is an essential mental exercise for engineers and creators.',
+    date: '2026-07-20',
+    category: 'Writing & Prose',
+    readTime: '4 min read',
+    type: 'non-tech',
+    content: `Writing is thinking made visible. If you cannot explain an idea clearly in simple written prose, you likely do not understand it deeply enough.
+
+### The Mental Health Benefits of Daily Prose
+- **Cognitive Defragmentation**: Writing down unresolved worries or creative ideas clears active memory, letting your brain rest.
+- **Refining Communication**: Concise writing translates directly into cleaner code documentation, pull request reviews, and clearer team collaboration.
+- **Historical Reflection**: Looking back at entries written a year ago reveals your personal growth trajectory and evolving priorities.
+
+Commit to writing 300 words a day—not for an audience, but as an exercise in clarity for yourself.`
+  },
+  {
+    id: 'creative-hobbies-balance',
+    title: 'Cultivating Hobbies & Hands-On Crafts Outside Software',
+    description: 'Finding balance, restoration, and creative energy through physical hobbies, music, and hands-on crafts.',
+    date: '2026-07-15',
+    category: 'Hobbies & Lifestyle',
+    readTime: '6 min read',
+    type: 'non-tech',
+    content: `Software engineering is fundamentally abstract—you spend hours manipulating invisible logic gates and virtual DOM trees. Engaging in tangible physical hobbies provides essential balance.
+
+### Hobbies That Recharge the Mind
+- **Acoustic Music & Instruments**: Playing an instrument demands present-moment focus and muscle memory, completely freeing your brain from analytical work.
+- **Physical Fitness & Crafting**: Physical exertion and building things with your hands restore baseline energy levels and prevent burnout.
+- **Exploration & Nature Walks**: Spending time in nature resets attention spans and triggers creative insights that rarely happen while sitting at a desk.
+
+A fulfilling tech career is built on sustainable personal well-being outside the terminal.`
   }
 ];
 
