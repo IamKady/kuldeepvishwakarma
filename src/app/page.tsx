@@ -182,7 +182,7 @@ export default function Home() {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="text-sm sm:text-base text-slate-600 dark:text-zinc-400 leading-relaxed font-sans"
             >
-              Hi there! I'm a passionate developer who loves building fast web apps, intelligent AI assistants, and useful digital products. I run <span className="text-slate-900 dark:text-white font-semibold">StartupWire</span>, build open-source tools, and pursue my Master's in Computer Science.
+              Hi there! I'm a passionate developer who loves building fast web apps, intelligent AI assistants, and useful digital products. I am the founder of <span className="text-slate-900 dark:text-white font-semibold">StartupWire.in</span> (AI tech news platform) and <span className="text-slate-900 dark:text-white font-semibold">Bookperia.com</span> (AI book discovery sanctuary), while pursuing my Master's in Computer Science.
             </motion.p>
 
             <motion.div
@@ -199,10 +199,10 @@ export default function Home() {
                 <ArrowRight className="w-3.5 h-3.5 ml-2 group-hover:translate-x-1 transition-transform" />
               </Link>
               <Link 
-                href="/blog" 
+                href="/startups" 
                 className="px-5 py-2.5 text-xs font-semibold text-slate-700 dark:text-zinc-200 hover:text-slate-900 dark:hover:text-white bg-white dark:bg-white/5 hover:bg-slate-100 dark:hover:bg-white/10 border border-slate-200 dark:border-white/10 rounded-lg hover:-translate-y-0.5 transition-all flex items-center cursor-pointer shadow-xs dark:shadow-none"
               >
-                Read Publications
+                Founder Startups
               </Link>
               <button 
                 onClick={() => {
@@ -285,7 +285,7 @@ export default function Home() {
                     <br/>  <span className="text-indigo-300 dark:text-indigo-400">"location"</span>: <span className="text-emerald-300 dark:text-emerald-400">"Uttar Pradesh, India"</span>,
                     <br/>  <span className="text-indigo-300 dark:text-indigo-400">"education"</span>: <span className="text-emerald-300 dark:text-emerald-400">"MSc CompSci (Pursuing) • BTech CSE"</span>,
                     <br/>  <span className="text-indigo-300 dark:text-indigo-400">"stack"</span>: <span className="text-emerald-300 dark:text-emerald-400">"Next.js, TypeScript, Python, Tailwind"</span>,
-                    <br/>  <span className="text-indigo-300 dark:text-indigo-400">"startup"</span>: <span className="text-emerald-300 dark:text-emerald-400">"StartupWire.in"</span>,
+                    <br/>  <span className="text-indigo-300 dark:text-indigo-400">"startups"</span>: <span className="text-emerald-300 dark:text-emerald-400">"StartupWire.in & Bookperia.com"</span>,
                     <br/>  <span className="text-indigo-300 dark:text-indigo-400">"interests"</span>: [
                     <br/>    <span className="text-amber-300 dark:text-amber-400">"AI Assistants & Telegram Bots"</span>,
                     <br/>    <span className="text-amber-300 dark:text-amber-400">"Web Security & Performance"</span>

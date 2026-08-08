@@ -28,7 +28,7 @@ export default function About() {
       id: 'transition-story',
       title: 'My Journey: From Civil Blueprints to Software Architecture',
       icon: <Compass className="w-5 h-5 text-indigo-400" />,
-      content: "I began my technical education studying Civil Engineering, learning structural mechanics and spatial design. While drafting load distributions, I noticed something fascinating: structural nodes and coordinates in physical engineering map naturally to relational databases and software architecture. Driven by this realization, I taught myself programming during off-hours, transitioned into Computer Science, graduated with honors in B.Tech CSE, and am now pursuing my Master's in CS while building products like StartupWire.in."
+      content: "I began my technical education studying Civil Engineering, learning structural mechanics and spatial design. While drafting load distributions, I noticed something fascinating: structural nodes and coordinates in physical engineering map naturally to relational databases and software architecture. Driven by this realization, I taught myself programming during off-hours, transitioned into Computer Science, graduated with honors in B.Tech CSE, and am now pursuing my Master's in CS while building startup products like StartupWire.in and Bookperia.com."
     },
     {
       id: 'why-tech',

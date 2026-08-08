@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Rocket, 
@@ -12,7 +13,11 @@ import {
   Search, 
   PlusCircle, 
   CheckCircle2, 
-  Calendar 
+  Calendar,
+  ExternalLink,
+  Github,
+  ArrowRight,
+  Sparkles
 } from 'lucide-react';
 import { startupLogs, startupRoadmap, StartupLog } from '@/data/db';
 
@@ -67,11 +72,154 @@ export default function Startups() {
       {/* Page Header */}
       <div className="space-y-3">
         <h1 className="text-3xl sm:text-5xl font-black text-slate-900 dark:text-white tracking-tight">
-          Startup Journal
+          Startup Journal & Ventures
         </h1>
         <p className="text-sm text-slate-600 dark:text-zinc-400 font-sans max-w-xl">
-          Logging my thoughts, experiments, metrics, and failures building digital products like StartupWire.
+          Logging my thoughts, experiments, roadmap milestones, and metrics building my core startup products: StartupWire and Bookperia.
         </p>
+      </div>
+
+      {/* Primary Startup Ventures Showcase */}
+      <div className="space-y-6">
+        <div className="border-b border-slate-200 dark:border-white/5 pb-4">
+          <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full border border-indigo-500/20 bg-indigo-500/10 text-xs text-indigo-700 dark:text-indigo-400 font-mono tracking-wider font-semibold uppercase mb-2">
+            🚀 FOUNDER VENTURES
+          </div>
+          <h2 className="text-2xl sm:text-4xl font-black text-slate-900 dark:text-white tracking-tight font-sans">
+            Primary Startup Plans
+          </h2>
+          <p className="text-sm text-slate-600 dark:text-zinc-400 font-sans mt-1 max-w-2xl">
+            My two core startup initiatives: an autonomous AI tech news platform and an AI-powered book discovery sanctuary.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          
+          {/* Venture 1: StartupWire.in */}
+          <div className="glass-panel p-6 rounded-2xl border border-slate-200 dark:border-white/10 space-y-5 shadow-xl bg-white/80 dark:bg-black/40 flex flex-col justify-between group">
+            <div className="space-y-4">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center space-x-3">
+                  <span className="text-3xl p-2.5 rounded-xl bg-indigo-500/10 border border-indigo-500/20">⚡</span>
+                  <div>
+                    <h3 className="text-xl font-bold text-slate-900 dark:text-white font-sans flex items-center gap-2">
+                      StartupWire.in
+                    </h3>
+                    <span className="text-[10px] font-mono text-indigo-600 dark:text-indigo-400 block font-semibold">
+                      AI Tech News & Curation Engine
+                    </span>
+                  </div>
+                </div>
+                <span className="text-[9px] font-mono font-semibold px-2.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 uppercase tracking-wider">
+                  Active Beta
+                </span>
+              </div>
+
+              <p className="text-xs sm:text-sm text-slate-600 dark:text-zinc-300 leading-relaxed font-sans">
+                An autonomous news curation platform aggregating tech launches, VC investments, and AI breakthroughs. Uses Gemini 1.5 Flash for topic summaries and Supabase pgvector cosine distance queries to eliminate duplicate press releases.
+              </p>
+
+              <div className="flex flex-wrap gap-1.5 pt-1">
+                {['Next.js 16', 'Gemini AI', 'Supabase PostgreSQL', 'pgvector', 'Tailwind v4'].map(tech => (
+                  <span key={tech} className="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-100 dark:bg-white/5 text-slate-700 dark:text-zinc-300 border border-slate-200 dark:border-white/5">
+                    {tech}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            <div className="pt-4 border-t border-slate-200 dark:border-white/5 flex items-center justify-between">
+              <Link 
+                href="/startups/startupwire" 
+                className="text-xs font-semibold text-indigo-600 dark:text-indigo-400 hover:underline flex items-center gap-1"
+              >
+                View Deep Dive <ArrowRight className="w-3.5 h-3.5" />
+              </Link>
+              <div className="flex items-center space-x-2">
+                <a 
+                  href="https://github.com/IamKady/startupwire" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="p-2 rounded-lg bg-slate-100 dark:bg-white/5 hover:bg-slate-200 dark:hover:bg-white/10 text-slate-700 dark:text-zinc-300 border border-slate-200 dark:border-white/5 text-xs font-mono font-semibold flex items-center gap-1 transition-colors"
+                >
+                  <Github className="w-3.5 h-3.5" />
+                </a>
+                <a 
+                  href="https://startupwire.in" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="px-3 py-1.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold flex items-center gap-1 shadow-md transition-colors"
+                >
+                  <span>startupwire.in</span>
+                  <ExternalLink className="w-3.5 h-3.5" />
+                </a>
+              </div>
+            </div>
+          </div>
+
+          {/* Venture 2: Bookperia.com */}
+          <div className="glass-panel p-6 rounded-2xl border border-slate-200 dark:border-white/10 space-y-5 shadow-xl bg-white/80 dark:bg-black/40 flex flex-col justify-between group">
+            <div className="space-y-4">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center space-x-3">
+                  <span className="text-3xl p-2.5 rounded-xl bg-rose-500/10 border border-rose-500/20">📚</span>
+                  <div>
+                    <h3 className="text-xl font-bold text-slate-900 dark:text-white font-sans flex items-center gap-2">
+                      Bookperia.com
+                    </h3>
+                    <span className="text-[10px] font-mono text-rose-600 dark:text-rose-400 block font-semibold">
+                      AI Book Discovery & Reading Sanctuary
+                    </span>
+                  </div>
+                </div>
+                <span className="text-[9px] font-mono font-semibold px-2.5 py-0.5 rounded-full bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-500/20 uppercase tracking-wider">
+                  Active Development
+                </span>
+              </div>
+
+              <p className="text-xs sm:text-sm text-slate-600 dark:text-zinc-300 leading-relaxed font-sans">
+                An AI-powered literary discovery platform featuring local-first shelf management, reading challenge trackers, instant chapter takeaway generators, and interactive AI librarian personas matching your reading vibes.
+              </p>
+
+              <div className="flex flex-wrap gap-1.5 pt-1">
+                {['Next.js 16', 'React 19', 'Zustand', 'LocalStorage API', 'AI Personas', 'Tailwind v4'].map(tech => (
+                  <span key={tech} className="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-100 dark:bg-white/5 text-slate-700 dark:text-zinc-300 border border-slate-200 dark:border-white/5">
+                    {tech}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            <div className="pt-4 border-t border-slate-200 dark:border-white/5 flex items-center justify-between">
+              <Link 
+                href="/projects#bookperia" 
+                className="text-xs font-semibold text-rose-600 dark:text-rose-400 hover:underline flex items-center gap-1"
+              >
+                View Case Study <ArrowRight className="w-3.5 h-3.5" />
+              </Link>
+              <div className="flex items-center space-x-2">
+                <a 
+                  href="https://github.com/IamKady/Bookperia.git" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="p-2 rounded-lg bg-slate-100 dark:bg-white/5 hover:bg-slate-200 dark:hover:bg-white/10 text-slate-700 dark:text-zinc-300 border border-slate-200 dark:border-white/5 text-xs font-mono font-semibold flex items-center gap-1 transition-colors"
+                >
+                  <Github className="w-3.5 h-3.5" />
+                </a>
+                <a 
+                  href="https://bookperia.com" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="px-3 py-1.5 rounded-lg bg-rose-600 hover:bg-rose-500 text-white text-xs font-semibold flex items-center gap-1 shadow-md transition-colors"
+                >
+                  <span>bookperia.com</span>
+                  <ExternalLink className="w-3.5 h-3.5" />
+                </a>
+              </div>
+            </div>
+          </div>
+
+        </div>
       </div>
 
       {/* Part 1: Interactive Roadmap Kanban */}
@@ -82,7 +230,7 @@ export default function Startups() {
             Startup Roadmap Board
           </h2>
           <p className="text-xs text-slate-600 dark:text-zinc-400 font-sans mt-1">
-            Current stages, milestones, and development sprint statuses for StartupWire.
+            Current stages, milestones, and development sprint statuses for StartupWire and Bookperia.
           </p>
         </div>
 

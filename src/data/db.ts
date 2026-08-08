@@ -757,40 +757,47 @@ export const startupLogs: StartupLog[] = [
   {
     id: 'log-1',
     date: '2026-06-15',
-    title: 'Launching StartupWire: Choosing the Tech Stack and Niche',
+    title: 'Launching StartupWire.in: Autonomous AI Curation & RSS Pipeline',
     category: 'Update',
-    content: 'Today I officially began building StartupWire. The goal is clear: create a self-sustaining tech news platform that filters clutter. I chose Next.js because of its excellent SEO capabilities out-of-the-box and Supabase to avoid database configuration headaches. My primary niche is Tech Startups and Applied AI developments.'
+    content: 'Officially launched StartupWire.in! The goal is to build an automated, self-moderating news portal for tech founders and developers. Powered by Next.js 16 App Router, Gemini 1.5 Flash for topic curation, and Supabase PostgreSQL with pgvector cosine distance filtering to eliminate duplicate press releases.'
   },
   {
     id: 'log-2',
     date: '2026-06-28',
-    title: 'The SEO Mistake That Cost Me Initial Indexing',
-    category: 'Mistakes',
-    content: 'During deployment, I misconfigured the `robots.txt` file and set `Disallow: /` instead of allowing access to the root path. Google Crawler ignored the website for a week. Lesson learned: always validate SEO configurations using Google Search Console immediately after launching, even in beta.'
+    title: 'Building Bookperia.com: Local-First Reading Ecosystem & AI Personas',
+    category: 'Update',
+    content: 'Started engineering Bookperia.com—an AI-powered literary sanctuary for book lovers. Built a local-first bookshelf manager with Zustand and LocalStorage rehydration, alongside AI librarian personas (Head Librarian, Sherlock Holmes, Alchemist) for mood and vibe-based book recommendations.'
   },
   {
     id: 'log-3',
     date: '2026-07-05',
-    title: 'Exploring Revenue Models: Micro-Sponsorships & API Access',
-    category: 'Revenue',
-    content: 'Instead of intrusive Google AdSense, I am exploring micro-sponsorships (e.g., text ads for developers) and charging for premium API access to aggregated, categorised startup news data. Programmatic SEO will drive the traffic needed to sustain this model.'
+    title: 'StartupWire.in: Solved Deduplication with Vector Cosine Distance',
+    category: 'SEO',
+    content: '70% of tech news portals publish identical press releases. Integrated pgvector embeddings in Supabase with a 0.85 cosine similarity threshold. Now, duplicate stories are automatically filtered before hitting the edge database!'
   },
   {
     id: 'log-4',
     date: '2026-07-10',
-    title: 'Lighthouse Score 100/100: How I Achieved It',
-    category: 'SEO',
-    content: 'Optimized StartupWire images using Next.js `<Image />` component, set font-display swap on Google Fonts, eliminated render-blocking third-party scripts, and pre-fetched critical links. Speed is a key SEO rank factor!'
+    title: 'Bookperia.com: Interactive Reading Progress & Instant AI Chapter Takeaways',
+    category: 'Growth',
+    content: 'Designed interactive reading challenge badges, daily progress trackers, and instant AI chapter-level summaries. Achieved sub-100ms client interactions by leveraging Zustand selectors and static edge bundle caching.'
+  },
+  {
+    id: 'log-5',
+    date: '2026-07-20',
+    title: 'Exploring Monetization: Micro-Sponsorships & Premium API Plans',
+    category: 'Revenue',
+    content: 'Exploring sustainable revenue for StartupWire.in (micro-sponsorship slots for dev tools & structured API feeds) and Bookperia.com (curated affiliate book links & premium AI persona chats).'
   }
 ];
 
 export const startupRoadmap: StartupRoadmapItem[] = [
-  { id: 'rm-1', stage: 'Ideation', task: 'Market Research & Competitor Analysis', status: 'Completed', details: 'Identify gaps in existing tech aggregators.' },
-  { id: 'rm-2', stage: 'Planning', task: 'Database Schema & Crawler Spec Design', status: 'Completed', details: 'Design relational tables for news, sources, and tags.' },
-  { id: 'rm-3', stage: 'MVP', task: 'AI Summary Pipeline Integration', status: 'Completed', details: 'Connect Gemini API to summarize text and assign categories.' },
-  { id: 'rm-4', stage: 'MVP', task: 'Public Launch (Beta Version)', status: 'Completed', details: 'Deploy UI to Vercel and check crawler reliability.' },
-  { id: 'rm-5', stage: 'Growth', task: 'Programmatic SEO & Newsletter Setup', status: 'In Progress', details: 'Build automated newsletter and improve organic indexing.' },
-  { id: 'rm-6', stage: 'Monetization', task: 'Launch Micro-Sponsorship Packages', status: 'Backlog', details: 'Create visual slots for developer tools and services.' }
+  { id: 'rm-1', stage: 'Ideation', task: 'Market Research for StartupWire & Bookperia', status: 'Completed', details: 'Identified gaps in tech news noise and static book discovery portals.' },
+  { id: 'rm-2', stage: 'Planning', task: 'Database Schemas & AI Agent Architecture', status: 'Completed', details: 'Designed PostgreSQL schemas for StartupWire and Zustand local stores for Bookperia.' },
+  { id: 'rm-3', stage: 'MVP', task: 'StartupWire.in Public Release', status: 'Completed', details: 'Deploys Gemini RSS crawlers, pgvector deduplication, and edge cache.' },
+  { id: 'rm-4', stage: 'MVP', task: 'Bookperia.com Public Beta Release', status: 'Completed', details: 'Deploys local shelf manager, AI librarian personas, and vibe-matching.' },
+  { id: 'rm-5', stage: 'Growth', task: 'Programmatic SEO & Newsletter Automation', status: 'In Progress', details: 'Building automated weekly digest newsletters and expanding organic indexing for both startups.' },
+  { id: 'rm-6', stage: 'Monetization', task: 'Developer API & Micro-Sponsorship Packages', status: 'Backlog', details: 'Exposing structured news API feeds and launching developer sponsorship tiers.' }
 ];
 
 export const aiPrompts: AIPrompt[] = [
