@@ -36,7 +36,7 @@ export default function Footer() {
               Kuldeep C. Vishwakarma
             </h3>
             <p className="text-xs text-slate-600 dark:text-zinc-400 max-w-sm leading-relaxed">
-              Software Engineer, AI Builder, and Startup Founder. Designing programmatic curation pipelines, edge networks, and security protocols.
+              Software Engineer, AI Builder, and Startup Founder. Building fast web applications, intelligent AI tools, and sharing lessons learned in public.
             </p>
             <div className="flex items-center space-x-3 pt-2">
               {socialLinks.map((s) => (
@@ -69,7 +69,7 @@ export default function Footer() {
           {/* Column 2: Navigation Links Grid */}
           <div className="space-y-4">
             <h3 className="text-sm font-bold text-slate-900 dark:text-white uppercase tracking-wider font-mono">
-              System Sitemap
+              Explore Pages
             </h3>
             <div className="grid grid-cols-2 gap-x-4 gap-y-2 text-xs">
               <Link href="/now" className="text-slate-600 dark:text-zinc-400 hover:text-slate-900 dark:hover:text-white transition-colors">/now</Link>
@@ -90,16 +90,16 @@ export default function Footer() {
           {/* Column 3: Newsletter System Updates */}
           <div className="space-y-4">
             <h3 className="text-sm font-bold text-slate-900 dark:text-white uppercase tracking-wider font-mono">
-              System Updates
+              Stay Connected
             </h3>
             <p className="text-xs text-slate-600 dark:text-zinc-400 leading-relaxed">
-              Subscribe to my tech publication newsletter. I log monthly reports on AI prompts, edge caches, and startup building.
+              Subscribe to my newsletter where I share monthly reflections on web development, AI tools, and building digital products.
             </p>
             <form onSubmit={handleSubscribe} className="flex max-w-md">
               <input
                 type="email"
                 required
-                placeholder="sys_admin@domain.com"
+                placeholder="your.email@example.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 className="w-full px-3 py-2 text-xs bg-white dark:bg-white/5 text-slate-900 dark:text-white border border-slate-300 dark:border-white/10 rounded-l-md outline-none focus:border-indigo-600 dark:focus:border-indigo-500 transition-colors font-mono placeholder:text-slate-400 dark:placeholder:text-zinc-500"

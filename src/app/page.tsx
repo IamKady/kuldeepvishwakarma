@@ -155,7 +155,7 @@ export default function Home() {
             >
               <span className="w-2 h-2 rounded-full bg-ai animate-pulse" />
               <span className="text-[10px] sm:text-xs font-mono text-slate-700 dark:text-zinc-300 tracking-wider">
-                DEVELOPER OS ACTIVE: VER 1.4.6 [STABLE]
+                👋 WELCOME TO MY PERSONAL PORTFOLIO
               </span>
             </motion.div>
 
@@ -182,7 +182,7 @@ export default function Home() {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="text-sm sm:text-base text-slate-600 dark:text-zinc-400 leading-relaxed font-sans"
             >
-              I build highly scalable software solutions, experiment with neural networks and AI prompting systems, establish digital products, and log cybersecurity notes. I run <span className="text-slate-900 dark:text-white font-semibold">StartupWire</span>, an automated news pipeline.
+              Hi there! I'm a passionate developer who loves building fast web apps, intelligent AI assistants, and useful digital products. I run <span className="text-slate-900 dark:text-white font-semibold">StartupWire</span>, build open-source tools, and pursue my Master's in Computer Science.
             </motion.p>
 
             <motion.div
@@ -241,7 +241,7 @@ export default function Home() {
                         hudView === 'code' ? 'text-slate-900 dark:text-white border-b border-indigo-600 dark:border-indigo-500 pb-0.5' : 'text-slate-500 dark:text-zinc-500 hover:text-slate-800 dark:hover:text-zinc-300'
                       }`}
                     >
-                      Schema
+                      Quick Bio
                     </button>
                     <button 
                       onClick={() => setHudView('photo')}
@@ -262,7 +262,7 @@ export default function Home() {
                   </button>
                 ) : (
                   <span className="text-[9px] uppercase tracking-wider text-emerald-400 font-mono font-semibold bg-emerald-500/10 border border-emerald-500/20 px-2 py-0.5 rounded">
-                    Operator
+                    Software Developer
                   </span>
                 )}
               </div>
@@ -278,18 +278,19 @@ export default function Home() {
                     transition={{ duration: 0.2 }}
                     className="font-mono text-[11px] text-zinc-200 dark:text-zinc-300 overflow-x-auto space-y-0.5 p-3 rounded bg-slate-900 dark:bg-black/50 border border-slate-800 dark:border-white/5"
                   >
-                    <span className="text-zinc-400 dark:text-zinc-500">// Personal Identity Schema</span>
+                    <span className="text-zinc-400 dark:text-zinc-500">// Quick Developer Bio</span>
                     <br/>{`{`}
                     <br/>  <span className="text-indigo-300 dark:text-indigo-400">"name"</span>: <span className="text-emerald-300 dark:text-emerald-400">"Kuldeep Chandra Vishwakarma"</span>,
-                    <br/>  <span className="text-indigo-300 dark:text-indigo-400">"role"</span>: <span className="text-emerald-300 dark:text-emerald-400">"Software Engineer"</span>,
-                    <br/>  <span className="text-indigo-300 dark:text-indigo-400">"education"</span>: <span className="text-emerald-300 dark:text-emerald-400">"MSc CompSci (Pursuing)"</span>,
-                    <br/>  <span className="text-indigo-300 dark:text-indigo-400">"focus"</span>: <span className="text-emerald-300 dark:text-emerald-400">"Full-Stack & AI pipelines"</span>,
+                    <br/>  <span className="text-indigo-300 dark:text-indigo-400">"role"</span>: <span className="text-emerald-300 dark:text-emerald-400">"Software Engineer & AI Builder"</span>,
+                    <br/>  <span className="text-indigo-300 dark:text-indigo-400">"location"</span>: <span className="text-emerald-300 dark:text-emerald-400">"Uttar Pradesh, India"</span>,
+                    <br/>  <span className="text-indigo-300 dark:text-indigo-400">"education"</span>: <span className="text-emerald-300 dark:text-emerald-400">"MSc CompSci (Pursuing) • BTech CSE"</span>,
+                    <br/>  <span className="text-indigo-300 dark:text-indigo-400">"stack"</span>: <span className="text-emerald-300 dark:text-emerald-400">"Next.js, TypeScript, Python, Tailwind"</span>,
                     <br/>  <span className="text-indigo-300 dark:text-indigo-400">"startup"</span>: <span className="text-emerald-300 dark:text-emerald-400">"StartupWire.in"</span>,
-                    <br/>  <span className="text-indigo-300 dark:text-indigo-400">"currently_learning"</span>: [
-                    <br/>    <span className="text-amber-300 dark:text-amber-400">"AI Agent Curation"</span>,
-                    <br/>    <span className="text-amber-300 dark:text-amber-400">"JWT/CSP Web Security"</span>
+                    <br/>  <span className="text-indigo-300 dark:text-indigo-400">"interests"</span>: [
+                    <br/>    <span className="text-amber-300 dark:text-amber-400">"AI Assistants & Telegram Bots"</span>,
+                    <br/>    <span className="text-amber-300 dark:text-amber-400">"Web Security & Performance"</span>
                     <br/>  ],
-                    <br/>  <span className="text-indigo-300 dark:text-indigo-400">"status"</span>: <span className="text-emerald-300 dark:text-emerald-400">"Open to software roles"</span>
+                    <br/>  <span className="text-indigo-300 dark:text-indigo-400">"status"</span>: <span className="text-emerald-300 dark:text-emerald-400">"Open to remote software roles"</span>
                     <br/>{`}`}
                   </motion.pre>
                 ) : (
@@ -309,14 +310,14 @@ export default function Home() {
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/35 to-transparent pointer-events-none" />
                     
-                    {/* Decorative cyber overlays */}
+                    {/* Decorative overlays */}
                     <div className="absolute top-2 left-2 flex items-center space-x-1.5 bg-slate-900/80 dark:bg-black/60 backdrop-blur-md border border-white/10 px-2 py-0.5 rounded text-[8px] font-mono tracking-widest text-zinc-300">
                       <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                      <span>SYS_ACTIVE</span>
+                      <span>OPEN FOR HIRE</span>
                     </div>
 
                     <div className="absolute top-2 right-2 bg-indigo-500/20 text-indigo-200 dark:text-indigo-300 text-[8px] font-mono uppercase tracking-widest px-2 py-0.5 rounded border border-indigo-500/30">
-                      Ver: 1.4.6
+                      UP, India
                     </div>
 
                     {/* Scanlines visual effect overlay */}
@@ -331,7 +332,7 @@ export default function Home() {
                         Kuldeep Chandra Vishwakarma
                       </h3>
                       <p className="text-[9px] text-zinc-300 font-mono flex items-center gap-1">
-                        <span className="text-indigo-300">Node:</span> MSc CS • Full-Stack Developer
+                        <span className="text-indigo-300">Bio:</span> MSc CS Student & Software Engineer
                       </p>
                     </div>
                   </motion.div>
@@ -341,9 +342,9 @@ export default function Home() {
               <div className="pt-4 flex justify-between items-center text-[10px] text-slate-500 dark:text-zinc-500 font-mono">
                 <div className="flex items-center space-x-1.5">
                   <span className="w-2 h-2 rounded-full bg-emerald-500 dark:bg-emerald-400 animate-ping" />
-                  <span>Node: Active</span>
+                  <span>Status: Open for roles</span>
                 </div>
-                <span>SSL: Active</span>
+                <span>India (IST)</span>
                 <span>Response: &lt; 2 hrs</span>
               </div>
             </div>
@@ -356,11 +357,11 @@ export default function Home() {
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 border-t border-slate-200 dark:border-white/5 pt-10">
           {[
             { label: 'Current Focus', value: 'StartupWire Curation' },
-            { label: 'Years Learning', value: '10 Yrs (Since 2016)' },
+            { label: 'Coding Experience', value: 'Since 2016' },
             { label: 'Subscribers', value: '1,240 Readers' },
             { label: 'GitHub Commits', value: '1,480 YTD' },
             { label: 'Products Shipped', value: '12 Production' },
-            { label: 'Availability', value: 'Hire Opportunity' }
+            { label: 'Availability', value: 'Open for Hire' }
           ].map((stat, idx) => (
             <div key={idx} className="p-4 rounded-xl border border-slate-200 dark:border-white/5 bg-white dark:bg-white/[0.02] shadow-xs dark:shadow-none flex flex-col justify-between space-y-1">
               <span className="text-[10px] text-slate-500 dark:text-zinc-500 font-mono uppercase tracking-wider block font-medium">
@@ -380,7 +381,7 @@ export default function Home() {
           <div className="space-y-1">
             <h2 className="text-2xl sm:text-3xl font-black tracking-tight text-slate-900 dark:text-white font-sans flex items-center gap-2">
               <Activity className="w-5 h-5 text-indigo-600 dark:text-indigo-400" />
-              Developer telemetry HUD
+              Interactive Developer Hub
             </h2>
             <p className="text-xs sm:text-sm text-slate-600 dark:text-zinc-400 font-sans">
               System performance stats, deployment pipelines, library checklists, and active codebase indexes.
@@ -388,7 +389,7 @@ export default function Home() {
           </div>
           <span className="text-[10px] sm:text-xs font-mono text-slate-600 dark:text-zinc-500 bg-white dark:bg-white/5 px-3 py-1.5 rounded-md border border-slate-200 dark:border-white/5 flex items-center shadow-xs dark:shadow-none">
             <Clock className="w-3.5 h-3.5 mr-1.5 text-slate-500 dark:text-zinc-400 animate-spin-slow" />
-            SYS TIME: {localTime}
+            Local Time (IST): {localTime}
           </span>
         </div>
 

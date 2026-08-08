@@ -172,14 +172,14 @@ export const projectsData: Project[] = [
   {
     id: 'albertquizbot',
     title: 'AlbertQuizBot - Telegram Quiz Bot',
-    tagline: 'Autonomous Telegram Quiz Bot Engine, Interactive Poll Generator & Assessment System',
+    tagline: 'Interactive Telegram Quiz Bot for Study Groups & Automated Practice',
     status: 'Active',
     logo: '🧠',
     categoryTag: 'SaaS & AI',
     technologies: ['Python 3.12', 'Telegram Bot API', 'Asyncio', 'JSON-Schema', 'AI Prompting', 'Vercel'],
     github: 'https://github.com/IamKady/ALBERTQUIZBOT',
     live: 'https://github.com/IamKady/ALBERTQUIZBOT',
-    summary: 'An autonomous Telegram quiz bot engineered for automated question generation, interactive quizzes, instant scoring, and asynchronous student evaluation.',
+    summary: 'A friendly Telegram bot built to run automated quiz sessions, instant scores, and interactive practice polls for students and study communities.',
     whatIAmDoingAndLearning: 'Engineering asynchronous Python Telegram bot handlers, structuring quiz schemas, managing multi-user quiz state concurrently, and building real-time score tracking.',
     caseStudy: {
       overview: 'AlbertQuizBot was engineered to automate interactive quizzes and assessments directly inside Telegram channels and group chats.',
@@ -224,15 +224,15 @@ export const projectsData: Project[] = [
   },
   {
     id: 'candidbot',
-    title: 'CandidBot - Autonomous AI Assistant Bot',
-    tagline: 'Autonomous AI Bot Engine, Telemetry Relay & Workflow Automation Platform',
+    title: 'CandidBot - Smart AI Telegram Assistant',
+    tagline: 'AI Telegram Assistant for Candidate Screening & Team Notifications',
     status: 'Active',
     logo: '🤖',
     categoryTag: 'SaaS & AI',
     technologies: ['TypeScript', 'Node.js', 'Python 3.12', 'Telegram Bot API', 'Google Gemini API', 'Zod', 'Next.js 16 App Router', 'Tailwind CSS v4', 'Vercel'],
     github: 'https://github.com/IamKady/candidbot',
     live: 'https://github.com/IamKady/candidbot',
-    summary: 'An autonomous AI bot engine engineered for automated candidate screening, telemetry notifications, conversational query processing, and intelligent workflow execution.',
+    summary: 'An intelligent Telegram assistant built for candidate screening, instant notifications, conversational query processing, and AI workflow execution.',
     whatIAmDoingAndLearning: 'Engineering asynchronous AI prompt pipelines, developing robust rate-limit retry handlers, structuring JSON schemas for LLM agent outputs, and building stateful bot webhooks with sub-100ms execution speeds.',
     caseStudy: {
       overview: 'CandidBot was designed to simplify interactive user query processing, automated candidate screening, and instant notification dispatching via intelligent LLM agent pipelines.',
@@ -278,14 +278,14 @@ export const projectsData: Project[] = [
   {
     id: 'telegram-ai-bot',
     title: 'AI Telegram Watchdog & Live Feed System',
-    tagline: 'Autonomous Security Alert System, Webhook Relay & Channel Feed Processor',
+    tagline: 'Real-Time Security Alert Relay & Telegram Channel Broadcast Feed',
     status: 'Active',
     logo: '📡',
     categoryTag: 'SaaS & AI',
     technologies: ['Next.js 16 App Router', 'Telegram Bot API', 'TypeScript', 'Node.js', 'Webhooks', 'Zustand', 'Tailwind CSS v4', 'Vercel Edge'],
     github: 'https://github.com/IamKady/kuldeepvishwakarma',
     live: '/contact',
-    summary: 'A real-time security watchdog and broadcast engine powered by Telegram webhooks, delivering instantaneous site contact alerts, channel post relays, and threat monitoring.',
+    summary: 'A real-time contact notification relay and live channel broadcast feed powered by Telegram webhooks, delivering instant mobile alerts and site updates.',
     whatIAmDoingAndLearning: 'Engineering secure Telegram Webhook SSL routing, handling asynchronous message dispatchers with zero-delay UX fallbacks, and creating stateful live broadcast feeds inside Next.js App Router.',
     caseStudy: {
       overview: 'Engineered a full-duplex Telegram bot integration to bridge instant site telemetry with custom mobile notifications. It serves as both an inbound watchdog for user contact inquiries and an outbound channel broadcast feed on the developer portfolio.',
@@ -1095,22 +1095,22 @@ export const blogsData: BlogPost[] = [
   {
     id: 'ai-news-automation',
     title: 'Building an Automated AI News Feed using Next.js & Gemini',
-    description: 'A deep-dive guide on how to parse RSS feeds, run them through Google Gemini for relevance, and automatically publish posts.',
+    description: 'A practical, first-person guide on parsing RSS feeds, filtering content with Google Gemini, and publishing automated tech summaries.',
     date: '2026-07-11',
     category: 'Artificial Intelligence',
     readTime: '6 min read',
     type: 'tech',
-    content: `Building news feed sites has historically required manual editing or resulted in spam-filled RSS aggregators. In this post, we discuss building a self-moderating news portal: StartupWire.in.
+    content: `Building news feed sites used to mean endless manual editing or ending up with spammy RSS aggregators. When I set out to build StartupWire.in, I wanted a clean, self-moderating news portal that automatically collects, filters, and summarizes the best tech stories.
 
-### The Pipeline Architecture
-The system operates as an asynchronous pipeline consisting of:
-1. **Ingest**: Scrapes verified RSS endpoints, extracts raw HTML, and sanities nodes using \`cheerio\`.
-2. **Crate**: Formulates a detailed LLM prompt containing strict guidelines.
-3. **Validate**: Uses Google Gemini 1.5 Flash to summarize key events, catalog topics, and extract URL attribution.
-4. **Publish**: Stores data inside Supabase. Edge caches revalidate instantly when a webhook registers database modifications.
+### How the Pipeline Works
+Here is how I structured the workflow from raw feed to live site:
+1. **Fetch & Clean**: Fetch RSS feeds from trusted tech sources, extract raw content, and clean up unnecessary HTML tags using \`cheerio\`.
+2. **AI Summarization**: Pass articles to Google Gemini 1.5 Flash with custom prompt guidelines to generate concise bullet summaries and key takeaways.
+3. **Structured Validation**: Enforce JSON schema responses directly at the API level so the data is always clean and predictable.
+4. **Instant Edge Delivery**: Store the processed articles in Supabase and trigger edge cache revalidation so readers get blazing-fast page loads.
 
 \`\`\`typescript
-// Enforcing JSON output structure at the API level
+// Enforcing clean JSON schema outputs from Gemini
 const model = genAI.getGenerativeModel({
   model: "gemini-1.5-flash",
   generationConfig: {
@@ -1120,36 +1120,38 @@ const model = genAI.getGenerativeModel({
 });
 \`\`\`
 
-By offloading content scraping to background workers and using edge CDNs to serve pre-rendered pages, we get performance and SEO optimization concurrently.`
+Combining background scraping with edge caching gives readers fresh content with zero page lag.`
   },
   {
     id: 'lighthouse-score-performance',
     title: 'How to Achieve a 100 Lighthouse Performance Rating in Next.js',
-    description: 'Learn the exact performance optimization techniques I used to get a perfect Lighthouse score on my portfolio and StartupWire.',
+    description: 'Practical front-end optimization techniques I used to get a perfect Lighthouse score on my portfolio and StartupWire.',
     date: '2026-07-09',
     category: 'System Design',
     readTime: '5 min read',
     type: 'tech',
-    content: `Google Search ranking algorithms heavily prioritize page performance and accessibility (Core Web Vitals). Achieving 100/100 scores in Lighthouse requires addressing specific front-end metrics:
+    content: `When building my portfolio and StartupWire, hitting a 100/100 score on Google Lighthouse wasn't just a vanity achievement—it was about delivering an amazingly fast experience for real people.
 
-### 1. Cumulative Layout Shift (CLS)
-Ensure all images have predefined aspect-ratio guidelines. Use Next.js \`<Image />\` configurations which automatically compute sizing tags:
+Here are the key optimizations that made the biggest impact:
+
+### 1. Eliminating Layout Shifts (CLS)
+Visual jumps while a page loads ruin the experience. Next.js \`<Image />\` components automatically handle sizing and aspect ratios, preventing layout shifts:
 \`\`\`tsx
 <Image 
   src="/hero.png" 
   width={600} 
   height={400} 
-  alt="Dashboard HUD" 
+  alt="Dashboard Preview" 
   priority 
 />
 \`\`\`
 
-### 2. First Contentful Paint (FCP)
-* Minimize render-blocking third-party trackers.
-* Apply \`font-display: swap\` to system fonts.
-* Leverage Next.js dynamic routing to lazy-load resource-intensive client libraries (like charting engines).
+### 2. Speeding Up First Render (FCP)
+* Kept third-party scripts to a minimum and loaded heavy components dynamically.
+* Configured web fonts with \`font-display: swap\` so text renders instantly without waiting for custom fonts to download.
+* Leveraged Tailwind CSS v4 to keep compiled stylesheet bundles as small as possible.
 
-Using Tailwind CSS v4's compiled build system further reduces package payloads, keeping main thread scripts minimal.`
+Small optimizations compound quickly—focusing on clean HTML and smart asset loading makes all the difference.`
   },
   {
     id: 'cybersecurity-developer-mindset',
@@ -1159,10 +1161,12 @@ Using Tailwind CSS v4's compiled build system further reduces package payloads, 
     category: 'Cybersecurity',
     readTime: '8 min read',
     type: 'tech',
-    content: `Web application security can no longer be treated as a post-launch audit step. Here is a developer security checklist:
+    content: `Security isn't something to tack on right before launch; it's a mindset that starts with the very first line of code you write. As web developers, building secure habits early saves countless headaches down the road.
 
-### 1. Direct Input Sanitization
-Never trust client inputs. Always sanitize database parameters using Zod validation grids:
+Here are essential security practices every developer should follow:
+
+### 1. Never Trust User Inputs
+Client-side validation is nice for UX, but server validation is non-negotiable. Always validate and sanitize inbound data using schema validators like Zod:
 \`\`\`typescript
 const ContactFormSchema = zod.object({
   name: zod.string().min(2).max(50),
@@ -1171,15 +1175,15 @@ const ContactFormSchema = zod.object({
 });
 \`\`\`
 
-### 2. Relational Row Level Security (RLS)
-Ensure databases (e.g., Supabase PostgreSQL) reject unauthorized reads. Never write open tables without setting select rules:
+### 2. Protect Your Database Row by Row
+If you're using databases like Supabase PostgreSQL, make sure Row Level Security (RLS) policies are active. Never expose raw database endpoints without explicit access rules:
 \`\`\`sql
 ALTER TABLE articles ENABLE ROW LEVEL SECURITY;
 CREATE POLICY "Public Read Access" ON articles FOR SELECT TO public USING (true);
 CREATE POLICY "Admin Write Access" ON articles FOR ALL TO authenticated USING (auth.role() = 'service_role');
 \`\`\`
 
-Deploy HTTP-only SameSite cookies and maintain clean Content-Security-Policy (CSP) headers inside Next.js config routing.`
+Pairing these with HTTP-only cookies and strict Content Security Policy (CSP) headers keeps your users and applications safe.`
   },
   {
     id: 'art-visual-thinking',
@@ -1189,15 +1193,15 @@ Deploy HTTP-only SameSite cookies and maintain clean Content-Security-Policy (CS
     category: 'Art & Creativity',
     readTime: '5 min read',
     type: 'non-tech',
-    content: `Before I ever wrote a line of code or deployed a serverless API, I spent years studying civil engineering blueprints and freehand drawing. Visual thinking is the secret superpower behind effective software architecture.
+    content: `Long before I wrote my first line of code or configured a cloud database, I spent hours studying civil engineering drawings and sketching with pencil and paper. That background in visual drafting shaped how I approach software design today.
 
-### Why Physical Sketching Matters
-In an era dominated by Figma, digital wireframes, and automated code generators, picking up a pen and a blank sheet of paper creates an unconstrained sandbox for the mind:
-- **Zero Syntax Constraints**: Paper forces you to think about spatial flow and conceptual boundaries without worrying about compiler rules or CSS flexbox alignments.
-- **Micro-Focus & Meditation**: Drawing complex perspective lines or freehand sketches calms cognitive noise, allowing solutions to difficult engineering problems to surface naturally.
-- **Blueprint Mental Models**: Physical drafting teaches you that complex structures are simply assemblies of primitive geometric blocks—just like modular software components.
+### Why Sketching Makes You a Better Developer
+In a world full of digital design tools and code generators, picking up a physical pencil gives your brain room to breathe:
+- **No Syntax to Worry About**: Paper lets you map out data flows, component boundaries, and spatial layouts without compiler warnings or CSS bugs.
+- **Clearing Mental Noise**: Freehand drawing calms the mind and gives tricky architectural problems space to solve themselves.
+- **Modular Thinking**: Engineering blueprints teach you that massive structures are built from simple, reusable geometric units—just like modular components in software.
 
-When stuck on a tricky asynchronous loop or database schema, step away from the monitor, grab a pencil, and draw the data flow.`
+Whenever you get stuck on a complex function or database relation, try stepping away from the monitor and sketching it out on paper first.`
   },
   {
     id: 'reading-books-wisdom',
@@ -1207,16 +1211,22 @@ When stuck on a tricky asynchronous loop or database schema, step away from the 
     category: 'Books & Reading',
     readTime: '7 min read',
     type: 'non-tech',
-    content: `Reading is the ultimate asynchronous knowledge transfer protocol. By opening a book, you get direct low-latency access to the compressed lifetime insights of thinkers across centuries.
+    content: `Books are magical. They let us sit down with brilliant thinkers across centuries and absorb a lifetime of their insights in just a few hours.
 
-### Key Literary Pillars
-1. **Meditation & Stoic Principles**: Learning to distinguish between what is strictly within our control (our reactions, effort, code quality) and what is external (market shifts, algorithm updates).
-2. **Deep Work & Focus**: How deep uninterrupted focus builds real competitive leverage in a noisy, notification-driven society.
-3. **Classical Literature**: Reading timeless stories reminds us that human nature, ambitions, and struggles remain remarkably constant regardless of technological shifts.
+Here are three key genres that have deeply shaped how I think and live:
 
-### Developing a Daily Reading Habit
-* Dedicate 30 minutes every morning before opening email or social feeds.
-* Take notes in a dedicated journal—summarizing key takeaways in your own prose cements understanding.`
+### 1. Philosophy & Stoicism
+Reading Stoic thinkers like Marcus Aurelius taught me to focus on what is within my direct control—my attitude, my work ethic, and the quality of my code—while letting go of external noise.
+
+### 2. Deep Work & Focus
+In a world full of notifications and endless scrolling, the ability to sit quietly and focus deeply on complex problems is a true superpower.
+
+### 3. Timeless Literature & Fiction
+Reading classic stories reminds us that human nature, hopes, and struggles stay remarkably similar, no matter how fast technology changes.
+
+### Making Time for Books
+* Read for 30 minutes every morning before opening email or social media.
+* Keep a reading journal to jot down key ideas in your own words—writing helps lock in what you've learned.`
   },
   {
     id: 'everyday-prose-writing',
@@ -1226,14 +1236,14 @@ When stuck on a tricky asynchronous loop or database schema, step away from the 
     category: 'Writing & Prose',
     readTime: '4 min read',
     type: 'non-tech',
-    content: `Writing is thinking made visible. If you cannot explain an idea clearly in simple written prose, you likely do not understand it deeply enough.
+    content: `Writing is how I make sense of my thoughts. If I can't explain an idea simply in written words, it usually means I haven't fully grasped it yet.
 
-### The Mental Health Benefits of Daily Prose
-- **Cognitive Defragmentation**: Writing down unresolved worries or creative ideas clears active memory, letting your brain rest.
-- **Refining Communication**: Concise writing translates directly into cleaner code documentation, pull request reviews, and clearer team collaboration.
-- **Historical Reflection**: Looking back at entries written a year ago reveals your personal growth trajectory and evolving priorities.
+### How Daily Writing Helps
+- **Clearing Mental Clutter**: Writing down thoughts, project ideas, or worries gets them out of your head so your mind can rest.
+- **Better Communication**: Expressing yourself clearly in writing translates directly into better code documentation, clearer pull requests, and smoother team discussions.
+- **Tracking Personal Growth**: Looking back at entries written months ago shows how much you've grown and learned over time.
 
-Commit to writing 300 words a day—not for an audience, but as an exercise in clarity for yourself.`
+Try writing just 200 to 300 words a day—not for an audience, but for yourself.`
   },
   {
     id: 'creative-hobbies-balance',
@@ -1243,14 +1253,14 @@ Commit to writing 300 words a day—not for an audience, but as an exercise in c
     category: 'Hobbies & Lifestyle',
     readTime: '6 min read',
     type: 'non-tech',
-    content: `Software engineering is fundamentally abstract—you spend hours manipulating invisible logic gates and virtual DOM trees. Engaging in tangible physical hobbies provides essential balance.
+    content: `Software development can be abstract—you spend hours manipulating digital logic, virtual DOM elements, and API routes. Engaging in tangible physical hobbies brings essential balance back into life.
 
-### Hobbies That Recharge the Mind
-- **Acoustic Music & Instruments**: Playing an instrument demands present-moment focus and muscle memory, completely freeing your brain from analytical work.
-- **Physical Fitness & Crafting**: Physical exertion and building things with your hands restore baseline energy levels and prevent burnout.
-- **Exploration & Nature Walks**: Spending time in nature resets attention spans and triggers creative insights that rarely happen while sitting at a desk.
+### Ways to Unplug and Refresh
+- **Music & Instruments**: Playing an instrument demands present-moment focus and muscle memory, giving your analytical brain a complete break.
+- **Hands-On Crafting & Exercise**: Working out or building things with your hands restores physical energy and prevents burnout.
+- **Walking in Nature**: Stepping outside and taking long walks resets your attention span and often sparks creative breakthroughs that don't happen sitting at a desk.
 
-A fulfilling tech career is built on sustainable personal well-being outside the terminal.`
+A long, enjoyable engineering career is built on maintaining a healthy, vibrant life outside the terminal.`
   }
 ];
 

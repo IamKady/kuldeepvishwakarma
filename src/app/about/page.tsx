@@ -26,27 +26,33 @@ export default function About() {
   const storySections = [
     {
       id: 'transition-story',
-      title: 'My Journey: Physics Blueprint to Relational Schema',
+      title: 'My Journey: From Civil Blueprints to Software Architecture',
       icon: <Compass className="w-5 h-5 text-indigo-400" />,
-      content: "I started my formal technical studies in Civil Engineering, where I trained in structural calculations, building layouts, and spatial physics. While mapping physical load distributions, I realized a profound connection: the nodes, structural vectors, and coordinates in physical systems map directly to the databases, schemas, and relational workflows of digital software. Inspired by this symmetry, I self-taught software development during off-hours, transitioned into Computer Science, graduated B.Tech CSE with honors, and am now pursuing MSc Computer Science while building autonomous digital products like StartupWire.in."
+      content: "I began my technical education studying Civil Engineering, learning structural mechanics and spatial design. While drafting load distributions, I noticed something fascinating: structural nodes and coordinates in physical engineering map naturally to relational databases and software architecture. Driven by this realization, I taught myself programming during off-hours, transitioned into Computer Science, graduated with honors in B.Tech CSE, and am now pursuing my Master's in CS while building products like StartupWire.in."
     },
     {
       id: 'why-tech',
-      title: 'Why I Choose Software Systems',
+      title: 'Why I Build Software',
       icon: <Heart className="w-5 h-5 text-rose-400" />,
-      content: "To me, software systems represent the ultimate leverage. With a keyboard, an API key, and an internet connection, you can build autonomous crawlers, deploy global edge-cached frontends, and serve thousands of concurrent readers. Software bridges systemic logical engineering with absolute user reach, turning ideas into active utilities."
+      content: "Software is the ultimate creative medium. With a computer, internet connection, and curiosity, you can turn an abstract idea into an active utility that helps people worldwide. It connects logical problem solving with real-world impact."
     },
     {
       id: 'engineering-philosophy',
-      title: 'Engineering Philosophy',
+      title: 'Engineering Values',
       icon: <Code className="w-5 h-5 text-emerald-400" />,
-      content: "I believe in writing dry, structured code, validating all inputs at the boundary using strict schemas (e.g. Zod validators), and minimizing server latency through pre-rendered cache layers. A systems engineer must treat performance, accessibility, and clean type systems as non-negotiable features, not afterthoughts."
+      content: "I believe in writing clean, readable code, validating data strictly at boundaries, and creating fast, accessible user experiences. Great software should feel effortless for users while remaining robust and maintainable under the hood."
     },
     {
       id: 'learning-philosophy',
-      title: 'Learning Philosophy',
+      title: 'Learning in Public',
       icon: <BookOpen className="w-5 h-5 text-amber-400" />,
-      content: "Constant construction, transparent telemetry, and structured debugging. I document my mistakes publicly, review vulnerability checkers (CTF writeups), and learn technologies by building fully functioning products. My goal is to master AI agents integration and distributed infrastructure security."
+      content: "I learn best by building real products, documenting challenges openly, and continuously experimenting. Whether exploring LLM agent architectures or cybersecurity CTF writeups, staying curious and transparent is my guiding principle."
+    },
+    {
+      id: 'beyond-code',
+      title: 'Beyond the Code',
+      icon: <Heart className="w-5 h-5 text-purple-400" />,
+      content: "Outside of coding, I'm an avid reader who loves books on philosophy, Stoicism, and classic literature. I also enjoy physical sketching, exploring nature, and disconnecting from screens to recharge. A fulfilling engineering career starts with a balanced, curious mind."
     }
   ];
 
@@ -93,14 +99,14 @@ export default function About() {
           <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full border border-slate-200 dark:border-white/10 glass-panel bg-white/80 dark:bg-white/5 shadow-xs dark:shadow-none">
             <span className="w-1.5 h-1.5 rounded-full bg-indigo-600 dark:bg-indigo-400 animate-pulse" />
             <span className="text-[10px] font-mono text-slate-700 dark:text-zinc-300 tracking-wider">
-              OPERATOR BIO // IDENT: KCV-77
+              ABOUT ME • SOFTWARE ENGINEER & AI BUILDER
             </span>
           </div>
           <h1 className="text-3xl sm:text-5xl font-black text-slate-900 dark:text-white tracking-tight leading-none">
-            Systems Developer Narrative
+            Hi, I'm Kuldeep — My Story & Journey
           </h1>
           <p className="text-sm text-slate-600 dark:text-zinc-400 font-sans leading-relaxed max-w-xl">
-            Tracing my transition from physics drafting into distributed systems, coding philosophies, and academic benchmarks.
+            Tracing my transition from civil engineering drafting into software development, coding values, and personal milestones.
           </p>
         </div>
 
@@ -122,7 +128,7 @@ export default function About() {
             <div className="pt-3 px-1 flex items-center justify-between">
               <div className="space-y-0.5">
                 <span className="text-[11px] font-bold text-slate-900 dark:text-white block">Kuldeep Chandra V.</span>
-                <span className="text-[9px] font-mono text-slate-500 dark:text-zinc-500 block">kcv-node-0</span>
+                <span className="text-[9px] font-mono text-slate-500 dark:text-zinc-500 block">Uttar Pradesh, India</span>
               </div>
               <div className="w-2 h-2 rounded-full bg-emerald-500 dark:bg-emerald-400 animate-pulse border border-emerald-500/50" />
             </div>
@@ -160,10 +166,10 @@ export default function About() {
           <div className="space-y-1">
             <h2 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white tracking-tight font-sans flex items-center">
               <History className="w-5 h-5 text-indigo-600 dark:text-indigo-400 mr-2" />
-              Career timeline logs
+              Milestones & Career Journey
             </h2>
             <p className="text-xs text-slate-600 dark:text-zinc-400 font-sans">
-              Filter my chronological milestones from high school through engineering transition to software systems.
+              A chronological look at my journey from early studies through engineering transition to full-stack software development.
             </p>
           </div>
 

@@ -165,10 +165,10 @@ export default function Contact() {
       {/* Header */}
       <div className="space-y-3">
         <h1 className="text-3xl sm:text-5xl font-black text-slate-900 dark:text-white tracking-tight">
-          Establish Contact
+          Let's Connect & Build Together
         </h1>
         <p className="text-sm text-slate-600 dark:text-zinc-400 font-sans max-w-xl">
-          Submit queries, download resumes, or schedule quick Zoom consultations via my interactive scheduler.
+          Have a project in mind, an opportunity to discuss, or just want to say hi? Send me a message below or schedule a chat—I'd love to connect!
         </p>
       </div>
 
