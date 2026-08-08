@@ -1100,6 +1100,508 @@ Empirical testing shows that a cosine similarity threshold of \`0.85\` accuratel
 
 export const blogsData: BlogPost[] = [
   {
+    id: 'nextjs-16-turbopack-tutorial',
+    title: 'Next.js 16 & Turbopack Tutorial: Complete Step-by-Step Setup Guide',
+    description: 'Master Next.js 16 App Router, Turbopack builds, server actions, and edge route handlers step-by-step for 100/100 Lighthouse performance.',
+    date: '2026-08-05',
+    category: 'Next.js',
+    readTime: '8 min read',
+    type: 'tech',
+    content: `Next.js 16 introduces blazingly fast Turbopack bundling, server actions, and enhanced edge caching. In this step-by-step tutorial, we will build a production-ready application from scratch.
+
+### Step 1: Initialize a Next.js 16 Project
+Run the official initializer command in your terminal:
+\`\`\`bash
+npx create-next-app@latest my-app --typescript --tailwind --app
+cd my-app
+\`\`\`
+
+Official Documentation: [Next.js Documentation](https://nextjs.org/docs)
+
+### Step 2: Configure Turbopack for Fast Development
+Update your \`package.json\` script configuration to enable Turbopack:
+\`\`\`json
+"scripts": {
+  "dev": "next dev --turbo",
+  "build": "next build",
+  "start": "next start"
+}
+\`\`\`
+
+### Step 3: Implement an Edge Route Handler
+Create a serverless API route in \`app/api/hello/route.ts\`:
+\`\`\`typescript
+import { NextResponse } from 'next/server';
+
+export const runtime = 'edge';
+
+export async function GET() {
+  return NextResponse.json({ message: 'Hello from Next.js 16 Edge Route!' });
+}
+\`\`\`
+
+### Key Takeaways
+* Turbopack delivers up to 10x faster local server restarts.
+* Edge route handlers guarantee sub-50ms global API responses.`
+  },
+  {
+    id: 'gemini-flash-api-tutorial',
+    title: 'Google Gemini 1.5 Flash API Tutorial: Structured JSON Schema & Prompt Curation',
+    description: 'Step-by-step guide to generating deterministic structured JSON outputs with Google Gemini API in TypeScript and Node.js.',
+    date: '2026-08-04',
+    category: 'Artificial Intelligence',
+    readTime: '7 min read',
+    type: 'tech',
+    content: `Generative AI tools like Google Gemini 1.5 Flash offer ultra-low latency and 1M+ token context windows. This tutorial teaches you how to enforce strict JSON output schemas for reliable AI pipelines.
+
+### Step 1: Install Google Gen AI SDK
+Install the official SDK package:
+\`\`\`bash
+npm install @google/generative-ai zod
+\`\`\`
+
+Official SDK Docs: [Google AI Developer Portal](https://ai.google.dev/docs)
+
+### Step 2: Define Output Schema & Initialize Model
+Set up structured JSON schema parameters in TypeScript:
+\`\`\`typescript
+import { GoogleGenerativeAI, Schema, Type } from '@google/generative-ai';
+
+const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
+
+const articleSchema: Schema = {
+  type: Type.OBJECT,
+  properties: {
+    title: { type: Type.STRING },
+    summary: { type: Type.STRING },
+    tags: { type: Type.ARRAY, items: { type: Type.STRING } }
+  },
+  required: ['title', 'summary', 'tags']
+};
+
+const model = genAI.getGenerativeModel({
+  model: 'gemini-1.5-flash',
+  generationConfig: {
+    responseMimeType: 'application/json',
+    responseSchema: articleSchema
+  }
+});
+\`\`\`
+
+### Step 3: Execute AI Summarization Query
+\`\`\`typescript
+const prompt = "Summarize this tech update: Next.js 16 was released with Turbopack improvements.";
+const result = await model.generateContent(prompt);
+const data = JSON.parse(result.response.text());
+console.log(data.title, data.summary);
+\`\`\`
+
+### Key Takeaways
+* Enforcing \`responseMimeType: application/json\` prevents LLM schema hallucinations.
+* Gemini 1.5 Flash processes structured prompts in under 1.5 seconds.`
+  },
+  {
+    id: 'supabase-pgvector-tutorial',
+    title: 'Supabase & pgvector Tutorial: Vector Similarity Search & Embeddings in PostgreSQL',
+    description: 'Learn how to set up pgvector embeddings, cosine distance queries, and content deduplication in Supabase PostgreSQL.',
+    date: '2026-08-03',
+    category: 'System Design',
+    readTime: '9 min read',
+    type: 'tech',
+    content: `Content duplication is a major challenge when aggregating news or articles. By combining Supabase PostgreSQL with the \`pgvector\` extension, we can query vector embeddings to filter duplicate content instantly.
+
+### Step 1: Enable pgvector Extension in Supabase
+Run the following SQL snippet inside your Supabase SQL Editor:
+\`\`\`sql
+CREATE EXTENSION IF NOT EXISTS vector;
+
+CREATE TABLE articles (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  title TEXT NOT NULL,
+  content TEXT NOT NULL,
+  embedding VECTOR(768)
+);
+\`\`\`
+
+Official Documentation: [Supabase pgvector Guide](https://supabase.com/docs/guides/database/extensions/pgvector)
+
+### Step 2: Create a Cosine Similarity Search Function
+\`\`\`sql
+CREATE OR REPLACE FUNCTION match_articles (
+  query_embedding VECTOR(768),
+  match_threshold FLOAT,
+  match_count INT
+)
+RETURNS TABLE (id UUID, title TEXT, similarity FLOAT)
+LANGUAGE plpgsql AS $$
+BEGIN
+  RETURN QUERY
+  SELECT
+    articles.id,
+    articles.title,
+    1 - (articles.embedding <=> query_embedding) AS similarity
+  FROM articles
+  WHERE 1 - (articles.embedding <=> query_embedding) > match_threshold
+  ORDER BY articles.embedding <=> query_embedding
+  LIMIT match_count;
+END;
+$$;
+\`\`\`
+
+### Step 3: Execute Vector Queries via Supabase Client
+\`\`\`typescript
+const { data, error } = await supabase.rpc('match_articles', {
+  query_embedding: candidateVector,
+  match_threshold: 0.85,
+  match_count: 5
+});
+\`\`\`
+
+### Key Takeaways
+* Cosine distance threshold \`0.85\` accurately detects duplicate press releases.
+* Vector indexing speeds up search queries on millions of rows.`
+  },
+  {
+    id: 'tailwind-css-v4-guide',
+    title: 'Tailwind CSS v4 Complete Guide: Setup, Custom Theme Variables & Fluid Layouts',
+    description: 'Learn how to configure Tailwind CSS v4, custom CSS variables, and fluid container queries for modern web applications.',
+    date: '2026-08-01',
+    category: 'Programming',
+    readTime: '6 min read',
+    type: 'tech',
+    content: `Tailwind CSS v4 replaces legacy \`tailwind.config.js\` files with modern CSS-first configuration using \`@theme\` directives and CSS custom properties.
+
+### Step 1: Install Tailwind CSS v4
+Install the official v4 package and Vite/PostCSS plugin:
+\`\`\`bash
+npm install tailwindcss @tailwindcss/vite
+\`\`\`
+
+Official Documentation: [Tailwind CSS Docs](https://tailwindcss.com/docs)
+
+### Step 2: Configure CSS Theme Variables
+In your main \`globals.css\` file, define custom design tokens:
+\`\`\`css
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #6366f1;
+  --color-accent: #10b981;
+  --font-sans: 'Inter', sans-serif;
+  --font-mono: 'Fira Code', monospace;
+}
+\`\`\`
+
+### Step 3: Use Fluid Layouts & Glassmorphism Utilities
+\`\`\`tsx
+<div className="p-6 rounded-2xl bg-white/80 dark:bg-black/40 backdrop-blur-md border border-slate-200 dark:border-white/10 shadow-xl">
+  <h2 className="text-xl font-bold text-primary font-sans">Modern UI Card</h2>
+  <p className="text-xs text-slate-600 dark:text-zinc-400">Powered by Tailwind CSS v4</p>
+</div>
+\`\`\`
+
+### Key Takeaways
+* Tailwind v4 compiles stylesheets faster with minimal bundle size.
+* Modern CSS variables provide seamless light/dark mode transitions.`
+  },
+  {
+    id: 'zod-schema-validation-tutorial',
+    title: 'Zod Schema Validation Tutorial: Type-Safe API Boundaries in TypeScript',
+    description: 'A step-by-step guide to validating API requests, form data, and environment variables using Zod validators.',
+    date: '2026-07-30',
+    category: 'Programming',
+    readTime: '6 min read',
+    type: 'tech',
+    content: `Unchecked client inputs cause security exploits and runtime bugs. Zod provides TypeScript-first schema validation that guarantees data types at runtime.
+
+### Step 1: Install Zod
+\`\`\`bash
+npm install zod
+\`\`\`
+
+Official Documentation: [Zod Documentation](https://zod.dev)
+
+### Step 2: Define Validation Schemas
+\`\`\`typescript
+import { z } from 'zod';
+
+export const ContactFormSchema = z.object({
+  name: z.string().min(2, 'Name must be at least 2 characters'),
+  email: z.string().email('Invalid email address'),
+  message: z.string().min(10, 'Message must be at least 10 characters').max(1000)
+});
+
+export type ContactFormData = z.infer<typeof ContactFormSchema>;
+\`\`\`
+
+### Step 3: Validate API Request Bodies
+\`\`\`typescript
+export async function POST(req: Request) {
+  const body = await req.json();
+  const parseResult = ContactFormSchema.safeParse(body);
+
+  if (!parseResult.success) {
+    return Response.json({ errors: parseResult.error.format() }, { status: 400 });
+  }
+
+  const { name, email, message } = parseResult.data;
+  // Process sanitized data safely
+}
+\`\`\`
+
+### Key Takeaways
+* \`safeParse\` handles errors gracefully without throwing execution crashes.
+* Automatically infers TypeScript types using \`z.infer\` snippet.`
+  },
+  {
+    id: 'zustand-state-management-tutorial',
+    title: 'Zustand State Management Tutorial: Local-First React Stores & LocalStorage',
+    description: 'Build fast, lightweight global React state management with Zustand, selectors, and automatic LocalStorage persistence.',
+    date: '2026-07-26',
+    category: 'React',
+    readTime: '5 min read',
+    type: 'tech',
+    content: `Zustand is a lightweight, boilerplate-free state management library for React. It is ideal for local-first web applications, shopping carts, and UI preference settings.
+
+### Step 1: Install Zustand
+\`\`\`bash
+npm install zustand
+\`\`\`
+
+Official Documentation: [Zustand Documentation](https://zustand-demo.pmnd.rs/)
+
+### Step 2: Create a Persistent Store
+\`\`\`typescript
+import { create } from 'zustand';
+import { persist } from 'zustand/middleware';
+
+interface ThemeStore {
+  theme: 'dark' | 'light';
+  toggleTheme: () => void;
+}
+
+export const useThemeStore = create<ThemeStore>()(
+  persist(
+    (set) => ({
+      theme: 'dark',
+      toggleTheme: () => set((state) => ({ theme: state.theme === 'dark' ? 'light' : 'dark' }))
+    }),
+    { name: 'user-theme-storage' }
+  )
+);
+\`\`\`
+
+### Step 3: Consume Selectors in React Components
+\`\`\`tsx
+export function ThemeToggle() {
+  const { theme, toggleTheme } = useThemeStore();
+  return (
+    <button onClick={toggleTheme} className="px-3 py-1 text-xs rounded border">
+      Current Theme: {theme}
+    </button>
+  );
+}
+\`\`\`
+
+### Key Takeaways
+* Eliminates Context Provider wrapping overhead.
+* Selective re-renders ensure 60fps UI performance.`
+  },
+  {
+    id: 'telegram-bot-api-webhooks-tutorial',
+    title: 'Telegram Bot API & Webhooks Tutorial: Asynchronous Python & Next.js Relays',
+    description: 'Step-by-step tutorial on building automated Telegram bots, webhook listeners, and instant mobile notification relays.',
+    date: '2026-07-22',
+    category: 'Automation',
+    readTime: '8 min read',
+    type: 'tech',
+    content: `Telegram bots are powerful tools for automated user quizzes, alert telemetry, and interactive candidate screening. In this tutorial, we connect Next.js webhooks to Telegram's Bot API.
+
+### Step 1: Obtain Bot Token from BotFather
+Message \`@BotFather\` on Telegram, create a new bot, and grab your HTTP API Token.
+
+Official Documentation: [Telegram Bot API Docs](https://core.telegram.org/bots/api)
+
+### Step 2: Send Instant Alerts from Next.js API Route
+\`\`\`typescript
+export async function sendTelegramAlert(message: string) {
+  const botToken = process.env.TELEGRAM_BOT_TOKEN;
+  const chatId = process.env.TELEGRAM_ADMIN_CHAT_ID;
+  
+  const url = \`https://api.telegram.org/bot\${botToken}/sendMessage\`;
+  await fetch(url, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      chat_id: chatId,
+      text: message,
+      parse_mode: 'Markdown'
+    })
+  });
+}
+\`\`\`
+
+### Step 3: Configure Webhook Route Handler
+\`\`\`typescript
+export async function POST(req: Request) {
+  const update = await req.json();
+  if (update.message) {
+    const chatText = update.message.text;
+    console.log('Received Telegram Message:', chatText);
+  }
+  return Response.json({ ok: true });
+}
+\`\`\`
+
+### Key Takeaways
+* Webhooks eliminate polling delays and run with zero server idle cost.
+* Sub-second execution speeds deliver instant mobile notifications.`
+  },
+  {
+    id: 'prisma-neon-postgresql-tutorial',
+    title: 'Prisma ORM & Neon Serverless PostgreSQL Tutorial: Relational Data Guide',
+    description: 'Model relational database entities, execute migrations, and optimize connection pooling with Prisma ORM and Neon Postgres.',
+    date: '2026-07-18',
+    category: 'System Design',
+    readTime: '9 min read',
+    type: 'tech',
+    content: `Neon Serverless Postgres combined with Prisma ORM provides autoscaling relational databases with zero infrastructure setup.
+
+### Step 1: Install Prisma & Client
+\`\`\`bash
+npm install prisma @prisma/client
+npx prisma init
+\`\`\`
+
+Official Documentation: [Prisma ORM Documentation](https://www.prisma.io/docs)
+
+### Step 2: Define Schema Entities in \`schema.prisma\`
+\`\`\`prisma
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Tool {
+  id          String   @id @default(cuid())
+  name        String
+  slug        String   @unique
+  category    String
+  createdAt   DateTime @default(now())
+}
+\`\`\`
+
+### Step 3: Run Database Migration & Query Records
+\`\`\`bash
+npx prisma migrate dev --name init
+\`\`\`
+\`\`\`typescript
+import { PrismaClient } from '@prisma/client';
+const prisma = new PrismaClient();
+
+const tools = await prisma.tool.findMany({
+  where: { category: 'AI Tools' },
+  orderBy: { createdAt: 'desc' }
+});
+\`\`\`
+
+### Key Takeaways
+* Connection pooling handles high concurrency during serverless traffic spikes.
+* Prisma Client guarantees strict type safety for all database queries.`
+  },
+  {
+    id: 'docker-microservices-web-guide',
+    title: 'Docker Containerization Tutorial: Production Dockerfile Setup for Web Apps',
+    description: 'Step-by-step Dockerfile setup, multi-stage builds, and Docker Compose configuration for Next.js and Node.js microservices.',
+    date: '2026-07-14',
+    category: 'Linux',
+    readTime: '7 min read',
+    type: 'tech',
+    content: `Containerizing applications with Docker guarantees identical execution environments across local development and production cloud clusters.
+
+### Step 1: Write a Multi-Stage Dockerfile
+Create a \`Dockerfile\` in your project root:
+\`\`\`dockerfile
+FROM node:20-alpine AS base
+
+FROM base AS deps
+WORKDIR /app
+COPY package*.json ./
+RUN npm ci
+
+FROM base AS builder
+WORKDIR /app
+COPY --from=deps /app/node_modules ./node_modules
+COPY . .
+RUN npm run build
+
+FROM base AS runner
+WORKDIR /app
+ENV NODE_ENV=production
+COPY --from=builder /app/public ./public
+COPY --from=builder /app/.next/standalone ./
+COPY --from=builder /app/.next/static ./.next/static
+
+EXPOSE 3000
+CMD ["node", "server.js"]
+\`\`\`
+
+Official Documentation: [Docker Documentation](https://docs.docker.com)
+
+### Step 2: Build & Run Container Image
+\`\`\`bash
+docker build -t my-next-app .
+docker run -p 3000:3000 my-next-app
+\`\`\`
+
+### Key Takeaways
+* Multi-stage builds reduce final Docker image sizes by up to 80%.
+* Standalone output mode minimizes runtime dependencies.`
+  },
+  {
+    id: 'git-github-rest-api-tutorial',
+    title: 'Git & GitHub REST API Tutorial: Advanced Developer Workflows & Telemetry',
+    description: 'Master essential git rebase strategies, commit conventions, branch protection, and GitHub REST API integration in Node.js.',
+    date: '2026-07-08',
+    category: 'Open Source',
+    readTime: '6 min read',
+    type: 'tech',
+    content: `Clean git commits and automated GitHub REST API scripts allow teams to build live activity feeds and automated release telemetry.
+
+### Step 1: Git Rebase & Clean Commit Workflow
+\`\`\`bash
+git checkout main
+git pull origin main
+git checkout feature-branch
+git rebase main
+git commit -m "feat(api): integrate GitHub REST commit telemetry"
+\`\`\`
+
+Official Documentation: [GitHub REST API Docs](https://github.com/rest)
+
+### Step 2: Query Live GitHub Commits via API
+\`\`\`typescript
+export async function getRecentCommits(owner: string, repo: string) {
+  const url = \`https://api.github.com/repos/\${owner}/\${repo}/commits?per_page=5\`;
+  const res = await fetch(url, {
+    headers: {
+      'User-Agent': 'Developer-Portfolio',
+      'Accept': 'application/vnd.github.v3+json'
+    }
+  });
+  return await res.json();
+}
+\`\`\`
+
+### Key Takeaways
+* Conventional commit formats (\`feat:\`, \`fix:\`, \`docs:\`) clarify change histories.
+* GitHub REST API enables real-time commit activity feeds on developer portfolios.`
+  },
+  {
     id: 'ai-news-automation',
     title: 'Building an Automated AI News Feed using Next.js & Gemini',
     description: 'A practical, first-person guide on parsing RSS feeds, filtering content with Google Gemini, and publishing automated tech summaries.',
