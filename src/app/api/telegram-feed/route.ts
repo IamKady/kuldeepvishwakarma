@@ -93,11 +93,10 @@ export async function GET(request: Request) {
       });
     }
 
-    return NextResponse.json({
-      success: true,
-      channel,
-      posts,
-    });
+    return NextResponse.json(
+      { success: true, channel, posts },
+      { headers: { 'Cache-Control': 'public, s-maxage=300, stale-while-revalidate=600' } }
+    );
   } catch (error) {
     console.error('Error parsing Telegram channel feed:', error);
     return NextResponse.json({ success: false, channel: '', posts: [] }, { status: 500 });

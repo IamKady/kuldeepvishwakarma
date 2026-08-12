@@ -89,7 +89,7 @@ export default function RootLayout({
     "name": "Kuldeep Chandra Vishwakarma",
     "alternateName": "Kuldeep Vishwakarma",
     "url": "https://kuldeepvishwakarma.com",
-    "image": "https://kuldeepvishwakarma.com/favicon.ico",
+    "image": "https://kuldeepvishwakarma.com/logo.png",
     "sameAs": [
       "https://github.com/IamKady",
       "https://www.linkedin.com/in/iamkady/",

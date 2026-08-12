@@ -151,9 +151,15 @@ export async function GET() {
       };
     });
 
-    return NextResponse.json({ commits: liveCommits, live: true });
+    return NextResponse.json(
+      { commits: liveCommits, live: true },
+      { headers: { 'Cache-Control': 'public, s-maxage=300, stale-while-revalidate=600' } }
+    );
   } catch (error) {
     console.error('Failed to fetch real-time GitHub commits from API:', error);
-    return NextResponse.json({ commits: staticRealCommits, live: false });
+    return NextResponse.json(
+      { commits: staticRealCommits, live: false },
+      { headers: { 'Cache-Control': 'public, s-maxage=300, stale-while-revalidate=600' } }
+    );
   }
 }

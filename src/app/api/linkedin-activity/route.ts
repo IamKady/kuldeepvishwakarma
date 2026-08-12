@@ -86,13 +86,16 @@ export async function GET() {
   }
 
   // Fallback to real-time work activity stream
-  return NextResponse.json({
-    posts: fallbackLinkedInActivity,
-    liveConnected: Boolean(linkedinToken),
-    setupInstructions: {
-      step1: 'Create a developer app at https://developer.linkedin.com',
-      step2: 'Obtain OAuth2 User Access Token with r_member_social scope',
-      step3: 'Add LINKEDIN_ACCESS_TOKEN=your_token to .env.local'
-    }
-  });
+  return NextResponse.json(
+    {
+      posts: fallbackLinkedInActivity,
+      liveConnected: Boolean(linkedinToken),
+      setupInstructions: {
+        step1: 'Create a developer app at https://developer.linkedin.com',
+        step2: 'Obtain OAuth2 User Access Token with r_member_social scope',
+        step3: 'Add LINKEDIN_ACCESS_TOKEN=your_token to .env.local'
+      }
+    },
+    { headers: { 'Cache-Control': 'public, s-maxage=300, stale-while-revalidate=600' } }
+  );
 }

@@ -53,14 +53,16 @@ export default function Navbar({ onSearchOpen, theme, toggleTheme }: NavbarProps
           
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-2.5 group">
-            <Image 
-              src="/logo.png" 
-              alt="Kuldeep Chandra Vishwakarma Logo" 
-              width={32}
-              height={32}
-              priority
-              className="w-8 h-8 rounded-lg object-contain border border-slate-200 dark:border-white/10 group-hover:scale-105 transition-transform shadow-xs flex-shrink-0" 
-            />
+            <div className="bg-black dark:bg-black/60 p-0.5 rounded-lg border border-slate-300 dark:border-white/10 group-hover:scale-105 transition-transform shadow-xs flex-shrink-0 flex items-center justify-center">
+              <Image 
+                src="/logo.png" 
+                alt="Kuldeep Chandra Vishwakarma Logo" 
+                width={32}
+                height={32}
+                priority
+                className="w-8 h-8 rounded-md object-contain" 
+              />
+            </div>
             <span className="text-xl font-bold font-sans tracking-tight text-slate-900 dark:text-white flex items-center">
               KCV
               <span className="w-1.5 h-1.5 rounded-full bg-ai ml-1 animate-pulse" />
