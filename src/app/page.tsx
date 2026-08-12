@@ -41,13 +41,58 @@ import {
 } from '@/data/db';
 import confetti from 'canvas-confetti';
 import TelegramFeed from '@/components/TelegramFeed';
+import SpotlightCard from '@/components/SpotlightCard';
 
 
 export default function Home() {
   const [localTime, setLocalTime] = useState('13:36 PM');
   const [dashboardTab, setDashboardTab] = useState<'status' | 'deployments' | 'radar' | 'oss' | 'books'>('status');
   const [copiedText, setCopiedText] = useState(false);
-  const [hudView, setHudView] = useState<'code' | 'photo'>('code');
+  const [hudView, setHudView] = useState<'code' | 'photo' | 'cli'>('code');
+
+  // Interactive CLI Prompt State
+  const [cliInput, setCliInput] = useState('');
+  const [cliHistory, setCliHistory] = useState<Array<{ command: string; output: string }>>([
+    { command: 'init', output: 'KCV Terminal Sandbox v2.0 ready. Type "help" for commands.' }
+  ]);
+
+  const handleCliSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const cmd = cliInput.trim().toLowerCase();
+    if (!cmd) return;
+
+    let output = '';
+    switch (cmd) {
+      case 'help':
+        output = 'Available commands: bio, stack, startups, contact, hire, clear';
+        break;
+      case 'bio':
+        output = 'Kuldeep Chandra Vishwakarma — Software Engineer & AI Builder. Founder of StartupWire.in & Bookperia.com. MSc CS Pursuing.';
+        break;
+      case 'stack':
+        output = 'Frontend: Next.js 16, React 19, TypeScript, Tailwind | Backend: Node.js, Python, Supabase, pgvector';
+        break;
+      case 'startups':
+        output = '1. StartupWire.in (AI Tech News Aggregator) | 2. Bookperia.com (AI Book Discovery Sanctuary)';
+        break;
+      case 'contact':
+        output = 'Email: contact@kuldeepvishwakarma.com | Location: UP, India | Availability: Remote Software Engineer';
+        break;
+      case 'hire':
+        output = '🎉 Status: Open for remote Software Engineer roles & AI product engineering!';
+        triggerConfetti();
+        break;
+      case 'clear':
+        setCliHistory([]);
+        setCliInput('');
+        return;
+      default:
+        output = `Command not recognized: "${cmd}". Type "help" to see available options.`;
+    }
+
+    setCliHistory((prev) => [...prev, { command: cmd, output }]);
+    setCliInput('');
+  };
 
   // Update India Time (IST) dynamically
   useEffect(() => {
@@ -224,7 +269,7 @@ export default function Home() {
             transition={{ duration: 0.8 }}
             className="w-full lg:w-[450px] relative flex justify-center items-center"
           >
-            <div className="w-full p-6 rounded-xl glass-panel relative z-10 border-slate-200 dark:border-white/10 shadow-2xl overflow-hidden group bg-white/80 dark:bg-black/40">
+            <SpotlightCard borderBeam={true} className="w-full p-6 relative z-10 border-slate-200 dark:border-white/10 shadow-2xl overflow-hidden group bg-white/80 dark:bg-black/40">
               {/* Window Header */}
               <div className="flex items-center justify-between border-b border-slate-200 dark:border-white/5 pb-4 mb-4 font-mono text-xs text-slate-500 dark:text-zinc-500">
                 <div className="flex items-center space-x-3">
@@ -251,6 +296,14 @@ export default function Home() {
                     >
                       Visual
                     </button>
+                    <button 
+                      onClick={() => setHudView('cli')}
+                      className={`text-[10px] font-mono tracking-wider uppercase font-semibold transition-colors cursor-pointer ${
+                        hudView === 'cli' ? 'text-slate-900 dark:text-white border-b border-indigo-600 dark:border-indigo-500 pb-0.5' : 'text-slate-500 dark:text-zinc-500 hover:text-slate-800 dark:hover:text-zinc-300'
+                      }`}
+                    >
+                      CLI Sandbox
+                    </button>
                   </div>
                 </div>
                 {hudView === 'code' ? (
@@ -260,6 +313,13 @@ export default function Home() {
                   >
                     {copiedText ? 'Copied!' : 'Copy'}
                   </button>
+                ) : hudView === 'cli' ? (
+                  <button 
+                    onClick={() => { setCliHistory([]); setCliInput(''); }}
+                    className="px-2 py-0.5 rounded bg-slate-100 dark:bg-white/5 hover:bg-slate-200 dark:hover:bg-white/10 text-[10px] text-slate-600 dark:text-zinc-400 hover:text-slate-900 dark:hover:text-white transition-colors cursor-pointer border border-slate-200 dark:border-white/5 font-mono"
+                  >
+                    Clear
+                  </button>
                 ) : (
                   <span className="text-[9px] uppercase tracking-wider text-emerald-400 font-mono font-semibold bg-emerald-500/10 border border-emerald-500/20 px-2 py-0.5 rounded">
                     Software Developer
@@ -267,7 +327,7 @@ export default function Home() {
                 )}
               </div>
 
-              {/* Monospaced JSON HUD or Visual profile photo */}
+              {/* Monospaced JSON HUD or Visual profile photo or Interactive CLI */}
               <AnimatePresence mode="wait">
                 {hudView === 'code' ? (
                   <motion.pre
@@ -293,7 +353,7 @@ export default function Home() {
                     <br/>  <span className="text-indigo-300 dark:text-indigo-400">"status"</span>: <span className="text-emerald-300 dark:text-emerald-400">"Open to remote software roles"</span>
                     <br/>{`}`}
                   </motion.pre>
-                ) : (
+                ) : hudView === 'photo' ? (
                   <motion.div
                     key="photo"
                     initial={{ opacity: 0, y: 10 }}
@@ -336,6 +396,40 @@ export default function Home() {
                       </p>
                     </div>
                   </motion.div>
+                ) : (
+                  <motion.div
+                    key="cli"
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    transition={{ duration: 0.2 }}
+                    className="font-mono text-[11px] h-[220px] rounded bg-slate-950 p-3 border border-slate-800 flex flex-col justify-between overflow-hidden"
+                  >
+                    <div className="overflow-y-auto space-y-2 pr-1 font-mono text-[11px]">
+                      {cliHistory.map((item, idx) => (
+                        <div key={idx} className="space-y-0.5">
+                          <div className="flex items-center text-emerald-400">
+                            <span className="text-indigo-400 mr-1.5">visitor@kcv:~$</span>
+                            <span>{item.command}</span>
+                          </div>
+                          <p className="text-zinc-300 text-[10px] pl-3 leading-relaxed">
+                            {item.output}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
+
+                    <form onSubmit={handleCliSubmit} className="pt-2 border-t border-slate-800/80 flex items-center space-x-1.5 text-[11px]">
+                      <span className="text-indigo-400">$</span>
+                      <input
+                        type="text"
+                        value={cliInput}
+                        onChange={(e) => setCliInput(e.target.value)}
+                        placeholder="type help, bio, stack, contact, hire..."
+                        className="w-full bg-transparent text-emerald-400 placeholder:text-zinc-600 focus:outline-none font-mono text-[11px]"
+                      />
+                    </form>
+                  </motion.div>
                 )}
               </AnimatePresence>
 
@@ -347,7 +441,7 @@ export default function Home() {
                 <span>India (IST)</span>
                 <span>Response: &lt; 2 hrs</span>
               </div>
-            </div>
+            </SpotlightCard>
 
             <div className="absolute inset-0 bg-indigo-500/5 blur-[80px] -z-10 rounded-full scale-75 group-hover:scale-90 transition-transform duration-700" />
           </motion.div>
@@ -363,14 +457,14 @@ export default function Home() {
             { label: 'Products Shipped', value: '12 Production' },
             { label: 'Availability', value: 'Open for Hire' }
           ].map((stat, idx) => (
-            <div key={idx} className="p-4 rounded-xl border border-slate-200 dark:border-white/5 bg-white dark:bg-white/[0.02] shadow-xs dark:shadow-none flex flex-col justify-between space-y-1">
+            <SpotlightCard key={idx} className="p-4 rounded-xl border border-slate-200 dark:border-white/5 bg-white dark:bg-white/[0.02] shadow-xs dark:shadow-none flex flex-col justify-between space-y-1">
               <span className="text-[10px] text-slate-500 dark:text-zinc-500 font-mono uppercase tracking-wider block font-medium">
                 {stat.label}
               </span>
               <span className="text-xs sm:text-sm font-bold text-slate-900 dark:text-white font-sans">
                 {stat.value}
               </span>
-            </div>
+            </SpotlightCard>
           ))}
         </div>
       </section>
@@ -418,7 +512,7 @@ export default function Home() {
         </div>
 
         {/* Tab contents wrapper */}
-        <div className="glass-panel p-6 rounded-2xl border border-slate-200 dark:border-white/10 shadow-2xl min-h-[300px] flex flex-col justify-between">
+        <SpotlightCard className="p-6 rounded-2xl border border-slate-200 dark:border-white/10 shadow-2xl min-h-[300px] flex flex-col justify-between">
           <AnimatePresence mode="wait">
             <motion.div
               key={dashboardTab}
@@ -618,11 +712,11 @@ export default function Home() {
               )}
             </motion.div>
           </AnimatePresence>
-        </div>
+        </SpotlightCard>
       </section>
 
       {/* 2.5 INTERACTIVE GITHUB CONTRIBUTION PANEL */}
-      <section className="glass-panel p-5 rounded-2xl border border-slate-200 dark:border-white/10 shadow-xl space-y-3 bg-white/80 dark:bg-black/40">
+      <SpotlightCard className="p-5 rounded-2xl border border-slate-200 dark:border-white/10 shadow-xl space-y-3 bg-white/80 dark:bg-black/40">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-200 dark:border-white/5 pb-3">
           <div className="flex items-center space-x-2">
             <Code className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
@@ -695,10 +789,11 @@ export default function Home() {
             <span>More</span>
           </div>
         </div>
-      </section>
+      </SpotlightCard>
+
 
       {/* 3. RECRUITER EVIDENCE CONSOLE */}
-      <section className="glass-panel p-6 sm:p-8 rounded-2xl border border-slate-200 dark:border-white/10 shadow-2xl relative overflow-hidden bg-white/80 dark:bg-black/60">
+      <SpotlightCard className="p-6 sm:p-8 rounded-2xl border border-slate-200 dark:border-white/10 shadow-2xl relative overflow-hidden bg-white/80 dark:bg-black/60">
         <div className="absolute top-1/2 left-1/2 w-72 h-72 rounded-full bg-emerald-500/5 blur-[100px] -translate-x-1/2 -translate-y-1/2 -z-10" />
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
@@ -816,7 +911,7 @@ export default function Home() {
             </div>
           </div>
         </div>
-      </section>
+      </SpotlightCard>
 
       {/* Telegram Channel Live Feed Section */}
       <section className="mb-20">
