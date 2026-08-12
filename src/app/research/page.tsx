@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { Shield, BookOpen, Calendar, Tag, CornerDownLeft } from 'lucide-react';
+import { Shield, BookOpen, Calendar, Tag, CornerDownLeft, Binary, FileText } from 'lucide-react';
 import { researchNotes } from '@/data/db';
 
 export default function ResearchPage() {
@@ -14,7 +14,7 @@ export default function ResearchPage() {
           <Shield className="w-8 h-8 text-indigo-600 dark:text-indigo-400" /> Research
         </h1>
         <p className="text-sm text-slate-600 dark:text-zinc-400 font-sans max-w-xl">
-          MSc Computer Science research papers, security analysis protocols, and AI curation summaries.
+          MSc Computer Science research preprints, cryptographic security protocols, and mathematical vector models.
         </p>
       </div>
 
@@ -40,6 +40,16 @@ export default function ResearchPage() {
                 {note.abstract}
               </p>
             </div>
+
+            {/* Mathematical Formula Box */}
+            {note.formula && (
+              <div className="p-3 rounded-xl bg-indigo-500/10 border border-indigo-500/20 text-indigo-700 dark:text-indigo-300 font-mono text-xs overflow-x-auto space-y-1">
+                <span className="text-[9px] text-slate-500 dark:text-zinc-400 uppercase tracking-widest font-bold block">Mathematical Formulation</span>
+                <code className="font-mono text-xs text-indigo-600 dark:text-indigo-400 font-bold block whitespace-pre">
+                  {note.formula}
+                </code>
+              </div>
+            )}
 
             {/* Detailed Content */}
             <div className="font-sans text-xs sm:text-sm text-slate-700 dark:text-zinc-300 leading-relaxed space-y-4 pt-2">
@@ -67,6 +77,16 @@ export default function ResearchPage() {
                 );
               })}
             </div>
+
+            {/* BibTeX Citation Box */}
+            {note.bibtex && (
+              <div className="pt-4 border-t border-slate-200 dark:border-white/5 space-y-1 font-mono text-[10px]">
+                <span className="text-slate-500 dark:text-zinc-500 uppercase tracking-wider block font-bold">BibTeX Citation</span>
+                <pre className="p-3 rounded-lg bg-slate-950 dark:bg-black border border-slate-800 text-zinc-300 overflow-x-auto whitespace-pre font-mono text-[10px]">
+                  {note.bibtex}
+                </pre>
+              </div>
+            )}
           </div>
         ))}
       </div>
@@ -74,3 +94,4 @@ export default function ResearchPage() {
     </div>
   );
 }
+

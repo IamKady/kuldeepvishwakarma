@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { FileSearch, Github, ExternalLink, Cpu, Shield, TrendingUp, Lightbulb } from 'lucide-react';
+import { FileSearch, Github, ExternalLink, Cpu, Shield, TrendingUp, Lightbulb, AlertTriangle, Activity } from 'lucide-react';
 import { projectsData } from '@/data/db';
 
 export default function CaseStudiesPage() {
@@ -17,7 +17,7 @@ export default function CaseStudiesPage() {
           <FileSearch className="w-8 h-8 text-indigo-600 dark:text-indigo-400" /> Case studies
         </h1>
         <p className="text-sm text-slate-600 dark:text-zinc-400 font-sans max-w-xl">
-          Unified portal containing comprehensive engineering evaluations, architectural audits, and trade-offs.
+          Unified portal containing comprehensive engineering evaluations, architectural audits, impact metrics, and trade-offs.
         </p>
       </div>
 
@@ -81,6 +81,19 @@ export default function CaseStudiesPage() {
             </div>
           </div>
 
+          {/* Impact Telemetry Badges */}
+          {activeStudy.impactMetrics && activeStudy.impactMetrics.length > 0 && (
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              {activeStudy.impactMetrics.map((metric, idx) => (
+                <div key={idx} className="p-3.5 rounded-xl border border-indigo-500/20 bg-indigo-500/5 flex flex-col justify-between space-y-1">
+                  <span className="text-[10px] font-mono uppercase text-indigo-600 dark:text-indigo-400 tracking-wider font-semibold">{metric.label}</span>
+                  <span className="text-base font-bold text-slate-900 dark:text-white font-mono">{metric.value}</span>
+                  <span className="text-[10px] text-slate-500 dark:text-zinc-400 leading-tight">{metric.detail}</span>
+                </div>
+              ))}
+            </div>
+          )}
+
           {/* Deep content breakdown */}
           <div className="space-y-6 font-sans text-xs sm:text-sm text-slate-700 dark:text-zinc-300">
             <div className="space-y-1.5">
@@ -100,6 +113,20 @@ export default function CaseStudiesPage() {
                 {activeStudy.caseStudy.architectureDiagram}
               </pre>
             </div>
+
+            {/* Post-Mortem Card */}
+            {activeStudy.postMortem && (
+              <div className="p-4 rounded-xl border border-rose-500/20 bg-rose-500/5 space-y-2 font-mono text-xs">
+                <div className="flex items-center text-rose-600 dark:text-rose-400 font-bold uppercase tracking-wider text-[10px]">
+                  <AlertTriangle className="w-3.5 h-3.5 mr-1.5 flex-shrink-0" /> Technical Post-Mortem & Architectural Patch
+                </div>
+                <div className="space-y-1 text-slate-700 dark:text-zinc-300 text-[11px]">
+                  <p><span className="text-rose-500 font-bold">Failure Mode:</span> {activeStudy.postMortem.failureMode}</p>
+                  <p><span className="text-amber-500 font-bold">Root Cause:</span> {activeStudy.postMortem.rootCause}</p>
+                  <p><span className="text-emerald-500 font-bold">Resolution:</span> {activeStudy.postMortem.resolution}</p>
+                </div>
+              </div>
+            )}
 
             <div className="space-y-1.5 border-t border-slate-200 dark:border-white/5 pt-4">
               <h3 className="text-xs font-mono font-bold uppercase text-rose-700 dark:text-rose-400 flex items-center gap-1.5"><Shield className="w-3.5 h-3.5" /> 4. Security Protocols</h3>
