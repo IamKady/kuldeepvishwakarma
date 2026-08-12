@@ -52,15 +52,19 @@ export default function Navbar({ onSearchOpen, theme, toggleTheme }: NavbarProps
         <div className="flex items-center justify-between">
           
           {/* Logo */}
-          <Link href="/" className="flex items-center group">
+          <Link href="/" className="flex items-center space-x-2.5 group">
             <Image 
               src="/logo.png" 
               alt="Kuldeep Chandra Vishwakarma Logo" 
-              width={160}
-              height={40}
+              width={32}
+              height={32}
               priority
-              className="h-8 sm:h-9 w-auto object-contain rounded-md group-hover:scale-105 transition-transform flex-shrink-0" 
+              className="w-8 h-8 rounded-lg object-contain border border-slate-200 dark:border-white/10 group-hover:scale-105 transition-transform shadow-xs flex-shrink-0" 
             />
+            <span className="text-xl font-bold font-sans tracking-tight text-slate-900 dark:text-white flex items-center">
+              KCV
+              <span className="w-1.5 h-1.5 rounded-full bg-ai ml-1 animate-pulse" />
+            </span>
           </Link>
 
           {/* Desktop Nav Links */}
