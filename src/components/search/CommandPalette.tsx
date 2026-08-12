@@ -142,9 +142,9 @@ export default function CommandPalette({ isOpen, onClose }: CommandPaletteProps)
               <Image 
                 src="/logo.png" 
                 alt="KCV Logo" 
-                width={24}
+                width={48}
                 height={24}
-                className="w-6 h-6 rounded-md object-cover border border-slate-200 dark:border-white/10 flex-shrink-0" 
+                className="h-6 w-auto object-contain rounded-md flex-shrink-0" 
               />
               <Search className="w-4 h-4 text-slate-400 dark:text-zinc-400 flex-shrink-0" />
               <input
