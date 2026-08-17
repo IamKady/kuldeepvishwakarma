@@ -140,10 +140,10 @@ export default function Home() {
 
   // State for Real-Time GitHub Commits
   const [realCommits, setRealCommits] = useState([
-    { commit: 'b9cdda2', branch: 'main', event: 'fix(layout): fix footer positioning and eliminate bottom viewport overflow whitespace', size: '142 kB', status: 'success', time: 'Recently', url: 'https://github.com/IamKady/kuldeepvishwakarma/commit/b9cdda25925320de4adb74f4672a614f8f480f37' },
-    { commit: '8eeaeed', branch: 'main', event: 'fix(theme): overhaul light mode contrast across all subpages', size: '142 kB', status: 'success', time: 'Today', url: 'https://github.com/IamKady/kuldeepvishwakarma/commit/8eeaeedf77706786378c58a23ad5deb8eacbd3d5' },
-    { commit: '5fc4616', branch: 'main', event: 'fix(theme): remove hardcoded dark panel backgrounds and fix light mode contrast', size: '141 kB', status: 'success', time: 'Today', url: 'https://github.com/IamKady/kuldeepvishwakarma/commit/5fc4616b0c86261dbc76bd2e5682e2bb6fc230b9' },
-    { commit: '1ea7a9f', branch: 'main', event: 'fix(theme): overhaul light mode styling, typography contrast, and Tailwind 4 dark variants', size: '140 kB', status: 'success', time: 'Today', url: 'https://github.com/IamKady/kuldeepvishwakarma/commit/1ea7a9fc7b6d18863526830e236c7921c9eceae0' }
+    { commit: '9f6b88f', branch: 'main', repoName: 'kuldeepvishwakarma', event: 'feat(content): add metric-driven case studies, post-mortems, AI prompts, and academic preprints', size: '144 kB', status: 'success', time: '5 days ago', url: 'https://github.com/IamKady/kuldeepvishwakarma/commit/9f6b88fbf3c35ae895560d5e2761a6a3ca5a226b' },
+    { commit: '3844ac2', branch: 'main', repoName: 'kuldeepvishwakarma', event: 'feat(design): implement ambient spotlights, mega-menu dropdowns, and interactive CLI terminal HUD', size: '143 kB', status: 'success', time: '5 days ago', url: 'https://github.com/IamKady/kuldeepvishwakarma/commit/3844ac2851b830953823b7faf4d530929ca01c25' },
+    { commit: '5dd5d3e', branch: 'main', repoName: 'kuldeepvishwakarma', event: 'feat: enhance site performance, image formats, logo framing, JSON-LD schema, and API caching headers', size: '142 kB', status: 'success', time: '5 days ago', url: 'https://github.com/IamKady/kuldeepvishwakarma/commit/5dd5d3edb012ad823a07ce9ea68e59ce09033324' },
+    { commit: '974679b', branch: 'main', repoName: 'ALBERTQUIZBOT', event: 'fix: resolve Telegram quiz poll generation, open_period clamping, and SQLite parameter limit issues', size: '48 kB', status: 'success', time: '12 days ago', url: 'https://github.com/IamKady/ALBERTQUIZBOT/commit/974679b' }
   ]);
   const [isLiveSync, setIsLiveSync] = useState(false);
 
@@ -716,22 +716,30 @@ export default function Home() {
       </section>
 
       {/* 2.5 INTERACTIVE GITHUB CONTRIBUTION PANEL */}
-      <SpotlightCard className="p-5 rounded-2xl border border-slate-200 dark:border-white/10 shadow-xl space-y-3 bg-white/80 dark:bg-black/40">
+      <SpotlightCard className="p-5 sm:p-6 rounded-2xl border border-slate-200 dark:border-white/10 shadow-xl space-y-4 bg-white/80 dark:bg-black/40">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-200 dark:border-white/5 pb-3">
           <div className="flex items-center space-x-2">
             <Code className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
             <span className="text-xs font-bold uppercase tracking-wider text-slate-900 dark:text-zinc-200 font-sans">
-              GitHub core contributions logs (YTD)
+              GitHub Core Contribution Activity & Commits Stream
             </span>
           </div>
-          <a 
-            href="https://github.com/IamKady" 
-            target="_blank" 
-            rel="noopener noreferrer" 
-            className="text-[10px] text-slate-500 dark:text-zinc-400 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors font-mono flex items-center"
-          >
-            github.com/IamKady <ChevronRight className="w-3.5 h-3.5 ml-0.5" />
-          </a>
+          <div className="flex items-center gap-3">
+            <Link
+              href="/open-source"
+              className="text-[10px] text-indigo-600 dark:text-indigo-400 hover:underline font-mono font-semibold flex items-center"
+            >
+              Explore 10 Repositories <ChevronRight className="w-3 h-3 ml-0.5" />
+            </Link>
+            <a 
+              href="https://github.com/IamKady" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="text-[10px] text-slate-500 dark:text-zinc-400 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors font-mono flex items-center"
+            >
+              github.com/IamKady <ExternalLink className="w-3 h-3 ml-0.5" />
+            </a>
+          </div>
         </div>
 
         {/* Grid representation */}
@@ -749,19 +757,25 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Live Commits Ticker */}
+        {/* Live Commits Stream */}
         <div className="pt-2 border-t border-slate-200 dark:border-white/5 space-y-2">
-          <span className="text-[10px] font-mono text-slate-500 dark:text-zinc-500 uppercase tracking-wider block font-bold">
-            Real-Time Commit Activity Stream
-          </span>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
+          <div className="flex items-center justify-between">
+            <span className="text-[10px] font-mono text-slate-500 dark:text-zinc-500 uppercase tracking-wider block font-bold">
+              Verified Production Commits Feed
+            </span>
+            <span className="text-[10px] font-mono text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full border border-emerald-500/20">
+              Live GitHub REST Pipeline
+            </span>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5">
             {realCommits.slice(0, 3).map((item, idx) => (
               <a
                 key={idx}
                 href={item.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2.5 rounded-lg border border-slate-200 dark:border-white/5 bg-slate-100/80 dark:bg-white/[0.02] hover:bg-slate-200/60 dark:hover:bg-white/[0.05] transition-all flex flex-col justify-between space-y-1 group"
+                className="p-3 rounded-xl border border-slate-200 dark:border-white/5 bg-slate-100/80 dark:bg-white/[0.02] hover:bg-slate-200/60 dark:hover:bg-white/[0.05] transition-all flex flex-col justify-between space-y-1.5 group"
               >
                 <div className="flex justify-between items-center text-[10px] font-mono">
                   <span className="font-bold text-indigo-600 dark:text-indigo-400 group-hover:underline flex items-center gap-1">
@@ -769,16 +783,21 @@ export default function Home() {
                   </span>
                   <span className="text-slate-500 dark:text-zinc-500">{item.time}</span>
                 </div>
-                <p className="text-[11px] font-sans text-slate-800 dark:text-zinc-300 truncate leading-snug">
+                <p className="text-[11px] font-sans text-slate-800 dark:text-zinc-300 line-clamp-2 leading-snug">
                   {item.event}
                 </p>
+                {item.repoName && (
+                  <span className="text-[9px] font-mono text-slate-500 dark:text-zinc-500 bg-slate-200/60 dark:bg-white/5 px-2 py-0.5 rounded w-fit">
+                    IamKady/{item.repoName}
+                  </span>
+                )}
               </a>
             ))}
           </div>
         </div>
 
-        <div className="flex justify-between items-center text-[10px] text-slate-500 dark:text-zinc-500 font-sans pt-1">
-          <span>Track automated releases and scripts cataloged publically</span>
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between text-[10px] text-slate-500 dark:text-zinc-500 font-sans pt-1 gap-2">
+          <span>Catalog of active repositories, automation scripts, and systems architectures</span>
           <div className="flex items-center space-x-2">
             <span>Less</span>
             <span className="w-2.5 h-2.5 bg-slate-200 border border-slate-300 dark:bg-zinc-900 dark:border-zinc-950 rounded-[1px]" />

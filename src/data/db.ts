@@ -735,22 +735,22 @@ export const projectsData: Project[] = [
   },
   {
     id: 'web-standards-css',
-    title: 'Web Standards & CSS Architecture',
-    tagline: 'Semantic HTML5, Flexbox/Grid Systems, and Responsive UI Standards',
+    title: 'Web Standards & HTML5 Architecture',
+    tagline: 'Semantic HTML5, Microdata Schemas, and Responsive Accessibility Standards',
     status: 'Active',
-    logo: '🎨',
+    logo: '🌐',
     categoryTag: 'Learning Labs',
-    technologies: ['Semantic HTML5', 'CSS3 Custom Properties', 'CSS Flexbox', 'CSS Grid Layout', 'WCAG 2.1 Accessibility', 'CSS Clamp / Fluid Typography'],
+    technologies: ['Semantic HTML5', 'Accessibility (a11y)', 'WCAG 2.1', 'JSON-LD', 'Web Standards'],
     github: 'https://github.com/IamKady/HTML-COMPLETE',
-    summary: 'An extensive reference and practice repository covering semantic HTML5 structure, modern CSS flexbox & grid design systems, and responsive layout standards.',
-    whatIAmDoingAndLearning: 'Deepening knowledge of semantic HTML5 element hierarchies, web accessibility (WCAG), CSS grid layout algorithms, and modern CSS custom property design systems.',
+    summary: 'An extensive reference and practice repository covering semantic HTML5 structure, modern document outline algorithms, and accessible web standards.',
+    whatIAmDoingAndLearning: 'Deepening knowledge of semantic HTML5 element hierarchies, web accessibility (WCAG), and modern document architecture.',
     caseStudy: {
       overview: 'Built a foundational web development guide and code repository mastering modern layout algorithms and design tokens.',
-      problem: 'Many web developers rely on heavy frameworks without understanding core CSS layout mechanics.',
+      problem: 'Many web developers rely on heavy frameworks without understanding core HTML document mechanics and accessibility rules.',
       research: 'Audited W3C HTML5 specifications and MDN web docs.',
-      targetUsers: 'Frontend developers wanting rock-solid mastery of HTML5 and CSS3.',
-      planning: 'Structured lessons covering selectors, flexbox, grid, animations, and accessibility.',
-      design: 'High-contrast responsive UI components with clean CSS custom properties.',
+      targetUsers: 'Frontend developers wanting rock-solid mastery of HTML5 and web accessibility.',
+      planning: 'Structured lessons covering semantic elements, accessible forms, audio/video APIs, and SEO tags.',
+      design: 'High-contrast responsive UI components with clean markup.',
       architectureDiagram: `
 +-----------------------------------+
 |      Semantic HTML5 Document     |
@@ -759,22 +759,22 @@ export const projectsData: Project[] = [
         +---------+---------+
         v                   v
 +---------------+   +---------------+
-| CSS Grid      |   | Flexbox       |
-| Layout System |   | Components    |
+| Accessibility |   | Semantic      |
+| WCAG 2.1      |   | Tag Hierarchy |
 +---------------+   +---------------+
       `,
       databaseSpecs: 'N/A',
       authenticationFlow: 'N/A',
       securityProtocols: 'WCAG 2.1 accessibility compliance guidelines.',
       seoOptimization: 'Semantic tag hierarchy (h1-h6, main, section, nav, footer).',
-      performanceTuning: 'Pure CSS rendering with zero JavaScript overhead.',
-      development: 'Written in pure HTML5 and vanilla CSS3.',
-      architecture: 'HTML5 Semantic Tree -> CSS Custom Property Design Tokens.',
+      performanceTuning: 'Pure HTML rendering with zero JavaScript overhead.',
+      development: 'Written in pure semantic HTML5.',
+      architecture: 'HTML5 Semantic Tree -> Accessibility Object Model.',
       seo: 'High semantic score.',
-      challenges: 'Ensuring 100% responsive behavior on all viewport sizes. Solved using fluid CSS clamp() function.',
-      tradeOffs: 'Used pure CSS without frameworks to gain complete mastery over browser layout engines.',
-      lessons: 'Solid CSS fundamentals make framework adoption effortless.',
-      futureRoadmap: 'Add CSS container query examples.',
+      challenges: 'Ensuring 100% accessible keyboard navigation across complex interactive elements.',
+      tradeOffs: 'Focus on pure semantic markup without external framework overhead.',
+      lessons: 'Solid semantic fundamentals make frontend web development robust and accessible to everyone.',
+      futureRoadmap: 'Add Web Components and Shadow DOM examples.',
       timeline: 'May 2024 - Present'
     },
     metrics: {
@@ -783,6 +783,113 @@ export const projectsData: Project[] = [
       bestPractices: 100,
       seo: 100,
       loadTimeMs: 70
+    }
+  },
+  {
+    id: 'css-masterclass',
+    title: 'Modern CSS Architecture & Styling Labs',
+    tagline: 'CSS Grid, Flexbox Layouts, Custom Properties & Animation Labs',
+    status: 'Active',
+    logo: '🎨',
+    categoryTag: 'Learning Labs',
+    technologies: ['CSS3', 'CSS Grid', 'Flexbox', 'CSS Custom Properties', 'Fluid Typography (clamp)', 'CSS Animations'],
+    github: 'https://github.com/IamKady/CSS',
+    summary: 'Comprehensive CSS practice and reference repository exploring advanced layout systems, responsive design patterns, CSS Grid math, and smooth transitions.',
+    whatIAmDoingAndLearning: 'Mastering modern CSS layout systems (Grid, Flexbox, Multi-column), custom property theming engines, and high-performance hardware-accelerated animations.',
+    caseStudy: {
+      overview: 'Practical repository covering modern CSS layout mechanics, responsive design patterns, and design token architectures.',
+      problem: 'Complex responsive layouts often suffer from layout shifts and brittle breakpoint logic when built without deep CSS layout comprehension.',
+      research: 'Evaluated CSS Grid specifications, subgrid, fluid clamp typography, and composited CSS animation performance.',
+      targetUsers: 'UI engineers and frontend developers building fluid, responsive interfaces.',
+      planning: 'Designed modular stylesheets covering layouts, typography, color tokens, and responsive UI components.',
+      design: 'High-contrast responsive components utilizing modern CSS variables.',
+      architectureDiagram: `
++-----------------------------------+
+|      CSS Design System Tokens     |
++-----------------------------------+
+                  |
+        +---------+---------+
+        v                   v
++---------------+   +---------------+
+| CSS Grid 2D   |   | Flexbox 1D    |
+| Layouts       |   | Component Bar |
++---------------+   +---------------+
+      `,
+      databaseSpecs: 'N/A',
+      authenticationFlow: 'N/A',
+      securityProtocols: 'Sanitized CSS styles and safe custom properties.',
+      seoOptimization: 'Clean CSS rules preventing CLS (Cumulative Layout Shift).',
+      performanceTuning: 'Hardware-accelerated CSS transforms and opacity animations.',
+      development: 'Authored in pure modern CSS3 with custom properties.',
+      architecture: 'CSS Custom Property Tokens -> Grid/Flexbox Layout Modules.',
+      seo: 'Zero layout shift.',
+      challenges: 'Creating intrinsic responsive layouts without dozens of media queries.',
+      tradeOffs: 'Pure CSS implementations without preprocessor dependencies.',
+      lessons: 'Modern CSS Grid and custom properties eliminate the need for heavy CSS frameworks in many use cases.',
+      futureRoadmap: 'Add CSS Container Queries (@container) and View Transitions API experiments.',
+      timeline: 'May 2024 - Present'
+    },
+    metrics: {
+      performance: 100,
+      accessibility: 100,
+      bestPractices: 100,
+      seo: 100,
+      loadTimeMs: 65
+    }
+  },
+  {
+    id: 'git-foundations',
+    title: 'Git & GitHub Workflow Engine',
+    tagline: 'Version Control Architecture, Branching Strategies & Merge Workflows',
+    status: 'Active',
+    logo: '🌿',
+    categoryTag: 'Learning Labs',
+    technologies: ['Git', 'GitHub CLI', 'Version Control', 'Branching & Merging', 'CI/CD Workflows'],
+    github: 'https://github.com/IamKady/git-hub-demo',
+    summary: 'Practical sandbox demonstrating Git version control best practices, semantic commit standards, feature branch workflows, and remote repository synchronization.',
+    whatIAmDoingAndLearning: 'Mastering Git internals, commit graph traversal, rebase vs merge trade-offs, and GitHub automation hooks.',
+    caseStudy: {
+      overview: 'Hands-on repository establishing foundational Git workflows and version control discipline.',
+      problem: 'Team collaboration without structured branching strategies leads to merge conflicts and chaotic commit histories.',
+      research: 'Studied Git flow, trunk-based development, and Conventional Commits specifications.',
+      targetUsers: 'Software developers collaborating on distributed codebases.',
+      planning: 'Documented branch naming conventions, atomic commit practices, and pull request review standards.',
+      design: 'Clean Git history with semantic commit messages.',
+      architectureDiagram: `
++-----------------------------------+
+|       Local Feature Branch        |
++-----------------------------------+
+                  |
+                  v (git push / PR)
++-----------------------------------+
+|      GitHub Remote Repository     |
++-----------------------------------+
+                  |
+                  v (main branch sync)
++-----------------------------------+
+|     Production CI/CD Pipeline     |
++-----------------------------------+
+      `,
+      databaseSpecs: 'N/A',
+      authenticationFlow: 'SSH & GPG commit signing.',
+      securityProtocols: 'Branch protection rules and verified commit signatures.',
+      seoOptimization: 'N/A',
+      performanceTuning: 'Fast branch switching and lightweight repository history.',
+      development: 'Maintained using Git and GitHub.',
+      architecture: 'Local Git Workspace -> Remote GitHub Origin -> Production Branches.',
+      seo: 'N/A',
+      challenges: 'Resolving complex three-way merge conflicts cleanly.',
+      tradeOffs: 'Strict conventional commit standards for clear change logs.',
+      lessons: 'Disciplined version control habits are fundamental to software engineering excellence.',
+      futureRoadmap: 'Add GitHub Actions automated CI/CD workflow examples.',
+      timeline: 'May 2024 - Present'
+    },
+    metrics: {
+      performance: 100,
+      accessibility: 100,
+      bestPractices: 100,
+      seo: 95,
+      loadTimeMs: 60
     }
   }
 ];
