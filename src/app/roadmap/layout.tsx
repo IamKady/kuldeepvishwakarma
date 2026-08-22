@@ -1,14 +1,15 @@
 import { Metadata } from 'next';
+import { BreadcrumbJsonLd, PageJsonLd } from '@/components/seo/JsonLd';
 
 export const metadata: Metadata = {
-  title: "Systems Roadmap",
-  description: "Visual checklist of features, database expansions, security layers, and product targets currently scheduled for Kuldeep's projects.",
+  title: "Engineering Roadmap & Milestones",
+  description: "Visual checklist of features, database expansions, security layers, and product targets scheduled for Kuldeep's systems.",
   alternates: {
     canonical: "https://kuldeepvishwakarma.com/roadmap",
   },
   openGraph: {
-    title: "Systems Roadmap | Kuldeep Chandra Vishwakarma",
-    description: "Visual checklist of features, database expansions, security layers, and product targets currently scheduled.",
+    title: "Engineering Roadmap & Milestones | Kuldeep Chandra Vishwakarma",
+    description: "Visual checklist of features, database expansions, security layers, and product targets scheduled for Kuldeep's systems.",
     url: "https://kuldeepvishwakarma.com/roadmap",
     type: "website",
     images: [
@@ -22,12 +23,38 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Systems Roadmap | Kuldeep Chandra Vishwakarma",
-    description: "Visual checklist of features, database expansions, security layers, and product targets currently scheduled.",
+    title: "Engineering Roadmap & Milestones | Kuldeep Chandra Vishwakarma",
+    description: "Visual checklist of features, database expansions, security layers, and product targets scheduled for Kuldeep's systems.",
     images: ["https://kuldeepvishwakarma.com/og-image.png"],
   },
 };
 
-export default function roadmapLayout({ children }: { children: React.ReactNode }) {
-  return <>{children}</>;
+export default function RoadmapLayout({ children }: { children: React.ReactNode }) {
+  const roadmapSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'ItemPage',
+    '@id': 'https://kuldeepvishwakarma.com/roadmap#webpage',
+    url: 'https://kuldeepvishwakarma.com/roadmap',
+    name: 'Engineering Roadmap & Milestones by Kuldeep Chandra Vishwakarma',
+    description: 'Public development roadmap for software architecture, AI tooling, and startup releases.',
+    publisher: {
+      '@type': 'Person',
+      '@id': 'https://kuldeepvishwakarma.com/#person',
+      name: 'Kuldeep Chandra Vishwakarma',
+    },
+  };
+
+  return (
+    <>
+      <BreadcrumbJsonLd
+        items={[
+          { name: 'Home', item: '/' },
+          { name: 'Roadmap', item: '/roadmap' },
+        ]}
+      />
+      <PageJsonLd data={roadmapSchema} />
+      {children}
+    </>
+  );
 }
+

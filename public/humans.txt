@@ -1,0 +1,14 @@
+/* TEAM */
+  Developer: Kuldeep Chandra Vishwakarma
+  Site: https://kuldeepvishwakarma.com
+  Twitter: @Kuldeep81824338
+  GitHub: https://github.com/IamKady
+  LinkedIn: https://www.linkedin.com/in/iamkady/
+  Location: Uttar Pradesh, India
+
+/* SITE */
+  Standards: HTML5, CSS3, ES2024, TypeScript
+  Framework: Next.js 16 (Turbopack, App Router)
+  Styling: Tailwind CSS
+  Animations: Framer Motion
+  Hosting: Vercel

@@ -1,14 +1,15 @@
 import { Metadata } from 'next';
+import { BreadcrumbJsonLd, PageJsonLd } from '@/components/seo/JsonLd';
 
 export const metadata: Metadata = {
-  title: "Cybersecurity Log",
-  description: "CTF writeups, vulnerability analysis, network security research, and security engineering notes.",
+  title: "Cybersecurity Logs & Security Audits",
+  description: "CTF writeups, vulnerability analysis, ethical hacking experiments, network security audits, and security engineering research.",
   alternates: {
     canonical: "https://kuldeepvishwakarma.com/cybersecurity",
   },
   openGraph: {
-    title: "Cybersecurity Log | Kuldeep Chandra Vishwakarma",
-    description: "CTF writeups, vulnerability analysis, network security research, and security engineering notes.",
+    title: "Cybersecurity Logs & Security Audits | Kuldeep Chandra Vishwakarma",
+    description: "CTF writeups, vulnerability analysis, ethical hacking experiments, network security audits, and security engineering research.",
     url: "https://kuldeepvishwakarma.com/cybersecurity",
     type: "website",
     images: [
@@ -22,12 +23,38 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Cybersecurity Log | Kuldeep Chandra Vishwakarma",
-    description: "CTF writeups, vulnerability analysis, network security research, and security engineering notes.",
+    title: "Cybersecurity Logs & Security Audits | Kuldeep Chandra Vishwakarma",
+    description: "CTF writeups, vulnerability analysis, ethical hacking experiments, network security audits, and security engineering research.",
     images: ["https://kuldeepvishwakarma.com/og-image.png"],
   },
 };
 
-export default function cybersecurityLayout({ children }: { children: React.ReactNode }) {
-  return <>{children}</>;
+export default function CybersecurityLayout({ children }: { children: React.ReactNode }) {
+  const cybersecuritySchema = {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    '@id': 'https://kuldeepvishwakarma.com/cybersecurity#webpage',
+    url: 'https://kuldeepvishwakarma.com/cybersecurity',
+    name: 'Cybersecurity Logs & CTF Audits by Kuldeep Chandra Vishwakarma',
+    description: 'Technical notes on network security, web application testing, and CTF security writeups.',
+    publisher: {
+      '@type': 'Person',
+      '@id': 'https://kuldeepvishwakarma.com/#person',
+      name: 'Kuldeep Chandra Vishwakarma',
+    },
+  };
+
+  return (
+    <>
+      <BreadcrumbJsonLd
+        items={[
+          { name: 'Home', item: '/' },
+          { name: 'Cybersecurity', item: '/cybersecurity' },
+        ]}
+      />
+      <PageJsonLd data={cybersecuritySchema} />
+      {children}
+    </>
+  );
 }
+

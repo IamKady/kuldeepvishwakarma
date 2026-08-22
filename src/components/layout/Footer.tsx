@@ -152,8 +152,9 @@ export default function Footer() {
         <div className="mt-12 pt-6 border-t border-slate-200 dark:border-white/5 flex flex-col sm:flex-row items-center justify-between text-[11px] text-slate-500 dark:text-zinc-500">
           <p>© {new Date().getFullYear()} Kuldeep Chandra Vishwakarma. All rights reserved.</p>
           <div className="flex space-x-4 mt-4 sm:mt-0 font-mono text-[10px]">
+            <Link href="/projects" className="hover:text-slate-800 dark:hover:text-zinc-300">/projects</Link>
+            <Link href="/case-studies" className="hover:text-slate-800 dark:hover:text-zinc-300">/case-studies</Link>
             <Link href="/resume" className="hover:text-slate-800 dark:hover:text-zinc-300">/resume</Link>
-            <Link href="/projects" className="hover:text-slate-800 dark:hover:text-zinc-300">/case-studies</Link>
             <Link href="/contact" className="hover:text-slate-800 dark:hover:text-zinc-300">/contact</Link>
             <a href="https://github.com/IamKady" target="_blank" rel="noopener noreferrer" className="hover:text-slate-800 dark:hover:text-zinc-300">github</a>
           </div>

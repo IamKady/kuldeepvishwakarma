@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/">
+  <ShortName>KCV Search</ShortName>
+  <Description>Search Kuldeep Chandra Vishwakarma's Portfolio &amp; Engineering OS</Description>
+  <InputEncoding>UTF-8</InputEncoding>
+  <Url type="text/html" template="https://kuldeepvishwakarma.com/?search={searchTerms}"/>
+  <Image width="32" height="32" type="image/png">https://kuldeepvishwakarma.com/logo.png</Image>
+</OpenSearchDescription>

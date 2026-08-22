@@ -52,6 +52,13 @@ export default function ClientShell({ children }: { children: React.ReactNode })
 
   return (
     <div className="min-h-screen flex flex-col bg-background text-foreground transition-colors duration-300 relative overflow-hidden">
+      {/* Skip to Main Content Link for Accessibility & SEO */}
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-indigo-600 focus:text-white focus:rounded-md focus:shadow-lg focus:outline-none text-xs font-mono"
+      >
+        Skip to main content
+      </a>
       
       {/* Mesh/Grid Background Details */}
       <div className="absolute inset-0 grid-bg pointer-events-none z-0" />
@@ -66,7 +73,7 @@ export default function ClientShell({ children }: { children: React.ReactNode })
       />
 
       {/* Main Pages */}
-      <main className="flex-grow pt-24 pb-16 relative z-10">
+      <main id="main-content" className="flex-grow pt-24 pb-16 relative z-10">
         {children}
       </main>
 
