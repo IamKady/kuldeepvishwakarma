@@ -13,8 +13,8 @@ export default function ArchitecturePage() {
         <h1 className="text-3xl sm:text-5xl font-black text-slate-900 dark:text-white tracking-tight flex items-center gap-2">
           <Cpu className="w-8 h-8 text-indigo-600 dark:text-indigo-400" /> System architectures
         </h1>
-        <p className="text-sm text-slate-600 dark:text-zinc-400 font-sans max-w-xl">
-          Detailed schema specifications, database triggers, and workflow diagrams of automated platforms I have engineered.
+        <p className="text-sm sm:text-base text-slate-600 dark:text-zinc-400 font-sans max-w-xl leading-relaxed">
+          Data flow diagrams, component hierarchies, and architectural decisions behind the systems and platforms I have engineered.
         </p>
       </div>
 
@@ -38,7 +38,7 @@ export default function ArchitecturePage() {
 
               {/* Components list */}
               <div className="lg:col-span-5 space-y-4">
-                <span className="text-[10px] font-mono text-slate-500 dark:text-zinc-500 uppercase tracking-widest block font-bold">Pipeline Nodes</span>
+                <span className="text-[10px] font-mono text-slate-500 dark:text-zinc-500 uppercase tracking-widest block font-bold">System Components</span>
                 <div className="space-y-3.5">
                   {arch.components.map((comp, cIdx) => (
                     <div key={cIdx} className="p-3.5 rounded-xl border border-slate-200 dark:border-white/5 bg-white dark:bg-white/[0.01] shadow-xs dark:shadow-none space-y-1.5">

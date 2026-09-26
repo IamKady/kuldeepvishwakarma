@@ -83,7 +83,7 @@ export default function Cybersecurity() {
         break;
       case 'sudo':
         newHistory.push({
-          text: 'sudo: guest is not in the sudoers file. This incident has been logged and reported to Antigravity core engine daemon.',
+          text: 'sudo: guest is not in the sudoers file. This incident will be reported to the sysadmin.',
           type: 'error'
         });
         break;
@@ -189,8 +189,8 @@ export default function Cybersecurity() {
             <ShieldAlert className="w-5 h-5 text-rose-600 dark:text-rose-400 mr-2" />
             Security & CTF Logs
           </h2>
-          <p className="text-xs text-slate-600 dark:text-zinc-400 font-sans mt-1">
-            Writeups on vulnerability exploitation, secure coding, and linux server logs.
+          <p className="text-xs sm:text-sm text-slate-600 dark:text-zinc-400 font-sans mt-1 leading-relaxed">
+            Practical writeups on vulnerability research, defensive coding patterns, and server hardening.
           </p>
         </div>
 

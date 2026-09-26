@@ -16,33 +16,33 @@ const fallbackLinkedInActivity: LinkedInPostItem[] = [
   {
     id: 'post-1',
     author: 'Kuldeep Chandra Vishwakarma',
-    text: '🚀 Overhauled light mode contrast and fixed full layout footer anchoring across all 29 routes on kuldeepvishwakarma.com! Verified static generator builds with 0 errors.',
+    text: '🚀 Shipped a major update to kuldeepvishwakarma.com! Integrated live Git commit telemetry directly with the GitHub REST API, added an interactive developer HUD terminal, and published field notes on distributed systems and deterministic AI pipelines.',
     date: new Date().toISOString(),
     relativeTime: 'Just now',
-    likesCount: 18,
-    commentsCount: 4,
+    likesCount: 24,
+    commentsCount: 5,
     url: 'https://www.linkedin.com/in/iamkady/',
     category: 'Milestone'
   },
   {
     id: 'post-2',
     author: 'Kuldeep Chandra Vishwakarma',
-    text: '⚡ Scaling StartupWire.in: Built an automated news curation pipeline leveraging Gemini API & pgvector cosine distance similarity search in Supabase PostgreSQL.',
+    text: '⚡ Scaling StartupWire.in: Built an automated tech news curation pipeline leveraging Google Gemini and pgvector cosine similarity in Supabase PostgreSQL. A 0.85 cosine distance threshold catches 80%+ duplicate wire stories before writing to the database.',
     date: new Date(Date.now() - 86400000 * 2).toISOString(),
     relativeTime: '2 days ago',
-    likesCount: 34,
-    commentsCount: 9,
+    likesCount: 38,
+    commentsCount: 11,
     url: 'https://www.linkedin.com/in/iamkady/',
     category: 'Project'
   },
   {
     id: 'post-3',
     author: 'Kuldeep Chandra Vishwakarma',
-    text: '📝 Published case studies for Bookperia and AIToolsWebsite. Exploring distributed systems security and CTF vulnerability assessments.',
+    text: '📝 Published architectural case studies for StartupWire and Bookperia. Exploring distributed caching, HMAC webhook validation, and defensive API boundaries in TypeScript.',
     date: new Date(Date.now() - 86400000 * 5).toISOString(),
     relativeTime: '5 days ago',
-    likesCount: 27,
-    commentsCount: 6,
+    likesCount: 31,
+    commentsCount: 7,
     url: 'https://www.linkedin.com/in/iamkady/',
     category: 'Article'
   }

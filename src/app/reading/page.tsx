@@ -17,10 +17,10 @@ export default function ReadingPage() {
       {/* Header */}
       <div className="space-y-3">
         <h1 className="text-3xl sm:text-5xl font-black text-slate-900 dark:text-white tracking-tight flex items-center gap-2">
-          <BookOpen className="w-8 h-8 text-indigo-600 dark:text-indigo-400" /> Library tracker
+          <BookOpen className="w-8 h-8 text-indigo-600 dark:text-indigo-400" /> Reading &amp; Bookshelf
         </h1>
-        <p className="text-sm text-slate-600 dark:text-zinc-400 font-sans">
-          Tracking books covering software architecture design, entrepreneurship, and cybersecurity logs.
+        <p className="text-sm sm:text-base text-slate-600 dark:text-zinc-400 font-sans max-w-xl leading-relaxed">
+          Books that have shaped my thinking across distributed systems, startups, philosophy, and engineering craft.
         </p>
       </div>
 

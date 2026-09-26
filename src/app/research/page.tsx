@@ -13,8 +13,8 @@ export default function ResearchPage() {
         <h1 className="text-3xl sm:text-5xl font-black text-slate-900 dark:text-white tracking-tight flex items-center gap-2">
           <Shield className="w-8 h-8 text-indigo-600 dark:text-indigo-400" /> Research
         </h1>
-        <p className="text-sm text-slate-600 dark:text-zinc-400 font-sans max-w-xl">
-          MSc Computer Science research preprints, cryptographic security protocols, and mathematical vector models.
+        <p className="text-sm sm:text-base text-slate-600 dark:text-zinc-400 font-sans max-w-xl leading-relaxed">
+          Academic preprints, mathematical formulations, and research notes from my Master&apos;s studies in Computer Science—focusing on distributed systems, vector indexing, and cryptographic security.
         </p>
       </div>
 

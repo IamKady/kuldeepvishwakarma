@@ -1,24 +1,48 @@
 'use client';
 
 import React from 'react';
-import { Settings, Laptop, Terminal, Chrome, Server } from 'lucide-react';
+import { Settings, Laptop, Terminal, Server } from 'lucide-react';
 
 export default function UsesPage() {
   const hardware = [
-    { name: 'Core Machine', desc: 'HP Laptop with AMD Ryzen 7 5700U, 16GB Dual-Channel DDR4 RAM, 512GB NVMe M.2 SSD.' },
-    { name: 'Display & Input', desc: '15.6" FHD IPS panel, Logitech silent mouse, mechanical brown switch keys.' },
-    { name: 'Mobile Node', desc: 'Realme Device used for responsive testing and Android APK debug audits.' }
+    { 
+      name: 'Primary Laptop', 
+      desc: 'HP Pavilion powered by AMD Ryzen 7 5700U (8 cores / 16 threads), 16GB Dual-Channel DDR4 RAM, and a fast 512GB NVMe M.2 SSD.' 
+    },
+    { 
+      name: 'Display & Peripherals', 
+      desc: '15.6" Full HD IPS anti-glare display, Logitech silent ergonomic mouse, and a mechanical keyboard with tactile brown switches.' 
+    },
+    { 
+      name: 'Mobile Testing Device', 
+      desc: 'Realme Android device used for responsive viewport debugging, mobile browser rendering, and APK audits.' 
+    }
   ];
 
   const software = [
-    { name: 'IDE workspace', desc: 'VS Code with theme styling (One Dark Pro) and extensions (ESLint, Prettier, GitLens, Tailwind CSS Intellisense).' },
-    { name: 'Terminal Shell', desc: 'WSL (Ubuntu 22.04 LTS), Warp terminal shell config, and Git bash for windows CLI commands.' },
-    { name: 'Testing Console', desc: 'Postman and Insomnia for local API payload diagnostics.' }
+    { 
+      name: 'Code Editor & Theme', 
+      desc: 'VS Code with One Dark Pro. Key extensions include ESLint, Prettier, GitLens, Error Lens, and Tailwind CSS IntelliSense.' 
+    },
+    { 
+      name: 'Terminal & Shell', 
+      desc: 'WSL 2 (Ubuntu 22.04 LTS) for native Linux tooling, Warp terminal shell, and Git Bash on Windows.' 
+    },
+    { 
+      name: 'API Testing & Debugging', 
+      desc: 'Postman and Insomnia for local REST payload testing, header inspection, and webhook simulation.' 
+    }
   ];
 
   const stack = [
-    { name: 'Local Database Node', desc: 'Docker Desktop orchestrating PostgreSQL databases and Redis caching containers.' },
-    { name: 'Environment Manager', desc: 'NodeJS (v22.1.0 LTS) and Python (3.11) managing local virtual environments.' }
+    { 
+      name: 'Databases & Containers', 
+      desc: 'Docker Desktop orchestrating local PostgreSQL instances with the pgvector extension and Redis caching containers.' 
+    },
+    { 
+      name: 'Runtimes & Package Managers', 
+      desc: 'Node.js (v22 LTS) with npm and pnpm, alongside Python 3.12 with virtual environments (venv) for AI pipelines.' 
+    }
   ];
 
   return (
@@ -27,8 +51,8 @@ export default function UsesPage() {
         <h1 className="text-3xl sm:text-5xl font-black text-slate-900 dark:text-white tracking-tight flex items-center gap-2">
           <Settings className="w-8 h-8 text-indigo-600 dark:text-indigo-400" /> Uses
         </h1>
-        <p className="text-sm text-slate-600 dark:text-zinc-400 font-sans">
-          A checklist detailing the hardware, software utilities, and local server configurations I use daily.
+        <p className="text-sm sm:text-base text-slate-600 dark:text-zinc-400 font-sans leading-relaxed max-w-xl">
+          A curated list of the hardware, developer tools, software, and local environments I rely on every day to write code and ship products.
         </p>
       </div>
 
@@ -36,7 +60,7 @@ export default function UsesPage() {
         {/* Hardware Column */}
         <div className="space-y-4">
           <h2 className="text-base font-bold text-slate-900 dark:text-white uppercase tracking-wider font-mono border-b border-slate-200 dark:border-white/5 pb-2 flex items-center gap-2">
-            <Laptop className="w-4.5 h-4.5 text-indigo-600 dark:text-indigo-400" /> Hardware Specs
+            <Laptop className="w-4.5 h-4.5 text-indigo-600 dark:text-indigo-400" /> Hardware Setup
           </h2>
           <div className="space-y-3.5">
             {hardware.map((item, idx) => (
@@ -51,7 +75,7 @@ export default function UsesPage() {
         {/* Software Column */}
         <div className="space-y-4">
           <h2 className="text-base font-bold text-slate-900 dark:text-white uppercase tracking-wider font-mono border-b border-slate-200 dark:border-white/5 pb-2 flex items-center gap-2">
-            <Terminal className="w-4.5 h-4.5 text-emerald-600 dark:text-emerald-400" /> IDE & Software Console
+            <Terminal className="w-4.5 h-4.5 text-emerald-600 dark:text-emerald-400" /> Editor &amp; Terminal
           </h2>
           <div className="space-y-3.5">
             {software.map((item, idx) => (
@@ -67,7 +91,7 @@ export default function UsesPage() {
       {/* Local Server Stack */}
       <div className="space-y-4">
         <h2 className="text-base font-bold text-slate-900 dark:text-white uppercase tracking-wider font-mono border-b border-slate-200 dark:border-white/5 pb-2 flex items-center gap-2">
-          <Server className="w-4.5 h-4.5 text-amber-600 dark:text-amber-500" /> Local Server & Dev stacks
+          <Server className="w-4.5 h-4.5 text-amber-600 dark:text-amber-500" /> Local Development &amp; Services
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {stack.map((item, idx) => (

@@ -16,8 +16,8 @@ export default function CaseStudiesPage() {
         <h1 className="text-3xl sm:text-5xl font-black text-slate-900 dark:text-white tracking-tight flex items-center gap-2">
           <FileSearch className="w-8 h-8 text-indigo-600 dark:text-indigo-400" /> Case studies
         </h1>
-        <p className="text-sm text-slate-600 dark:text-zinc-400 font-sans max-w-xl">
-          Unified portal containing comprehensive engineering evaluations, architectural audits, impact metrics, and trade-offs.
+        <p className="text-sm sm:text-base text-slate-600 dark:text-zinc-400 font-sans max-w-xl leading-relaxed">
+          In-depth architectural breakdowns, real-world technical trade-offs, and lessons learned from designing and shipping production software.
         </p>
       </div>
 

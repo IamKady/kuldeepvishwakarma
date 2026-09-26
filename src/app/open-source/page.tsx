@@ -97,7 +97,7 @@ export default function OpenSourcePage() {
             <div className="flex items-center space-x-2">
               <span className="text-[10px] font-mono uppercase tracking-widest text-indigo-600 dark:text-indigo-400 bg-indigo-500/10 px-2.5 py-0.5 rounded-full border border-indigo-500/20 font-bold flex items-center gap-1.5">
                 <Github className="w-3 h-3" />
-                GitHub Ecosystem Hub
+                Open Source &amp; Repositories
               </span>
               {isLiveSync && (
                 <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 text-[10px] font-mono font-semibold">
@@ -105,16 +105,16 @@ export default function OpenSourcePage() {
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                     <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
                   </span>
-                  Live REST Sync
+                  Live GitHub Sync
                 </span>
               )}
             </div>
 
             <h1 className="text-3xl sm:text-5xl font-black text-slate-900 dark:text-white tracking-tight flex items-center gap-3 mt-2">
-              <Code className="w-8 h-8 text-indigo-600 dark:text-indigo-400" /> Open Source & GitHub
+              <Code className="w-8 h-8 text-indigo-600 dark:text-indigo-400" /> Open Source &amp; Code
             </h1>
-            <p className="text-sm text-slate-600 dark:text-zinc-400 font-sans max-w-2xl mt-1">
-              Public code repositories, system architectures, AI agent utilities, and ecosystem contribution pull requests authored by <strong className="text-slate-900 dark:text-white">Kuldeep Chandra Vishwakarma (@IamKady)</strong>.
+            <p className="text-sm sm:text-base text-slate-600 dark:text-zinc-400 font-sans max-w-2xl mt-1 leading-relaxed">
+              Public code repositories, developer utilities, and open-source contributions authored by <strong className="text-slate-900 dark:text-white">Kuldeep Chandra Vishwakarma (@IamKady)</strong>.
             </p>
           </div>
 

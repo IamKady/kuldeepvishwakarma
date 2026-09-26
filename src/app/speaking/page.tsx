@@ -7,18 +7,18 @@ export default function SpeakingPage() {
   const talks = [
     {
       title: 'Building Autonomous Curation Engines with Gemini 1.5 Flash',
-      event: 'Webinar & Technical Presentation',
+      event: 'Developer Meetup & Technical Presentation',
       date: 'June 2026',
-      audience: 'Developer Meetup',
-      desc: 'Discussed strategies for prompt tuning, vector deduplication inside PostgreSQL, and caching edge configurations in Next.js.',
+      audience: 'Engineers & Founders',
+      desc: 'Shared practical lessons from deploying Google Gemini in production: enforcing deterministic JSON schemas, vector deduplication with pgvector, and sub-50ms edge caching in Next.js 16.',
       slidesUrl: 'https://github.com/IamKady'
     },
     {
       title: 'Transitioning from Civil Engineering to Systems Coding',
-      event: 'College Tech Talk',
+      event: 'University Tech Talk',
       date: 'April 2025',
       audience: 'CS Undergraduates',
-      desc: 'Shared structural physics perspectives mapping directly to database design schemas, routing tables, and server containers.',
+      desc: 'Explored how the physical mechanics of load distribution, structural drafting, and material tension directly map to resilient database design, distributed caching, and microservices.',
       slidesUrl: 'https://github.com/IamKady'
     }
   ];
@@ -29,25 +29,26 @@ export default function SpeakingPage() {
       {/* Header */}
       <div className="space-y-3">
         <h1 className="text-3xl sm:text-5xl font-black text-slate-900 dark:text-white tracking-tight flex items-center gap-2">
-          <Radio className="w-8 h-8 text-indigo-600 dark:text-indigo-400 animate-pulse" /> Speaking
+          <Radio className="w-8 h-8 text-indigo-600 dark:text-indigo-400" /> Speaking &amp; Talks
         </h1>
-        <p className="text-sm text-slate-600 dark:text-zinc-400 font-sans max-w-xl">
-          College presentations, developers webinars, and tech talks sharing systems engineering learnings.
+        <p className="text-sm sm:text-base text-slate-600 dark:text-zinc-400 font-sans max-w-xl leading-relaxed">
+          Presentations, developer meetups, and technical talks on distributed architectures, AI agent pipelines, and engineering transitions.
         </p>
       </div>
 
       {/* Talks list */}
       <div className="grid grid-cols-1 gap-6">
         {talks.map((talk, idx) => (
-          <div key={idx} className="p-6 rounded-2xl border border-slate-200 dark:border-white/10 glass-panel space-y-4 shadow-xl bg-white/80 dark:bg-black/40">
+          <div key={idx} className="p-6 rounded-2xl border border-slate-200 dark:border-white/10 glass-panel space-y-4 shadow-sm bg-white/80 dark:bg-black/40">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-200 dark:border-white/5 pb-3">
               <div>
-                <h2 className="text-base font-bold text-slate-900 dark:text-white font-sans">{talk.title}</h2>
+                <h2 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white font-sans">{talk.title}</h2>
                 <span className="text-xs text-indigo-600 dark:text-indigo-400 font-mono block mt-0.5">{talk.event}</span>
               </div>
 
-              <div className="flex items-center space-x-3 text-[10px] font-mono text-slate-500 dark:text-zinc-500">
+              <div className="flex items-center space-x-3 text-[11px] font-mono text-slate-500 dark:text-zinc-500">
                 <span className="flex items-center"><Calendar className="w-3.5 h-3.5 mr-1" /> {talk.date}</span>
+                <span>•</span>
                 <span className="flex items-center"><Users className="w-3.5 h-3.5 mr-1" /> {talk.audience}</span>
               </div>
             </div>
@@ -56,14 +57,14 @@ export default function SpeakingPage() {
               {talk.desc}
             </p>
 
-            <div className="pt-2 flex justify-between items-center text-[10px] text-slate-500 dark:text-zinc-500 font-mono">
+            <div className="pt-2 flex justify-between items-center text-xs text-slate-500 dark:text-zinc-500 font-mono">
               <a 
                 href={talk.slidesUrl} 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 dark:hover:text-indigo-300 flex items-center"
+                className="text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 dark:hover:text-indigo-300 flex items-center font-semibold"
               >
-                Inspect presentation details <ExternalLink className="w-3 h-3 ml-0.5" />
+                View session repository &amp; notes <ExternalLink className="w-3.5 h-3.5 ml-1" />
               </a>
             </div>
           </div>

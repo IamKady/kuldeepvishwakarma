@@ -229,11 +229,11 @@ export default function Home() {
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
               </span>
               <span className="text-[10px] sm:text-xs font-mono text-slate-800 dark:text-zinc-200 tracking-wider flex items-center gap-1.5">
-                <span className="text-emerald-600 dark:text-emerald-400 font-bold">SYSTEM ONLINE</span>
-                <span className="text-slate-400 dark:text-zinc-600">//</span>
-                <span>KCV_NODE_01</span>
+                <span className="text-emerald-600 dark:text-emerald-400 font-bold">AVAILABLE FOR FULL-TIME ROLES</span>
                 <span className="text-slate-400 dark:text-zinc-600">•</span>
-                <span className="text-indigo-600 dark:text-indigo-400 font-medium">AVAILABLE FOR HIRE</span>
+                <span>BASED IN INDIA (IST)</span>
+                <span className="text-slate-400 dark:text-zinc-600">•</span>
+                <span className="text-indigo-600 dark:text-indigo-400 font-medium">SOFTWARE ENGINEER &amp; FOUNDER</span>
               </span>
             </motion.div>
 
@@ -266,9 +266,9 @@ export default function Home() {
               initial={{ opacity: 0, y: 25 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-sm sm:text-base text-slate-600 dark:text-zinc-400 leading-relaxed font-sans max-w-2xl"
+              className="text-sm sm:text-base text-slate-600 dark:text-zinc-300 leading-relaxed font-sans max-w-2xl"
             >
-              Engineering resilient, high-throughput web architectures and autonomous AI reasoning systems. Founder of <Link href="/startups" className="text-slate-900 dark:text-white font-semibold underline decoration-indigo-500/40 hover:decoration-indigo-500 underline-offset-4 transition-colors">StartupWire.in</Link> (AI tech intelligence engine) and <Link href="/startups" className="text-slate-900 dark:text-white font-semibold underline decoration-emerald-500/40 hover:decoration-emerald-500 underline-offset-4 transition-colors">Bookperia.com</Link> (semantic book discovery sanctuary), while completing a Master&apos;s degree in Computer Science.
+              Full-stack software engineer and startup founder. I design and build resilient distributed web applications, deterministic AI agent pipelines, and high-performance tools using Next.js 16, TypeScript, and Python. Creator of <Link href="/startups" className="text-slate-900 dark:text-white font-semibold underline decoration-indigo-500/40 hover:decoration-indigo-500 underline-offset-4 transition-colors">StartupWire.in</Link> and <Link href="/startups" className="text-slate-900 dark:text-white font-semibold underline decoration-emerald-500/40 hover:decoration-emerald-500 underline-offset-4 transition-colors">Bookperia.com</Link>, while completing a Master&apos;s degree in Computer Science.
             </motion.p>
 
             <motion.div
@@ -590,10 +590,10 @@ export default function Home() {
           <div className="space-y-1">
             <h2 className="text-2xl sm:text-3xl font-black tracking-tight text-slate-900 dark:text-white font-sans flex items-center gap-2">
               <Activity className="w-5 h-5 text-indigo-600 dark:text-indigo-400" />
-              Interactive Developer Hub
+              Engineering Hub
             </h2>
             <p className="text-xs sm:text-sm text-slate-600 dark:text-zinc-400 font-sans">
-              System performance stats, deployment pipelines, library checklists, and active codebase indexes.
+              Live commit telemetry, deployment status, technical stack radar, and open-source milestones.
             </p>
           </div>
           <span className="text-[10px] sm:text-xs font-mono text-slate-600 dark:text-zinc-500 bg-white dark:bg-white/5 px-3 py-1.5 rounded-md border border-slate-200 dark:border-white/5 flex items-center shadow-xs dark:shadow-none">

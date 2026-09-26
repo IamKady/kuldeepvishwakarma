@@ -51,8 +51,8 @@ export default function LearningJournalPage() {
         <h1 className="text-3xl sm:text-5xl font-black text-slate-900 dark:text-white tracking-tight flex items-center gap-2">
           <BookOpen className="w-8 h-8 text-indigo-600 dark:text-indigo-400" /> Learning journal
         </h1>
-        <p className="text-sm text-slate-600 dark:text-zinc-400 font-sans max-w-xl">
-          Logging my coding insights, system setups, SEO adjustments, and failures building software.
+        <p className="text-sm sm:text-base text-slate-600 dark:text-zinc-400 font-sans max-w-xl leading-relaxed">
+          Raw notes, engineering trade-offs, and lessons learned while building products and exploring systems in public.
         </p>
       </div>
 

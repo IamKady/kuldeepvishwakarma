@@ -26,33 +26,33 @@ export default function About() {
   const storySections = [
     {
       id: 'transition-story',
-      title: 'My Journey: From Civil Blueprints to Software Architecture',
+      title: 'From Civil Blueprints to Distributed Software',
       icon: <Compass className="w-5 h-5 text-indigo-400" />,
-      content: "I began my technical education studying Civil Engineering, learning structural mechanics and spatial design. While drafting load distributions, I noticed something fascinating: structural nodes and coordinates in physical engineering map naturally to relational databases and software architecture. Driven by this realization, I taught myself programming during off-hours, transitioned into Computer Science, graduated with honors in B.Tech CSE, and am now pursuing my Master's in CS while building startup products like StartupWire.in and Bookperia.com."
+      content: "Before writing Next.js route handlers or configuring vector search, I spent three years in Civil Engineering drafting physical blueprints and analyzing structural load distributions. When I realized that physical cantilevers and beams followed the exact same principles as database partitioning and distributed caching, something clicked. I taught myself programming late at night, transitioned into Computer Science, graduated with honors in B.Tech CSE, and am now pursuing my Master's in CS while building real products like StartupWire.in."
     },
     {
       id: 'why-tech',
       title: 'Why I Build Software',
       icon: <Heart className="w-5 h-5 text-rose-400" />,
-      content: "Software is the ultimate creative medium. With a computer, internet connection, and curiosity, you can turn an abstract idea into an active utility that helps people worldwide. It connects logical problem solving with real-world impact."
+      content: "Software is the only creative medium where a single builder with a laptop and curiosity can turn an abstract idea into an active utility used by thousands of people. Connecting logical systems thinking with real-world human impact is what gets me excited to sit down at the keyboard every single morning."
     },
     {
       id: 'engineering-philosophy',
       title: 'Engineering Values',
       icon: <Code className="w-5 h-5 text-emerald-400" />,
-      content: "I believe in writing clean, readable code, validating data strictly at boundaries, and creating fast, accessible user experiences. Great software should feel effortless for users while remaining robust and maintainable under the hood."
+      content: "I value simplicity over cleverness. In production, the most resilient code is the code that is impossible to misunderstand, verified strictly at data boundaries with runtime schemas, and designed to fail gracefully. Great software should feel effortless to the user while remaining robust under heavy load."
     },
     {
       id: 'learning-philosophy',
       title: 'Learning in Public',
       icon: <BookOpen className="w-5 h-5 text-amber-400" />,
-      content: "I learn best by building real products, documenting challenges openly, and continuously experimenting. Whether exploring LLM agent architectures or cybersecurity CTF writeups, staying curious and transparent is my guiding principle."
+      content: "I learn best by shipping real systems, breaking things down, and documenting what actually happened—including the trade-offs and edge cases that broke at 2 AM. Sharing engineering post-mortems and open-source code openly keeps me accountable and constantly growing."
     },
     {
       id: 'beyond-code',
-      title: 'Beyond the Code',
+      title: 'Outside the Terminal',
       icon: <Heart className="w-5 h-5 text-purple-400" />,
-      content: "Outside of coding, I'm an avid reader who loves books on philosophy, Stoicism, and classic literature. I also enjoy physical sketching, exploring nature, and disconnecting from screens to recharge. A fulfilling engineering career starts with a balanced, curious mind."
+      content: "When I step away from the monitor, I'm an avid reader who loves books on Stoic philosophy, classic literature, and systems thinking. I still pick up a pencil to sketch freehand blueprints and study nature. A calm, curious mind outside the terminal is the secret to sustained engineering craftsmanship."
     }
   ];
 
@@ -103,10 +103,10 @@ export default function About() {
             </span>
           </div>
           <h1 className="text-3xl sm:text-5xl font-black text-slate-900 dark:text-white tracking-tight leading-none">
-            Hi, I'm Kuldeep — My Story & Journey
+            Hi, I&apos;m Kuldeep — Engineer &amp; Builder
           </h1>
-          <p className="text-sm text-slate-600 dark:text-zinc-400 font-sans leading-relaxed max-w-xl">
-            Tracing my transition from civil engineering drafting into software development, coding values, and personal milestones.
+          <p className="text-sm sm:text-base text-slate-600 dark:text-zinc-400 font-sans leading-relaxed max-w-xl">
+            A personal look at my journey from civil engineering blueprints to software architecture, core engineering values, and lessons along the way.
           </p>
         </div>
 

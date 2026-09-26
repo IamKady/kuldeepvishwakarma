@@ -22,8 +22,8 @@ export default function DeveloperNotesPage() {
         <h1 className="text-3xl sm:text-5xl font-black text-slate-900 dark:text-white tracking-tight flex items-center gap-2">
           <Terminal className="w-8 h-8 text-indigo-600 dark:text-indigo-400" /> Developer notes
         </h1>
-        <p className="text-sm text-slate-600 dark:text-zinc-400 font-sans max-w-xl">
-          Quick commands, setup routines, shell parameters, and syntax cheat sheets compiled during daily engineering workflows.
+        <p className="text-sm sm:text-base text-slate-600 dark:text-zinc-400 font-sans max-w-xl leading-relaxed">
+          Essential CLI commands, shell shortcuts, and configuration snippets I reference frequently while coding and debugging.
         </p>
       </div>
 

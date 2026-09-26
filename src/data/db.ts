@@ -544,15 +544,15 @@ export const projectsData: Project[] = [
     technologies: ['Next.js 16 App Router', 'React 19', 'TypeScript', 'Tailwind CSS v4', 'Framer Motion', 'GitHub REST API', 'LinkedIn API', 'Zustand', 'Vercel Edge'],
     github: 'https://github.com/IamKady/kuldeepvishwakarma',
     live: 'https://kuldeepvishwakarma.com',
-    summary: 'Personal developer portfolio OS built with Next.js App Router, featuring site-wide light/dark mode contrast, real-time GitHub commit feeds, LinkedIn live work streams, and 29 subpage architectures.',
-    whatIAmDoingAndLearning: 'Mastering Next.js App Router compilation, Tailwind CSS v4 `@variant dark` custom directives, dynamic sitemaps generation, structured JSON-LD Schema.org metadata, and real-time GitHub/LinkedIn REST API integrations.',
+    summary: 'Personal developer platform built with Next.js 16 App Router, featuring an interactive developer HUD, real-time GitHub commit telemetry, verified system architecture case studies, and responsive editorial typography.',
+    whatIAmDoingAndLearning: 'Mastering Next.js 16 App Router compilation, Tailwind CSS v4 CSS-first theming, dynamic sitemaps generation, structured JSON-LD Schema.org metadata, and real-time GitHub/LinkedIn REST API integrations.',
     caseStudy: {
-      overview: 'Engineered as a personal operating system to showcase verified technical skills, live commit activity, and detailed system architecture case studies.',
-      problem: 'Generic portfolios look static, lack real empirical commit evidence, and often break in light/dark mode transitions.',
-      research: 'Audited modern developer sites. Built a monospaced terminal aesthetic with interactive HUD dashboards.',
-      targetUsers: 'Recruiters, founders, technical leaders, and software engineering collaborators.',
-      planning: 'Structured 29 dynamic routes with clean layout docking, client shells, and zero bottom viewport overflow.',
-      design: 'Vibrant indigo and emerald glowing accents with glassmorphism panels and responsive CSS grid math.',
+      overview: 'Engineered as an interactive personal platform to showcase real-world projects, live GitHub telemetry, technical case studies, and engineering field notes.',
+      problem: 'Most developer portfolios are static resumes filled with unverified claims and boilerplate templates that fail to reflect an engineer\'s true technical depth and daily momentum.',
+      research: 'Studied modern developer tools like Linear and Stripe Press. Designed an interactive CLI sandbox and HUD terminal paired with clean, accessible editorial typography.',
+      targetUsers: 'Founders, engineering leaders, technical recruiters, and open-source collaborators.',
+      planning: 'Architected modular App Router layouts, dynamic sitemaps, JSON-LD Schema.org metadata, and low-latency API route caching.',
+      design: 'Dark/light theme system with smooth glassmorphism, responsive CSS variables, and accessible color contrast.',
       architectureDiagram: `
 +-----------------------------------+
 |        Client Viewport Edge       |
@@ -571,12 +571,12 @@ export const projectsData: Project[] = [
       securityProtocols: 'Strict Content Security Policies, sanitized inputs, and sanitized meta tags.',
       seoOptimization: 'Achieved 100/100 Lighthouse SEO score with custom OpenGraph banners and canonical routes.',
       performanceTuning: 'Fast 150ms page transitions using Turbopack compiler optimizations and Vercel Edge caching.',
-      development: 'Iteratively refactored 29 routes for WCAG contrast compliance and clean layout flex docking.',
+      development: 'Built with Next.js 16, TypeScript, Tailwind CSS v4, and Framer Motion.',
       architecture: 'Client Shell -> Next.js API Routes -> GitHub/LinkedIn APIs.',
       seo: 'Full OpenGraph, Twitter card tags, and dynamic sitemap.xml route generation.',
-      challenges: 'Eliminating extraneous vertical scroll whitespace below the footer. Fixed using strict overflow clipping.',
-      tradeOffs: 'Favored Tailwind 4 custom variants over heavy UI libraries to maintain minimal bundle weight.',
-      lessons: 'Continuous iteration and empirical runtime verification ensure rock-solid production web applications.',
+      challenges: 'Balancing rich interactive micro-animations and cybernetic terminal HUD elements with sub-150ms cold loads and zero cumulative layout shift (CLS).',
+      tradeOffs: 'Favored native CSS custom properties and lightweight utility tokens over bulky component libraries to keep client bundles under 150kB.',
+      lessons: 'Real-world developer telemetry (like live Git commits) provides authentic proof of work far better than static resume bullets.',
       futureRoadmap: 'Expose public GraphQL endpoint for personal tech telemetry data.',
       timeline: 'Jul 2026 - Present (Active Development)'
     },
@@ -1128,13 +1128,13 @@ export const timelineMilestones: TimelineMilestone[] = [
     id: 'time-present',
     year: '2025 – Present',
     title: 'MSc Computer Science & Startup Builder',
-    organization: 'Self & University',
-    description: 'Pursuing academic research in distributed architectures while building scalable digital products.',
+    organization: 'Self-Directed & University',
+    description: 'Researching distributed systems and vector search while building and scaling StartupWire.in and Bookperia.com.',
     category: 'work',
     details: [
-      'Engineered StartupWire.in: Crawling system publishing aggregated articles with programmatic SEO and 100/100 Lighthouse rating.',
-      'Diving deep into Artificial Intelligence APIs, vector search databases, and JWT API security safeguards.',
-      'Studying advanced distributed system paradigms and networking protocols.'
+      'Engineered StartupWire.in: Built an automated news pipeline parsing 50+ tech sources, deduplicating articles with pgvector cosine distance, and achieving 100/100 Lighthouse performance.',
+      'Developing deterministic AI agent workflows using Google Gemini SDK, Zod runtime validation, and vector similarity indexing.',
+      'Studying advanced distributed systems, consensus models, and cryptographic security.'
     ]
   },
   {
@@ -1142,12 +1142,12 @@ export const timelineMilestones: TimelineMilestone[] = [
     year: '2022 – 2025',
     title: 'B.Tech in Computer Science & Engineering',
     organization: 'Dr. A.P.J. Abdul Kalam Technical University',
-    description: 'Transitioned fully into computer science, completing coursework in database indexing, systems programming, and compilers.',
+    description: 'Completed full-stack computer science curriculum with honors (7.29 CGPA), mastering systems programming, database indexing, and web architectures.',
     category: 'education',
     details: [
-      'Graduated with honors (7.29 CGPA). Deployed freelance MERN stack web nodes for global startup clients.',
-      'Wrote Python data analyzers and automated shell integration scripts.',
-      'Completed project audits on SQL Injection pathways and server protection checklists.'
+      'Built custom full-stack web applications for startup clients as an independent developer.',
+      'Engineered automation tools, web scrapers, and data ingestion pipelines in Python and Node.js.',
+      'Conducted security audits focused on SQL injection prevention, rate limiting, and JWT authentication safeguards.'
     ]
   },
   {
@@ -1155,42 +1155,42 @@ export const timelineMilestones: TimelineMilestone[] = [
     year: '2019 – 2022',
     title: 'Diploma in Civil Engineering',
     organization: 'Technical Board',
-    description: 'Completed structural physics training. Learned to draft structural blueprints and coordinate physical logistics.',
+    description: 'Trained in structural mechanics and spatial blueprint drafting. While calculating physical load distributions, realized that physical structural principles mirrored database schemas and distributed software architecture.',
     category: 'transition',
     details: [
-      'Acquired system layout disciplines. Transitioned into software systems after realizing physics blueprints map directly to relational schemas.',
-      'Self-taught programming fundamentals: HTML, CSS, JavaScript, and database structures during off-hours.'
+      'Discovered programming during off-hours, self-teaching JavaScript, Python, database structures, and web technologies.',
+      'Decided to formally transition into Computer Science to pursue software engineering full-time.'
     ]
   },
   {
     id: 'time-explore',
     year: '2018 – 2019',
-    title: 'Career Exploration Phase',
+    title: 'Early Technology & Web Exploration',
     organization: 'Self-Directed',
-    description: 'Experimented with web publishing, SEO networks, and system setups to find long-term technology pathways.',
+    description: 'Explored web development, hosting environments, and search engine mechanics, sparking a lifelong curiosity for building online tools.',
     category: 'transition',
     details: [
-      'Configured WordPress nodes and managed traffic setups.',
-      'Analyzed web crawler patterns and Google search engine crawlers.'
+      'Configured web servers, learned DNS routing, and managed high-traffic publishing sites.',
+      'Analyzed web crawling patterns and algorithmic search indexing.'
     ]
   },
   {
     id: 'time-12th',
     year: '2018',
-    title: 'Class XII (Intermediate)',
+    title: 'Class XII (Intermediate - Science & Math)',
     organization: 'State Board',
-    description: 'Focused on Mathematics, Physics, and Chemistry, establishing computational analytical baselines.',
+    description: 'Focused on Mathematics, Physics, and Chemistry, graduating with 82% and building the analytical foundation for computer science.',
     category: 'education',
-    details: ['Scored 82% overall, laying structural analytical skills needed for system algorithms.']
+    details: ['Developed deep curiosity for analytical problem solving and scientific principles.']
   },
   {
     id: 'time-10th',
     year: '2016',
     title: 'Class X (High School)',
     organization: 'State Board',
-    description: 'First formal introduction to logical studies, general sciences, and arithmetic equations.',
+    description: 'Graduated with top academic standing, discovering an early passion for science and mathematics.',
     category: 'education',
-    details: ['Graduated top tier, establishing foundational problem-solving disciplines.']
+    details: ['Graduated top tier with distinction across sciences and mathematics.']
   }
 ];
 

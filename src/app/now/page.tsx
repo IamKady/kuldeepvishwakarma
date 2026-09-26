@@ -35,19 +35,19 @@ export default function NowPage() {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
           {/* Location */}
           <div className="p-5 rounded-2xl border border-slate-200 dark:border-white/5 bg-white dark:bg-white/[0.01] shadow-xs dark:shadow-none space-y-3">
-            <span className="text-[10px] font-mono text-slate-500 dark:text-zinc-500 uppercase tracking-wider block flex items-center gap-1.5"><MapPin className="w-3.5 h-3.5" /> Coordinates</span>
+            <span className="text-[10px] font-mono text-slate-500 dark:text-zinc-500 uppercase tracking-wider block flex items-center gap-1.5"><MapPin className="w-3.5 h-3.5" /> Location</span>
             <h3 className="text-sm font-bold text-slate-900 dark:text-white">Uttar Pradesh, India</h3>
             <p className="text-xs text-slate-600 dark:text-zinc-400 leading-relaxed">
-              Living and working in India (IST, GMT +5:30). Optimizing distributed content workers and completing MSc studies remotely.
+              Based in India (IST, UTC +5:30). Building software products full-time and completing my Master&apos;s degree in Computer Science.
             </p>
           </div>
 
-          {/* Vibe */}
+          {/* Current Focus */}
           <div className="p-5 rounded-2xl border border-slate-200 dark:border-white/5 bg-white dark:bg-white/[0.01] shadow-xs dark:shadow-none space-y-3">
-            <span className="text-[10px] font-mono text-slate-500 dark:text-zinc-500 uppercase tracking-wider block flex items-center gap-1.5"><Radio className="w-3.5 h-3.5" /> Current Vibe</span>
-            <h3 className="text-sm font-bold text-slate-900 dark:text-white">Lo-Fi & Systems Coding</h3>
+            <span className="text-[10px] font-mono text-slate-500 dark:text-zinc-500 uppercase tracking-wider block flex items-center gap-1.5"><Radio className="w-3.5 h-3.5" /> Daily Focus</span>
+            <h3 className="text-sm font-bold text-slate-900 dark:text-white">Deep Work &amp; Systems Engineering</h3>
             <p className="text-xs text-slate-600 dark:text-zinc-400 leading-relaxed">
-              Focusing on monospaced layouts, terminal utilities, and reading Martin Kleppmann's reviews of database indexes.
+              Focusing on clean TypeScript architecture, AI agent pipelines, and reading Martin Kleppmann&apos;s Designing Data-Intensive Applications.
             </p>
           </div>
         </div>
@@ -105,21 +105,21 @@ export default function NowPage() {
               <span className="w-1.5 h-1.5 rounded-full bg-indigo-600 dark:bg-indigo-500 mt-2 mr-3 flex-shrink-0" />
               <div>
                 <span className="font-bold text-slate-900 dark:text-white">Scaling StartupWire.in</span>
-                <p className="text-xs text-slate-600 dark:text-zinc-400 mt-0.5">Optimizing pgvector cosine distance deduplication algorithms in Supabase and designing automated newsletter digest triggers.</p>
+                <p className="text-xs text-slate-600 dark:text-zinc-400 mt-0.5">Refining semantic deduplication with pgvector in Supabase and setting up automated weekly digest newsletters for readers.</p>
               </div>
             </li>
             <li className="flex items-start">
               <span className="w-1.5 h-1.5 rounded-full bg-indigo-600 dark:bg-indigo-500 mt-2 mr-3 flex-shrink-0" />
               <div>
-                <span className="font-bold text-slate-900 dark:text-white">MSc Computer Science coursework</span>
-                <p className="text-xs text-slate-600 dark:text-zinc-400 mt-0.5">Researching networking logs, distributed hashing systems, and software engineering workflows.</p>
+                <span className="font-bold text-slate-900 dark:text-white">MSc in Computer Science</span>
+                <p className="text-xs text-slate-600 dark:text-zinc-400 mt-0.5">Deepening research into distributed systems, consensus protocols, and advanced database indexing.</p>
               </div>
             </li>
             <li className="flex items-start">
               <span className="w-1.5 h-1.5 rounded-full bg-indigo-600 dark:bg-indigo-500 mt-2 mr-3 flex-shrink-0" />
               <div>
-                <span className="font-bold text-slate-900 dark:text-white">Ethical Hacking writeups</span>
-                <p className="text-xs text-slate-600 dark:text-zinc-400 mt-0.5">Logging CTF challenge reviews covering SQL inject pathways and JWT session bypasses inside private folders.</p>
+                <span className="font-bold text-slate-900 dark:text-white">Security Research &amp; CTF Writeups</span>
+                <p className="text-xs text-slate-600 dark:text-zinc-400 mt-0.5">Practicing defensive web security, auditing API authentication boundaries, and documenting vulnerability writeups.</p>
               </div>
             </li>
           </ul>
