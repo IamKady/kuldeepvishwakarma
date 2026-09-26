@@ -2031,6 +2031,271 @@ Try writing just 200 to 300 words a day—not for an audience, but for yourself.
 - **Walking in Nature**: Stepping outside and taking long walks resets your attention span and often sparks creative breakthroughs that don't happen sitting at a desk.
 
 A long, enjoyable engineering career is built on maintaining a healthy, vibrant life outside the terminal.`
+  },
+  {
+    id: 'designing-interactive-cli-hud-terminal',
+    title: 'Designing an Interactive CLI & Cyberpunk HUD Terminal in Next.js 16',
+    description: 'A deep architectural guide to crafting an ultra-fast developer HUD with monospaced JSON views, animated reticle overlays, and an interactive shell sandbox in React 19.',
+    date: '2026-08-20',
+    category: 'Frontend & UI',
+    readTime: '9 min read',
+    type: 'tech',
+    content: `Modern developer portfolios often resemble static resumes—flat grids of project screenshots and lists of bullet points. But a software engineer's website should feel alive, reflecting the craftsmanship and systems thinking of its author.
+
+In this guide, we break down the architecture of the Cyberpunk HUD Terminal built for [kuldeepvishwakarma.com](https://kuldeepvishwakarma.com)—combining monospaced JSON inspections, biometric photo reticles, live telemetry streams, and an interactive CLI shell sandbox in Next.js 16 and React 19.
+
+### Step 1: The Multi-View Telemetry Architecture
+Rather than forcing all information into a single view, we organize the HUD into 4 distinct operational modes:
+* **01 // BIO.json**: A syntax-highlighted code editor view with line numbers and quick-copy payload triggers.
+* **02 // OPERATOR.id**: A cybernetic biometric viewport featuring animated scanlines and coordinate telemetry.
+* **03 // SHELL.sh**: An autoscrolling, command-driven CLI terminal sandbox.
+* **04 // VITALS.sys**: A real-time telemetry card reporting edge CDN latency, SEO scores, and security ratings.
+
+\`\`\`typescript
+type HudView = 'code' | 'photo' | 'cli' | 'vitals';
+
+export function TerminalHeader({ currentView, setView }: { currentView: HudView; setView: (v: HudView) => void }) {
+  const tabs = [
+    { id: 'code', label: '01 // BIO.json' },
+    { id: 'photo', label: '02 // OPERATOR.id' },
+    { id: 'cli', label: '03 // SHELL.sh' },
+    { id: 'vitals', label: '04 // VITALS.sys' },
+  ];
+
+  return (
+    <div className="flex items-center space-x-1 font-mono text-[10px]">
+      {tabs.map((tab) => (
+        <button
+          key={tab.id}
+          onClick={() => setView(tab.id as HudView)}
+          className={\`px-2 py-0.5 rounded transition-all \${
+            currentView === tab.id
+              ? 'text-indigo-400 bg-indigo-500/10 font-bold border border-indigo-500/30'
+              : 'text-zinc-500 hover:text-zinc-300'
+          }\`}
+        >
+          {tab.label}
+        </button>
+      ))}
+    </div>
+  );
+}
+\`\`\`
+
+### Step 2: The Interactive CLI Command Dispatcher
+The terminal sandbox maintains history in memory and dispatches commands with zero external runtime dependencies:
+
+\`\`\`typescript
+interface CliEntry {
+  command: string;
+  output: string;
+}
+
+export function useTerminalShell() {
+  const [history, setHistory] = useState<CliEntry[]>([
+    { command: 'init', output: 'KCV Terminal Sandbox v2.6.4 [ONLINE]. Type "help" for commands.' }
+  ]);
+  const [input, setInput] = useState('');
+
+  const executeCommand = (cmd: string) => {
+    const trimmed = cmd.trim().toLowerCase();
+    let output = '';
+
+    switch (trimmed) {
+      case 'help':
+        output = 'Available: bio, stack, startups, projects, vitals, neofetch, uptime, hire, clear';
+        break;
+      case 'stack':
+        output = 'Next.js 16, TypeScript, Python 3.12, FastAPI, Supabase, PostgreSQL, Gemini AI, Tailwind v4';
+        break;
+      case 'neofetch':
+        output = 'OS: KCV-OS v2.6.4 | Host: Vercel Edge Runtime | Uptime: 99.98% | Packages: 36 Static Routes';
+        break;
+      case 'clear':
+        setHistory([]);
+        return;
+      default:
+        output = \`Command "\${trimmed}" not found. Type "help" for commands.\`;
+    }
+
+    setHistory((prev) => [...prev, { command: trimmed, output }]);
+  };
+
+  return { history, input, setInput, executeCommand };
+}
+\`\`\`
+
+### Step 3: Cybernetic Scanlines with Pure CSS
+To create the retro-futuristic CRT scanline effect without heavy gif or canvas assets, we use CSS keyframe transforms:
+
+\`\`\`css
+@keyframes cyber-scan {
+  0% { transform: translateY(-100%); opacity: 0; }
+  50% { opacity: 0.8; }
+  100% { transform: translateY(1000%); opacity: 0; }
+}
+
+.animate-cyber-scan {
+  animation: cyber-scan 3.5s ease-in-out infinite;
+}
+\`\`\`
+
+### Architectural Principles
+* **Zero Performance Tax**: The entire HUD compiles to static semantic markup and uses CSS GPU acceleration for all animations.
+* **Accessibility**: Screen readers can navigate code and vitals tabs transparently without interactive locks.
+* **Developer Delight**: Little touches—like the \`neofetch\` command and confetti bursts on \`hire\`—turn casual visitors into memorable engagements.`
+  },
+  {
+    id: 'autonomous-ai-agents-gemini-zod-workflows',
+    title: 'Autonomous AI Reasoning Agents: Structuring Deterministic Workflows with Gemini & Zod',
+    description: 'Master agentic workflow orchestration, schema-constrained LLM generation, recursive tool calling, and defensive error mitigation for mission-critical applications.',
+    date: '2026-08-14',
+    category: 'AI & LLMs',
+    readTime: '10 min read',
+    type: 'tech',
+    content: `Building toy LLM demos is straightforward. But moving an LLM pipeline into a mission-critical production environment—such as automated candidate evaluation in CandidAI or RSS news deduplication in StartupWire—demands absolute determinism.
+
+If an LLM drops a required JSON key, returns malformed markdown, or hallucinates an invalid status, downstream database writes fail. Here is how we enforce strict typing, recursive validation, and agentic reasoning using Google Gemini and Zod.
+
+### The Problem: Unconstrained Generation
+Standard prompt engineering often asks the model to "Return valid JSON". However, under high concurrency or ambiguous inputs, LLMs frequently:
+1. Wrap JSON in unwanted backticks (\`\`\`json ... \`\`\`).
+2. Hallucinate schema fields that do not exist in your database models.
+3. Drop numeric precision or convert arrays into comma-separated strings.
+
+### Step 1: The Contract-First Schema with Zod
+Define your data contract with Zod first. This single schema serves as runtime validator, TypeScript type inference, and JSON schema definition for the model.
+
+\`\`\`typescript
+import { z } from 'zod';
+
+export const CandidateEvaluationSchema = z.object({
+  candidateName: z.string().min(1),
+  primaryRole: z.string(),
+  yearsOfExperience: z.number().nonnegative(),
+  matchedSkills: z.array(z.string()).min(1),
+  missingQualifications: z.array(z.string()),
+  recommendationScore: z.number().min(0).max(100),
+  reasoningNotes: z.string().max(500),
+  actionRecommended: z.enum(['FAST_TRACK', 'SCHEDULE_SCREEN', 'REJECT'])
+});
+
+export type CandidateEvaluation = z.infer<typeof CandidateEvaluationSchema>;
+\`\`\`
+
+### Step 2: Deterministic Schema Ingestion via Gemini API
+Configure Google's Gemini SDK with \`responseSchema\` and \`responseMimeType: "application/json"\` to constrain the model's token decoding probability space to conform strictly to the JSON schema:
+
+\`\`\`typescript
+import { GoogleGenerativeAI } from '@google/generative-ai';
+
+const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
+
+export async function evaluateCandidateResume(resumeText: string): Promise<CandidateEvaluation> {
+  const model = genAI.getGenerativeModel({
+    model: 'gemini-1.5-flash',
+    generationConfig: {
+      temperature: 0.1, // Low temperature for maximum determinism
+      responseMimeType: 'application/json'
+    }
+  });
+
+  const prompt = \`
+You are an expert technical recruiting agent. Evaluate the following candidate resume against a Senior Full-Stack Software Engineer specification.
+Return strictly valid JSON adhering to the specified schema contract.
+
+Resume Content:
+\${resumeText}
+\`;
+
+  const result = await model.generateContent(prompt);
+  const rawJson = JSON.parse(result.response.text());
+
+  // Strict runtime validation ensures zero unexpected keys reach your database
+  const validatedData = CandidateEvaluationSchema.parse(rawJson);
+  return validatedData;
+}
+\`\`\`
+
+### Step 3: Defensive Retries with Exponential Backoff
+Even with constrained decoding, network timeouts and token limits can interrupt generation. Wrap agent invocations in a resilient retry loop:
+
+\`\`\`typescript
+export async function withAgentRetry<T>(
+  task: () => Promise<T>,
+  maxRetries = 3,
+  delayMs = 500
+): Promise<T> {
+  for (let attempt = 1; attempt <= maxRetries; attempt++) {
+    try {
+      return await task();
+    } catch (error) {
+      if (attempt === maxRetries) throw error;
+      console.warn(\`Agent execution failed (attempt \${attempt}/\${maxRetries}). Retrying in \${delayMs}ms...\`);
+      await new Promise((resolve) => setTimeout(resolve, delayMs));
+      delayMs *= 2;
+    }
+  }
+  throw new Error('Unreachable state in agent retry wrapper');
+}
+\`\`\`
+
+### Key Production Lessons
+1. **Always Calibrate Temperature**: For analytical extraction or categorization, set temperature to \`0.0\` or \`0.1\`. Save higher creativity values (\`0.7+\`) for narrative writing.
+2. **Double-Lock with Zod**: Even if the model claims to enforce schemas, validate runtime outputs using Zod before passing payloads to PostgreSQL or Supabase.
+3. **Log Raw Inputs**: When an agent fails, save the exact prompt input and token output to a debug ledger to audit edge-case failures.`
+  },
+  {
+    id: 'from-civil-blueprints-to-distributed-systems',
+    title: 'From Civil Blueprints to Distributed Systems: Lessons from Engineering Transitions',
+    description: 'How the physical mechanics of load distribution, structural drafting, and material tension directly inform resilient distributed software architecture.',
+    date: '2026-08-08',
+    category: 'Career & Mindset',
+    readTime: '7 min read',
+    type: 'non-tech',
+    content: `Before I spent my days writing Next.js route handlers, configuring pgvector indexes, and auditing cryptographic JWT signatures, my world looked very different.
+
+I wore steel-toed boots and hard hats, drafting structural blueprints, calculating concrete compressive strengths, and analyzing load distributions across steel trusses in civil engineering.
+
+When I decided to teach myself programming and formally transition into Computer Science—graduating with honors in B.Tech CSE and advancing into an MSc in Computer Science—many people assumed I had thrown away three years of foundational engineering training.
+
+They were wrong.
+
+Civil engineering didn't slow down my software career. It gave me an unfair systems-thinking advantage.
+
+### 1. Concrete Beams and Database Shards: Both Distribute Load
+In structural engineering, no single beam is expected to carry the entire weight of a multi-story building. You analyze dead loads (the weight of the structure itself) and live loads (people, wind, furniture, earthquakes). You distribute that weight across footings, columns, and foundations.
+
+When I first learned about distributed database sharding, horizontal autoscaling, and content delivery networks (CDNs), the concept wasn't foreign—it was intuitive.
+
+An edge CDN node like Vercel or Cloudflare is simply a distributed cantilever truss: it intercepts traffic at the perimeter so the central server foundation doesn't buckle under sudden stress.
+
+### 2. Failure Modes: Why Buildings and Microservices Collapse
+Civil engineers are trained to obsess over failure modes:
+* What happens when material fatigue sets in?
+* What happens when a thermal expansion joint seizes?
+* What is the safety margin for catastrophic wind loads?
+
+Software engineers often design for the "happy path"—when network connections are 100% stable, third-party APIs never fail, and database queries return in 5ms.
+
+My civil background taught me to assume that anything under tension *will* eventually fail:
+* APIs will encounter timeouts.
+* External webhooks will send malformed payloads.
+* Database connections will pool-exhaust under burst traffic.
+
+Designing with defensive fallbacks—like the retry loops and in-memory caches we engineered for StartupWire and Sentinel Guard—is the software equivalent of installing reinforced rebar in concrete.
+
+### 3. Draft the Blueprint Before Pouring the Foundation
+In construction, you don't pour concrete and then decide where the plumbing should go. Reworking physical concrete after it cures costs hundreds of thousands of dollars. You draft blueprints down to the millimeter first.
+
+In software, it's dangerously easy to open an editor, start typing, and accumulate architectural debt before understanding the data schema.
+
+Taking the time to draft clean TypeScript interfaces, document API request/response contracts, and sketch data flow diagrams saves countless hours of painful refactoring down the road.
+
+### The Builder's Ethos
+Whether you are building bridges out of steel or applications out of code, the core identity is the same: **you are a builder who solves problems for human beings.**
+
+Embrace your non-linear background. Cross-disciplinary curiosity isn't a distraction—it is the very foundation of extraordinary engineering.`
   }
 ];
 
