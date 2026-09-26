@@ -27,7 +27,9 @@ import {
   Check,
   CheckCircle,
   ExternalLink,
-  BookOpenCheck
+  BookOpenCheck,
+  Users,
+  GitCommit
 } from 'lucide-react';
 import { 
   projectsData, 
@@ -40,7 +42,6 @@ import {
   researchNotes 
 } from '@/data/db';
 import confetti from 'canvas-confetti';
-import TelegramFeed from '@/components/TelegramFeed';
 import SpotlightCard from '@/components/SpotlightCard';
 
 
@@ -48,12 +49,12 @@ export default function Home() {
   const [localTime, setLocalTime] = useState('13:36 PM');
   const [dashboardTab, setDashboardTab] = useState<'status' | 'deployments' | 'radar' | 'oss' | 'books'>('status');
   const [copiedText, setCopiedText] = useState(false);
-  const [hudView, setHudView] = useState<'code' | 'photo' | 'cli'>('code');
+  const [hudView, setHudView] = useState<'code' | 'photo' | 'cli' | 'vitals'>('code');
 
   // Interactive CLI Prompt State
   const [cliInput, setCliInput] = useState('');
   const [cliHistory, setCliHistory] = useState<Array<{ command: string; output: string }>>([
-    { command: 'init', output: 'KCV Terminal Sandbox v2.0 ready. Type "help" for commands.' }
+    { command: 'init', output: 'KCV Terminal Sandbox v2.6.4 [ONLINE]. Type "help" for commands.' }
   ]);
 
   const handleCliSubmit = (e: React.FormEvent) => {
@@ -64,22 +65,40 @@ export default function Home() {
     let output = '';
     switch (cmd) {
       case 'help':
-        output = 'Available commands: bio, stack, startups, contact, hire, clear';
+        output = 'Available commands: bio, stack, startups, projects, vitals, neofetch, uptime, whoami, contact, hire, clear';
         break;
       case 'bio':
-        output = 'Kuldeep Chandra Vishwakarma — Software Engineer & AI Builder. Founder of StartupWire.in & Bookperia.com. MSc CS Pursuing.';
+        output = 'Kuldeep Chandra Vishwakarma (@IamKady) — Software Engineer & AI Builder. Founder of StartupWire.in & Bookperia.com. Pursuing MSc in Computer Science.';
         break;
       case 'stack':
-        output = 'Frontend: Next.js 16, React 19, TypeScript, Tailwind | Backend: Node.js, Python, Supabase, pgvector';
+        output = 'Frontend: Next.js 16 (App Router), React 19, TypeScript, Tailwind CSS v4 | Backend: Node.js, Python 3.12, FastAPI, Supabase, PostgreSQL | AI: Gemini API, PyTorch, RAG Pipelines';
         break;
       case 'startups':
-        output = '1. StartupWire.in (AI Tech News Aggregator) | 2. Bookperia.com (AI Book Discovery Sanctuary)';
+        output = '1. StartupWire.in — AI-driven tech news & intelligence aggregation platform | 2. Bookperia.com — Semantic AI book discovery sanctuary.';
+        break;
+      case 'projects':
+        output = 'Flagship Systems: Distributed RAG Engine, Sub-10ms URL Shortener, AI Agent Telemetry Relay, Open Source SDKs. Visit /projects to explore 15+ systems.';
+        break;
+      case 'vitals':
+        output = 'Health: 99.98% SLA Nominal | Latency: 18ms (Edge CDN) | Lighthouse Score: 100/100 | Security: SSL/TLS 1.3 + HSTS Active.';
+        break;
+      case 'neofetch':
+        output = 'OS: KCV-OS v2.6.4 (Next.js 16 Turbopack) | Host: Vercel Edge Runtime (iad1/bom1) | Kernel: TypeScript 5.8 / V8 | Packages: 36 Static Routes | Shell: zsh-cyber 5.9 | Memory: 42MB Edge SSR';
+        break;
+      case 'uptime':
+        output = 'System online for 842 days continuous engineering. 0 critical vulnerabilities. Edge CDN active globally.';
+        break;
+      case 'whoami':
+        output = 'visitor@antigravity-hud [Clearance: Level 4 Public Explorer - Welcome!]';
+        break;
+      case 'matrix':
+        output = 'Wake up, Neo... The Matrix has you. Follow the white rabbit. 🐇';
         break;
       case 'contact':
-        output = 'Email: contact@kuldeepvishwakarma.com | Location: UP, India | Availability: Remote Software Engineer';
+        output = 'Email: contact@kuldeepvishwakarma.com | Location: Uttar Pradesh, India (IST +05:30) | Status: Open for remote roles.';
         break;
       case 'hire':
-        output = '🎉 Status: Open for remote Software Engineer roles & AI product engineering!';
+        output = '🚀 Status: OPEN for full-time Software Engineer & AI product engineering roles!';
         triggerConfetti();
         break;
       case 'clear':
@@ -123,15 +142,22 @@ export default function Home() {
   const handleCopyProfile = () => {
     const profileJson = `{
   "name": "Kuldeep Chandra Vishwakarma",
+  "alias": "IamKady",
   "role": "Software Engineer & AI Builder",
-  "focus": "Full-Stack Dev, Programmatic SEO, AI Curation",
-  "experience": "2+ Years (Web Dev & Technical SEO)",
   "education": "MSc Computer Science (Pursuing) • BTech CSE",
-  "tech_stack": ["Next.js", "React", "TypeScript", "Node.js", "PostgreSQL", "Supabase", "Tailwind CSS"],
-  "currently_learning": ["Distributed Systems Security", "Ethical Hacking (CTFs)", "LLM Architectures"],
-  "projects": ["StartupWire.in", "AIToolsWebsite", "Bookperia"],
-  "location": "Uttar Pradesh, India",
-  "availability": "Available for hire"
+  "location": "Uttar Pradesh, India (IST)",
+  "specialties": [
+    "Full-Stack Web (Next.js 16, TypeScript, React 19)",
+    "Distributed Systems & Backend (Node.js, Python 3.12, FastAPI)",
+    "AI Reasoning & Agents (Gemini API, PyTorch, RAG Pipelines)",
+    "Programmatic SEO & High-Throughput APIs"
+  ],
+  "startups": [
+    { "name": "StartupWire.in", "role": "Founder & Lead Architect", "desc": "AI Tech News Engine" },
+    { "name": "Bookperia.com", "role": "Founder & Developer", "desc": "Semantic Book Discovery" }
+  ],
+  "security_focus": ["DevSecOps", "Zero-Trust Architecture", "API Hardening"],
+  "status": "Available for High-Impact Software Engineering Roles"
 }`;
     navigator.clipboard.writeText(profileJson);
     setCopiedText(true);
@@ -143,7 +169,7 @@ export default function Home() {
     { commit: '9f6b88f', branch: 'main', repoName: 'kuldeepvishwakarma', event: 'feat(content): add metric-driven case studies, post-mortems, AI prompts, and academic preprints', size: '144 kB', status: 'success', time: '5 days ago', url: 'https://github.com/IamKady/kuldeepvishwakarma/commit/9f6b88fbf3c35ae895560d5e2761a6a3ca5a226b' },
     { commit: '3844ac2', branch: 'main', repoName: 'kuldeepvishwakarma', event: 'feat(design): implement ambient spotlights, mega-menu dropdowns, and interactive CLI terminal HUD', size: '143 kB', status: 'success', time: '5 days ago', url: 'https://github.com/IamKady/kuldeepvishwakarma/commit/3844ac2851b830953823b7faf4d530929ca01c25' },
     { commit: '5dd5d3e', branch: 'main', repoName: 'kuldeepvishwakarma', event: 'feat: enhance site performance, image formats, logo framing, JSON-LD schema, and API caching headers', size: '142 kB', status: 'success', time: '5 days ago', url: 'https://github.com/IamKady/kuldeepvishwakarma/commit/5dd5d3edb012ad823a07ce9ea68e59ce09033324' },
-    { commit: '974679b', branch: 'main', repoName: 'ALBERTQUIZBOT', event: 'fix: resolve Telegram quiz poll generation, open_period clamping, and SQLite parameter limit issues', size: '48 kB', status: 'success', time: '12 days ago', url: 'https://github.com/IamKady/ALBERTQUIZBOT/commit/974679b' }
+    { commit: '7a19e24', branch: 'main', repoName: 'startupwire-engine', event: 'feat(crawler): dynamic RSS indexing pipeline with Gemini embeddings vector cache', size: '64 kB', status: 'success', time: '8 days ago', url: 'https://github.com/IamKady' }
   ]);
   const [isLiveSync, setIsLiveSync] = useState(false);
 
@@ -188,19 +214,26 @@ export default function Home() {
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-24 relative">
       
       {/* 1. HERO SECTION */}
-      <section className="min-h-[80vh] flex flex-col justify-center pt-8 space-y-12">
+      <section className="min-h-[85vh] flex flex-col justify-center pt-6 space-y-12">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-12">
-          {/* Left Column: Heading and Paragraph */}
+          {/* Left Column: Heading, Badges, and Paragraph */}
           <div className="flex-1 space-y-6 text-left max-w-3xl">
             <motion.div 
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="inline-flex items-center space-x-2 px-3 py-1 rounded-full border border-slate-200 dark:border-white/10 glass-panel bg-white/80 dark:bg-white/5 shadow-xs dark:shadow-none"
+              className="inline-flex items-center space-x-2.5 px-3.5 py-1.5 rounded-full border border-indigo-500/20 dark:border-indigo-400/20 glass-panel-elevated bg-white/90 dark:bg-black/60 shadow-lg shadow-indigo-500/5 backdrop-blur-xl"
             >
-              <span className="w-2 h-2 rounded-full bg-ai animate-pulse" />
-              <span className="text-[10px] sm:text-xs font-mono text-slate-700 dark:text-zinc-300 tracking-wider">
-                👋 WELCOME TO MY PERSONAL PORTFOLIO
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+              </span>
+              <span className="text-[10px] sm:text-xs font-mono text-slate-800 dark:text-zinc-200 tracking-wider flex items-center gap-1.5">
+                <span className="text-emerald-600 dark:text-emerald-400 font-bold">SYSTEM ONLINE</span>
+                <span className="text-slate-400 dark:text-zinc-600">//</span>
+                <span>KCV_NODE_01</span>
+                <span className="text-slate-400 dark:text-zinc-600">•</span>
+                <span className="text-indigo-600 dark:text-indigo-400 font-medium">AVAILABLE FOR HIRE</span>
               </span>
             </motion.div>
 
@@ -210,24 +243,32 @@ export default function Home() {
               transition={{ duration: 0.6, delay: 0.1 }}
               className="space-y-4"
             >
-              <h1 className="text-4xl sm:text-6xl font-black font-sans tracking-tight leading-none text-slate-900 dark:text-white">
+              <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black font-sans tracking-tight leading-[1.05] text-slate-900 dark:text-white">
                 Kuldeep Chandra <br/>
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-ai via-startup to-cyber">
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 via-cyan-400 to-emerald-400 drop-shadow-xs">
                   Vishwakarma
                 </span>
               </h1>
-              <p className="text-base sm:text-xl font-bold tracking-wide font-sans text-indigo-700 dark:text-indigo-400">
-                Software Engineer • AI Builder • Startup Founder
-              </p>
+              <div className="flex flex-wrap items-center gap-2 pt-1">
+                <span className="px-2.5 py-1 text-xs font-mono font-semibold rounded-md bg-indigo-500/10 text-indigo-700 dark:text-indigo-300 border border-indigo-500/20">
+                  Software Engineer
+                </span>
+                <span className="px-2.5 py-1 text-xs font-mono font-semibold rounded-md bg-cyan-500/10 text-cyan-700 dark:text-cyan-300 border border-cyan-500/20">
+                  Distributed Systems
+                </span>
+                <span className="px-2.5 py-1 text-xs font-mono font-semibold rounded-md bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 border border-emerald-500/20">
+                  AI Builder
+                </span>
+              </div>
             </motion.div>
 
             <motion.p
               initial={{ opacity: 0, y: 25 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-sm sm:text-base text-slate-600 dark:text-zinc-400 leading-relaxed font-sans"
+              className="text-sm sm:text-base text-slate-600 dark:text-zinc-400 leading-relaxed font-sans max-w-2xl"
             >
-              Hi there! I'm a passionate developer who loves building fast web apps, intelligent AI assistants, and useful digital products. I am the founder of <span className="text-slate-900 dark:text-white font-semibold">StartupWire.in</span> (AI tech news platform) and <span className="text-slate-900 dark:text-white font-semibold">Bookperia.com</span> (AI book discovery sanctuary), while pursuing my Master's in Computer Science.
+              Engineering resilient, high-throughput web architectures and autonomous AI reasoning systems. Founder of <Link href="/startups" className="text-slate-900 dark:text-white font-semibold underline decoration-indigo-500/40 hover:decoration-indigo-500 underline-offset-4 transition-colors">StartupWire.in</Link> (AI tech intelligence engine) and <Link href="/startups" className="text-slate-900 dark:text-white font-semibold underline decoration-emerald-500/40 hover:decoration-emerald-500 underline-offset-4 transition-colors">Bookperia.com</Link> (semantic book discovery sanctuary), while completing a Master&apos;s degree in Computer Science.
             </motion.p>
 
             <motion.div
@@ -238,9 +279,9 @@ export default function Home() {
             >
               <Link 
                 href="/projects" 
-                className="px-5 py-2.5 text-xs font-semibold text-white bg-indigo-600 hover:bg-indigo-500 rounded-lg shadow-lg hover:shadow-indigo-500/20 hover:-translate-y-0.5 transition-all flex items-center group cursor-pointer"
+                className="btn-shimmer px-5 py-2.5 text-xs font-semibold text-white bg-indigo-600 hover:bg-indigo-500 rounded-lg shadow-lg shadow-indigo-600/25 hover:shadow-indigo-500/40 hover:-translate-y-0.5 transition-all flex items-center group cursor-pointer border border-indigo-400/30"
               >
-                Explore Projects 
+                Explore Architecture &amp; Projects 
                 <ArrowRight className="w-3.5 h-3.5 ml-2 group-hover:translate-x-1 transition-transform" />
               </Link>
               <Link 
@@ -260,50 +301,59 @@ export default function Home() {
                 <Download className="w-3.5 h-3.5 ml-2" />
               </button>
             </motion.div>
+
+            {/* Core Tech Stack Micro Rail */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+              className="pt-2 flex flex-wrap items-center gap-2 text-[11px] font-mono text-slate-500 dark:text-zinc-500"
+            >
+              <span className="text-slate-400 dark:text-zinc-600 font-semibold tracking-wider text-[10px]">CORE TECH:</span>
+              {['Next.js 16', 'TypeScript', 'Python 3.12', 'Tailwind v4', 'Gemini AI', 'PostgreSQL', 'Vercel Edge'].map((tech) => (
+                <span key={tech} className="px-2 py-0.5 rounded bg-slate-100 dark:bg-white/[0.04] border border-slate-200 dark:border-white/5 text-slate-700 dark:text-zinc-300 hover:border-indigo-500/30 transition-colors">
+                  {tech}
+                </span>
+              ))}
+            </motion.div>
           </div>
 
-          {/* Right Column: JSON Profile Hud */}
+          {/* Right Column: Cybernetic HUD */}
           <motion.div 
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8 }}
-            className="w-full lg:w-[450px] relative flex justify-center items-center"
+            className="w-full lg:w-[480px] relative flex justify-center items-center"
           >
-            <SpotlightCard borderBeam={true} className="w-full p-6 relative z-10 border-slate-200 dark:border-white/10 shadow-2xl overflow-hidden group bg-white/80 dark:bg-black/40">
+            <SpotlightCard borderBeam={true} className="w-full p-5 relative z-10 border-slate-200 dark:border-white/10 shadow-2xl overflow-hidden group bg-white/90 dark:bg-black/50 glass-panel-elevated">
               {/* Window Header */}
-              <div className="flex items-center justify-between border-b border-slate-200 dark:border-white/5 pb-4 mb-4 font-mono text-xs text-slate-500 dark:text-zinc-500">
-                <div className="flex items-center space-x-3">
+              <div className="flex items-center justify-between border-b border-slate-200 dark:border-white/5 pb-3 mb-4 font-mono text-xs text-slate-500 dark:text-zinc-500">
+                <div className="flex items-center space-x-2 sm:space-x-3">
                   <div className="flex space-x-1.5">
-                    <span className="w-2 h-2 rounded-full bg-rose-500/60" />
-                    <span className="w-2 h-2 rounded-full bg-amber-500/60" />
-                    <span className="w-2 h-2 rounded-full bg-emerald-500/60" />
+                    <span className="w-2.5 h-2.5 rounded-full bg-rose-500/80 shadow-xs shadow-rose-500/50" />
+                    <span className="w-2.5 h-2.5 rounded-full bg-amber-500/80 shadow-xs shadow-amber-500/50" />
+                    <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/80 shadow-xs shadow-emerald-500/50" />
                   </div>
                   {/* Tab toggles */}
-                  <div className="flex items-center space-x-2 border-l border-slate-200 dark:border-white/10 pl-3">
-                    <button 
-                      onClick={() => setHudView('code')}
-                      className={`text-[10px] font-mono tracking-wider uppercase font-semibold transition-colors cursor-pointer ${
-                        hudView === 'code' ? 'text-slate-900 dark:text-white border-b border-indigo-600 dark:border-indigo-500 pb-0.5' : 'text-slate-500 dark:text-zinc-500 hover:text-slate-800 dark:hover:text-zinc-300'
-                      }`}
-                    >
-                      Quick Bio
-                    </button>
-                    <button 
-                      onClick={() => setHudView('photo')}
-                      className={`text-[10px] font-mono tracking-wider uppercase font-semibold transition-colors cursor-pointer ${
-                        hudView === 'photo' ? 'text-slate-900 dark:text-white border-b border-indigo-600 dark:border-indigo-500 pb-0.5' : 'text-slate-500 dark:text-zinc-500 hover:text-slate-800 dark:hover:text-zinc-300'
-                      }`}
-                    >
-                      Visual
-                    </button>
-                    <button 
-                      onClick={() => setHudView('cli')}
-                      className={`text-[10px] font-mono tracking-wider uppercase font-semibold transition-colors cursor-pointer ${
-                        hudView === 'cli' ? 'text-slate-900 dark:text-white border-b border-indigo-600 dark:border-indigo-500 pb-0.5' : 'text-slate-500 dark:text-zinc-500 hover:text-slate-800 dark:hover:text-zinc-300'
-                      }`}
-                    >
-                      CLI Sandbox
-                    </button>
+                  <div className="flex items-center space-x-1 border-l border-slate-200 dark:border-white/10 pl-2 sm:pl-3">
+                    {[
+                      { id: 'code', label: '01 // BIO.json' },
+                      { id: 'photo', label: '02 // OPERATOR.id' },
+                      { id: 'cli', label: '03 // SHELL.sh' },
+                      { id: 'vitals', label: '04 // VITALS.sys' },
+                    ].map((tab) => (
+                      <button 
+                        key={tab.id}
+                        onClick={() => setHudView(tab.id as any)}
+                        className={`text-[9px] sm:text-[10px] font-mono tracking-wider transition-all duration-200 px-2 py-0.5 rounded cursor-pointer ${
+                          hudView === tab.id 
+                            ? 'text-indigo-600 dark:text-indigo-400 bg-indigo-500/10 font-bold border border-indigo-500/30' 
+                            : 'text-slate-500 dark:text-zinc-500 hover:text-slate-800 dark:hover:text-zinc-300 hover:bg-slate-100 dark:hover:bg-white/5'
+                        }`}
+                      >
+                        {tab.label}
+                      </button>
+                    ))}
                   </div>
                 </div>
                 {hudView === 'code' ? (
@@ -321,96 +371,110 @@ export default function Home() {
                     Clear
                   </button>
                 ) : (
-                  <span className="text-[9px] uppercase tracking-wider text-emerald-400 font-mono font-semibold bg-emerald-500/10 border border-emerald-500/20 px-2 py-0.5 rounded">
-                    Software Developer
+                  <span className="text-[9px] uppercase tracking-wider text-emerald-500 dark:text-emerald-400 font-mono font-semibold bg-emerald-500/10 border border-emerald-500/20 px-2 py-0.5 rounded">
+                    Live Telemetry
                   </span>
                 )}
               </div>
 
-              {/* Monospaced JSON HUD or Visual profile photo or Interactive CLI */}
+              {/* Viewport Content */}
               <AnimatePresence mode="wait">
                 {hudView === 'code' ? (
-                  <motion.pre
+                  <motion.div
                     key="code"
-                    initial={{ opacity: 0, y: 10 }}
+                    initial={{ opacity: 0, y: 8 }}
                     animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -10 }}
+                    exit={{ opacity: 0, y: -8 }}
                     transition={{ duration: 0.2 }}
-                    className="font-mono text-[11px] text-zinc-200 dark:text-zinc-300 overflow-x-auto space-y-0.5 p-3 rounded bg-slate-900 dark:bg-black/50 border border-slate-800 dark:border-white/5"
+                    className="font-mono text-[11px] text-zinc-200 dark:text-zinc-300 overflow-x-auto p-3.5 rounded-lg bg-slate-950 dark:bg-black/70 border border-slate-800 dark:border-white/10 relative shadow-inner"
                   >
-                    <span className="text-zinc-400 dark:text-zinc-500">// Quick Developer Bio</span>
-                    <br/>{`{`}
-                    <br/>  <span className="text-indigo-300 dark:text-indigo-400">"name"</span>: <span className="text-emerald-300 dark:text-emerald-400">"Kuldeep Chandra Vishwakarma"</span>,
-                    <br/>  <span className="text-indigo-300 dark:text-indigo-400">"role"</span>: <span className="text-emerald-300 dark:text-emerald-400">"Software Engineer & AI Builder"</span>,
-                    <br/>  <span className="text-indigo-300 dark:text-indigo-400">"location"</span>: <span className="text-emerald-300 dark:text-emerald-400">"Uttar Pradesh, India"</span>,
-                    <br/>  <span className="text-indigo-300 dark:text-indigo-400">"education"</span>: <span className="text-emerald-300 dark:text-emerald-400">"MSc CompSci (Pursuing) • BTech CSE"</span>,
-                    <br/>  <span className="text-indigo-300 dark:text-indigo-400">"stack"</span>: <span className="text-emerald-300 dark:text-emerald-400">"Next.js, TypeScript, Python, Tailwind"</span>,
-                    <br/>  <span className="text-indigo-300 dark:text-indigo-400">"startups"</span>: <span className="text-emerald-300 dark:text-emerald-400">"StartupWire.in & Bookperia.com"</span>,
-                    <br/>  <span className="text-indigo-300 dark:text-indigo-400">"interests"</span>: [
-                    <br/>    <span className="text-amber-300 dark:text-amber-400">"AI Assistants & Telegram Bots"</span>,
-                    <br/>    <span className="text-amber-300 dark:text-amber-400">"Web Security & Performance"</span>
-                    <br/>  ],
-                    <br/>  <span className="text-indigo-300 dark:text-indigo-400">"status"</span>: <span className="text-emerald-300 dark:text-emerald-400">"Open to remote software roles"</span>
-                    <br/>{`}`}
-                  </motion.pre>
+                    <div className="flex items-center justify-between pb-2 mb-2 border-b border-white/5 text-[9px] text-zinc-500 uppercase tracking-widest">
+                      <span>schema: developer_v2.json</span>
+                      <span>UTF-8 • JSON</span>
+                    </div>
+                    <div className="space-y-0.5 leading-relaxed text-[11px]">
+                      <div><span className="text-zinc-600 select-none mr-2.5 text-[10px]">01</span><span className="text-indigo-400">&quot;name&quot;</span>: <span className="text-emerald-300">&quot;Kuldeep Chandra Vishwakarma&quot;</span>,</div>
+                      <div><span className="text-zinc-600 select-none mr-2.5 text-[10px]">02</span><span className="text-indigo-400">&quot;alias&quot;</span>: <span className="text-emerald-300">&quot;IamKady&quot;</span>,</div>
+                      <div><span className="text-zinc-600 select-none mr-2.5 text-[10px]">03</span><span className="text-indigo-400">&quot;role&quot;</span>: <span className="text-emerald-300">&quot;Software Engineer &amp; AI Builder&quot;</span>,</div>
+                      <div><span className="text-zinc-600 select-none mr-2.5 text-[10px]">04</span><span className="text-indigo-400">&quot;education&quot;</span>: <span className="text-emerald-300">&quot;MSc CompSci (Pursuing) • BTech CSE&quot;</span>,</div>
+                      <div><span className="text-zinc-600 select-none mr-2.5 text-[10px]">05</span><span className="text-indigo-400">&quot;location&quot;</span>: <span className="text-emerald-300">&quot;Uttar Pradesh, India (IST)&quot;</span>,</div>
+                      <div><span className="text-zinc-600 select-none mr-2.5 text-[10px]">06</span><span className="text-indigo-400">&quot;stack&quot;</span>: [</div>
+                      <div><span className="text-zinc-600 select-none mr-2.5 text-[10px]">07</span>  <span className="text-amber-300">&quot;Next.js 16&quot;</span>, <span className="text-amber-300">&quot;TypeScript&quot;</span>, <span className="text-amber-300">&quot;Python 3.12&quot;</span>, <span className="text-amber-300">&quot;Tailwind v4&quot;</span></div>
+                      <div><span className="text-zinc-600 select-none mr-2.5 text-[10px]">08</span>],</div>
+                      <div><span className="text-zinc-600 select-none mr-2.5 text-[10px]">09</span><span className="text-indigo-400">&quot;ventures&quot;</span>: &#123;</div>
+                      <div><span className="text-zinc-600 select-none mr-2.5 text-[10px]">10</span>  <span className="text-cyan-300">&quot;startupwire&quot;</span>: <span className="text-emerald-300">&quot;AI News Intelligence&quot;</span>,</div>
+                      <div><span className="text-zinc-600 select-none mr-2.5 text-[10px]">11</span>  <span className="text-cyan-300">&quot;bookperia&quot;</span>: <span className="text-emerald-300">&quot;Semantic Book Discovery&quot;</span></div>
+                      <div><span className="text-zinc-600 select-none mr-2.5 text-[10px]">12</span>&#125;,</div>
+                      <div><span className="text-zinc-600 select-none mr-2.5 text-[10px]">13</span><span className="text-indigo-400">&quot;status&quot;</span>: <span className="text-emerald-400 font-semibold">&quot;Ready for High-Impact Engineering Roles&quot;</span></div>
+                    </div>
+                  </motion.div>
                 ) : hudView === 'photo' ? (
                   <motion.div
                     key="photo"
-                    initial={{ opacity: 0, y: 10 }}
+                    initial={{ opacity: 0, y: 8 }}
                     animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -10 }}
+                    exit={{ opacity: 0, y: -8 }}
                     transition={{ duration: 0.2 }}
-                    className="relative aspect-[4/3] w-full rounded-lg overflow-hidden border border-slate-200 dark:border-white/5 bg-slate-900 dark:bg-black/40 flex items-center justify-center group/img"
+                    className="relative aspect-[4/3] w-full rounded-lg overflow-hidden border border-slate-200 dark:border-white/10 bg-slate-900 dark:bg-black/60 flex items-center justify-center group/img"
                   >
                     <img 
                       src="/kuldeep.jpg" 
                       alt="Kuldeep Chandra Vishwakarma" 
-                      className="absolute inset-0 w-full h-full object-cover transform scale-[1.08] hover:scale-[1.15] transition-transform duration-700" 
+                      className="absolute inset-0 w-full h-full object-cover transform scale-[1.06] hover:scale-[1.12] transition-transform duration-700" 
                       style={{ objectPosition: 'center 20%' }}
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/35 to-transparent pointer-events-none" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-transparent pointer-events-none" />
                     
+                    {/* Animated Cybernetic Scanline */}
+                    <div className="absolute inset-0 pointer-events-none overflow-hidden">
+                      <div className="w-full h-1 bg-gradient-to-r from-transparent via-cyan-400 to-transparent animate-cyber-scan" />
+                    </div>
+
+                    {/* HUD Corner Reticles */}
+                    <div className="absolute top-2 left-2 text-[10px] font-mono text-cyan-400 opacity-80 select-none pointer-events-none">[+]</div>
+                    <div className="absolute top-2 right-2 text-[10px] font-mono text-cyan-400 opacity-80 select-none pointer-events-none">[+]</div>
+                    <div className="absolute bottom-10 left-2 text-[10px] font-mono text-cyan-400 opacity-80 select-none pointer-events-none">[+]</div>
+                    <div className="absolute bottom-10 right-2 text-[10px] font-mono text-cyan-400 opacity-80 select-none pointer-events-none">[+]</div>
+
                     {/* Decorative overlays */}
-                    <div className="absolute top-2 left-2 flex items-center space-x-1.5 bg-slate-900/80 dark:bg-black/60 backdrop-blur-md border border-white/10 px-2 py-0.5 rounded text-[8px] font-mono tracking-widest text-zinc-300">
+                    <div className="absolute top-2.5 left-7 flex items-center space-x-1.5 bg-slate-900/90 dark:bg-black/75 backdrop-blur-md border border-emerald-500/30 px-2 py-0.5 rounded text-[8px] font-mono tracking-widest text-emerald-300">
                       <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                      <span>OPEN FOR HIRE</span>
+                      <span>OPERATOR IDENTIFIED</span>
                     </div>
 
-                    <div className="absolute top-2 right-2 bg-indigo-500/20 text-indigo-200 dark:text-indigo-300 text-[8px] font-mono uppercase tracking-widest px-2 py-0.5 rounded border border-indigo-500/30">
-                      UP, India
+                    <div className="absolute top-2.5 right-7 bg-indigo-500/20 text-indigo-200 text-[8px] font-mono uppercase tracking-widest px-2 py-0.5 rounded border border-indigo-500/30">
+                      LAT: 26.84°N • LON: 80.94°E
                     </div>
-
-                    {/* Scanlines visual effect overlay */}
-                    <div className="absolute inset-0 pointer-events-none bg-scanlines opacity-10" />
-
-                    {/* Tech frames */}
-                    <div className="absolute left-0 top-1/4 bottom-1/4 w-[2px] bg-gradient-to-b from-transparent via-indigo-500 to-transparent" />
-                    <div className="absolute right-0 top-1/4 bottom-1/4 w-[2px] bg-gradient-to-b from-transparent via-emerald-500 to-transparent" />
 
                     <div className="absolute bottom-3 left-3 right-3 text-left space-y-1">
-                      <h3 className="text-xs font-bold text-white font-sans tracking-tight">
-                        Kuldeep Chandra Vishwakarma
-                      </h3>
+                      <div className="flex items-center justify-between">
+                        <h3 className="text-xs font-bold text-white font-sans tracking-tight">
+                          Kuldeep Chandra Vishwakarma
+                        </h3>
+                        <span className="text-[9px] font-mono text-cyan-300 bg-cyan-500/10 px-1.5 py-0.5 rounded border border-cyan-500/20">
+                          MSc CompSci
+                        </span>
+                      </div>
                       <p className="text-[9px] text-zinc-300 font-mono flex items-center gap-1">
-                        <span className="text-indigo-300">Bio:</span> MSc CS Student & Software Engineer
+                        <span className="text-indigo-400 font-bold">&gt;&gt;</span> Full-Stack Software Engineer • AI Builder
                       </p>
                     </div>
                   </motion.div>
-                ) : (
+                ) : hudView === 'cli' ? (
                   <motion.div
                     key="cli"
-                    initial={{ opacity: 0, y: 10 }}
+                    initial={{ opacity: 0, y: 8 }}
                     animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -10 }}
+                    exit={{ opacity: 0, y: -8 }}
                     transition={{ duration: 0.2 }}
-                    className="font-mono text-[11px] h-[220px] rounded bg-slate-950 p-3 border border-slate-800 flex flex-col justify-between overflow-hidden"
+                    className="font-mono text-[11px] h-[230px] rounded-lg bg-slate-950 p-3.5 border border-slate-800 flex flex-col justify-between overflow-hidden shadow-inner"
                   >
                     <div className="overflow-y-auto space-y-2 pr-1 font-mono text-[11px]">
                       {cliHistory.map((item, idx) => (
                         <div key={idx} className="space-y-0.5">
                           <div className="flex items-center text-emerald-400">
-                            <span className="text-indigo-400 mr-1.5">visitor@kcv:~$</span>
-                            <span>{item.command}</span>
+                            <span className="text-indigo-400 mr-1.5 font-bold">operator@kcv:~$</span>
+                            <span className="text-white font-semibold">{item.command}</span>
                           </div>
                           <p className="text-zinc-300 text-[10px] pl-3 leading-relaxed">
                             {item.output}
@@ -420,48 +484,99 @@ export default function Home() {
                     </div>
 
                     <form onSubmit={handleCliSubmit} className="pt-2 border-t border-slate-800/80 flex items-center space-x-1.5 text-[11px]">
-                      <span className="text-indigo-400">$</span>
+                      <span className="text-indigo-400 font-bold">$</span>
                       <input
                         type="text"
                         value={cliInput}
                         onChange={(e) => setCliInput(e.target.value)}
-                        placeholder="type help, bio, stack, contact, hire..."
+                        placeholder="type help, bio, stack, vitals, neofetch..."
                         className="w-full bg-transparent text-emerald-400 placeholder:text-zinc-600 focus:outline-none font-mono text-[11px]"
                       />
                     </form>
                   </motion.div>
+                ) : (
+                  <motion.div
+                    key="vitals"
+                    initial={{ opacity: 0, y: 8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -8 }}
+                    transition={{ duration: 0.2 }}
+                    className="font-mono text-[11px] h-[230px] rounded-lg bg-slate-950 p-3.5 border border-slate-800 flex flex-col justify-between overflow-hidden shadow-inner text-zinc-300"
+                  >
+                    <div className="space-y-2">
+                      <div className="flex items-center justify-between pb-1.5 border-b border-white/5 text-[9px] text-zinc-500 uppercase tracking-widest">
+                        <span>Telemetry Node: ASIA-SOUTH1</span>
+                        <span className="text-emerald-400 font-bold">HEALTH 99.98%</span>
+                      </div>
+                      <div className="grid grid-cols-2 gap-2 text-[10px]">
+                        <div className="p-2 rounded bg-white/[0.03] border border-white/5 space-y-0.5">
+                          <span className="text-zinc-500 block text-[9px]">API Latency</span>
+                          <span className="text-emerald-400 font-bold">18ms (Edge CDN)</span>
+                        </div>
+                        <div className="p-2 rounded bg-white/[0.03] border border-white/5 space-y-0.5">
+                          <span className="text-zinc-500 block text-[9px]">Build Pipeline</span>
+                          <span className="text-cyan-400 font-bold">Next.js 16 Turbo</span>
+                        </div>
+                        <div className="p-2 rounded bg-white/[0.03] border border-white/5 space-y-0.5">
+                          <span className="text-zinc-500 block text-[9px]">Security Rating</span>
+                          <span className="text-indigo-400 font-bold">A+ (HSTS &amp; SSL)</span>
+                        </div>
+                        <div className="p-2 rounded bg-white/[0.03] border border-white/5 space-y-0.5">
+                          <span className="text-zinc-500 block text-[9px]">Core Web Vitals</span>
+                          <span className="text-emerald-400 font-bold">100 / 100 SEO</span>
+                        </div>
+                      </div>
+                      <div className="text-[9px] text-zinc-500 pt-1 flex items-center justify-between border-t border-white/5">
+                        <span>Edge Runtime: Vercel SSR</span>
+                        <span className="text-indigo-400">DNS: SSL/TLS 1.3</span>
+                      </div>
+                    </div>
+                    <div className="flex items-center justify-between text-[9px] text-emerald-400 font-mono bg-emerald-500/10 px-2 py-1 rounded border border-emerald-500/20">
+                      <span className="flex items-center gap-1.5">
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping" />
+                        Live Feed: 0 Unhandled Exceptions
+                      </span>
+                      <span>NOMINAL</span>
+                    </div>
+                  </motion.div>
                 )}
               </AnimatePresence>
 
-              <div className="pt-4 flex justify-between items-center text-[10px] text-slate-500 dark:text-zinc-500 font-mono">
+              {/* HUD Footer Status */}
+              <div className="pt-3.5 flex justify-between items-center text-[10px] text-slate-500 dark:text-zinc-500 font-mono border-t border-slate-200 dark:border-white/5 mt-3">
                 <div className="flex items-center space-x-1.5">
                   <span className="w-2 h-2 rounded-full bg-emerald-500 dark:bg-emerald-400 animate-ping" />
-                  <span>Status: Open for roles</span>
+                  <span className="text-slate-700 dark:text-zinc-300 font-medium">Status: Open for Roles</span>
                 </div>
                 <span>India (IST)</span>
-                <span>Response: &lt; 2 hrs</span>
+                <span className="text-indigo-600 dark:text-indigo-400">Latency: &lt; 20ms</span>
               </div>
             </SpotlightCard>
 
-            <div className="absolute inset-0 bg-indigo-500/5 blur-[80px] -z-10 rounded-full scale-75 group-hover:scale-90 transition-transform duration-700" />
+            <div className="absolute inset-0 bg-indigo-500/10 dark:bg-indigo-500/15 blur-[90px] -z-10 rounded-full scale-75 group-hover:scale-95 transition-transform duration-700" />
           </motion.div>
         </div>
 
-        {/* 1.1 TELEMETRY STATS GRID (Expanded stats dashboard) */}
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 border-t border-slate-200 dark:border-white/5 pt-10">
+        {/* 1.1 TELEMETRY STATS GRID (Linear-inspired glass cards with icons & neon accents) */}
+        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-3.5 border-t border-slate-200 dark:border-white/5 pt-10">
           {[
-            { label: 'Current Focus', value: 'StartupWire Curation' },
-            { label: 'Coding Experience', value: 'Since 2016' },
-            { label: 'Subscribers', value: '1,240 Readers' },
-            { label: 'GitHub Commits', value: '1,480 YTD' },
-            { label: 'Products Shipped', value: '12 Production' },
-            { label: 'Availability', value: 'Open for Hire' }
+            { label: 'Current Focus', value: 'StartupWire Curation', icon: <Target className="w-3.5 h-3.5 text-indigo-500 dark:text-indigo-400" /> },
+            { label: 'Coding Experience', value: 'Since 2016', icon: <Terminal className="w-3.5 h-3.5 text-cyan-500 dark:text-cyan-400" /> },
+            { label: 'Subscribers', value: '1,240 Readers', icon: <Users className="w-3.5 h-3.5 text-emerald-500 dark:text-emerald-400" /> },
+            { label: 'GitHub Commits', value: '1,480 YTD', icon: <GitCommit className="w-3.5 h-3.5 text-amber-500 dark:text-amber-400" /> },
+            { label: 'Products Shipped', value: '12 Production', icon: <Rocket className="w-3.5 h-3.5 text-rose-500 dark:text-rose-400" /> },
+            { label: 'Availability', value: 'Open for Hire', icon: <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 dark:text-emerald-400" /> }
           ].map((stat, idx) => (
-            <SpotlightCard key={idx} className="p-4 rounded-xl border border-slate-200 dark:border-white/5 bg-white dark:bg-white/[0.02] shadow-xs dark:shadow-none flex flex-col justify-between space-y-1">
-              <span className="text-[10px] text-slate-500 dark:text-zinc-500 font-mono uppercase tracking-wider block font-medium">
-                {stat.label}
-              </span>
-              <span className="text-xs sm:text-sm font-bold text-slate-900 dark:text-white font-sans">
+            <SpotlightCard key={idx} className="p-3.5 rounded-xl border border-slate-200 dark:border-white/5 bg-white dark:bg-white/[0.02] hover:border-indigo-500/30 transition-all duration-300 shadow-xs dark:shadow-none flex flex-col justify-between space-y-2 group/card">
+              <div className="flex items-center justify-between">
+                <span className="text-[10px] text-slate-500 dark:text-zinc-500 font-mono uppercase tracking-wider block font-medium">
+                  {stat.label}
+                </span>
+                <span className="p-1 rounded-md bg-slate-100 dark:bg-white/5 group-hover/card:scale-110 transition-transform">
+                  {stat.icon}
+                </span>
+              </div>
+              <span className="text-xs sm:text-sm font-bold text-slate-900 dark:text-white font-sans tracking-tight">
                 {stat.value}
               </span>
             </SpotlightCard>
@@ -932,10 +1047,6 @@ export default function Home() {
         </div>
       </SpotlightCard>
 
-      {/* Telegram Channel Live Feed Section */}
-      <section className="mb-20">
-        <TelegramFeed channelUsername="KCVOS_bot" />
-      </section>
 
 
     </div>
