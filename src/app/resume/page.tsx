@@ -36,10 +36,10 @@ export default function Resume() {
   };
 
   const skillsGroup = [
-    { title: 'Languages', items: ['TypeScript', 'JavaScript', 'Python', 'C++', 'SQL', 'HTML5', 'CSS3'] },
-    { title: 'Frameworks / Libs', items: ['React.js', 'Next.js (App Router)', 'Node.js', 'Express', 'Tailwind CSS'] },
-    { title: 'Databases & Cloud', items: ['PostgreSQL', 'pgvector', 'MongoDB', 'Supabase', 'Docker', 'Vercel', 'AWS (Basic)'] },
-    { title: 'Specializations', items: ['AI Agent Integration', 'Gemini API models', 'Programmatic SEO', 'API Security (JWT/CSP)', 'Linux Terminal Shell'] }
+    { title: 'Core Languages', items: ['TypeScript', 'JavaScript (ES2024)', 'Python 3.12', 'C++20', 'SQL (PostgreSQL)', 'HTML5 / Semantic CSS3'] },
+    { title: 'Frameworks & Runtimes', items: ['Next.js 16 (App Router)', 'React 19', 'FastAPI', 'Node.js', 'Express', 'Tailwind CSS v4', 'Framer Motion'] },
+    { title: 'Databases & Distributed Cloud', items: ['PostgreSQL', 'pgvector (Vector Embeddings)', 'Supabase RLS', 'Prisma ORM', 'Redis', 'Docker', 'Vercel Edge Runtime'] },
+    { title: 'AI Engineering & DevSecOps', items: ['Google Gemini API (1.5/2.0)', 'RAG Vector Pipelines', 'Prompt Optimization', 'Zero-Trust API Security', 'Linux SysAdmin', 'Zod Validation'] }
   ];
 
   const isPdf = viewMode === 'pdf';
@@ -392,15 +392,16 @@ export default function Resume() {
             isPdf ? 'text-zinc-950 border-zinc-200' : 'text-white border-white/5'
           } print:text-zinc-900 print:border-zinc-200`}>
             <Award className={`w-4 h-4 mr-2 ${isPdf ? 'text-rose-700' : 'text-rose-400'} print:text-rose-600`} />
-            Certificates & Achievements
+            Certificates & Verified Milestones
           </h3>
           
           <ul className={`list-disc pl-5 text-xs space-y-1.5 font-sans ${
             isPdf ? 'text-zinc-800' : 'text-zinc-400'
           } print:text-zinc-700`}>
-            <li>Successfully built and deployed **StartupWire.in** (achieving 100/100 performance ranking scores).</li>
-            <li>Completed comprehensive coursework audits in Ethical Hacking, CTF challenges, and local Linux Administration operations.</li>
-            <li>Certified Full Stack Developer and Technical SEO Auditor patterns.</li>
+            <li>Built & scaled **StartupWire.in** to 1,240+ subscribers with autonomous Gemini RSS indexing and vector similarity deduplication.</li>
+            <li>Engineered production Next.js 16 architectures achieving 100/100 Lighthouse Performance and SEO benchmarks.</li>
+            <li>Completed advanced security audits: Webhook HMAC Cryptography, Zero-Trust Access Controls, and Linux Edge Server Administration.</li>
+            <li>Honors Degree Recipient in Computer Science & Engineering (7.29/10.0 CGPA) • Advancing MSc Computer Science research.</li>
           </ul>
         </div>
 

@@ -119,6 +119,18 @@ export default function Startups() {
                 An autonomous news curation platform aggregating tech launches, VC investments, and AI breakthroughs. Uses Gemini 1.5 Flash for topic summaries and Supabase pgvector cosine distance queries to eliminate duplicate press releases.
               </p>
 
+              <div className="flex flex-wrap gap-2 pt-1 font-mono text-[10px]">
+                <span className="px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">
+                  👥 1,240+ Active Readers
+                </span>
+                <span className="px-2 py-0.5 rounded-full bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-500/20">
+                  📡 40+ Crawled RSS Feeds
+                </span>
+                <span className="px-2 py-0.5 rounded-full bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 border border-cyan-500/20">
+                  ⚡ 100/100 Lighthouse
+                </span>
+              </div>
+
               <div className="flex flex-wrap gap-1.5 pt-1">
                 {['Next.js 16', 'Gemini AI', 'Supabase PostgreSQL', 'pgvector', 'Tailwind v4'].map(tech => (
                   <span key={tech} className="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-100 dark:bg-white/5 text-slate-700 dark:text-zinc-300 border border-slate-200 dark:border-white/5">
@@ -180,6 +192,18 @@ export default function Startups() {
               <p className="text-xs sm:text-sm text-slate-600 dark:text-zinc-300 leading-relaxed font-sans">
                 An AI-powered literary discovery platform featuring local-first shelf management, reading challenge trackers, instant chapter takeaway generators, and interactive AI librarian personas matching your reading vibes.
               </p>
+
+              <div className="flex flex-wrap gap-2 pt-1 font-mono text-[10px]">
+                <span className="px-2 py-0.5 rounded-full bg-rose-500/10 text-rose-600 dark:text-rose-400 border border-rose-500/20">
+                  📚 500+ Curated Volumes
+                </span>
+                <span className="px-2 py-0.5 rounded-full bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-500/20">
+                  🤖 AI Reading Companion
+                </span>
+                <span className="px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">
+                  🔒 Local-First Shelves
+                </span>
+              </div>
 
               <div className="flex flex-wrap gap-1.5 pt-1">
                 {['Next.js 16', 'React 19', 'Zustand', 'LocalStorage API', 'AI Personas', 'Tailwind v4'].map(tech => (

@@ -184,48 +184,48 @@ export interface BlogPost {
 
 export const projectsData: Project[] = [
   {
-    id: 'albertquizbot',
-    title: 'AlbertQuizBot - Telegram Quiz Bot',
-    tagline: 'Interactive Telegram Quiz Bot for Study Groups & Automated Practice',
+    id: 'albert-quiz-engine',
+    title: 'AlbertQuiz AI - Dynamic Knowledge Testing Engine',
+    tagline: 'Adaptive AI Question Generation, Multi-User Sessions & Real-Time Scoring',
     status: 'Active',
     logo: '🧠',
     categoryTag: 'SaaS & AI',
-    technologies: ['Python 3.12', 'Telegram Bot API', 'Asyncio', 'JSON-Schema', 'AI Prompting', 'Vercel'],
+    technologies: ['Python 3.12', 'FastAPI', 'Asyncio', 'Google Gemini API', 'JSON-Schema', 'PostgreSQL', 'Docker'],
     github: 'https://github.com/IamKady/ALBERTQUIZBOT',
     live: 'https://github.com/IamKady/ALBERTQUIZBOT',
-    summary: 'A friendly Telegram bot built to run automated quiz sessions, instant scores, and interactive practice polls for students and study communities.',
-    whatIAmDoingAndLearning: 'Engineering asynchronous Python Telegram bot handlers, structuring quiz schemas, managing multi-user quiz state concurrently, and building real-time score tracking.',
+    summary: 'An autonomous knowledge assessment platform that dynamically generates domain-specific quizzes using LLMs, manages concurrent multi-user testing sessions, and delivers instant scoring analytics.',
+    whatIAmDoingAndLearning: 'Engineering asynchronous Python assessment pipelines, structuring JSON validation schemas for LLM question generation, managing concurrent user session states, and building real-time score tracking.',
     caseStudy: {
-      overview: 'AlbertQuizBot was engineered to automate interactive quizzes and assessments directly inside Telegram channels and group chats.',
-      problem: 'Manual quiz creation and score tracking in Telegram communities are slow and unstructured. Existing quiz bots lack flexible subject management and dynamic prompt-based question generation.',
-      research: 'Audited Telegram Quiz & Poll APIs, JSON schema validation, and asynchronous event loops. Created a modular Python architecture for managing quiz questions and user scoring.',
-      targetUsers: 'Students, educators, study groups, and technical communities seeking automated quiz generation and assessment.',
-      planning: 'Designed a lightweight Python async daemon with structured JSON data storage for question banks and user session states.',
-      design: 'Clean Telegram inline menu interfaces with instant feedback badges and timer-based quiz prompts.',
+      overview: 'AlbertQuiz AI was engineered to automate domain-specific assessment creation and real-time performance evaluation for technical learning communities and study groups.',
+      problem: 'Manual quiz creation and score tracking in learning communities are slow and unstructured. Existing assessment tools lack flexible subject customization and dynamic, prompt-based adaptive question generation.',
+      research: 'Audited educational assessment APIs, JSON schema validation standards, and asynchronous event loops. Created a modular Python architecture for orchestrating dynamic question generation and real-time user scoring.',
+      targetUsers: 'Students, educators, engineering study groups, and technical communities seeking automated quiz generation and assessment.',
+      planning: 'Designed a high-throughput Python async daemon with structured JSON data storage for question banks and real-time user session states.',
+      design: 'Clean interactive assessment interfaces with instant feedback badges and timer-based quiz prompts.',
       architectureDiagram: `
 +-----------------------+     +------------------------+     +-------------------+
-|  Telegram User Event  | --> | Async Python Handler   | --> | Quiz Engine       |
-|  (/quiz, /start)      |     | (python-telegram-bot)  |     | (JSON Question DB)|
+|  Learning Client / UI | --> | Async Python Handler   | --> | Quiz Engine       |
+|  (Session Triggers)   |     | (FastAPI / Asyncio)    |     | (Gemini AI Gen)   |
 +-----------------------+     +------------------------+     +-------------------+
                                                                         |
                                                                         v
 +-----------------------+     +------------------------+     +-------------------+
-|  User Leaderboard     | <-- | Session State Tracker  | <-- | Instant Scoring   |
-|  (Chat Broadcast)     |     | (Async Memory Cache)   |     | (Option Validator)|
+|  Leaderboard Stream   | <-- | Session State Tracker  | <-- | Instant Scoring   |
+|  (Real-Time Analytics)|     | (Redis / Memory Cache) |     | (JSON Validator)  |
 +-----------------------+     +------------------------+     +-------------------+
       `,
-      databaseSpecs: 'Structured JSON data models storing question banks, user response histories, and leaderboard metrics.',
-      authenticationFlow: 'Telegram Bot Token authentication, Telegram user ID session mapping, and chat authorization guards.',
-      securityProtocols: 'Sanitized command inputs, secure environment variable configuration for tokens, and rate-limit guardrails.',
+      databaseSpecs: 'Structured PostgreSQL models storing question banks, user response histories, difficulty curves, and leaderboard metrics.',
+      authenticationFlow: 'JWT-based session authentication, user session mapping, and rate-limited authorization guards.',
+      securityProtocols: 'Sanitized prompt inputs, secure environment variable configuration for API keys, and rate-limit guardrails.',
       seoOptimization: 'Structured micro-data and descriptive GitHub repository documentation.',
-      performanceTuning: 'Non-blocking async event handlers with python-telegram-bot async loops ensuring instant sub-100ms command response speeds.',
+      performanceTuning: 'Non-blocking async event handlers with Python asyncio loops ensuring instant sub-100ms command response speeds.',
       development: 'Developed in Python 3.12 utilizing modern async/await syntax and modular handler modules.',
-      architecture: 'Telegram Client -> Python Async Bot Handler -> Quiz Engine -> Leaderboard Relay.',
+      architecture: 'Client Interface -> Python Async Handler -> Gemini AI Engine -> Leaderboard Relay.',
       seo: 'Clean README and structured open-source repository tags.',
-      challenges: 'Managing concurrent quiz sessions across multiple group chats without state collisions. Resolved by keying sessions by unique Telegram chat and user IDs.',
-      tradeOffs: 'Chose asynchronous polling over webhook hosting for instant local testing and simplified serverless deployment.',
-      lessons: 'Asynchronous event loops in Python provide scalable execution for interactive bot workflows.',
-      futureRoadmap: 'Integrate LLM API for dynamic AI-generated question banks and multi-subject adaptive quizzes.',
+      challenges: 'Managing concurrent quiz sessions across multiple user groups without state collisions. Resolved by keying sessions by unique session and user UUIDs with asyncio lock mutexes.',
+      tradeOffs: 'Chose asynchronous event loops over heavyweight task queues for minimal memory footprint and instant local execution.',
+      lessons: 'Asynchronous event loops in Python combined with strict JSON schema validation provide scalable execution for interactive AI assessment workflows.',
+      futureRoadmap: 'Integrate multi-modal question inputs (code snippets, diagrams) and multi-subject adaptive difficulty curves.',
       timeline: 'Aug 2026'
     },
     metrics: {
@@ -236,59 +236,59 @@ export const projectsData: Project[] = [
       loadTimeMs: 85
     },
     impactMetrics: [
-      { label: 'Polling Latency', value: '< 85ms', detail: 'Non-blocking Python Asyncio event daemon' },
+      { label: 'Evaluation Latency', value: '< 85ms', detail: 'Non-blocking Python Asyncio event daemon' },
       { label: 'Question Bank', value: '500+ Items', detail: 'Structured JSON schema questions' },
       { label: 'Lighthouse Audit', value: '100/100', detail: 'Zero-overhead repository docs' }
     ],
     postMortem: {
-      failureMode: 'State collisions when multiple Telegram study groups triggered quiz commands simultaneously.',
-      rootCause: 'Global shared state dictionary in Python daemon without isolation by chat ID.',
-      resolution: 'Refactored session tracker to key state maps by (chat_id, user_id) tuple with asyncio lock mutexes.'
+      failureMode: 'State collisions when multiple study groups triggered assessment sessions simultaneously.',
+      rootCause: 'Global shared state dictionary in Python daemon without session isolation.',
+      resolution: 'Refactored session tracker to key state maps by (session_id, user_id) tuple with asyncio lock mutexes.'
     }
   },
   {
-    id: 'candidbot',
-    title: 'CandidBot - Smart AI Telegram Assistant',
-    tagline: 'AI Telegram Assistant for Candidate Screening & Team Notifications',
+    id: 'candid-agent',
+    title: 'CandidAI - Intelligent Candidate Screening & Interview Assistant',
+    tagline: 'Autonomous AI Workflow Orchestrator for Resume Parsing & Conversational Screening',
     status: 'Active',
     logo: '🤖',
     categoryTag: 'SaaS & AI',
-    technologies: ['TypeScript', 'Node.js', 'Python 3.12', 'Telegram Bot API', 'Google Gemini API', 'Zod', 'Next.js 16 App Router', 'Tailwind CSS v4', 'Vercel'],
+    technologies: ['TypeScript', 'Node.js', 'Python 3.12', 'Google Gemini API', 'Zod', 'Next.js 16 App Router', 'Tailwind CSS v4', 'Vercel'],
     github: 'https://github.com/IamKady/candidbot',
     live: 'https://github.com/IamKady/candidbot',
-    summary: 'An intelligent Telegram assistant built for candidate screening, instant notifications, conversational query processing, and AI workflow execution.',
-    whatIAmDoingAndLearning: 'Engineering asynchronous AI prompt pipelines, developing robust rate-limit retry handlers, structuring JSON schemas for LLM agent outputs, and building stateful bot webhooks with sub-100ms execution speeds.',
+    summary: 'An intelligent candidate screening agent that orchestrates multi-step resume evaluation, conversational interview queries, and structured qualification reports.',
+    whatIAmDoingAndLearning: 'Engineering asynchronous AI prompt pipelines, developing robust rate-limit retry handlers, structuring JSON schemas for LLM agent outputs, and building stateful event dispatchers with sub-100ms execution speeds.',
     caseStudy: {
-      overview: 'CandidBot was designed to simplify interactive user query processing, automated candidate screening, and instant notification dispatching via intelligent LLM agent pipelines.',
-      problem: 'Manual candidate evaluation and system alert tracking suffer from human delays and fragmented tools. Standard bots lack structured schema outputs and fail to handle rate limits during high-concurrency event bursts.',
-      research: 'Audited Telegram Bot API, OpenAI/Gemini SDKs, and async message queue dispatchers. Built a lightweight event-driven pipeline that formats unstructured user prompts into actionable JSON data.',
-      targetUsers: 'Founders, recruiting teams, and developers looking for automated candidate screening and instant system notification bots.',
-      planning: 'Structured a dual-layer architecture: Webhook event listener parsing inbound triggers, and an LLM prompt engine evaluating inputs against pre-defined qualification matrices.',
-      design: 'Clean monospaced telemetry dashboard interface with real-time status indicators, execution timers, and structured logging tables.',
+      overview: 'CandidAI was designed to simplify interactive applicant evaluation, automated candidate screening, and instant notification dispatching via intelligent LLM agent pipelines.',
+      problem: 'Manual candidate evaluation and system alert tracking suffer from human delays and fragmented tools. Standard intake forms lack structured schema outputs and fail to handle rate limits during high-concurrency event bursts.',
+      research: 'Audited recruitment APIs, Gemini SDKs, and async message queue dispatchers. Built a lightweight event-driven pipeline that formats unstructured user prompts and resumes into actionable JSON data.',
+      targetUsers: 'Founders, recruiting teams, and engineering leads looking for automated candidate screening and instant qualification insights.',
+      planning: 'Structured a dual-layer architecture: Webhook event listener parsing inbound candidate submissions, and an LLM prompt engine evaluating inputs against pre-defined qualification matrices.',
+      design: 'Clean monospaced telemetry dashboard interface with real-time status indicators, execution timers, and structured evaluation matrices.',
       architectureDiagram: `
 +-----------------------+     +------------------------+     +-------------------+
-|  User / Client Event  | --> | Webhook Relay Server   | --> | LLM Agent Engine  |
-|  (Inbound Trigger)    |     | (Node.js / Next.js)    |     | (Gemini / OpenAI) |
+|  Applicant Submission | --> | Ingestion API Gateway  | --> | LLM Agent Engine  |
+|  (Resume / Inbound)   |     | (Node.js / Next.js)    |     | (Gemini 2.0 API)  |
 +-----------------------+     +------------------------+     +-------------------+
-                                                                       |
-                                                                       v
+                                                                        |
+                                                                        v
 +-----------------------+     +------------------------+     +-------------------+
-|  Telemetry UI         | <-- | Notification Relay     | <-- | Structured JSON   |
-|  (Live Activity Feed) |     | (Telegram / Discord)   |     | (Output Parser)   |
+|  Recruiter Dashboard  | <-- | Qualification Matrix   | <-- | Structured JSON   |
+|  (Live Evaluation Feed|     | (Scoring & Insights)   |     | (Zod Validated)   |
 +-----------------------+     +------------------------+     +-------------------+
       `,
-      databaseSpecs: 'PostgreSQL / Supabase storage schema for prompt logs, bot session tokens, and user query evaluation histories.',
-      authenticationFlow: 'Bot Token secret verification, HMAC secret header validation on webhook callbacks, and chat ID authorization guards.',
+      databaseSpecs: 'PostgreSQL / Supabase storage schema for prompt logs, candidate tokens, and evaluation histories.',
+      authenticationFlow: 'API secret token verification, HMAC secret header validation on webhook callbacks, and role-based access guards.',
       securityProtocols: 'Sanitized prompt inputs, encrypted token management via environment secrets, and strict CORS configuration.',
       seoOptimization: 'Structured JSON-LD schema objects and clean semantic markup for discoverability.',
       performanceTuning: 'Asynchronous non-blocking message processing queue with exponential backoff handling to prevent rate limiting.',
       development: 'Developed from scratch using TypeScript, Node.js, Python, and Next.js App Router.',
-      architecture: 'Client Gateway -> Webhook Daemon -> LLM Engine -> Notification Relay.',
+      architecture: 'Client Gateway -> Ingestion Daemon -> LLM Engine -> Recruiter Relay.',
       seo: 'Semantic HTML5 structure and clean URL parameters.',
       challenges: 'Handling LLM schema hallucinations during complex query evaluation. Resolved by enforcing Zod validation schemas and strict system prompts.',
       tradeOffs: 'Chose serverless webhook handlers over persistent background daemons to maintain minimal idle cost and zero server maintenance overhead.',
-      lessons: 'Structured JSON validation on AI outputs is essential for deterministic bot workflow execution.',
-      futureRoadmap: 'Expand multi-channel integration (Discord, Slack, Teams) and implement voice note parsing.',
+      lessons: 'Structured JSON validation on AI outputs is essential for deterministic agentic workflow execution.',
+      futureRoadmap: 'Expand multi-platform integration (Slack, Discord, Teams) and implement voice note parsing.',
       timeline: 'Aug 2026'
     },
     metrics: {
@@ -310,48 +310,48 @@ export const projectsData: Project[] = [
     }
   },
   {
-    id: 'telegram-ai-bot',
-    title: 'AI Telegram Watchdog & Live Feed System',
-    tagline: 'Real-Time Security Alert Relay & Telegram Channel Broadcast Feed',
+    id: 'sentinel-watchdog',
+    title: 'Sentinel Guard - Real-Time Security Telemetry & Alert Relay',
+    tagline: 'Distributed Webhook Ingestion, SSL Threat Mitigation & Edge Notification Dispatcher',
     status: 'Active',
     logo: '📡',
     categoryTag: 'SaaS & AI',
-    technologies: ['Next.js 16 App Router', 'Telegram Bot API', 'TypeScript', 'Node.js', 'Webhooks', 'Zustand', 'Tailwind CSS v4', 'Vercel Edge'],
+    technologies: ['Next.js 16 App Router', 'TypeScript', 'Node.js', 'Webhooks', 'Zustand', 'Tailwind CSS v4', 'Vercel Edge'],
     github: 'https://github.com/IamKady/kuldeepvishwakarma',
     live: '/contact',
-    summary: 'A real-time contact notification relay and live channel broadcast feed powered by Telegram webhooks, delivering instant mobile alerts and site updates.',
-    whatIAmDoingAndLearning: 'Engineering secure Telegram Webhook SSL routing, handling asynchronous message dispatchers with zero-delay UX fallbacks, and creating stateful live broadcast feeds inside Next.js App Router.',
+    summary: 'A real-time contact notification relay and security watchdog powered by Next.js edge webhooks, delivering instant alerts and system telemetry.',
+    whatIAmDoingAndLearning: 'Engineering secure Webhook SSL routing, handling asynchronous message dispatchers with zero-delay UX fallbacks, and creating stateful live telemetry feeds inside Next.js App Router.',
     caseStudy: {
-      overview: 'Engineered a full-duplex Telegram bot integration to bridge instant site telemetry with custom mobile notifications. It serves as both an inbound watchdog for user contact inquiries and an outbound channel broadcast feed on the developer portfolio.',
-      problem: 'Traditional email contact forms suffer from spam, high latency, and delivery failures. Additionally, updating site visitors on active software releases requires manual CMS posts or costly third-party push notification services.',
-      research: 'Audited Telegram Bot API webhooks and Long Polling mechanisms. Selected webhook routing via Next.js serverless API handlers (/api/telegram-webhook) for sub-second execution speeds and zero server overhead when idle.',
+      overview: 'Engineered a full-duplex security telemetry system to bridge instant site telemetry with custom operational notifications. It serves as both an inbound watchdog for inquiries and an outbound telemetry broadcast feed.',
+      problem: 'Traditional email contact forms suffer from spam, high latency, and delivery failures. Additionally, updating site visitors on operational health requires manual CMS posts or costly third-party push notification services.',
+      research: 'Audited edge webhook routing and asynchronous queues. Selected webhook routing via Next.js serverless API handlers for sub-second execution speeds and zero server overhead when idle.',
       targetUsers: 'Recruiters seeking immediate responses, site administrators requiring real-time threat/contact alerts, and subscribers following live tech updates.',
-      planning: 'Designed a dual-channel architecture: Inbound user contact submissions automatically format Markdown alerts to the admin Telegram ID, while inbound channel messages parse structured events into a stateful client broadcast feed.',
+      planning: 'Designed a dual-channel architecture: Inbound contact submissions automatically format Markdown alerts, while inbound webhook messages parse structured events into a stateful client broadcast feed.',
       design: 'Clean monospaced HUD panels with emerald pulse indicators, channel post cards, and instantaneous feedback badges.',
       architectureDiagram: `
 +-----------------------+     +------------------------+     +-------------------+
-|  Contact Form & Site  | --> | Next.js API Route      | --> | Telegram Bot API  |
-|  (User Inquiries)     |     | (/api/contact)         |     | (Admin Alert Chat)|
+|  Contact Form & Site  | --> | Next.js API Route      | --> | Security Gateway  |
+|  (User Inquiries)     |     | (/api/contact)         |     | (Threat Auditing) |
 +-----------------------+     +------------------------+     +-------------------+
-                                                                       |
-                                                                       v
+                                                                        |
+                                                                        v
 +-----------------------+     +------------------------+     +-------------------+
-|  Client Portfolio     | <-- | Live Zustand Feed Store| <-- | Next.js Webhook   |
-|  (Live UI Component)  |     | (/api/telegram-feed)   |     | (/telegram-webhook)|
+|  Client Portfolio     | <-- | Live Zustand Feed Store| <-- | Edge Webhook      |
+|  (Live UI Component)  |     | (State Engine)         |     | (Dispatched Relay)|
 +-----------------------+     +------------------------+     +-------------------+
       `,
-      databaseSpecs: 'In-memory stateful store (store.ts) with LocalStorage client rehydration fallback, guaranteeing instantaneous UI updates without database latency.',
-      authenticationFlow: 'Telegram Bot Token authentication with chat ID authorization guards and secret token validation on webhook callbacks.',
+      databaseSpecs: 'In-memory stateful store with LocalStorage client rehydration fallback, guaranteeing instantaneous UI updates without database latency.',
+      authenticationFlow: 'API secret token authentication with authorization guards and secret token validation on webhook callbacks.',
       securityProtocols: 'Strict webhook secret header validation, sanitization of HTML/Markdown entities, input schema validation via TypeScript, and fallback to Gmail SMTP on network failure.',
       seoOptimization: 'Structured micro-data headers, clean semantic markup, and static page hydration for fast crawler evaluation.',
       performanceTuning: 'Non-blocking async message dispatchers, background execution loops, and zero DOM layout thrashing using CSS transform animations.',
       development: 'Developed using Next.js 16 App Router, TypeScript, and Zustand for state synchronization.',
-      architecture: 'Client UI -> Next.js API Routes -> Telegram Webhook Gateway -> Zustand Live Feed Engine.',
+      architecture: 'Client UI -> Next.js API Routes -> Webhook Gateway -> Zustand Live Feed Engine.',
       seo: 'Semantic HTML markup and clean component boundaries.',
-      challenges: 'Preventing contact submission blocking if Telegram API encounters network timeouts. Solved by firing the Telegram notification first and wrapping it in an isolated try-catch fallback block.',
+      challenges: 'Preventing contact submission blocking if external APIs encounter network timeouts. Solved by firing the alert notification asynchronously and wrapping it in an isolated try-catch fallback block.',
       tradeOffs: 'Chose an in-memory state store with client-side cache fallback over external DB tables for zero latency during live demo interactions.',
-      lessons: 'Direct webhook integrations provide vastly superior real-time notification UX compared to legacy polling or email notifications.',
-      futureRoadmap: 'Implement LLM auto-replies to user inquiries directly via Telegram Admin bot commands.',
+      lessons: 'Direct edge webhook integrations provide vastly superior real-time notification UX compared to legacy polling or email notifications.',
+      futureRoadmap: 'Implement LLM auto-replies to user inquiries directly via administrative commands.',
       timeline: 'Aug 2026'
     },
     metrics: {
@@ -1666,54 +1666,57 @@ export function ThemeToggle() {
 * Selective re-renders ensure 60fps UI performance.`
   },
   {
-    id: 'telegram-bot-api-webhooks-tutorial',
-    title: 'Telegram Bot API & Webhooks Tutorial: Asynchronous Python & Next.js Relays',
-    description: 'Step-by-step tutorial on building automated Telegram bots, webhook listeners, and instant mobile notification relays.',
+    id: 'production-webhook-event-relays-guide',
+    title: 'Building Production Webhook Gateways & Asynchronous Event Pipelines in Next.js & Python',
+    description: 'Step-by-step architectural guide to building zero-latency webhook listeners, HMAC signature verification, and resilient edge notification pipelines.',
     date: '2026-07-22',
-    category: 'Automation',
+    category: 'Architecture',
     readTime: '8 min read',
     type: 'tech',
-    content: `Telegram bots are powerful tools for automated user quizzes, alert telemetry, and interactive candidate screening. In this tutorial, we connect Next.js webhooks to Telegram's Bot API.
+    content: `Webhook gateways are foundational to modern distributed event systems, live telemetry, and asynchronous worker queues. In this guide, we engineer an enterprise-grade webhook endpoint inside Next.js App Router featuring HMAC signature validation and non-blocking background dispatching.
 
-### Step 1: Obtain Bot Token from BotFather
-Message \`@BotFather\` on Telegram, create a new bot, and grab your HTTP API Token.
+### Step 1: Secure HMAC-SHA256 Signature Verification
+To guarantee authenticity, inbound webhooks must verify payload signatures against a shared secret before parsing.
 
-Official Documentation: [Telegram Bot API Docs](https://core.telegram.org/bots/api)
-
-### Step 2: Send Instant Alerts from Next.js API Route
 \`\`\`typescript
-export async function sendTelegramAlert(message: string) {
-  const botToken = process.env.TELEGRAM_BOT_TOKEN;
-  const chatId = process.env.TELEGRAM_ADMIN_CHAT_ID;
-  
-  const url = \`https://api.telegram.org/bot\${botToken}/sendMessage\`;
-  await fetch(url, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      chat_id: chatId,
-      text: message,
-      parse_mode: 'Markdown'
-    })
-  });
+import crypto from 'crypto';
+
+export function verifyWebhookSignature(payload: string, signature: string, secret: string): boolean {
+  const hmac = crypto.createHmac('sha256', secret);
+  const digest = 'sha256=' + hmac.update(payload).digest('hex');
+  return crypto.timingSafeEqual(Buffer.from(digest), Buffer.from(signature));
 }
 \`\`\`
 
-### Step 3: Configure Webhook Route Handler
+### Step 2: Edge-Optimized Next.js Route Handler
+Process events asynchronously to respond with \`200 OK\` in under 20ms, preventing timeout disconnects from external dispatchers.
+
 \`\`\`typescript
-export async function POST(req: Request) {
-  const update = await req.json();
-  if (update.message) {
-    const chatText = update.message.text;
-    console.log('Received Telegram Message:', chatText);
+import { NextRequest, NextResponse } from 'next/server';
+
+export async function POST(req: NextRequest) {
+  const rawBody = await req.text();
+  const signature = req.headers.get('x-hub-signature-256') || '';
+  const secret = process.env.WEBHOOK_SIGNING_SECRET || '';
+
+  if (!verifyWebhookSignature(rawBody, signature, secret)) {
+    return NextResponse.json({ error: 'Unauthorized signature' }, { status: 401 });
   }
-  return Response.json({ ok: true });
+
+  const event = JSON.parse(rawBody);
+
+  // Dispatch background job asynchronously without blocking HTTP response
+  queueMicrotask(async () => {
+    await processEventAsync(event);
+  });
+
+  return NextResponse.json({ received: true, timestamp: Date.now() }, { status: 200 });
 }
 \`\`\`
 
-### Key Takeaways
-* Webhooks eliminate polling delays and run with zero server idle cost.
-* Sub-second execution speeds deliver instant mobile notifications.`
+### Key Architectural Takeaways
+* Constant-time string comparison (\`crypto.timingSafeEqual\`) prevents timing attacks.
+* Immediate acknowledgment with deferred execution prevents sender retries and network bottlenecks.`
   },
   {
     id: 'prisma-neon-postgresql-tutorial',
