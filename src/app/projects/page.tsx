@@ -65,7 +65,7 @@ export default function Projects() {
     }
   };
 
-  const categories = ['All', 'SaaS & AI', 'Full-Stack', 'Systems & Open Source', 'Learning Labs'];
+  const categories = ['All', 'SaaS & AI', 'Full-Stack', 'Client Work', 'Systems & Open Source', 'Learning Labs'];
 
   const filteredProjects = selectedCategory === 'All'
     ? projectsData

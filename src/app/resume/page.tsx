@@ -270,6 +270,12 @@ export default function Resume() {
                 A high-fidelity book discovery sanctuary built with Next.js and Zustand, featuring custom bookshelves, automated AI takeaways generation, and interactive chat companion personas.
               </p>
             </div>
+            <div>
+              <span className={`font-bold block ${isPdf ? 'text-zinc-900' : 'text-white'} print:text-zinc-900`}>Vijaya Home Healthcare &amp; Sapthagiri Health Care — Commercial Healthcare Platforms</span>
+              <p className={isPdf ? 'text-zinc-700' : 'text-zinc-400 print:text-zinc-700'}>
+                Engineered production digital healthcare web applications for Bangalore healthcare providers, featuring direct WhatsApp consultation routing, multi-service clinical catalogs, local Schema.org SEO, and edge CDN delivery with sub-100ms first paint times.
+              </p>
+            </div>
           </div>
         </div>
 

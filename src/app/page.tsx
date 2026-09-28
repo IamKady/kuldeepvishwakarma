@@ -77,7 +77,7 @@ export default function Home() {
         output = '1. StartupWire.in — AI-driven tech news & intelligence aggregation platform | 2. Bookperia.com — Semantic AI book discovery sanctuary.';
         break;
       case 'projects':
-        output = 'Flagship Systems: Distributed RAG Engine, Sub-10ms URL Shortener, AI Agent Telemetry Relay, Open Source SDKs. Visit /projects to explore 15+ systems.';
+        output = 'Flagship Systems: Distributed RAG Engine, Sub-10ms URL Shortener, AI Agent Telemetry Relay, Healthcare Web Platforms (Vijaya & Sapthagiri), Open Source SDKs. Visit /projects to explore 15+ systems.';
         break;
       case 'vitals':
         output = 'Health: 99.98% SLA Nominal | Latency: 18ms (Edge CDN) | Lighthouse Score: 100/100 | Security: SSL/TLS 1.3 + HSTS Active.';
