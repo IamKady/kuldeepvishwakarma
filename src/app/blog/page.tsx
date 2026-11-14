@@ -215,7 +215,7 @@ export default function Blog() {
   const nextBlog = getNextBlog();
 
   return (
-    <div className="max-w-5xl mx-auto px-4 sm:px-6 py-10 relative">
+    <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 relative">
       
       {/* Subtle Ambient Glow */}
       <div className="absolute top-12 left-1/3 w-80 h-80 bg-indigo-500/10 dark:bg-indigo-500/15 rounded-full blur-3xl pointer-events-none -z-10" />

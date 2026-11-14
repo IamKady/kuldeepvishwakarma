@@ -160,15 +160,15 @@ export default function Contact() {
   ];
 
   return (
-    <div className="max-w-5xl mx-auto px-4 space-y-16 py-6">
+    <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12 sm:space-y-16 py-6 sm:py-8">
       
       {/* Header */}
       <div className="space-y-3">
-        <h1 className="text-3xl sm:text-5xl font-black text-slate-900 dark:text-white tracking-tight">
-          Let's Connect & Build Together
+        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 dark:text-white tracking-tight">
+          Let&apos;s Connect &amp; Build Together
         </h1>
-        <p className="text-sm text-slate-600 dark:text-zinc-400 font-sans max-w-xl">
-          Have a project in mind, an opportunity to discuss, or just want to say hi? Send me a message below or schedule a chat—I'd love to connect!
+        <p className="text-sm sm:text-base text-slate-600 dark:text-zinc-300 font-sans max-w-xl leading-relaxed">
+          Have a project in mind, an opportunity to discuss, or just want to say hi? Send me a message below or schedule a chat—I&apos;d love to connect!
         </p>
       </div>
 
@@ -191,8 +191,8 @@ export default function Contact() {
                   {ch.icon}
                 </div>
                 <div className="overflow-hidden">
-                  <span className="text-[10px] text-slate-500 dark:text-zinc-500 font-mono block uppercase">{ch.name}</span>
-                  <span className="text-xs font-semibold text-slate-700 dark:text-zinc-300 group-hover:text-slate-900 dark:group-hover:text-white transition-colors truncate block">
+                  <span className="text-xs text-slate-500 dark:text-zinc-400 font-mono block uppercase">{ch.name}</span>
+                  <span className="text-xs sm:text-sm font-semibold text-slate-700 dark:text-zinc-300 group-hover:text-slate-900 dark:group-hover:text-white transition-colors truncate block">
                     {ch.value}
                   </span>
                 </div>
@@ -206,52 +206,52 @@ export default function Contact() {
               Send Console Message
             </h3>
 
-            <form onSubmit={handleFormSubmit} className="space-y-4 font-sans text-xs">
+            <form onSubmit={handleFormSubmit} className="space-y-4 font-sans text-xs sm:text-sm">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="space-y-1">
-                  <label className="text-[10px] font-mono text-slate-500 dark:text-zinc-500 uppercase">Your Name</label>
+                  <label className="text-xs font-mono text-slate-600 dark:text-zinc-400 uppercase font-medium">Your Name</label>
                   <input
                     type="text"
                     required
                     value={formData.name}
                     onChange={e => setFormData({ ...formData, name: e.target.value })}
-                    className="w-full px-3 py-2 bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-lg outline-none text-slate-900 dark:text-white focus:border-indigo-500 transition-colors shadow-xs dark:shadow-none"
+                    className="w-full px-3.5 py-2.5 bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-lg outline-none text-slate-900 dark:text-white focus:border-indigo-500 transition-colors shadow-xs dark:shadow-none text-xs sm:text-sm"
                     placeholder="Guest Administrator"
                   />
                 </div>
                 <div className="space-y-1">
-                  <label className="text-[10px] font-mono text-slate-500 dark:text-zinc-500 uppercase">Your Email</label>
+                  <label className="text-xs font-mono text-slate-600 dark:text-zinc-400 uppercase font-medium">Your Email</label>
                   <input
                     type="email"
                     required
                     value={formData.email}
                     onChange={e => setFormData({ ...formData, email: e.target.value })}
-                    className="w-full px-3 py-2 bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-lg outline-none text-slate-900 dark:text-white focus:border-indigo-500 transition-colors shadow-xs dark:shadow-none"
+                    className="w-full px-3.5 py-2.5 bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-lg outline-none text-slate-900 dark:text-white focus:border-indigo-500 transition-colors shadow-xs dark:shadow-none text-xs sm:text-sm"
                     placeholder="guest_user@host.com"
                   />
                 </div>
               </div>
 
               <div className="space-y-1">
-                <label className="text-[10px] font-mono text-slate-500 dark:text-zinc-500 uppercase">Subject</label>
+                <label className="text-xs font-mono text-slate-600 dark:text-zinc-400 uppercase font-medium">Subject</label>
                 <input
                   type="text"
                   required
                   value={formData.subject}
                   onChange={e => setFormData({ ...formData, subject: e.target.value })}
-                  className="w-full px-3 py-2 bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-lg outline-none text-slate-900 dark:text-white focus:border-indigo-500 transition-colors shadow-xs dark:shadow-none"
+                  className="w-full px-3.5 py-2.5 bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-lg outline-none text-slate-900 dark:text-white focus:border-indigo-500 transition-colors shadow-xs dark:shadow-none text-xs sm:text-sm"
                   placeholder="System Integration / Full-stack Opportunity"
                 />
               </div>
 
               <div className="space-y-1">
-                <label className="text-[10px] font-mono text-slate-500 dark:text-zinc-500 uppercase">Message</label>
+                <label className="text-xs font-mono text-slate-600 dark:text-zinc-400 uppercase font-medium">Message</label>
                 <textarea
                   required
                   rows={4}
                   value={formData.message}
                   onChange={e => setFormData({ ...formData, message: e.target.value })}
-                  className="w-full px-3 py-2 bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-lg outline-none text-slate-900 dark:text-white focus:border-indigo-500 transition-colors resize-none shadow-xs dark:shadow-none"
+                  className="w-full px-3.5 py-2.5 bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-lg outline-none text-slate-900 dark:text-white focus:border-indigo-500 transition-colors resize-none shadow-xs dark:shadow-none text-xs sm:text-sm"
                   placeholder="Write message details..."
                 />
               </div>

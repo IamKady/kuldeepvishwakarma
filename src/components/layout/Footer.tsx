@@ -35,7 +35,7 @@ export default function Footer() {
             <h3 className="text-sm font-bold text-slate-900 dark:text-white uppercase tracking-wider font-mono">
               Kuldeep C. Vishwakarma
             </h3>
-            <p className="text-xs text-slate-600 dark:text-zinc-400 max-w-sm leading-relaxed">
+            <p className="text-xs sm:text-sm text-slate-600 dark:text-zinc-400 max-w-sm leading-relaxed">
               Software Engineer, AI Builder, and Startup Founder. Building fast web applications, intelligent AI tools, and sharing lessons learned in public.
             </p>
             <div className="flex items-center space-x-3 pt-2">
@@ -60,7 +60,7 @@ export default function Footer() {
               </Link>
             </div>
             
-            <div className="text-[10px] text-slate-500 dark:text-zinc-500 font-mono">
+            <div className="text-xs text-slate-500 dark:text-zinc-500 font-mono">
               <span>Status: </span>
               <span className="text-emerald-600 dark:text-emerald-400 font-semibold">Available for Hire (IST)</span>
             </div>
@@ -71,7 +71,7 @@ export default function Footer() {
             <h3 className="text-sm font-bold text-slate-900 dark:text-white uppercase tracking-wider font-mono">
               Explore Pages
             </h3>
-            <div className="grid grid-cols-2 gap-x-4 gap-y-2 text-xs">
+            <div className="grid grid-cols-2 gap-x-4 gap-y-2 text-xs sm:text-sm">
               <Link href="/now" className="text-slate-600 dark:text-zinc-400 hover:text-slate-900 dark:hover:text-white transition-colors">/now</Link>
               <Link href="/uses" className="text-slate-600 dark:text-zinc-400 hover:text-slate-900 dark:hover:text-white transition-colors">/uses</Link>
               <Link href="/reading" className="text-slate-600 dark:text-zinc-400 hover:text-slate-900 dark:hover:text-white transition-colors">/reading</Link>
@@ -92,7 +92,7 @@ export default function Footer() {
             <h3 className="text-sm font-bold text-slate-900 dark:text-white uppercase tracking-wider font-mono">
               Stay Connected
             </h3>
-            <p className="text-xs text-slate-600 dark:text-zinc-400 leading-relaxed">
+            <p className="text-xs sm:text-sm text-slate-600 dark:text-zinc-400 leading-relaxed">
               Subscribe to my newsletter where I share monthly reflections on web development, AI tools, and building digital products.
             </p>
             <form onSubmit={handleSubscribe} className="flex max-w-md">
@@ -102,17 +102,17 @@ export default function Footer() {
                 placeholder="your.email@example.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full px-3 py-2 text-xs bg-white dark:bg-white/5 text-slate-900 dark:text-white border border-slate-300 dark:border-white/10 rounded-l-md outline-none focus:border-indigo-600 dark:focus:border-indigo-500 transition-colors font-mono placeholder:text-slate-400 dark:placeholder:text-zinc-500"
+                className="w-full px-3.5 py-2.5 text-xs sm:text-sm bg-white dark:bg-white/5 text-slate-900 dark:text-white border border-slate-300 dark:border-white/10 rounded-l-md outline-none focus:border-indigo-600 dark:focus:border-indigo-500 transition-colors font-mono placeholder:text-slate-400 dark:placeholder:text-zinc-500"
               />
               <button
                 type="submit"
-                className={`px-4 py-2 text-xs font-semibold rounded-r-md flex items-center transition-all cursor-pointer ${
+                className={`px-4 py-2.5 text-xs sm:text-sm font-semibold rounded-r-md flex items-center transition-all cursor-pointer ${
                   subscribed 
                     ? 'bg-emerald-600 dark:bg-emerald-500 text-white' 
                     : 'bg-indigo-600 text-white hover:bg-indigo-700 dark:hover:bg-indigo-500'
                 }`}
               >
-                {subscribed ? <Check className="w-3.5 h-3.5" /> : <ArrowRight className="w-3.5 h-3.5" />}
+                {subscribed ? <Check className="w-4 h-4" /> : <ArrowRight className="w-4 h-4" />}
               </button>
             </form>
           </div>
@@ -122,7 +122,7 @@ export default function Footer() {
             <h3 className="text-sm font-bold text-slate-900 dark:text-white uppercase tracking-wider font-mono">
               OS Telemetry Console
             </h3>
-            <div className="p-3.5 rounded-lg border border-slate-200 dark:border-white/10 bg-white dark:bg-black/50 font-mono text-[10px] space-y-1.5 text-slate-600 dark:text-zinc-400 shadow-sm dark:shadow-none">
+            <div className="p-4 rounded-lg border border-slate-200 dark:border-white/10 bg-white dark:bg-black/50 font-mono text-xs space-y-2 text-slate-600 dark:text-zinc-400 shadow-sm dark:shadow-none">
               <div className="flex justify-between gap-2">
                 <span className="flex-shrink-0">SYSTEM UPTIME:</span>
                 <span className="text-emerald-600 dark:text-emerald-400 font-medium text-right">324d 18h 45m</span>
@@ -139,7 +139,7 @@ export default function Footer() {
                 <span className="flex-shrink-0">PORTFOLIO OS:</span>
                 <span className="text-slate-900 dark:text-zinc-200 break-all text-right font-medium">v1.4.6 (Next.js Node)</span>
               </div>
-              <div className="flex justify-between gap-2 border-t border-slate-200 dark:border-white/5 pt-1.5 mt-1 text-slate-500 dark:text-zinc-500">
+              <div className="flex justify-between gap-2 border-t border-slate-200 dark:border-white/5 pt-2 mt-1 text-slate-500 dark:text-zinc-500">
                 <span className="flex-shrink-0">CHANGELOG:</span>
                 <span className="text-indigo-600 dark:text-indigo-400 break-all text-right">All 12 subpages active</span>
               </div>
@@ -149,9 +149,9 @@ export default function Footer() {
         </div>
 
         {/* Footer Bottom */}
-        <div className="mt-12 pt-6 border-t border-slate-200 dark:border-white/5 flex flex-col sm:flex-row items-center justify-between text-[11px] text-slate-500 dark:text-zinc-500">
+        <div className="mt-12 pt-6 border-t border-slate-200 dark:border-white/5 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 dark:text-zinc-500">
           <p>© {new Date().getFullYear()} Kuldeep Chandra Vishwakarma. All rights reserved.</p>
-          <div className="flex space-x-4 mt-4 sm:mt-0 font-mono text-[10px]">
+          <div className="flex space-x-4 mt-4 sm:mt-0 font-mono text-xs">
             <Link href="/projects" className="hover:text-slate-800 dark:hover:text-zinc-300">/projects</Link>
             <Link href="/case-studies" className="hover:text-slate-800 dark:hover:text-zinc-300">/case-studies</Link>
             <Link href="/resume" className="hover:text-slate-800 dark:hover:text-zinc-300">/resume</Link>

@@ -215,7 +215,7 @@ export default function Navbar({ onSearchOpen, theme, toggleTheme }: NavbarProps
                                     {subItem.name}
                                     {isSubActive && <span className="ml-1.5 w-1.5 h-1.5 rounded-full bg-indigo-500" />}
                                   </div>
-                                  <p className="text-[10px] text-slate-500 dark:text-zinc-400 leading-tight">
+                                  <p className="text-xs text-slate-500 dark:text-zinc-400 leading-normal">
                                     {subItem.description}
                                   </p>
                                 </div>
@@ -258,7 +258,7 @@ export default function Navbar({ onSearchOpen, theme, toggleTheme }: NavbarProps
             >
               <Search className="w-3.5 h-3.5" />
               <span className="hidden sm:inline font-sans">Search</span>
-              <kbd className="hidden sm:inline-flex items-center text-[9px] bg-slate-200/80 dark:bg-white/10 px-1 py-0.2 rounded border border-slate-300 dark:border-white/5 font-mono text-slate-600 dark:text-zinc-400">
+              <kbd className="hidden sm:inline-flex items-center text-[10px] bg-slate-200/80 dark:bg-white/10 px-1.5 py-0.5 rounded border border-slate-300 dark:border-white/5 font-mono font-medium text-slate-600 dark:text-zinc-400">
                 ⌘K
               </kbd>
             </button>
@@ -327,7 +327,7 @@ export default function Navbar({ onSearchOpen, theme, toggleTheme }: NavbarProps
                             key={subItem.name}
                             href={subItem.path}
                             onClick={() => setIsOpen(false)}
-                            className="flex items-center space-x-2.5 px-3 py-2 rounded-md text-xs text-slate-600 dark:text-zinc-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/5"
+                            className="flex items-center space-x-2.5 px-3 py-2.5 rounded-md text-sm text-slate-700 dark:text-zinc-300 hover:text-slate-950 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/5"
                           >
                             {subItem.icon}
                             <span className="font-medium">{subItem.name}</span>

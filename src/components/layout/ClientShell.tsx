@@ -73,7 +73,7 @@ export default function ClientShell({ children }: { children: React.ReactNode })
       />
 
       {/* Main Pages */}
-      <main id="main-content" className="flex-grow pt-24 pb-16 relative z-10">
+      <main id="main-content" className="flex-grow pt-20 sm:pt-24 pb-20 sm:pb-24 relative z-10">
         {children}
       </main>
 

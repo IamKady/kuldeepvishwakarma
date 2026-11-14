@@ -67,14 +67,14 @@ export default function Startups() {
   const stages = ['Ideation', 'Planning', 'MVP', 'Growth', 'Monetization'];
 
   return (
-    <div className="max-w-6xl mx-auto px-4 space-y-16 py-6">
+    <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12 sm:space-y-16 py-6 sm:py-8">
       
       {/* Page Header */}
       <div className="space-y-3">
-        <h1 className="text-3xl sm:text-5xl font-black text-slate-900 dark:text-white tracking-tight">
-          Startup Journal & Ventures
+        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 dark:text-white tracking-tight">
+          Startup Journal &amp; Ventures
         </h1>
-        <p className="text-sm text-slate-600 dark:text-zinc-400 font-sans max-w-xl">
+        <p className="text-sm sm:text-base text-slate-600 dark:text-zinc-300 font-sans max-w-xl leading-relaxed">
           Logging my thoughts, experiments, roadmap milestones, and metrics building my core startup products: StartupWire and Bookperia.
         </p>
       </div>
@@ -85,10 +85,10 @@ export default function Startups() {
           <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full border border-indigo-500/20 bg-indigo-500/10 text-xs text-indigo-700 dark:text-indigo-400 font-mono tracking-wider font-semibold uppercase mb-2">
             🚀 FOUNDER VENTURES
           </div>
-          <h2 className="text-2xl sm:text-4xl font-black text-slate-900 dark:text-white tracking-tight font-sans">
+          <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white tracking-tight font-sans">
             Primary Startup Plans
           </h2>
-          <p className="text-sm text-slate-600 dark:text-zinc-400 font-sans mt-1 max-w-2xl">
+          <p className="text-xs sm:text-sm text-slate-600 dark:text-zinc-400 font-sans mt-1 max-w-2xl">
             My two core startup initiatives: an autonomous AI tech news platform and an AI-powered book discovery sanctuary.
           </p>
         </div>
@@ -105,12 +105,12 @@ export default function Startups() {
                     <h3 className="text-xl font-bold text-slate-900 dark:text-white font-sans flex items-center gap-2">
                       StartupWire.in
                     </h3>
-                    <span className="text-[10px] font-mono text-indigo-600 dark:text-indigo-400 block font-semibold">
-                      AI Tech News & Curation Engine
+                    <span className="text-xs font-mono text-indigo-600 dark:text-indigo-400 block font-semibold">
+                      AI Tech News &amp; Curation Engine
                     </span>
                   </div>
                 </div>
-                <span className="text-[9px] font-mono font-semibold px-2.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 uppercase tracking-wider">
+                <span className="text-xs font-mono font-medium px-2.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 uppercase tracking-wider">
                   Active Beta
                 </span>
               </div>
@@ -119,21 +119,21 @@ export default function Startups() {
                 An autonomous news curation platform aggregating tech launches, VC investments, and AI breakthroughs. Uses Gemini 1.5 Flash for topic summaries and Supabase pgvector cosine distance queries to eliminate duplicate press releases.
               </p>
 
-              <div className="flex flex-wrap gap-2 pt-1 font-mono text-[10px]">
-                <span className="px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">
+              <div className="flex flex-wrap gap-2 pt-1 font-mono text-xs">
+                <span className="px-2.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">
                   👥 1,240+ Active Readers
                 </span>
-                <span className="px-2 py-0.5 rounded-full bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-500/20">
+                <span className="px-2.5 py-0.5 rounded-full bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-500/20">
                   📡 40+ Crawled RSS Feeds
                 </span>
-                <span className="px-2 py-0.5 rounded-full bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 border border-cyan-500/20">
+                <span className="px-2.5 py-0.5 rounded-full bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 border border-cyan-500/20">
                   ⚡ 100/100 Lighthouse
                 </span>
               </div>
 
               <div className="flex flex-wrap gap-1.5 pt-1">
                 {['Next.js 16', 'Gemini AI', 'Supabase PostgreSQL', 'pgvector', 'Tailwind v4'].map(tech => (
-                  <span key={tech} className="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-100 dark:bg-white/5 text-slate-700 dark:text-zinc-300 border border-slate-200 dark:border-white/5">
+                  <span key={tech} className="text-xs font-mono px-2.5 py-1 rounded bg-slate-100 dark:bg-white/5 text-slate-700 dark:text-zinc-300 border border-slate-200 dark:border-white/5">
                     {tech}
                   </span>
                 ))}
@@ -143,7 +143,7 @@ export default function Startups() {
             <div className="pt-4 border-t border-slate-200 dark:border-white/5 flex items-center justify-between">
               <Link 
                 href="/startups/startupwire" 
-                className="text-xs font-semibold text-indigo-600 dark:text-indigo-400 hover:underline flex items-center gap-1"
+                className="text-xs sm:text-sm font-semibold text-indigo-600 dark:text-indigo-400 hover:underline flex items-center gap-1"
               >
                 View Deep Dive <ArrowRight className="w-3.5 h-3.5" />
               </Link>
