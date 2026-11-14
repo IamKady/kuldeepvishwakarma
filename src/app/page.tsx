@@ -49,7 +49,7 @@ export default function Home() {
   const [localTime, setLocalTime] = useState('13:36 PM');
   const [dashboardTab, setDashboardTab] = useState<'status' | 'deployments' | 'radar' | 'oss' | 'books'>('status');
   const [copiedText, setCopiedText] = useState(false);
-  const [hudView, setHudView] = useState<'code' | 'photo' | 'cli' | 'vitals'>('code');
+  const [hudView, setHudView] = useState<'code' | 'photo' | 'cli' | 'vitals'>('photo');
 
   // Interactive CLI Prompt State
   const [cliInput, setCliInput] = useState('');
@@ -211,29 +211,26 @@ export default function Home() {
   const githubCells = generateGithubGrid();
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-24 relative">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-20 sm:space-y-28 relative">
       
       {/* 1. HERO SECTION */}
-      <section className="min-h-[85vh] flex flex-col justify-center pt-6 space-y-12">
-        <div className="flex flex-col lg:flex-row items-center justify-between gap-12">
+      <section className="min-h-[72vh] flex flex-col justify-center pt-8 space-y-10">
+        <div className="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-16">
           {/* Left Column: Heading, Badges, and Paragraph */}
           <div className="flex-1 space-y-6 text-left max-w-3xl">
             <motion.div 
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="inline-flex items-center space-x-2.5 px-3.5 py-1.5 rounded-full border border-indigo-500/20 dark:border-indigo-400/20 glass-panel-elevated bg-white/90 dark:bg-black/60 shadow-lg shadow-indigo-500/5 backdrop-blur-xl"
+              className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full border border-slate-200 dark:border-white/10 bg-white/80 dark:bg-white/[0.03] shadow-sm backdrop-blur-xl"
             >
               <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
               </span>
-              <span className="text-[10px] sm:text-xs font-mono text-slate-800 dark:text-zinc-200 tracking-wider flex items-center gap-1.5">
-                <span className="text-emerald-600 dark:text-emerald-400 font-bold">AVAILABLE FOR FULL-TIME ROLES</span>
-                <span className="text-slate-400 dark:text-zinc-600">•</span>
-                <span>BASED IN INDIA (IST)</span>
-                <span className="text-slate-400 dark:text-zinc-600">•</span>
-                <span className="text-indigo-600 dark:text-indigo-400 font-medium">SOFTWARE ENGINEER &amp; FOUNDER</span>
+              <span className="text-[10px] sm:text-xs font-mono text-slate-700 dark:text-zinc-300 tracking-wide">
+                <span className="text-emerald-700 dark:text-emerald-400 font-semibold">OPEN TO FULL-TIME ROLES</span>
+                <span className="text-slate-400 dark:text-zinc-600"> · India (IST)</span>
               </span>
             </motion.div>
 
@@ -243,20 +240,20 @@ export default function Home() {
               transition={{ duration: 0.6, delay: 0.1 }}
               className="space-y-4"
             >
-              <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black font-sans tracking-tight leading-[1.05] text-slate-900 dark:text-white">
+              <h1 className="text-4xl sm:text-6xl lg:text-7xl font-bold font-sans tracking-[-0.045em] leading-[1.02] text-slate-950 dark:text-white">
                 Kuldeep Chandra <br/>
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 via-cyan-400 to-emerald-400 drop-shadow-xs">
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 via-indigo-400 to-cyan-400">
                   Vishwakarma
                 </span>
               </h1>
               <div className="flex flex-wrap items-center gap-2 pt-1">
-                <span className="px-2.5 py-1 text-xs font-mono font-semibold rounded-md bg-indigo-500/10 text-indigo-700 dark:text-indigo-300 border border-indigo-500/20">
+                <span className="px-2.5 py-1 text-[11px] font-medium rounded-full bg-indigo-500/[0.07] text-indigo-700 dark:text-indigo-300 border border-indigo-500/15">
                   Software Engineer
                 </span>
-                <span className="px-2.5 py-1 text-xs font-mono font-semibold rounded-md bg-cyan-500/10 text-cyan-700 dark:text-cyan-300 border border-cyan-500/20">
+                <span className="px-2.5 py-1 text-[11px] font-medium rounded-full bg-indigo-500/[0.07] text-indigo-700 dark:text-indigo-300 border border-indigo-500/15">
                   Distributed Systems
                 </span>
-                <span className="px-2.5 py-1 text-xs font-mono font-semibold rounded-md bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 border border-emerald-500/20">
+                <span className="px-2.5 py-1 text-[11px] font-medium rounded-full bg-indigo-500/[0.07] text-indigo-700 dark:text-indigo-300 border border-indigo-500/15">
                   AI Builder
                 </span>
               </div>
@@ -266,40 +263,37 @@ export default function Home() {
               initial={{ opacity: 0, y: 25 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-sm sm:text-base text-slate-600 dark:text-zinc-300 leading-relaxed font-sans max-w-2xl"
+              className="text-sm sm:text-base text-slate-600 dark:text-zinc-300 leading-7 font-sans max-w-xl"
             >
-              Full-stack software engineer and startup founder. I design and build resilient distributed web applications, deterministic AI agent pipelines, and high-performance tools using Next.js 16, TypeScript, and Python. Creator of <Link href="/startups" className="text-slate-900 dark:text-white font-semibold underline decoration-indigo-500/40 hover:decoration-indigo-500 underline-offset-4 transition-colors">StartupWire.in</Link> and <Link href="/startups" className="text-slate-900 dark:text-white font-semibold underline decoration-emerald-500/40 hover:decoration-emerald-500 underline-offset-4 transition-colors">Bookperia.com</Link>, while completing a Master&apos;s degree in Computer Science.
+              I build resilient web products and AI systems, from distributed applications to agent workflows. I&apos;m the founder of <Link href="/startups" className="text-slate-900 dark:text-white font-medium underline decoration-indigo-500/40 hover:decoration-indigo-500 underline-offset-4 transition-colors">StartupWire</Link> and <Link href="/startups" className="text-slate-900 dark:text-white font-medium underline decoration-indigo-500/40 hover:decoration-indigo-500 underline-offset-4 transition-colors">Bookperia</Link>, and am currently pursuing a Master&apos;s degree in Computer Science.
             </motion.p>
 
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="flex flex-wrap items-center gap-3 pt-2"
+              className="flex flex-wrap items-center gap-2.5 pt-1"
             >
               <Link 
                 href="/projects" 
-                className="btn-shimmer px-5 py-2.5 text-xs font-semibold text-white bg-indigo-600 hover:bg-indigo-500 rounded-lg shadow-lg shadow-indigo-600/25 hover:shadow-indigo-500/40 hover:-translate-y-0.5 transition-all flex items-center group cursor-pointer border border-indigo-400/30"
+                className="px-4 py-2.5 text-xs font-semibold text-white bg-indigo-600 hover:bg-indigo-500 rounded-lg shadow-md shadow-indigo-600/15 hover:-translate-y-0.5 transition-all flex items-center group border border-indigo-400/30"
               >
-                Explore Architecture &amp; Projects 
+                Explore selected work
                 <ArrowRight className="w-3.5 h-3.5 ml-2 group-hover:translate-x-1 transition-transform" />
               </Link>
               <Link 
                 href="/startups" 
-                className="px-5 py-2.5 text-xs font-semibold text-slate-700 dark:text-zinc-200 hover:text-slate-900 dark:hover:text-white bg-white dark:bg-white/5 hover:bg-slate-100 dark:hover:bg-white/10 border border-slate-200 dark:border-white/10 rounded-lg hover:-translate-y-0.5 transition-all flex items-center cursor-pointer shadow-xs dark:shadow-none"
+                className="px-4 py-2.5 text-xs font-medium text-slate-700 dark:text-zinc-200 hover:text-slate-950 dark:hover:text-white bg-white/70 dark:bg-white/[0.03] hover:bg-slate-100 dark:hover:bg-white/10 border border-slate-200 dark:border-white/10 rounded-lg hover:-translate-y-0.5 transition-all flex items-center"
               >
-                Founder Startups
+                Startups
               </Link>
-              <button 
-                onClick={() => {
-                  triggerConfetti();
-                  window.open('/resume', '_blank');
-                }}
-                className="px-5 py-2.5 text-xs font-semibold text-emerald-700 dark:text-emerald-400 hover:text-emerald-800 dark:hover:text-emerald-300 bg-emerald-500/10 dark:bg-emerald-500/5 hover:bg-emerald-500/20 dark:hover:bg-emerald-500/10 border border-emerald-500/30 dark:border-emerald-500/20 rounded-lg hover:-translate-y-0.5 transition-all flex items-center cursor-pointer"
+              <Link
+                href="/resume"
+                className="px-3 py-2.5 text-xs font-medium text-slate-600 dark:text-zinc-300 hover:text-slate-950 dark:hover:text-white transition-colors flex items-center"
               >
-                Download Resume 
+                View résumé
                 <Download className="w-3.5 h-3.5 ml-2" />
-              </button>
+              </Link>
             </motion.div>
 
             {/* Core Tech Stack Micro Rail */}
@@ -307,25 +301,25 @@ export default function Home() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.8, delay: 0.4 }}
-              className="pt-2 flex flex-wrap items-center gap-2 text-[11px] font-mono text-slate-500 dark:text-zinc-500"
+              className="pt-1 flex flex-wrap items-center gap-2 text-[11px] text-slate-500 dark:text-zinc-500"
             >
-              <span className="text-slate-400 dark:text-zinc-600 font-semibold tracking-wider text-[10px]">CORE TECH:</span>
+              <span className="text-slate-400 dark:text-zinc-600 font-semibold tracking-wider text-[10px]">STACK</span>
               {['Next.js 16', 'TypeScript', 'Python 3.12', 'Tailwind v4', 'Gemini AI', 'PostgreSQL', 'Vercel Edge'].map((tech) => (
-                <span key={tech} className="px-2 py-0.5 rounded bg-slate-100 dark:bg-white/[0.04] border border-slate-200 dark:border-white/5 text-slate-700 dark:text-zinc-300 hover:border-indigo-500/30 transition-colors">
+                <span key={tech} className="text-slate-600 dark:text-zinc-400 after:content-['·'] after:ml-2 last:after:content-['']">
                   {tech}
                 </span>
               ))}
             </motion.div>
           </div>
 
-          {/* Right Column: Cybernetic HUD */}
+          {/* Right Column: Interactive Profile Card */}
           <motion.div 
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8 }}
-            className="w-full lg:w-[480px] relative flex justify-center items-center"
+            className="w-full lg:w-[440px] relative flex justify-center items-center"
           >
-            <SpotlightCard borderBeam={true} className="w-full p-5 relative z-10 border-slate-200 dark:border-white/10 shadow-2xl overflow-hidden group bg-white/90 dark:bg-black/50 glass-panel-elevated">
+            <SpotlightCard className="w-full p-4 sm:p-5 relative z-10 border-slate-200 dark:border-white/10 shadow-xl overflow-hidden group bg-white/90 dark:bg-slate-950/70 glass-panel">
               {/* Window Header */}
               <div className="flex items-center justify-between border-b border-slate-200 dark:border-white/5 pb-3 mb-4 font-mono text-xs text-slate-500 dark:text-zinc-500">
                 <div className="flex items-center space-x-2 sm:space-x-3">
@@ -336,16 +330,16 @@ export default function Home() {
                   </div>
                   {/* Tab toggles */}
                   <div className="flex items-center space-x-1 border-l border-slate-200 dark:border-white/10 pl-2 sm:pl-3">
-                    {[
-                      { id: 'code', label: '01 // BIO.json' },
-                      { id: 'photo', label: '02 // OPERATOR.id' },
-                      { id: 'cli', label: '03 // SHELL.sh' },
-                      { id: 'vitals', label: '04 // VITALS.sys' },
-                    ].map((tab) => (
+                    {([
+                      { id: 'code', label: 'Overview' },
+                      { id: 'photo', label: 'Portrait' },
+                      { id: 'cli', label: 'Terminal' },
+                      { id: 'vitals', label: 'Vitals' },
+                    ] as const).map((tab) => (
                       <button 
                         key={tab.id}
-                        onClick={() => setHudView(tab.id as any)}
-                        className={`text-[9px] sm:text-[10px] font-mono tracking-wider transition-all duration-200 px-2 py-0.5 rounded cursor-pointer ${
+                        onClick={() => setHudView(tab.id)}
+                        className={`text-[9px] sm:text-[10px] tracking-wide transition-all duration-200 px-2 py-1 rounded-md cursor-pointer ${
                           hudView === tab.id 
                             ? 'text-indigo-600 dark:text-indigo-400 bg-indigo-500/10 font-bold border border-indigo-500/30' 
                             : 'text-slate-500 dark:text-zinc-500 hover:text-slate-800 dark:hover:text-zinc-300 hover:bg-slate-100 dark:hover:bg-white/5'
@@ -425,27 +419,7 @@ export default function Home() {
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-transparent pointer-events-none" />
                     
-                    {/* Animated Cybernetic Scanline */}
-                    <div className="absolute inset-0 pointer-events-none overflow-hidden">
-                      <div className="w-full h-1 bg-gradient-to-r from-transparent via-cyan-400 to-transparent animate-cyber-scan" />
-                    </div>
-
-                    {/* HUD Corner Reticles */}
-                    <div className="absolute top-2 left-2 text-[10px] font-mono text-cyan-400 opacity-80 select-none pointer-events-none">[+]</div>
-                    <div className="absolute top-2 right-2 text-[10px] font-mono text-cyan-400 opacity-80 select-none pointer-events-none">[+]</div>
-                    <div className="absolute bottom-10 left-2 text-[10px] font-mono text-cyan-400 opacity-80 select-none pointer-events-none">[+]</div>
-                    <div className="absolute bottom-10 right-2 text-[10px] font-mono text-cyan-400 opacity-80 select-none pointer-events-none">[+]</div>
-
                     {/* Decorative overlays */}
-                    <div className="absolute top-2.5 left-7 flex items-center space-x-1.5 bg-slate-900/90 dark:bg-black/75 backdrop-blur-md border border-emerald-500/30 px-2 py-0.5 rounded text-[8px] font-mono tracking-widest text-emerald-300">
-                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                      <span>OPERATOR IDENTIFIED</span>
-                    </div>
-
-                    <div className="absolute top-2.5 right-7 bg-indigo-500/20 text-indigo-200 text-[8px] font-mono uppercase tracking-widest px-2 py-0.5 rounded border border-indigo-500/30">
-                      LAT: 26.84°N • LON: 80.94°E
-                    </div>
-
                     <div className="absolute bottom-3 left-3 right-3 text-left space-y-1">
                       <div className="flex items-center justify-between">
                         <h3 className="text-xs font-bold text-white font-sans tracking-tight">
@@ -558,7 +532,7 @@ export default function Home() {
         </div>
 
         {/* 1.1 TELEMETRY STATS GRID (Linear-inspired glass cards with icons & neon accents) */}
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-3.5 border-t border-slate-200 dark:border-white/5 pt-10">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-x-6 gap-y-4 border-t border-slate-200 dark:border-white/5 pt-6">
           {[
             { label: 'Current Focus', value: 'StartupWire Curation', icon: <Target className="w-3.5 h-3.5 text-indigo-500 dark:text-indigo-400" /> },
             { label: 'Coding Experience', value: 'Since 2016', icon: <Terminal className="w-3.5 h-3.5 text-cyan-500 dark:text-cyan-400" /> },
@@ -567,7 +541,7 @@ export default function Home() {
             { label: 'Products Shipped', value: '12 Production', icon: <Rocket className="w-3.5 h-3.5 text-rose-500 dark:text-rose-400" /> },
             { label: 'Availability', value: 'Open for Hire', icon: <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 dark:text-emerald-400" /> }
           ].map((stat, idx) => (
-            <SpotlightCard key={idx} className="p-3.5 rounded-xl border border-slate-200 dark:border-white/5 bg-white dark:bg-white/[0.02] hover:border-indigo-500/30 transition-all duration-300 shadow-xs dark:shadow-none flex flex-col justify-between space-y-2 group/card">
+            <div key={idx} className="py-2 flex flex-col justify-between gap-2 group/card">
               <div className="flex items-center justify-between">
                 <span className="text-[10px] text-slate-500 dark:text-zinc-500 font-mono uppercase tracking-wider block font-medium">
                   {stat.label}
@@ -579,7 +553,7 @@ export default function Home() {
               <span className="text-xs sm:text-sm font-bold text-slate-900 dark:text-white font-sans tracking-tight">
                 {stat.value}
               </span>
-            </SpotlightCard>
+            </div>
           ))}
         </div>
       </section>
