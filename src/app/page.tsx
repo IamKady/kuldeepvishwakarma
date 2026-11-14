@@ -409,13 +409,12 @@ export default function Home() {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -8 }}
                     transition={{ duration: 0.2 }}
-                    className="relative aspect-[4/3] w-full rounded-lg overflow-hidden border border-slate-200 dark:border-white/10 bg-slate-900 dark:bg-black/60 flex items-center justify-center group/img"
+                    className="relative aspect-[9/16] w-full max-w-[240px] mx-auto rounded-lg overflow-hidden border border-slate-200 dark:border-white/10 bg-slate-900 dark:bg-black/60 flex items-center justify-center group/img"
                   >
                     <img 
                       src="/kuldeep.jpg" 
                       alt="Kuldeep Chandra Vishwakarma" 
-                      className="absolute inset-0 w-full h-full object-cover transform scale-[1.06] hover:scale-[1.12] transition-transform duration-700" 
-                      style={{ objectPosition: 'center 20%' }}
+                      className="absolute inset-0 w-full h-full object-contain"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-transparent pointer-events-none" />
                     
