@@ -49,7 +49,7 @@ export default function Home() {
   const [localTime, setLocalTime] = useState('13:36 PM');
   const [dashboardTab, setDashboardTab] = useState<'status' | 'deployments' | 'radar' | 'oss' | 'books'>('status');
   const [copiedText, setCopiedText] = useState(false);
-  const [hudView, setHudView] = useState<'code' | 'photo' | 'cli' | 'vitals'>('photo');
+  const [hudView, setHudView] = useState<'code' | 'cli' | 'vitals'>('code');
 
   // Interactive CLI Prompt State
   const [cliInput, setCliInput] = useState('');
@@ -332,7 +332,6 @@ export default function Home() {
                   <div className="flex items-center space-x-1 border-l border-slate-200 dark:border-white/10 pl-2 sm:pl-3">
                     {([
                       { id: 'code', label: 'Overview' },
-                      { id: 'photo', label: 'Portrait' },
                       { id: 'cli', label: 'Terminal' },
                       { id: 'vitals', label: 'Vitals' },
                     ] as const).map((tab) => (
@@ -400,44 +399,6 @@ export default function Home() {
                       <div><span className="text-zinc-600 select-none mr-2.5 text-[11px]">11</span>  <span className="text-cyan-300">&quot;bookperia&quot;</span>: <span className="text-emerald-300">&quot;Semantic Book Discovery&quot;</span></div>
                       <div><span className="text-zinc-600 select-none mr-2.5 text-[11px]">12</span>&#125;,</div>
                       <div><span className="text-zinc-600 select-none mr-2.5 text-[11px]">13</span><span className="text-indigo-400">&quot;status&quot;</span>: <span className="text-emerald-400 font-semibold">&quot;Ready for High-Impact Engineering Roles&quot;</span></div>
-                    </div>
-                  </motion.div>
-                ) : hudView === 'photo' ? (
-                  <motion.div
-                    key="photo"
-                    initial={{ opacity: 0, y: 8 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -8 }}
-                    transition={{ duration: 0.2 }}
-                    className="relative h-[300px] w-full rounded-lg overflow-hidden border border-slate-200 dark:border-white/10 bg-slate-950 flex items-center justify-center group/img"
-                  >
-                    {/* Soft ambient background fill */}
-                    <img 
-                      src="/kuldeep.jpg" 
-                      alt="" 
-                      className="absolute inset-0 w-full h-full object-cover blur-2xl opacity-25 pointer-events-none" 
-                    />
-                    {/* Clear, uncropped portrait */}
-                    <img 
-                      src="/kuldeep.jpg" 
-                      alt="Kuldeep Chandra Vishwakarma" 
-                      className="relative z-10 h-full w-auto max-w-full object-contain mx-auto" 
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/25 to-transparent pointer-events-none z-20" />
-                    
-                    {/* Decorative overlays */}
-                    <div className="absolute bottom-3.5 left-3.5 right-3.5 text-left space-y-1 z-30">
-                      <div className="flex items-center justify-between">
-                        <h3 className="text-xs font-bold text-white font-sans tracking-tight">
-                          Kuldeep Chandra Vishwakarma
-                        </h3>
-                        <span className="text-[10px] font-mono text-cyan-300 bg-cyan-500/10 px-2 py-0.5 rounded border border-cyan-500/20 font-medium">
-                          MSc CompSci
-                        </span>
-                      </div>
-                      <p className="text-xs text-zinc-300 font-mono flex items-center gap-1.5">
-                        <span className="text-indigo-400 font-bold">&gt;&gt;</span> Full-Stack Software Engineer • AI Builder
-                      </p>
                     </div>
                   </motion.div>
                 ) : hudView === 'cli' ? (
