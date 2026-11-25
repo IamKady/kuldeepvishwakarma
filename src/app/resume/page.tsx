@@ -410,7 +410,7 @@ export default function Resume() {
           <ul className={`list-disc pl-5 text-xs space-y-1.5 font-sans ${
             isPdf ? 'text-zinc-800' : 'text-zinc-400'
           } print:text-zinc-700`}>
-            <li>Built & scaled **StartupWire.in** to 1,240+ subscribers with autonomous Gemini RSS indexing and vector similarity deduplication.</li>
+            <li>Built &amp; scaled **StartupWire.in** with autonomous Gemini RSS indexing and pgvector similarity deduplication.</li>
             <li>Engineered production Next.js 16 architectures achieving 100/100 Lighthouse Performance and SEO benchmarks.</li>
             <li>Completed advanced security audits: Webhook HMAC Cryptography, Zero-Trust Access Controls, and Linux Edge Server Administration.</li>
             <li>Honors Degree Recipient in Computer Science & Engineering (7.29/10.0 CGPA) • Advancing MSc Computer Science research.</li>

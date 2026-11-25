@@ -16,8 +16,8 @@ const geistMono = Geist_Mono({
 });
 
 export const viewport: Viewport = {
-  themeColor: "#090d16",
-  colorScheme: "dark light",
+  themeColor: "#faf9f6",
+  colorScheme: "light dark",
   width: "device-width",
   initialScale: 1,
   maximumScale: 5,
@@ -25,10 +25,10 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   title: {
-    default: "Kuldeep Chandra Vishwakarma | Software Engineer • AI Builder • Startup Founder",
+    default: "Kuldeep Chandra Vishwakarma — Software Developer, AI Builder & Entrepreneur",
     template: "%s | Kuldeep Chandra Vishwakarma"
   },
-  description: "Personal Operating System of Kuldeep Chandra Vishwakarma. Software Engineer, AI Builder, Startup Founder, and Tech Writer. Building StartupWire, researching cybersecurity and AI workflows.",
+  description: "Personal website and engineering journal of Kuldeep Chandra Vishwakarma. Software Developer, AI Builder, and Entrepreneur building StartupWire, Bookperia, and KadyVerse.",
   metadataBase: new URL("https://kuldeepvishwakarma.com"),
   applicationName: "Kuldeep Chandra Vishwakarma Portfolio",
   generator: "Next.js",

@@ -6,21 +6,24 @@ import Footer from './Footer';
 import CommandPalette from '../search/CommandPalette';
 
 export default function ClientShell({ children }: { children: React.ReactNode }) {
-  const [theme, setTheme] = useState<'dark' | 'light'>('dark');
+  const [theme, setTheme] = useState<'dark' | 'light'>('light');
   const [isSearchOpen, setIsSearchOpen] = useState(false);
 
-  // Sync theme with DOM and localStorage
+  // Sync theme with DOM and localStorage (default: warm-white editorial light mode)
   useEffect(() => {
     const savedTheme = localStorage.getItem('theme') as 'dark' | 'light' | null;
-    const initialTheme = savedTheme || 'dark';
-    setTheme(initialTheme);
-    
+    const initialTheme = savedTheme || 'light';
+
     if (initialTheme === 'dark') {
       document.documentElement.classList.add('dark');
       document.documentElement.classList.remove('light');
     } else {
       document.documentElement.classList.add('light');
       document.documentElement.classList.remove('dark');
+    }
+
+    if (initialTheme !== 'light') {
+      queueMicrotask(() => setTheme(initialTheme));
     }
   }, []);
 
@@ -51,39 +54,34 @@ export default function ClientShell({ children }: { children: React.ReactNode })
   }, []);
 
   return (
-    <div className="min-h-screen flex flex-col bg-background text-foreground transition-colors duration-300 relative overflow-hidden">
+    <div className="min-h-screen flex flex-col bg-background text-foreground transition-colors duration-200 relative">
       {/* Skip to Main Content Link for Accessibility & SEO */}
       <a
         href="#main-content"
-        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-indigo-600 focus:text-white focus:rounded-md focus:shadow-lg focus:outline-none text-xs font-mono"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-blue-600 focus:text-white focus:rounded-md focus:shadow-lg focus:outline-none text-xs font-mono"
       >
         Skip to main content
       </a>
-      
-      {/* Mesh/Grid Background Details */}
-      <div className="absolute inset-0 grid-bg pointer-events-none z-0" />
-      <div className="absolute top-0 left-0 w-[50vw] h-[50vh] rounded-full bg-ai/10 blur-[120px] pointer-events-none z-0" />
-      <div className="absolute bottom-0 right-0 w-[50vw] h-[50vh] rounded-full bg-startup/5 blur-[120px] pointer-events-none z-0" />
-      
+
       {/* Navigation */}
-      <Navbar 
-        onSearchOpen={() => setIsSearchOpen(true)} 
-        theme={theme} 
-        toggleTheme={toggleTheme} 
+      <Navbar
+        onSearchOpen={() => setIsSearchOpen(true)}
+        theme={theme}
+        toggleTheme={toggleTheme}
       />
 
-      {/* Main Pages */}
-      <main id="main-content" className="flex-grow pt-20 sm:pt-24 pb-20 sm:pb-24 relative z-10">
+      {/* Main Content */}
+      <main id="main-content" className="flex-grow pt-24 sm:pt-28 pb-20 sm:pb-24 relative z-10">
         {children}
       </main>
 
       {/* Command Palette Spotlight Search */}
-      <CommandPalette 
-        isOpen={isSearchOpen} 
-        onClose={() => setIsSearchOpen(false)} 
+      <CommandPalette
+        isOpen={isSearchOpen}
+        onClose={() => setIsSearchOpen(false)}
       />
 
-      {/* Footer */}
+      {/* Minimal Footer */}
       <Footer />
     </div>
   );
