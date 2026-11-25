@@ -13,8 +13,8 @@ export default function RoadmapPage() {
     },
     {
       year: 'Q4 2026',
-      title: 'VectorPulse Semantic Cache & News Curation API',
-      desc: 'Launching hybrid BM25 + pgvector HNSW semantic caching (-42% LLM inference spend), ArogyaCare Diagnostics portal, and scoped StartupWire API feeds.',
+      title: 'KadyVerse Studio, AIToolsWebsite Expansion & News API',
+      desc: 'Launched KadyVerse (kadyverse.vercel.app) with Supabase RLS writing studio, expanded AIToolsWebsite AI articles, and building scoped StartupWire API feeds.',
       status: 'In Progress'
     },
     {

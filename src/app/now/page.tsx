@@ -51,9 +51,9 @@ export default function NowPage() {
           {/* Current Focus */}
           <div className="p-5 rounded-2xl border border-slate-200 dark:border-white/5 bg-white dark:bg-white/[0.01] shadow-xs dark:shadow-none space-y-3">
             <span className="text-[10px] font-mono text-slate-500 dark:text-zinc-500 uppercase tracking-wider block flex items-center gap-1.5"><Radio className="w-3.5 h-3.5" /> Daily Focus</span>
-            <h3 className="text-sm font-bold text-slate-900 dark:text-white">AI Infrastructure &amp; Client Platforms</h3>
+            <h3 className="text-sm font-bold text-slate-900 dark:text-white">KadyVerse, AI Platforms &amp; Systems</h3>
             <p className="text-xs text-slate-600 dark:text-zinc-400 leading-relaxed">
-              Building VectorPulse (pgvector HNSW semantic caching), shipping healthcare web platforms, and studying distributed consensus in DDIA.
+              Shipping KadyVerse (kadyverse.vercel.app), expanding AIToolsWebsite &amp; AlbertQuiz AI, and studying distributed consensus in DDIA.
             </p>
           </div>
         </div>
@@ -110,15 +110,15 @@ export default function NowPage() {
             <li className="flex items-start">
               <span className="w-1.5 h-1.5 rounded-full bg-indigo-600 dark:bg-indigo-500 mt-2 mr-3 flex-shrink-0" />
               <div>
-                <span className="font-bold text-slate-900 dark:text-white">VectorPulse &amp; StartupWire.in API</span>
-                <p className="text-xs text-slate-600 dark:text-zinc-400 mt-0.5">Shipping L1 Redis + L2 pgvector HNSW semantic caching (-42% inference cost) and opening the structured StartupWire news API beta.</p>
+                <span className="font-bold text-slate-900 dark:text-white">KadyVerse &amp; Editorial Studio</span>
+                <p className="text-xs text-slate-600 dark:text-zinc-400 mt-0.5">Building kadyverse.vercel.app with esbuild static pre-rendering and a private Supabase RLS mobile writing studio.</p>
               </div>
             </li>
             <li className="flex items-start">
               <span className="w-1.5 h-1.5 rounded-full bg-indigo-600 dark:bg-indigo-500 mt-2 mr-3 flex-shrink-0" />
               <div>
-                <span className="font-bold text-slate-900 dark:text-white">Healthcare Digital Platforms</span>
-                <p className="text-xs text-slate-600 dark:text-zinc-400 mt-0.5">Maintaining and optimizing Vijaya Home Healthcare, Sapthagiri Health Care, and ArogyaCare Diagnostics for sub-100ms mobile UX.</p>
+                <span className="font-bold text-slate-900 dark:text-white">AIToolsWebsite &amp; Healthcare Client Platforms</span>
+                <p className="text-xs text-slate-600 dark:text-zinc-400 mt-0.5">Publishing AI discussion articles on aitoolswebsite-psi.vercel.app and maintaining Vijaya Home Healthcare &amp; Sapthagiri Health Care.</p>
               </div>
             </li>
             <li className="flex items-start">

@@ -184,120 +184,60 @@ export interface BlogPost {
 
 export const projectsData: Project[] = [
   {
-    id: 'vectorpulse-rag',
-    title: 'VectorPulse - Distributed Semantic Cache & Hybrid RAG Gateway',
-    tagline: 'Sub-25ms LLM Semantic Caching, Hybrid BM25 + HNSW Retrieval & Token Cost Telemetry',
-    status: 'Beta',
-    logo: '⚡',
-    categoryTag: 'SaaS & AI',
-    technologies: ['Next.js 16 App Router', 'TypeScript', 'PostgreSQL', 'pgvector (HNSW)', 'Redis', 'Google Gemini API', 'Zod', 'Vercel Edge'],
-    github: 'https://github.com/IamKady',
-    live: '/case-studies',
-    summary: 'A high-throughput semantic cache and hybrid retrieval gateway that intercepts repetitive LLM prompts, serves vector-matched responses in under 25ms, and combines BM25 lexical search with pgvector HNSW embeddings.',
-    whatIAmDoingAndLearning: 'Benchmarking HNSW index recall vs. latency trade-offs in pgvector, designing hybrid Reciprocal Rank Fusion (RRF) scoring pipelines, and building real-time token cost savings telemetry.',
-    caseStudy: {
-      overview: 'VectorPulse was built to eliminate redundant LLM API calls in production AI agents and content curation pipelines by caching semantically equivalent queries at the edge.',
-      problem: 'Production LLM workflows frequently receive paraphrased or repeated queries, inflating inference latency (600ms–2s) and API token spend while exact-match Redis caches miss semantic equivalence.',
-      research: 'Evaluated cosine similarity thresholds across 768-dimensional embeddings and benchmarked Reciprocal Rank Fusion (RRF) combining PostgreSQL full-text search (tsvector) with pgvector HNSW indexes.',
-      targetUsers: 'AI engineers, SaaS founders, and backend teams running high-volume Gemini/OpenAI inference pipelines.',
-      planning: 'Architected a two-tier lookup: L1 exact-hash lookup in Redis (<3ms), followed by L2 cosine similarity lookup in pgvector HNSW (>0.92 similarity threshold) before falling back to live LLM generation.',
-      design: 'Telemetry-first dashboard displaying cache hit ratio, p95 latency savings, and estimated monthly token cost reduction.',
-      architectureDiagram: `
-+-----------------------+     +------------------------+     +-------------------+
-|  Client / Agent Query | --> | L1 Exact Hash (Redis)  | --> | Hit (< 3ms)       |
-+-----------------------+     +------------------------+     +-------------------+
-                                          | (Miss)
-                                          v
-+-----------------------+     +------------------------+     +-------------------+
-|  Live Gemini Fallback | <-- | L2 pgvector HNSW (>0.92| --> | Hit (< 25ms)      |
-|  (Stream + Async Save)|     | Cosine Similarity)     |     | Semantic Cache    |
-+-----------------------+     +------------------------+     +-------------------+
-      `,
-      databaseSpecs: 'PostgreSQL 16 with pgvector HNSW index (m=16, ef_construction=64) and tsvector GIN index for hybrid RRF retrieval.',
-      authenticationFlow: 'Scoped Bearer API keys with HMAC-SHA256 verification and per-tenant rate limiting.',
-      securityProtocols: 'Strict Zod payload validation, PII redaction before embedding generation, and tenant-isolated cache namespaces.',
-      seoOptimization: 'Structured developer documentation and OpenGraph telemetry previews.',
-      performanceTuning: 'Achieved 42% cache hit rate on production news-curation workloads with <25ms p95 semantic lookup latency.',
-      development: 'Built in TypeScript and Next.js 16 Route Handlers with streaming SSE passthrough on cache misses.',
-      architecture: 'Edge Gateway -> Redis L1 -> pgvector HNSW L2 -> Gemini Streaming Fallback.',
-      seo: 'Clean API reference routes and semantic metadata.',
-      challenges: 'Preventing false-positive cache hits on time-sensitive queries (e.g., "latest funding today"). Solved by adding TTL decay and temporal intent classification.',
-      tradeOffs: 'Chose pgvector HNSW inside existing PostgreSQL over a separate managed vector DB to simplify transactional consistency and reduce infrastructure hops.',
-      lessons: 'Hybrid retrieval (BM25 + dense vectors) with a conservative 0.92 cache threshold delivers massive cost savings without sacrificing factual freshness.',
-      futureRoadmap: 'Add multi-region read replicas and automated embedding quantization (int8) for 4x lower RAM footprint.',
-      timeline: 'Oct 2026 - Nov 2026 (Beta)'
-    },
-    metrics: {
-      performance: 99,
-      accessibility: 100,
-      bestPractices: 100,
-      seo: 96,
-      loadTimeMs: 24
-    },
-    impactMetrics: [
-      { label: 'Semantic Cache Hit', value: '< 25ms', detail: 'pgvector HNSW cosine lookup' },
-      { label: 'Inference Cost Cut', value: '-42%', detail: 'Eliminated redundant LLM calls' },
-      { label: 'Precision Threshold', value: '0.92+', detail: 'Zero stale temporal false-positives' }
-    ],
-    postMortem: {
-      failureMode: 'Time-sensitive queries returned stale cached responses from earlier in the week.',
-      rootCause: 'Global semantic cache lacked temporal awareness and entity-freshness TTLs.',
-      resolution: 'Added lightweight temporal keyword detection and 15-minute sliding TTL buckets for news/realtime namespaces.'
-    }
-  },
-  {
-    id: 'arogyacare-diagnostics',
-    title: 'ArogyaCare Clinic & Diagnostics Portal',
-    tagline: 'Patient Appointment Scheduling, Diagnostic Test Catalog & WhatsApp Report Alerts',
+    id: 'kadyverse',
+    title: 'KadyVerse - Editorial Publication & Private Writing Studio',
+    tagline: 'Static Pre-Rendered Editorial Platform & Mobile-First Supabase Writing Studio',
     status: 'Active',
-    logo: '🩺',
-    categoryTag: 'Client Work',
-    technologies: ['Next.js 16 App Router', 'TypeScript', 'Tailwind CSS v4', 'Zod', 'JSON-LD Schema.org', 'Vercel Edge'],
-    live: '/projects',
-    summary: 'A fast, mobile-first diagnostic center and outpatient clinic web platform featuring searchable pathology test catalogs, home sample collection booking, and automated WhatsApp confirmation routing.',
-    whatIAmDoingAndLearning: 'Designing accessible medical booking flows for non-technical patients, implementing MedicalClinic Schema.org structured data, and optimizing instant client-side test filtering.',
+    logo: '✍️',
+    categoryTag: 'Full-Stack',
+    technologies: ['JavaScript (ES6+)', 'esbuild', 'Supabase Auth & RLS', 'PostgreSQL', 'HTML5', 'CSS3', 'Vercel'],
+    github: 'https://github.com/IamKady/Kadyverse',
+    live: 'https://kadyverse.vercel.app',
+    summary: 'A quiet, editorial publication and private writing studio for thoughts, questions, observations, and essays—combining a fast static pre-rendered public site with a mobile-first Supabase-backed owner writing studio.',
+    whatIAmDoingAndLearning: 'Building custom static pre-renderers with esbuild (build.mjs), designing single-owner Supabase Row Level Security (RLS) policies with private revision history, and crafting distraction-free editorial typography with Playfair Display and DM Sans.',
     caseStudy: {
-      overview: 'Engineered for a regional diagnostics and outpatient clinic to streamline home blood-collection bookings and replace phone-only test price inquiries.',
-      problem: 'Patients repeatedly called the clinic desk just to check fasting requirements, test pricing, and home-collection availability, overwhelming front-desk staff.',
-      research: 'Shadowed clinic reception workflows and found 70% of calls were routine price/preparation questions for top 30 pathology panels.',
-      targetUsers: 'Patients booking preventive health checkups, elderly patients needing home sample collection, and clinic coordinators.',
-      planning: 'Built an instant searchable test directory with transparent pricing, preparation badges (e.g., "10hr Fasting"), and a 3-field home collection booking form.',
-      design: 'High-contrast accessible UI with large tap targets, calm slate/emerald medical palette, and instant WhatsApp booking handoff.',
+      overview: 'KadyVerse was built as a calm, long-form editorial home and private mobile-first writing studio—completely separate from heavy CMS platforms—with zero public registration and full owner-only revision history.',
+      problem: 'Most blogging platforms either ship bloated JavaScript bundles and noisy social feeds, or require complex headless CMS setups just to draft, revise, and publish personal essays from mobile.',
+      research: 'Evaluated static site generators vs. custom esbuild pre-rendering paired with Supabase Auth and PostgreSQL migrations. Found that separating public static output (dist/) from the authenticated /studio/ route delivers instant public loads and clean security boundaries.',
+      targetUsers: 'Independent writers and builders seeking a distraction-free editorial publication with a private, versioned writing studio.',
+      planning: 'Structured a two-part system: a public static site (index.html, app.js, styles.css, generated sitemap.xml) and a private owner studio (studio.html, studio.js) backed by Supabase migrations (20261125160000_writing_studio.sql).',
+      design: 'Editorial ivory paper palette, charcoal typography, muted bronze accents, Playfair Display headings, and DM Sans body copy.',
       architectureDiagram: `
 +-----------------------+     +------------------------+     +-------------------+
-|  Patient Browser      | --> | Searchable Test Catalog| --> | 1-Tap Slot Picker |
+|  Public Reader        | --> | Static dist/ (Vercel)  | --> | Pre-rendered HTML |
+|  (kadyverse.vercel.app|     | (index.html, app.js)   |     | (< 50ms TTFB)     |
 +-----------------------+     +------------------------+     +-------------------+
-                                                                        |
-                                                                        v
+
 +-----------------------+     +------------------------+     +-------------------+
-|  Clinic Coordinator   | <-- | WhatsApp / API Relay   | <-- | Zod Validation    |
+|  Owner (/studio/)     | --> | Supabase Auth (Single  | --> | PostgreSQL + RLS  |
+|  Mobile Writing Studio|     | Owner UUID Allowlist)  |     | Revision History  |
 +-----------------------+     +------------------------+     +-------------------+
       `,
-      databaseSpecs: 'Typed static test catalog with ICD/panel metadata and structured MedicalClinic JSON-LD.',
-      authenticationFlow: 'Public patient booking with phone-number format validation and anti-spam rate guards.',
-      securityProtocols: 'Strict input sanitization, HTTPS/HSTS enforcement, and zero PII stored in client localStorage.',
-      seoOptimization: 'Local MedicalClinic and DiagnosticLab Schema.org tags with clean service slugs.',
-      performanceTuning: 'Sub-100ms initial render via static edge generation and zero third-party tracker bloat.',
-      development: 'Built with Next.js 16 App Router, TypeScript, and Tailwind CSS v4.',
-      architecture: 'Vercel Edge Static Shell -> Client Filter Engine -> WhatsApp/Webhook Dispatch.',
-      seo: 'Targeted local diagnostic search intent with structured FAQ & test pricing schemas.',
-      challenges: 'Making complex pathology panel names searchable by everyday symptoms or common abbreviations (e.g., "sugar test" -> HbA1c). Solved with synonym keyword indexing.',
-      tradeOffs: 'Opted for direct WhatsApp/webhook dispatch over a full patient login portal to eliminate OTP friction for first-time elderly callers.',
-      lessons: 'Synonym-aware search and transparent prep instructions cut repetitive front-desk inquiry calls significantly.',
-      futureRoadmap: 'Integrate PDF lab report lookup via secure time-limited download links.',
-      timeline: 'Oct 2026 - Nov 2026 (Production)'
+      databaseSpecs: 'Supabase PostgreSQL with owner-scoped RLS policies, studio_owner allowlist table, and private revision history tracking.',
+      authenticationFlow: 'Supabase Auth with sign-ups disabled; only the owner Auth UUID in public.studio_owner can access and mutate studio drafts.',
+      securityProtocols: 'Zero public registration flow, strict PostgreSQL RLS owner policies, and decoupled static public build.',
+      seoOptimization: 'Automated sitemap.xml generation via build.mjs, robots.txt, and clean semantic HTML5 editorial markup.',
+      performanceTuning: 'esbuild bundling and static pre-rendering into dist/ for sub-50ms edge delivery with zero framework runtime overhead.',
+      development: 'Built with ES6+ JavaScript, esbuild, @supabase/supabase-js, and custom static pre-rendering scripts.',
+      architecture: 'Public Readers -> Static Edge dist/ | Owner -> /studio/ -> Supabase Auth & RLS PostgreSQL.',
+      seo: 'Generated sitemap.xml, semantic article structure, and custom artwork/favicon assets.',
+      challenges: 'Keeping the /studio/ route completely decoupled from the public navigation while maintaining seamless owner access and build-time environment variable safety.',
+      tradeOffs: 'Chose a custom esbuild static pre-renderer over a full React/Next.js stack to keep the editorial reader ultra-lightweight and dependency-minimal.',
+      lessons: 'Single-owner RLS allowlists paired with static pre-rendering provide rock-solid security and instant page loads without CMS bloat.',
+      futureRoadmap: 'Expand studio revision diffing and scheduled essay publishing workflows.',
+      timeline: 'Nov 2026 (Active)'
     },
     metrics: {
       performance: 100,
       accessibility: 100,
       bestPractices: 100,
       seo: 100,
-      loadTimeMs: 88
+      loadTimeMs: 48
     },
     impactMetrics: [
-      { label: 'Lighthouse Score', value: '100/100', detail: 'Zero-bloat static edge delivery' },
-      { label: 'Booking Friction', value: '3 Fields', detail: '1-tap home collection handoff' },
-      { label: 'Inquiry Clarity', value: '80+ Tests', detail: 'Synonym-indexed diagnostic catalog' }
+      { label: 'Static Bundle', value: '< 50ms', detail: 'esbuild pre-rendered dist/ output' },
+      { label: 'Access Control', value: 'Single-Owner RLS', detail: 'Supabase Auth UUID allowlist' },
+      { label: 'Lighthouse Score', value: '100/100', detail: 'Zero framework runtime overhead' }
     ]
   },
   {
@@ -309,7 +249,7 @@ export const projectsData: Project[] = [
     categoryTag: 'SaaS & AI',
     technologies: ['Python 3.12', 'FastAPI', 'Asyncio', 'Google Gemini API', 'JSON-Schema', 'PostgreSQL', 'Docker'],
     github: 'https://github.com/IamKady/ALBERTQUIZBOT',
-    live: 'https://github.com/IamKady/ALBERTQUIZBOT',
+    live: 'https://albertquizbot.vercel.app',
     summary: 'An autonomous knowledge assessment platform that dynamically generates domain-specific quizzes using LLMs, manages concurrent multi-user testing sessions, and delivers instant scoring analytics.',
     whatIAmDoingAndLearning: 'Engineering asynchronous Python assessment pipelines, structuring JSON validation schemas for LLM question generation, managing concurrent user session states, and building real-time score tracking.',
     caseStudy: {
@@ -1434,9 +1374,9 @@ export const timelineMilestones: TimelineMilestone[] = [
     category: 'work',
     details: [
       'Engineered StartupWire.in: Built an automated news pipeline parsing 50+ tech sources, deduplicating articles with pgvector cosine distance, and achieving 100/100 Lighthouse performance.',
-      'Shipped production healthcare client platforms (Vijaya Home Healthcare, Sapthagiri Health Care, and ArogyaCare Diagnostics) with sub-100ms edge delivery and local Schema.org SEO.',
-      'Building VectorPulse semantic caching & hybrid RAG gateways (BM25 + pgvector HNSW) to cut redundant LLM inference spend.',
-      'Studying advanced distributed systems, consensus models, and cryptographic security.'
+      'Launched KadyVerse (kadyverse.vercel.app): An editorial publication and private mobile-first writing studio powered by esbuild static pre-rendering and Supabase RLS.',
+      'Shipped production healthcare client platforms (Vijaya Home Healthcare and Sapthagiri Health Care) with sub-100ms edge delivery and local Schema.org SEO.',
+      'Actively expanding AIToolsWebsite (aitoolswebsite-psi.vercel.app) and AlbertQuiz AI (albertquizbot.vercel.app) while studying distributed systems and cryptographic security.'
     ]
   },
   {

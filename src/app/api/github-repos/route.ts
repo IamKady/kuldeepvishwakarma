@@ -18,8 +18,25 @@ export interface GitHubRepoItem {
   homepage?: string | null;
 }
 
-// Complete offline fallback dataset for IamKady's 10 public GitHub repositories
+// Complete offline fallback dataset for IamKady's public GitHub repositories
 export const fallbackRepositories: GitHubRepoItem[] = [
+  {
+    name: 'Kadyverse',
+    fullName: 'IamKady/Kadyverse',
+    url: 'https://github.com/IamKady/Kadyverse',
+    description: 'Editorial publication and private mobile-first writing studio powered by esbuild static pre-rendering and Supabase RLS.',
+    stars: 0,
+    forks: 0,
+    language: 'JavaScript',
+    updatedAt: '2026-11-25T09:54:27Z',
+    pushedAt: '2026-11-25T15:43:29Z',
+    topics: ['editorial', 'supabase', 'esbuild', 'static-site', 'writing-studio'],
+    openIssues: 0,
+    cloneUrl: 'https://github.com/IamKady/Kadyverse.git',
+    defaultBranch: 'main',
+    isFork: false,
+    homepage: 'https://kadyverse.vercel.app'
+  },
   {
     name: 'kuldeepvishwakarma',
     fullName: 'IamKady/kuldeepvishwakarma',
@@ -28,8 +45,8 @@ export const fallbackRepositories: GitHubRepoItem[] = [
     stars: 0,
     forks: 0,
     language: 'TypeScript',
-    updatedAt: '2026-08-12T09:01:29Z',
-    pushedAt: '2026-08-12T08:58:57Z',
+    updatedAt: '2026-11-25T16:13:20Z',
+    pushedAt: '2026-11-25T16:13:20Z',
     topics: ['nextjs', 'react', 'typescript', 'tailwindcss', 'portfolio'],
     openIssues: 0,
     cloneUrl: 'https://github.com/IamKady/kuldeepvishwakarma.git',
@@ -41,18 +58,18 @@ export const fallbackRepositories: GitHubRepoItem[] = [
     name: 'ALBERTQUIZBOT',
     fullName: 'IamKady/ALBERTQUIZBOT',
     url: 'https://github.com/IamKady/ALBERTQUIZBOT',
-    description: 'Interactive Telegram Quiz Bot for study groups, automated practice polls, instant scoring, and scheduled delivery.',
+    description: 'Interactive Quiz Bot & Web Assessment Engine for study groups, automated practice polls, instant scoring, and scheduled delivery.',
     stars: 0,
     forks: 0,
     language: 'Python',
-    updatedAt: '2026-08-05T16:55:37Z',
-    pushedAt: '2026-08-05T16:55:27Z',
+    updatedAt: '2026-09-19T15:16:16Z',
+    pushedAt: '2026-09-19T15:16:16Z',
     topics: ['python', 'telegram-bot', 'asyncio', 'quiz-bot', 'ai'],
     openIssues: 0,
     cloneUrl: 'https://github.com/IamKady/ALBERTQUIZBOT.git',
     defaultBranch: 'main',
     isFork: false,
-    homepage: null
+    homepage: 'https://albertquizbot.vercel.app'
   },
   {
     name: 'aitoolswebsite',
@@ -62,8 +79,8 @@ export const fallbackRepositories: GitHubRepoItem[] = [
     stars: 0,
     forks: 0,
     language: 'TypeScript',
-    updatedAt: '2026-07-17T11:39:39Z',
-    pushedAt: '2026-07-17T11:39:29Z',
+    updatedAt: '2026-11-24T16:10:50Z',
+    pushedAt: '2026-11-24T16:10:50Z',
     topics: ['nextjs', 'ai-tools', 'prisma', 'postgresql', 'clerk'],
     openIssues: 0,
     cloneUrl: 'https://github.com/IamKady/aitoolswebsite.git',

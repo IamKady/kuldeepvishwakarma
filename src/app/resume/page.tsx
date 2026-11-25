@@ -271,15 +271,15 @@ export default function Resume() {
               </p>
             </div>
             <div>
-              <span className={`font-bold block ${isPdf ? 'text-zinc-900' : 'text-white'} print:text-zinc-900`}>VectorPulse — Distributed Semantic Cache &amp; Hybrid RAG Gateway</span>
+              <span className={`font-bold block ${isPdf ? 'text-zinc-900' : 'text-white'} print:text-zinc-900`}>KadyVerse — Editorial Publication &amp; Private Writing Studio</span>
               <p className={isPdf ? 'text-zinc-700' : 'text-zinc-400 print:text-zinc-700'}>
-                Two-tier L1 Redis + L2 pgvector HNSW semantic cache gateway with Reciprocal Rank Fusion (BM25 + dense vectors), cutting redundant LLM API spend by 42% at &lt;25ms lookup latency.
+                Built a static pre-rendered editorial platform (kadyverse.vercel.app) with esbuild and a private mobile-first writing studio backed by Supabase Auth &amp; single-owner Row Level Security (RLS) revision history.
               </p>
             </div>
             <div>
-              <span className={`font-bold block ${isPdf ? 'text-zinc-900' : 'text-white'} print:text-zinc-900`}>Vijaya, Sapthagiri &amp; ArogyaCare — Commercial Healthcare Platforms</span>
+              <span className={`font-bold block ${isPdf ? 'text-zinc-900' : 'text-white'} print:text-zinc-900`}>Vijaya Home Healthcare &amp; Sapthagiri Health Care — Commercial Healthcare Platforms</span>
               <p className={isPdf ? 'text-zinc-700' : 'text-zinc-400 print:text-zinc-700'}>
-                Engineered three production digital healthcare web applications featuring direct WhatsApp consultation routing, synonym-indexed diagnostic catalogs, local Schema.org SEO, and edge CDN delivery with sub-100ms first paint times.
+                Engineered production digital healthcare web applications for Bangalore healthcare providers, featuring direct WhatsApp consultation routing, multi-service clinical catalogs, local Schema.org SEO, and edge CDN delivery with sub-100ms first paint times.
               </p>
             </div>
           </div>
