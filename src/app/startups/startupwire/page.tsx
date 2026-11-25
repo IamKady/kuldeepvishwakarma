@@ -3,16 +3,16 @@
 import React from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { 
-  Rocket, 
-  Map, 
-  BookOpen, 
-  Cpu, 
-  Activity, 
-  TrendingUp, 
-  Layers, 
-  Shield, 
-  Search, 
+import {
+  Rocket,
+  Map,
+  BookOpen,
+  Cpu,
+  Activity,
+  TrendingUp,
+  Layers,
+  Shield,
+  Search,
   ArrowLeft,
   ChevronRight,
   ExternalLink,
@@ -24,19 +24,19 @@ import {
 export default function StartupWireProductPage() {
   return (
     <div className="max-w-5xl mx-auto px-4 space-y-16 py-6">
-      
+
       {/* Back button */}
       <div className="flex flex-wrap items-center justify-between gap-3">
-        <Link 
+        <Link
           href="/startups"
           className="px-4 py-2 rounded-lg bg-card-bg border border-card-border hover:border-zinc-400 dark:hover:border-zinc-600 text-xs font-semibold text-zinc-700 dark:text-zinc-300 hover:text-zinc-900 dark:hover:text-white transition-all flex items-center space-x-1.5 cursor-pointer"
         >
           <ArrowLeft className="w-3.5 h-3.5" />
           <span>Back to Startup Journal</span>
         </Link>
-        <a 
-          href="https://startupwire.in" 
-          target="_blank" 
+        <a
+          href="https://startupwire.in"
+          target="_blank"
           rel="noopener noreferrer"
           className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-xs font-semibold text-white rounded-lg transition-all flex items-center space-x-1.5 cursor-pointer shadow-sm"
         >
@@ -125,7 +125,7 @@ export default function StartupWireProductPage() {
           <div className="p-5 rounded-2xl border border-slate-800 dark:border-white/10 bg-slate-900 dark:bg-black/60 font-mono text-[10px] text-zinc-200 dark:text-zinc-300 space-y-4 shadow-xl overflow-x-auto">
             <span className="text-zinc-400 dark:text-zinc-500 font-bold uppercase tracking-widest text-[9px] block mb-2">{'// ASCII PIPELINE FLOWCHART'}</span>
             <pre className="leading-tight select-none">
-{`[RSS Feed Feeder Nodes]
+              {`[RSS Feed Feeder Nodes]
          |
          v (triggered every 4h)
 [Node.js Scraper Daemon]

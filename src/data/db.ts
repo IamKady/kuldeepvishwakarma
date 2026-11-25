@@ -167,14 +167,29 @@ export interface ResearchNote {
 }
 
 
+export type JournalPillar =
+  | 'Reflections'
+  | 'Philosophy'
+  | 'Society & People'
+  | 'Literature & Poetry'
+  | 'Perspectives'
+  | 'Notes & Fragments'
+  | 'Growth & Learning'
+  | 'Technical Archive';
+
 export interface BlogPost {
   id: string;
   title: string;
   description: string;
   date: string;
   category: string;
+  pillar?: JournalPillar;
   readTime: string;
   type: 'tech' | 'non-tech';
+  status?: 'published' | 'draft' | 'archived' | 'hidden';
+  featured?: boolean;
+  coverImage?: string;
+  coverCaption?: string;
   content: string;
 }
 
@@ -2362,9 +2377,11 @@ Pairing these with HTTP-only cookies and strict Content Security Policy (CSP) he
     title: 'The Art of Visual Thinking: Sketching Beyond Code',
     description: 'Exploring pencil drawing, architectural blueprints, and how physical sketching sharpens abstract system design skills.',
     date: '2026-08-02',
-    category: 'Art & Creativity',
+    category: 'Reflections',
+    pillar: 'Reflections',
     readTime: '5 min read',
     type: 'non-tech',
+    status: 'published',
     content: `Long before I wrote my first line of code or configured a cloud database, I spent hours studying civil engineering drawings and sketching with pencil and paper. That background in visual drafting shaped how I approach software design today.
 
 ### Why Sketching Makes You a Better Developer
@@ -2380,9 +2397,11 @@ Whenever you get stuck on a complex function or database relation, try stepping 
     title: '20 Books That Shaped My Mind: From Philosophy to Fiction',
     description: 'A curated reflection on foundational books across Stoicism, science, literature, and personal growth that changed my worldview.',
     date: '2026-07-28',
-    category: 'Books & Reading',
+    category: 'Literature & Poetry',
+    pillar: 'Literature & Poetry',
     readTime: '7 min read',
     type: 'non-tech',
+    status: 'published',
     content: `Books are magical. They let us sit down with brilliant thinkers across centuries and absorb a lifetime of their insights in just a few hours.
 
 Here are three key genres that have deeply shaped how I think and live:
@@ -2405,9 +2424,11 @@ Reading classic stories reminds us that human nature, hopes, and struggles stay 
     title: 'On Writing: How Daily Journaling Clears Cognitive Noise',
     description: 'Why drafting personal essays, prose, and daily reflections is an essential mental exercise for engineers and creators.',
     date: '2026-07-20',
-    category: 'Writing & Prose',
+    category: 'Notes & Fragments',
+    pillar: 'Notes & Fragments',
     readTime: '4 min read',
     type: 'non-tech',
+    status: 'published',
     content: `Writing is how I make sense of my thoughts. If I can't explain an idea simply in written words, it usually means I haven't fully grasped it yet.
 
 ### How Daily Writing Helps
@@ -2422,9 +2443,11 @@ Try writing just 200 to 300 words a day—not for an audience, but for yourself.
     title: 'Cultivating Hobbies & Hands-On Crafts Outside Software',
     description: 'Finding balance, restoration, and creative energy through physical hobbies, music, and hands-on crafts.',
     date: '2026-07-15',
-    category: 'Hobbies & Lifestyle',
+    category: 'Reflections',
+    pillar: 'Reflections',
     readTime: '6 min read',
     type: 'non-tech',
+    status: 'published',
     content: `Software development can be abstract—you spend hours manipulating digital logic, virtual DOM elements, and API routes. Engaging in tangible physical hobbies brings essential balance back into life.
 
 ### Ways to Unplug and Refresh
@@ -2652,9 +2675,12 @@ export async function withAgentRetry<T>(
     title: 'From Civil Blueprints to Distributed Systems: Lessons from Engineering Transitions',
     description: 'How the physical mechanics of load distribution, structural drafting, and material tension directly inform resilient distributed software architecture.',
     date: '2026-08-08',
-    category: 'Career & Mindset',
+    category: 'Growth & Learning',
+    pillar: 'Growth & Learning',
     readTime: '7 min read',
     type: 'non-tech',
+    status: 'published',
+    featured: true,
     content: `Before I spent my days writing Next.js route handlers, configuring pgvector indexes, and auditing cryptographic JWT signatures, my world looked very different.
 
 I wore steel-toed boots and hard hats, drafting structural blueprints, calculating concrete compressive strengths, and analyzing load distributions across steel trusses in civil engineering.
@@ -2698,60 +2724,6 @@ Taking the time to draft clean TypeScript interfaces, document API request/respo
 Whether you are building bridges out of steel or applications out of code, the core identity is the same: **you are a builder who solves problems for human beings.**
 
 Embrace your non-linear background. Cross-disciplinary curiosity isn't a distraction—it is the very foundation of extraordinary engineering.`
-  },
-  {
-    id: 'semantic-caching-pgvector-rag',
-    title: 'Cutting LLM Inference Costs by 42% with Hybrid Semantic Caching (pgvector + Redis)',
-    description: 'A practical engineering guide to combining L1 Redis exact-hash lookups with L2 pgvector HNSW similarity search and temporal TTL guards in Next.js 16.',
-    date: '2026-11-18',
-    category: 'AI & Systems',
-    readTime: '9 min read',
-    type: 'tech',
-    content: `When you run autonomous LLM pipelines in production—like StartupWire's news curation workers or multi-step agent evaluators—you quickly discover a hidden tax: **semantic repetition**.
-
-Users and automated workers ask the same question phrased five slightly different ways. Exact-match Redis caching misses these paraphrases completely, sending redundant requests to the LLM API and burning both latency (600ms–2s) and token budget.
-
-### 1. The Two-Tier Cache Architecture
-In **VectorPulse**, we solved this with a two-tier lookup before touching the Gemini API:
-* **L1 (Exact Hash)**: Normalize whitespace/casing, SHA-256 hash the prompt, and check Redis in under 3ms.
-* **L2 (Semantic HNSW)**: Embed the query into a 768-dimension vector and run a \`pgvector\` HNSW cosine similarity search against recent cache entries.
-
-\`\`\`sql
-SELECT response_payload, 1 - (query_embedding <=> $1) AS similarity
-FROM semantic_cache
-WHERE namespace = $2
-  AND expires_at > NOW()
-  AND 1 - (query_embedding <=> $1) >= 0.92
-ORDER BY similarity DESC
-LIMIT 1;
-\`\`\`
-
-### 2. Why 0.92+ Matters (and Temporal Guards)
-At \`0.85\` similarity (which works great for deduplicating news articles), two distinct questions like *"Next.js 15 caching"* and *"Next.js 16 caching"* can collide. For response caching, we raised the threshold to **0.92** and added a lightweight temporal intent filter so queries containing *"today"*, *"latest"*, or version numbers use shorter 15-minute TTL buckets.
-
-### 3. Results in Production
-Across our curation and Q&A workloads, L1 + L2 semantic caching achieved a **42% hit rate** with **<25ms p95 latency**—keeping PostgreSQL as our single source of truth without needing a separate managed vector database.`
-  },
-  {
-    id: 'shipping-production-healthcare-platforms',
-    title: 'Engineering Sub-100ms Healthcare Platforms: Lessons from Three Production Launches',
-    description: 'What building live digital platforms for Vijaya Home Healthcare, Sapthagiri Health Care, and ArogyaCare Diagnostics taught me about mobile speed, local SEO, and patient UX.',
-    date: '2026-10-28',
-    category: 'Client Engineering',
-    readTime: '7 min read',
-    type: 'tech',
-    content: `Over the past few months, I designed and shipped three production healthcare web platforms: **Vijaya Home Healthcare**, **Sapthagiri Health Care**, and **ArogyaCare Diagnostics**.
-
-Healthcare software has a very different set of constraints than developer tools. When a family is searching for home nursing or urgent diagnostic tests at 11 PM, they are often stressed, on a mid-range Android phone, and on a congested mobile network.
-
-### 1. Speed Is Trust
-Every extra second of JavaScript hydration or unoptimized hero imagery increases bounce rate. By leaning on **static edge delivery** and zero-bloat CSS, all three platforms hit **<115ms load times** and **98–100 Lighthouse Performance scores**.
-
-### 2. Replace Multi-Step Forms with 1-Tap Routing
-Our early prototype included a 5-field inquiry modal. Drop-off was immediate. Switching to **pre-populated WhatsApp consultation links** and a 3-field callback dispatcher boosted lead conversions by over **45%**.
-
-### 3. Structured Medical Schema.org SEO
-Search engines reward clarity. Adding granular \`MedicalBusiness\`, \`HomeHealthService\`, and \`DiagnosticLab\` JSON-LD schemas—paired with dedicated clinical vertical pages (e.g., Dementia Care vs. Post-Op Physiotherapy)—helped each clinic rank cleanly for high-intent local searches.`
   }
 ];
 

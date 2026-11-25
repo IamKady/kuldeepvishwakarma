@@ -1,105 +1,206 @@
 'use client';
 
-import React, { useState, useEffect, useRef } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { 
-  Search, 
-  Calendar, 
-  Clock, 
-  X, 
+import React, { useState, useEffect, useRef, useMemo } from 'react';
+import Link from 'next/link';
+import Image from 'next/image';
+import {
+  Search,
+  X,
   ArrowLeft,
-  Rss,
-  Hash,
-  ChevronRight,
+  ArrowRight,
+  ArrowUpRight,
   Share2,
   Check,
-  Sparkles,
   Copy,
-  ArrowRight,
-  Filter,
-  Layers,
-  ExternalLink,
-  BookOpen
+  PenLine,
+  Rss,
 } from 'lucide-react';
-import { blogsData } from '@/data/db';
+import { blogsData, BlogPost, JournalPillar } from '@/data/db';
+import {
+  EntryStatus,
+  getMergedJournalEntries,
+  JOURNAL_PILLARS,
+  normalizeBaseEntry,
+} from '@/lib/journalStore';
 
-export default function Blog() {
-  const [activeTab, setActiveTab] = useState<'tech' | 'non-tech'>('tech');
+type MergedEntry = BlogPost & {
+  pillar: JournalPillar;
+  status: EntryStatus;
+  isCustom?: boolean;
+};
+
+const BASE_ENTRIES: MergedEntry[] = blogsData
+  .map(normalizeBaseEntry)
+  .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+
+type FilterOption = 'All' | Exclude<JournalPillar, 'Technical Archive'> | 'Archive';
+
+export default function JournalPage() {
+  const [entries, setEntries] = useState<MergedEntry[]>(BASE_ENTRIES);
+  const [selectedCategory, setSelectedCategory] = useState<FilterOption>('All');
   const [searchQuery, setSearchQuery] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState('All');
-  const [readingBlogId, setReadingBlogId] = useState<string | null>(null);
+  const [readingId, setReadingId] = useState<string | null>(null);
   const [copiedLink, setCopiedLink] = useState(false);
   const [copiedCodeIdx, setCopiedCodeIdx] = useState<number | null>(null);
   const [readingProgress, setReadingProgress] = useState(0);
-
   const searchInputRef = useRef<HTMLInputElement>(null);
 
-  // Sync with URL hash for deep linking (e.g. /blog#nextjs-16-turbopack-tutorial)
+  // Load author's custom published pieces & review overrides on mount
   useEffect(() => {
-    const handleHash = () => {
+    const raf = requestAnimationFrame(() => {
+      setEntries(getMergedJournalEntries());
+    });
+    return () => cancelAnimationFrame(raf);
+  }, []);
+
+  // Sync URL hash for deep linking (#slug)
+  useEffect(() => {
+    const syncHash = () => {
       const hash = window.location.hash.replace('#', '');
-      if (hash) {
-        const found = blogsData.find(b => b.id === hash);
-        if (found) {
-          setReadingBlogId(found.id);
-          setActiveTab(found.type || 'tech');
-        }
+      if (!hash) {
+        setReadingId(null);
+        return;
+      }
+      const all = getMergedJournalEntries();
+      const match = all.find((e) => e.id === hash && e.status !== 'hidden');
+      if (match) {
+        setReadingId(match.id);
       }
     };
 
-    handleHash();
-    window.addEventListener('hashchange', handleHash);
-    return () => window.removeEventListener('hashchange', handleHash);
+    const raf = requestAnimationFrame(syncHash);
+    window.addEventListener('hashchange', syncHash);
+    return () => {
+      cancelAnimationFrame(raf);
+      window.removeEventListener('hashchange', syncHash);
+    };
   }, []);
 
-  // Update hash when opening or closing reader
   const openArticle = (id: string) => {
-    setReadingBlogId(id);
-    window.location.hash = id;
+    setReadingId(id);
+    history.pushState(null, '', `#${id}`);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const closeArticle = () => {
-    setReadingBlogId(null);
+    setReadingId(null);
     history.pushState('', document.title, window.location.pathname + window.location.search);
   };
 
-  // Global window scroll progress when in reader mode
   useEffect(() => {
-    if (!readingBlogId) return;
-
-    const handleWindowScroll = () => {
+    if (!readingId) return;
+    const handleScroll = () => {
       const scrollTop = window.scrollY;
       const docHeight = document.documentElement.scrollHeight - window.innerHeight;
       if (docHeight > 0) {
-        const progress = (scrollTop / docHeight) * 100;
-        setReadingProgress(Math.min(100, Math.max(0, progress)));
+        setReadingProgress(Math.min(100, Math.max(0, (scrollTop / docHeight) * 100)));
       }
     };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    const raf = requestAnimationFrame(handleScroll);
+    return () => {
+      cancelAnimationFrame(raf);
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [readingId]);
 
-    window.addEventListener('scroll', handleWindowScroll, { passive: true });
-    handleWindowScroll();
-    return () => window.removeEventListener('scroll', handleWindowScroll);
-  }, [readingBlogId]);
-
-  // Keyboard shortcuts (Esc to close, / to search)
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
-        if (readingBlogId) {
-          closeArticle();
-        } else if (searchQuery) {
-          setSearchQuery('');
-        }
-      } else if (e.key === '/' && !readingBlogId && document.activeElement !== searchInputRef.current) {
+        if (readingId) closeArticle();
+        else if (searchQuery) setSearchQuery('');
+      } else if (
+        e.key === '/' &&
+        !readingId &&
+        document.activeElement !== searchInputRef.current
+      ) {
         e.preventDefault();
         searchInputRef.current?.focus();
       }
     };
-
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [readingBlogId, searchQuery]);
+  }, [readingId, searchQuery]);
+
+  const publishedEntries = useMemo(
+    () => entries.filter((e) => e.status === 'published'),
+    [entries]
+  );
+
+  const archivedEntries = useMemo(
+    () => entries.filter((e) => e.status === 'archived'),
+    [entries]
+  );
+
+  const activeArticle = useMemo(
+    () => entries.find((e) => e.id === readingId) || null,
+    [entries, readingId]
+  );
+
+  const relatedArticles = useMemo(() => {
+    if (!activeArticle) return [];
+    const pool = publishedEntries.filter((e) => e.id !== activeArticle.id);
+    const samePillar = pool.filter((e) => e.pillar === activeArticle.pillar);
+    const others = pool.filter((e) => e.pillar !== activeArticle.pillar);
+    return [...samePillar, ...others].slice(0, 3);
+  }, [activeArticle, publishedEntries]);
+
+  const filteredList = useMemo(() => {
+    const q = searchQuery.trim().toLowerCase();
+    const source =
+      selectedCategory === 'Archive' ? archivedEntries : publishedEntries;
+
+    return source.filter((item) => {
+      const matchesCategory =
+        selectedCategory === 'All' ||
+        selectedCategory === 'Archive' ||
+        item.pillar === selectedCategory;
+      const matchesQuery =
+        !q ||
+        item.title.toLowerCase().includes(q) ||
+        item.description.toLowerCase().includes(q) ||
+        item.content.toLowerCase().includes(q);
+      return matchesCategory && matchesQuery;
+    });
+  }, [selectedCategory, searchQuery, publishedEntries, archivedEntries]);
+
+  // Curated sections for default editorial homepage
+  const featuredEntry = useMemo(
+    () =>
+      publishedEntries.find((e) => e.featured) || publishedEntries[0] || null,
+    [publishedEntries]
+  );
+
+  const latestReflections = useMemo(
+    () =>
+      publishedEntries.filter(
+        (e) =>
+          e.id !== featuredEntry?.id &&
+          (e.pillar === 'Reflections' || e.pillar === 'Growth & Learning')
+      ),
+    [publishedEntries, featuredEntry]
+  );
+
+  const essaysAndPhilosophy = useMemo(
+    () =>
+      publishedEntries.filter(
+        (e) =>
+          e.pillar === 'Philosophy' ||
+          e.pillar === 'Society & People' ||
+          e.pillar === 'Perspectives'
+      ),
+    [publishedEntries]
+  );
+
+  const poetryAndLiterature = useMemo(
+    () => publishedEntries.filter((e) => e.pillar === 'Literature & Poetry'),
+    [publishedEntries]
+  );
+
+  const notesAndFragments = useMemo(
+    () => publishedEntries.filter((e) => e.pillar === 'Notes & Fragments'),
+    [publishedEntries]
+  );
 
   const handleCopyLink = (id: string) => {
     const url = `${window.location.origin}/blog#${id}`;
@@ -114,654 +215,653 @@ export default function Blog() {
     setTimeout(() => setCopiedCodeIdx(null), 2000);
   };
 
-  const renderFormattedText = (text: string) => {
-    const linkRegex = /\[([^\]]+)\]\(([^)]+)\)/g;
-    const parts: (string | React.ReactNode)[] = [];
-    let lastIndex = 0;
-    let match;
+  const renderInline = (text: string) => {
+    // Support [label](url), **bold**, *italic*, and `code` cleanly
+    const tokenRegex =
+      /(\[[^\]]+\]\([^)]+\)|\*\*[^*]+\*\*|\*[^*]+\*|`[^`]+`)/g;
+    const parts = text.split(tokenRegex);
 
-    while ((match = linkRegex.exec(text)) !== null) {
-      if (match.index > lastIndex) {
-        parts.push(text.substring(lastIndex, match.index));
-      }
-      parts.push(
-        <a
-          key={match.index}
-          href={match[2]}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-indigo-600 dark:text-indigo-400 font-semibold underline underline-offset-2 hover:text-indigo-700 dark:hover:text-indigo-300 inline-flex items-center gap-0.5"
-        >
-          {match[1]} <ExternalLink className="w-3 h-3 inline ml-0.5 opacity-70" />
-        </a>
-      );
-      lastIndex = linkRegex.lastIndex;
-    }
-
-    if (lastIndex < text.length) {
-      parts.push(text.substring(lastIndex));
-    }
-
-    return parts.length > 0 ? parts : text;
-  };
-
-  const techCategories = [
-    'All', 
-    'Artificial Intelligence', 
-    'Programming', 
-    'Next.js', 
-    'React', 
-    'Architecture', 
-    'System Design', 
-    'Linux', 
-    'Open Source', 
-    'Cybersecurity',
-    'Frontend & UI',
-    'AI & LLMs'
-  ];
-
-  const nonTechCategories = [
-    'All',
-    'Career & Mindset',
-    'Art & Creativity',
-    'Books & Reading',
-    'Writing & Prose',
-    'Hobbies & Lifestyle'
-  ];
-
-  const currentCategories = activeTab === 'tech' ? techCategories : nonTechCategories;
-
-  const filteredBlogs = blogsData.filter(blog => {
-    const blogType = blog.type || 'tech';
-    const matchesTab = blogType === activeTab;
-
-    const matchesSearch = blog.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
-                          blog.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                          blog.content.toLowerCase().includes(searchQuery.toLowerCase());
-    
-    const matchesCategory = selectedCategory === 'All' || blog.category === selectedCategory;
-
-    return matchesTab && matchesSearch && matchesCategory;
-  });
-
-  const activeBlog = blogsData.find(b => b.id === readingBlogId);
-
-  const techBlogs = blogsData.filter(b => (b.type || 'tech') === 'tech');
-  const nonTechBlogs = blogsData.filter(b => b.type === 'non-tech');
-
-  // Extract sections/headings from active blog content
-  const extractHeadings = (content?: string) => {
-    if (!content) return [];
-    return content
-      .split('\n\n')
-      .filter(p => p.startsWith('### '))
-      .map(p => p.replace('### ', '').trim());
-  };
-
-  const articleHeadings = extractHeadings(activeBlog?.content);
-
-  // Featured blog (first in filtered set when default view)
-  const isDefaultFilter = selectedCategory === 'All' && !searchQuery;
-  const featuredBlog = isDefaultFilter && filteredBlogs.length > 0 ? filteredBlogs[0] : null;
-  const regularBlogs = featuredBlog ? filteredBlogs.slice(1) : filteredBlogs;
-
-  // Next blog recommendation in reader mode
-  const getNextBlog = () => {
-    if (!activeBlog) return null;
-    const currentIndex = blogsData.findIndex(b => b.id === activeBlog.id);
-    return blogsData[(currentIndex + 1) % blogsData.length];
-  };
-
-  const nextBlog = getNextBlog();
-
-  return (
-    <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 relative">
-      
-      {/* Subtle Ambient Glow */}
-      <div className="absolute top-12 left-1/3 w-80 h-80 bg-indigo-500/10 dark:bg-indigo-500/15 rounded-full blur-3xl pointer-events-none -z-10" />
-      <div className="absolute top-48 right-1/4 w-80 h-80 bg-rose-500/10 dark:bg-rose-500/10 rounded-full blur-3xl pointer-events-none -z-10" />
-
-      <AnimatePresence mode="wait">
-        {!readingBlogId ? (
-          <motion.div
-            key="list"
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -12 }}
-            transition={{ duration: 0.25 }}
-            className="space-y-12"
+    return parts.map((part, idx) => {
+      if (!part) return null;
+      const linkMatch = part.match(/^\[([^\]]+)\]\(([^)]+)\)$/);
+      if (linkMatch) {
+        return (
+          <a
+            key={idx}
+            href={linkMatch[2]}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-700 dark:text-blue-400 underline decoration-blue-600/30 underline-offset-4 hover:decoration-blue-600 transition-colors"
           >
-            {/* Editorial Masthead */}
-            <header className="space-y-6 border-b border-slate-200/80 dark:border-white/10 pb-8">
-              <div className="flex flex-wrap items-center justify-between gap-4">
-                <div className="inline-flex items-center space-x-2 text-xs font-mono text-slate-600 dark:text-zinc-400">
-                  <span className="relative flex h-2 w-2">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                    <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-                  </span>
-                  <span className="font-semibold tracking-wider uppercase">FIELD NOTES & DISPATCHES</span>
-                  <span className="text-slate-400 dark:text-zinc-600">•</span>
-                  <span>Vol. 2026</span>
-                </div>
+            {linkMatch[1]}
+          </a>
+        );
+      }
+      if (part.startsWith('**') && part.endsWith('**')) {
+        return (
+          <strong key={idx} className="font-semibold text-zinc-900 dark:text-zinc-100">
+            {part.slice(2, -2)}
+          </strong>
+        );
+      }
+      if (part.startsWith('*') && part.endsWith('*')) {
+        return (
+          <em key={idx} className="italic">
+            {part.slice(1, -1)}
+          </em>
+        );
+      }
+      if (part.startsWith('`') && part.endsWith('`')) {
+        return (
+          <code
+            key={idx}
+            className="px-1.5 py-0.5 rounded bg-card-inner border border-card-border font-mono text-[0.88em] text-zinc-800 dark:text-zinc-200"
+          >
+            {part.slice(1, -1)}
+          </code>
+        );
+      }
+      return <React.Fragment key={idx}>{part}</React.Fragment>;
+    });
+  };
 
-                <a 
-                  href="/rss.xml" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center space-x-1.5 px-3 py-1.5 rounded-full border border-slate-200 dark:border-white/10 bg-slate-100/60 dark:bg-white/5 hover:bg-slate-200/60 dark:hover:bg-white/10 text-xs text-slate-700 dark:text-zinc-300 transition-all font-mono"
-                  title="Subscribe to RSS Feed"
-                >
-                  <Rss className="w-3.5 h-3.5 text-rose-500" />
-                  <span>RSS Feed</span>
-                </a>
-              </div>
+  const formatDisplayDate = (dateStr: string) => {
+    const parsed = new Date(dateStr);
+    if (Number.isNaN(parsed.getTime())) return dateStr;
+    return parsed.toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    });
+  };
 
-              <div className="space-y-3 max-w-3xl">
-                <h1 className="text-3xl sm:text-5xl font-black text-slate-900 dark:text-white tracking-tight leading-[1.15]">
-                  {activeTab === 'tech' ? (
-                    <>
-                      Engineering, Systems & <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-violet-600 to-indigo-500 dark:from-indigo-400 dark:via-violet-400 dark:to-indigo-300">Software Craft</span>
-                    </>
-                  ) : (
-                    <>
-                      Reflections, Design & <span className="text-transparent bg-clip-text bg-gradient-to-r from-rose-600 via-pink-600 to-rose-500 dark:from-rose-400 dark:via-pink-400 dark:to-rose-300">Creative Life</span>
-                    </>
-                  )}
-                </h1>
+  const isEditorialHome = selectedCategory === 'All' && !searchQuery.trim();
 
-                <p className="text-base sm:text-lg text-slate-600 dark:text-zinc-300 font-sans leading-relaxed">
-                  {activeTab === 'tech'
-                    ? 'Candid architectural post-mortems, deterministic AI pipelines, and practical distributed systems from the trenches of building StartupWire and Sentinel Guard.'
-                    : 'Personal essays on transitioning from civil blueprints to computer science, sketching visual thinking, reading philosophy, and finding balance outside the terminal.'}
-                </p>
-              </div>
+  // ---------------- READER VIEW ----------------
+  if (readingId && activeArticle) {
+    return (
+      <div className="max-w-3xl mx-auto px-5 sm:px-8 pb-16 space-y-10">
+        {/* Minimal Sticky Reading Bar */}
+        <div className="sticky top-20 z-30 bg-background/90 backdrop-blur-md border-b border-card-border py-3 flex items-center justify-between gap-4">
+          <button
+            onClick={closeArticle}
+            className="inline-flex items-center gap-1.5 text-sm text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors cursor-pointer"
+          >
+            <ArrowLeft className="w-4 h-4" />
+            <span>Journal</span>
+          </button>
 
-              {/* Author Byline Attribution */}
-              <div className="flex items-center space-x-3 pt-2 text-xs text-slate-600 dark:text-zinc-400">
-                <div className="w-7 h-7 rounded-full bg-gradient-to-br from-indigo-500 to-rose-500 flex items-center justify-center text-white font-bold text-[11px] shadow-xs">
-                  KV
-                </div>
-                <div>
-                  <span className="font-semibold text-slate-900 dark:text-zinc-200">Kuldeep Chandra Vishwakarma</span>
-                  <span className="mx-1.5 text-slate-400 dark:text-zinc-600">•</span>
-                  <span>Software Engineer & Founder</span>
-                </div>
-              </div>
-            </header>
+          <div className="flex items-center gap-3">
+            <button
+              onClick={() => handleCopyLink(activeArticle.id)}
+              className="inline-flex items-center gap-1.5 text-xs font-mono px-2.5 py-1 rounded border border-card-border bg-card-bg text-zinc-700 dark:text-zinc-300 hover:border-blue-500/40 transition-colors cursor-pointer"
+            >
+              {copiedLink ? (
+                <>
+                  <Check className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
+                  <span>Copied</span>
+                </>
+              ) : (
+                <>
+                  <Share2 className="w-3.5 h-3.5" />
+                  <span>Share</span>
+                </>
+              )}
+            </button>
+          </div>
 
-            {/* Controls Bar: Segment Switcher & Search */}
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4">
-              
-              {/* Tab Switcher */}
-              <div className="flex p-1 bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-2xl w-full sm:w-auto">
-                <button
-                  onClick={() => {
-                    setActiveTab('tech');
-                    setSelectedCategory('All');
-                  }}
-                  className={`relative flex-1 sm:flex-initial py-2 px-4 rounded-xl text-xs font-semibold flex items-center justify-center gap-2 transition-colors cursor-pointer z-10 ${
-                    activeTab === 'tech'
-                      ? 'text-slate-900 dark:text-white'
-                      : 'text-slate-600 dark:text-zinc-400 hover:text-slate-900 dark:hover:text-white'
-                  }`}
-                >
-                  {activeTab === 'tech' && (
-                    <motion.div
-                      layoutId="activeBlogTab"
-                      className="absolute inset-0 bg-white dark:bg-indigo-600 rounded-xl shadow-xs -z-10"
-                      transition={{ type: "spring", stiffness: 450, damping: 35 }}
-                    />
-                  )}
-                  <span>Technical Dispatches</span>
-                  <span className={`px-2 py-0.5 rounded-full text-[10px] font-mono ${
-                    activeTab === 'tech'
-                      ? 'bg-indigo-100 dark:bg-white/20 text-indigo-700 dark:text-white'
-                      : 'bg-slate-200/80 dark:bg-white/10 text-slate-600 dark:text-zinc-400'
-                  }`}>
-                    {techBlogs.length}
-                  </span>
-                </button>
+          <div
+            className="absolute bottom-0 left-0 h-[2px] bg-blue-600 dark:bg-blue-400 transition-all duration-100"
+            style={{ width: `${readingProgress}%` }}
+          />
+        </div>
 
-                <button
-                  onClick={() => {
-                    setActiveTab('non-tech');
-                    setSelectedCategory('All');
-                  }}
-                  className={`relative flex-1 sm:flex-initial py-2 px-4 rounded-xl text-xs font-semibold flex items-center justify-center gap-2 transition-colors cursor-pointer z-10 ${
-                    activeTab === 'non-tech'
-                      ? 'text-slate-900 dark:text-white'
-                      : 'text-slate-600 dark:text-zinc-400 hover:text-slate-900 dark:hover:text-white'
-                  }`}
-                >
-                  {activeTab === 'non-tech' && (
-                    <motion.div
-                      layoutId="activeBlogTab"
-                      className="absolute inset-0 bg-white dark:bg-rose-600 rounded-xl shadow-xs -z-10"
-                      transition={{ type: "spring", stiffness: 450, damping: 35 }}
-                    />
-                  )}
-                  <span>Essays & Crafts</span>
-                  <span className={`px-2 py-0.5 rounded-full text-[10px] font-mono ${
-                    activeTab === 'non-tech'
-                      ? 'bg-rose-100 dark:bg-white/20 text-rose-700 dark:text-white'
-                      : 'bg-slate-200/80 dark:bg-white/10 text-slate-600 dark:text-zinc-400'
-                  }`}>
-                    {nonTechBlogs.length}
-                  </span>
-                </button>
-              </div>
-
-              {/* Search Bar */}
-              <div className="relative w-full sm:w-72">
-                <Search className="absolute left-3.5 top-3 w-4 h-4 text-slate-400 dark:text-zinc-500" />
-                <input
-                  ref={searchInputRef}
-                  type="text"
-                  placeholder={`Search ${activeTab === 'tech' ? 'technical notes' : 'essays'}...`}
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full pl-10 pr-9 py-2 text-xs bg-slate-100/80 dark:bg-white/5 text-slate-900 dark:text-white border border-slate-200 dark:border-white/10 rounded-xl outline-none focus:border-indigo-500 dark:focus:border-indigo-400 transition-all font-sans placeholder:text-slate-400 dark:placeholder:text-zinc-500"
-                />
-                {searchQuery ? (
-                  <button 
-                    onClick={() => setSearchQuery('')}
-                    className="absolute right-3 top-2.5 text-slate-400 hover:text-slate-600 dark:hover:text-zinc-200"
-                  >
-                    <X className="w-3.5 h-3.5" />
-                  </button>
-                ) : (
-                  <kbd className="hidden sm:inline-block absolute right-3 top-2.5 text-[10px] font-mono text-slate-400 dark:text-zinc-500 border border-slate-300 dark:border-white/10 rounded px-1.5 py-0.2">
-                    /
-                  </kbd>
-                )}
-              </div>
-
+        {/* Article Presentation */}
+        <article className="mx-auto max-w-[65ch] space-y-8 pt-2">
+          <header className="space-y-5 border-b border-card-border pb-8">
+            <div className="flex flex-wrap items-center gap-2.5 text-xs font-mono text-zinc-500 dark:text-zinc-400">
+              <span className="text-blue-600 dark:text-blue-400 uppercase tracking-wider">
+                {activeArticle.pillar}
+              </span>
+              <span>·</span>
+              <time dateTime={activeArticle.date}>
+                {formatDisplayDate(activeArticle.date)}
+              </time>
+              <span>·</span>
+              <span>{activeArticle.readTime}</span>
             </div>
 
-            {/* Category Filter Chips */}
-            <div className="flex items-center space-x-2 overflow-x-auto pb-2 scrollbar-none pt-1">
-              <span className="text-xs font-mono text-slate-500 dark:text-zinc-400 flex items-center gap-1 shrink-0 pr-1">
-                <Filter className="w-3.5 h-3.5" />
-                <span>Filter:</span>
-              </span>
-              {currentCategories.map((cat) => (
+            <h1 className="font-serif text-3xl sm:text-4xl lg:text-[2.6rem] font-semibold tracking-tight leading-[1.18] text-zinc-900 dark:text-zinc-50">
+              {activeArticle.title}
+            </h1>
+
+            <p className="text-base sm:text-lg text-zinc-600 dark:text-zinc-300 leading-relaxed">
+              {activeArticle.description}
+            </p>
+          </header>
+
+          {activeArticle.coverImage && (
+            <figure className="space-y-2">
+              <Image
+                src={activeArticle.coverImage}
+                alt={activeArticle.coverCaption || activeArticle.title}
+                width={1200}
+                height={675}
+                unoptimized
+                className="w-full rounded-lg border border-card-border object-cover max-h-[420px]"
+              />
+              {activeArticle.coverCaption && (
+                <figcaption className="text-xs text-zinc-500 dark:text-zinc-400 italic text-center">
+                  {activeArticle.coverCaption}
+                </figcaption>
+              )}
+            </figure>
+          )}
+
+          {/* Reading Body */}
+          <div className="space-y-6 text-[17px] sm:text-[18px] leading-[1.85] text-zinc-800 dark:text-zinc-200">
+            {activeArticle.content.split('\n\n').map((block, idx) => {
+              if (block.startsWith('## ') || block.startsWith('### ')) {
+                const heading = block.replace(/^###?\s+/, '');
+                return (
+                  <h2
+                    key={idx}
+                    className="font-serif text-xl sm:text-2xl font-semibold text-zinc-900 dark:text-zinc-50 pt-6 pb-1"
+                  >
+                    {heading}
+                  </h2>
+                );
+              }
+
+              if (block.startsWith('> ')) {
+                const quoteLines = block
+                  .split('\n')
+                  .map((l) => l.replace(/^>\s?/, ''));
+                return (
+                  <blockquote
+                    key={idx}
+                    className="border-l-2 border-blue-600/50 dark:border-blue-400/50 pl-5 py-1 my-6 font-serif italic text-zinc-700 dark:text-zinc-300 space-y-1.5"
+                  >
+                    {quoteLines.map((line, lIdx) => (
+                      <p key={lIdx}>{renderInline(line)}</p>
+                    ))}
+                  </blockquote>
+                );
+              }
+
+              if (block.startsWith('---')) {
+                return (
+                  <hr
+                    key={idx}
+                    className="my-8 border-t border-card-border w-24 mx-auto"
+                  />
+                );
+              }
+
+              if (block.startsWith('```')) {
+                const lines = block.split('\n');
+                const lang = lines[0].replace('```', '') || 'text';
+                const code = lines.slice(1, lines.length - 1).join('\n');
+                const isCopied = copiedCodeIdx === idx;
+                return (
+                  <div
+                    key={idx}
+                    className="rounded-lg bg-zinc-950 border border-zinc-800 overflow-hidden my-6"
+                  >
+                    <div className="flex items-center justify-between px-4 py-2 border-b border-zinc-800 text-xs font-mono text-zinc-400">
+                      <span className="uppercase">{lang}</span>
+                      <button
+                        onClick={() => handleCopyCode(code, idx)}
+                        className="inline-flex items-center gap-1 text-zinc-300 hover:text-white cursor-pointer"
+                      >
+                        {isCopied ? (
+                          <Check className="w-3.5 h-3.5 text-emerald-400" />
+                        ) : (
+                          <Copy className="w-3.5 h-3.5" />
+                        )}
+                        <span>{isCopied ? 'Copied' : 'Copy'}</span>
+                      </button>
+                    </div>
+                    <pre className="p-4 font-mono text-xs sm:text-sm text-zinc-200 overflow-x-auto leading-relaxed">
+                      <code>{code}</code>
+                    </pre>
+                  </div>
+                );
+              }
+
+              if (
+                block.startsWith('* ') ||
+                block.startsWith('- ') ||
+                /^\d+\.\s/.test(block)
+              ) {
+                const isOrdered = /^\d+\.\s/.test(block);
+                const ListTag = isOrdered ? 'ol' : 'ul';
+                return (
+                  <ListTag
+                    key={idx}
+                    className={`${
+                      isOrdered ? 'list-decimal' : 'list-disc'
+                    } pl-6 space-y-2 text-zinc-700 dark:text-zinc-300`}
+                  >
+                    {block.split('\n').map((item, itemIdx) => (
+                      <li key={itemIdx}>
+                        {renderInline(item.replace(/^\* |^- |^\d+\.\s/, ''))}
+                      </li>
+                    ))}
+                  </ListTag>
+                );
+              }
+
+              return (
+                <p key={idx} className="whitespace-pre-line">
+                  {renderInline(block)}
+                </p>
+              );
+            })}
+          </div>
+
+          {/* Minimal Author Information */}
+          <footer className="pt-10 mt-12 border-t border-card-border space-y-10">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 text-sm text-zinc-600 dark:text-zinc-400">
+              <div className="space-y-1">
+                <p className="font-medium text-zinc-900 dark:text-zinc-100">
+                  Kuldeep Chandra Vishwakarma
+                </p>
+                <p className="text-xs leading-relaxed max-w-md">
+                  Independent writing on human behaviour, literature, philosophy, and life while building software.
+                </p>
+              </div>
+              <Link
+                href="/about"
+                className="text-xs font-medium text-blue-600 dark:text-blue-400 hover:underline inline-flex items-center gap-1"
+              >
+                About the author <ArrowUpRight className="w-3.5 h-3.5" />
+              </Link>
+            </div>
+
+            {/* Related Writing */}
+            {relatedArticles.length > 0 && (
+              <div className="space-y-4 pt-6 border-t border-card-border">
+                <h3 className="text-xs font-mono uppercase tracking-[0.16em] text-zinc-500 dark:text-zinc-400">
+                  Related Writing
+                </h3>
+                <div className="divide-y divide-card-border border-y border-card-border">
+                  {relatedArticles.map((rel) => (
+                    <button
+                      key={rel.id}
+                      onClick={() => openArticle(rel.id)}
+                      className="w-full text-left py-4 flex items-baseline justify-between gap-4 group cursor-pointer"
+                    >
+                      <div className="space-y-1">
+                        <span className="font-serif text-base font-medium text-zinc-900 dark:text-zinc-100 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors block">
+                          {rel.title}
+                        </span>
+                        <span className="text-xs font-mono text-zinc-500 dark:text-zinc-400">
+                          {rel.pillar} · {rel.readTime}
+                        </span>
+                      </div>
+                      <ArrowRight className="w-4 h-4 text-zinc-400 group-hover:text-blue-600 dark:group-hover:text-blue-400 flex-shrink-0 transition-colors" />
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
+          </footer>
+        </article>
+      </div>
+    );
+  }
+
+  // ---------------- EDITORIAL JOURNAL HOMEPAGE ----------------
+  const categoryOptions: FilterOption[] = [
+    'All',
+    ...JOURNAL_PILLARS.map((p) => p.id),
+    'Archive',
+  ];
+
+  const renderEntryRow = (entry: MergedEntry) => (
+    <article
+      key={entry.id}
+      id={entry.id}
+      onClick={() => openArticle(entry.id)}
+      className="py-6 group cursor-pointer grid grid-cols-1 md:grid-cols-12 gap-2 md:gap-6 items-baseline"
+    >
+      <div className="md:col-span-3 flex flex-wrap items-center gap-2 text-xs font-mono text-zinc-500 dark:text-zinc-400">
+        <time dateTime={entry.date}>{entry.date}</time>
+        <span>·</span>
+        <span>{entry.readTime}</span>
+      </div>
+      <div className="md:col-span-9 space-y-1.5">
+        <span className="text-[11px] font-mono uppercase tracking-wider text-blue-600 dark:text-blue-400 block">
+          {entry.pillar}
+        </span>
+        <h3 className="font-serif text-xl font-medium text-zinc-900 dark:text-zinc-100 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors leading-snug">
+          {entry.title}
+        </h3>
+        <p className="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed line-clamp-2">
+          {entry.description}
+        </p>
+      </div>
+    </article>
+  );
+
+  return (
+    <div className="max-w-4xl mx-auto px-5 sm:px-8 space-y-14 pb-12">
+      {/* Masthead */}
+      <header className="space-y-6 border-b border-card-border pb-10 pt-2">
+        <div className="flex flex-wrap items-center justify-between gap-4">
+          <p className="text-xs font-mono uppercase tracking-[0.18em] text-blue-600 dark:text-blue-400">
+            Independent Journal &amp; Essays
+          </p>
+          <div className="flex items-center gap-4 text-xs font-mono">
+            <Link
+              href="/blog/studio"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md border border-card-border bg-card-bg text-zinc-700 dark:text-zinc-300 hover:border-blue-500/40 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+            >
+              <PenLine className="w-3.5 h-3.5" />
+              <span>Author Studio</span>
+            </Link>
+            <a
+              href="/rss.xml"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1 text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
+            >
+              <Rss className="w-3.5 h-3.5" />
+              <span>RSS</span>
+            </a>
+          </div>
+        </div>
+
+        <div className="space-y-3 max-w-2xl">
+          <h1 className="font-serif text-4xl sm:text-5xl font-semibold tracking-tight text-zinc-900 dark:text-zinc-50 leading-[1.12]">
+            Journal &amp; Writing
+          </h1>
+          <p className="text-base sm:text-lg text-zinc-600 dark:text-zinc-300 leading-relaxed">
+            Personal reflections, philosophical questions, notes on books and poetry, and quiet observations on people and life. Written slowly, outside algorithms.
+          </p>
+        </div>
+
+        {/* Category Navigation & Search */}
+        <div className="space-y-4 pt-2">
+          <nav
+            aria-label="Journal categories"
+            className="flex flex-wrap items-center gap-1.5"
+          >
+            {categoryOptions.map((cat) => {
+              const isActive = selectedCategory === cat;
+              const isArchive = cat === 'Archive';
+              return (
                 <button
                   key={cat}
                   onClick={() => setSelectedCategory(cat)}
-                  className={`px-3 py-1.5 text-xs rounded-xl border transition-all cursor-pointer shrink-0 font-medium ${
-                    selectedCategory === cat
-                      ? activeTab === 'non-tech'
-                        ? 'bg-rose-500/15 text-rose-700 dark:text-rose-300 border-rose-500/40 font-semibold'
-                        : 'bg-indigo-500/15 text-indigo-700 dark:text-indigo-300 border-indigo-500/40 font-semibold'
-                      : 'bg-transparent text-slate-600 dark:text-zinc-400 hover:text-slate-900 dark:hover:text-zinc-200 border-slate-200/80 dark:border-white/10'
+                  className={`px-3 py-1.5 rounded-md text-xs transition-colors cursor-pointer ${
+                    isActive
+                      ? 'bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 font-medium'
+                      : isArchive
+                        ? 'text-zinc-500 dark:text-zinc-500 hover:text-zinc-800 dark:hover:text-zinc-300 border border-dashed border-card-border'
+                        : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 bg-card-bg border border-card-border'
                   }`}
                 >
-                  {cat}
+                  {cat === 'Archive'
+                    ? `Archive (${archivedEntries.length})`
+                    : cat}
                 </button>
-              ))}
-            </div>
+              );
+            })}
+          </nav>
 
-            {/* Featured Lead Dispatch (when browsing default unfiltered view) */}
-            {featuredBlog && (
-              <motion.article
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                className="relative overflow-hidden rounded-3xl border border-slate-200 dark:border-white/10 bg-gradient-to-br from-indigo-50/50 via-white to-purple-50/30 dark:from-indigo-950/20 dark:via-zinc-950/40 dark:to-purple-950/15 p-6 sm:p-9 shadow-sm hover:shadow-md hover:border-indigo-500/30 transition-all cursor-pointer group"
-                onClick={() => openArticle(featuredBlog.id)}
+          <div className="relative max-w-xs">
+            <Search className="absolute left-3 top-2.5 w-3.5 h-3.5 text-zinc-400" />
+            <input
+              ref={searchInputRef}
+              type="text"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder="Search essays & notes ( / )"
+              aria-label="Search journal entries"
+              className="w-full pl-8 pr-8 py-1.5 text-xs bg-card-bg border border-card-border rounded-md outline-none text-zinc-900 dark:text-zinc-100 placeholder:text-zinc-400 focus:border-blue-600 transition-colors"
+            />
+            {searchQuery && (
+              <button
+                onClick={() => setSearchQuery('')}
+                aria-label="Clear search"
+                className="absolute right-2.5 top-2 text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-200 cursor-pointer"
               >
-                <div className="relative z-10 space-y-4">
-                  <div className="flex flex-wrap items-center justify-between gap-3 text-xs font-mono">
-                    <div className="flex items-center space-x-2">
-                      <span className="px-2.5 py-1 rounded-md text-[10px] font-bold uppercase tracking-wider bg-indigo-600 text-white shadow-2xs">
-                        Lead Dispatch
-                      </span>
-                      <span className="text-indigo-700 dark:text-indigo-400 font-medium">
-                        {featuredBlog.category}
-                      </span>
-                    </div>
-
-                    <div className="flex items-center space-x-3 text-slate-500 dark:text-zinc-400">
-                      <span>{featuredBlog.date}</span>
-                      <span>•</span>
-                      <span>{featuredBlog.readTime}</span>
-                    </div>
-                  </div>
-
-                  <div className="space-y-3 max-w-3xl">
-                    <h2 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors tracking-tight leading-tight">
-                      {featuredBlog.title}
-                    </h2>
-                    <p className="text-sm sm:text-base text-slate-600 dark:text-zinc-300 leading-relaxed font-sans line-clamp-3">
-                      {featuredBlog.description}
-                    </p>
-                  </div>
-
-                  <div className="pt-2 flex items-center justify-between border-t border-slate-200/60 dark:border-white/5">
-                    <div className="text-xs text-slate-500 dark:text-zinc-400">
-                      <span>Written by <strong>Kuldeep</strong></span>
-                    </div>
-
-                    <div className="inline-flex items-center space-x-1.5 text-xs font-semibold text-indigo-600 dark:text-indigo-400 group-hover:translate-x-1 transition-transform">
-                      <span>Read Full Dispatch</span>
-                      <ArrowRight className="w-4 h-4" />
-                    </div>
-                  </div>
-                </div>
-              </motion.article>
+                <X className="w-3.5 h-3.5" />
+              </button>
             )}
+          </div>
+        </div>
+      </header>
 
-            {/* Articles Stream */}
-            <div className="space-y-4">
-              <div className="text-xs font-mono text-slate-500 dark:text-zinc-500 uppercase tracking-wider pb-2 border-b border-slate-200/60 dark:border-white/5 flex items-center justify-between">
-                <span>All Articles ({filteredBlogs.length})</span>
-                <span>Sorted Chronologically</span>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {regularBlogs.map((blog) => (
-                  <motion.article 
-                    key={blog.id} 
-                    id={blog.id}
-                    whileHover={{ y: -2 }}
-                    transition={{ duration: 0.15 }}
-                    onClick={() => openArticle(blog.id)}
-                    className="p-5 sm:p-6 rounded-2xl border border-slate-200/80 dark:border-white/10 hover:border-indigo-500/40 dark:hover:border-indigo-500/30 transition-all cursor-pointer bg-white/70 dark:bg-white/[0.02] hover:bg-white dark:hover:bg-white/[0.04] shadow-xs hover:shadow-md flex flex-col justify-between group space-y-4"
-                  >
-                    <div className="space-y-3">
-                      <div className="flex items-center justify-between text-xs font-mono text-slate-500 dark:text-zinc-400">
-                        <span className={`text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded ${
-                          blog.type === 'non-tech'
-                            ? 'bg-rose-500/10 text-rose-700 dark:text-rose-400'
-                            : 'bg-indigo-500/10 text-indigo-700 dark:text-indigo-400'
-                        }`}>
-                          {blog.category}
-                        </span>
-                        
-                        <div className="flex items-center space-x-2 text-[11px]">
-                          <span>{blog.date}</span>
-                          <span>•</span>
-                          <span>{blog.readTime}</span>
-                        </div>
-                      </div>
-
-                      <div className="space-y-1.5">
-                        <h3 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug">
-                          {blog.title}
-                        </h3>
-                        <p className="text-xs sm:text-sm text-slate-600 dark:text-zinc-400 leading-relaxed line-clamp-2">
-                          {blog.description}
-                        </p>
-                      </div>
-                    </div>
-
-                    <div className={`pt-3 border-t border-slate-100 dark:border-white/5 text-xs font-semibold flex items-center justify-between ${
-                      blog.type === 'non-tech' ? 'text-rose-600 dark:text-rose-400' : 'text-indigo-600 dark:text-indigo-400'
-                    }`}>
-                      <span>Read essay</span>
-                      <span className="group-hover:translate-x-1 transition-transform inline-flex items-center gap-1">
-                        →
-                      </span>
-                    </div>
-                  </motion.article>
-                ))}
-              </div>
-
-              {filteredBlogs.length === 0 && (
-                <div className="text-center py-16 bg-slate-50 dark:bg-white/[0.02] rounded-3xl border border-dashed border-slate-300 dark:border-white/10 space-y-3">
-                  <Search className="w-8 h-8 text-slate-400 dark:text-zinc-500 mx-auto" />
-                  <p className="text-sm font-semibold text-slate-700 dark:text-zinc-300">
-                    No articles found matching &ldquo;{searchQuery}&rdquo;
-                  </p>
-                  <p className="text-xs text-slate-500 dark:text-zinc-500">
-                    Try adjusting your search query or selecting a different category filter.
-                  </p>
-                  <button 
-                    onClick={() => {
-                      setSearchQuery('');
-                      setSelectedCategory('All');
-                    }}
-                    className="mt-2 px-4 py-2 rounded-xl bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 text-xs font-semibold hover:bg-indigo-500/20 transition-all cursor-pointer"
-                  >
-                    Reset Filters
-                  </button>
+      {/* EDITORIAL HOMEPAGE VIEW */}
+      {isEditorialHome ? (
+        <div className="space-y-16">
+          {/* 1. Featured Writing */}
+          {featuredEntry && (
+            <section aria-labelledby="featured-heading" className="space-y-4">
+              <h2
+                id="featured-heading"
+                className="text-xs font-mono uppercase tracking-[0.16em] text-zinc-500 dark:text-zinc-400"
+              >
+                Featured Writing
+              </h2>
+              <article
+                onClick={() => openArticle(featuredEntry.id)}
+                className="p-7 sm:p-10 rounded-2xl border border-card-border bg-card-bg hover:border-zinc-400 dark:hover:border-zinc-600 transition-colors cursor-pointer space-y-5 group"
+              >
+                <div className="flex flex-wrap items-center gap-2.5 text-xs font-mono text-zinc-500 dark:text-zinc-400">
+                  <span className="text-blue-600 dark:text-blue-400 uppercase tracking-wider">
+                    {featuredEntry.pillar}
+                  </span>
+                  <span>·</span>
+                  <time dateTime={featuredEntry.date}>{featuredEntry.date}</time>
+                  <span>·</span>
+                  <span>{featuredEntry.readTime}</span>
                 </div>
+
+                <h3 className="font-serif text-2xl sm:text-3xl font-semibold text-zinc-900 dark:text-zinc-50 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors leading-snug">
+                  {featuredEntry.title}
+                </h3>
+
+                <p className="text-base text-zinc-600 dark:text-zinc-300 leading-relaxed max-w-2xl">
+                  {featuredEntry.description}
+                </p>
+
+                <span className="inline-flex items-center gap-1.5 text-sm font-medium text-blue-600 dark:text-blue-400">
+                  Read essay <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+                </span>
+              </article>
+            </section>
+          )}
+
+          {/* 2. Latest Reflections */}
+          <section aria-labelledby="reflections-heading" className="space-y-3">
+            <div className="flex items-baseline justify-between border-b border-card-border pb-2">
+              <h2
+                id="reflections-heading"
+                className="font-serif text-2xl font-medium text-zinc-900 dark:text-zinc-100"
+              >
+                Latest Reflections
+              </h2>
+              <button
+                onClick={() => setSelectedCategory('Reflections')}
+                className="text-xs font-mono text-blue-600 dark:text-blue-400 hover:underline cursor-pointer"
+              >
+                Filter Reflections
+              </button>
+            </div>
+            {latestReflections.length > 0 ? (
+              <div className="divide-y divide-card-border">
+                {latestReflections.map(renderEntryRow)}
+              </div>
+            ) : (
+              <p className="py-6 text-sm text-zinc-500 dark:text-zinc-400 italic font-serif">
+                New reflections are drafted privately in the Author Studio before publication.
+              </p>
+            )}
+          </section>
+
+          {/* 3. Essays & Philosophy */}
+          <section aria-labelledby="philosophy-heading" className="space-y-3">
+            <div className="flex items-baseline justify-between border-b border-card-border pb-2">
+              <h2
+                id="philosophy-heading"
+                className="font-serif text-2xl font-medium text-zinc-900 dark:text-zinc-100"
+              >
+                Essays &amp; Philosophy
+              </h2>
+              <button
+                onClick={() => setSelectedCategory('Philosophy')}
+                className="text-xs font-mono text-blue-600 dark:text-blue-400 hover:underline cursor-pointer"
+              >
+                Philosophy &amp; Society
+              </button>
+            </div>
+            {essaysAndPhilosophy.length > 0 ? (
+              <div className="divide-y divide-card-border">
+                {essaysAndPhilosophy.map(renderEntryRow)}
+              </div>
+            ) : (
+              <div className="py-6 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-sm text-zinc-500 dark:text-zinc-400">
+                <p className="font-serif italic">
+                  Awaiting original essays on philosophy, human behaviour, and contemporary perspectives.
+                </p>
+                <Link
+                  href="/blog/studio?pillar=Philosophy"
+                  className="text-xs font-mono text-blue-600 dark:text-blue-400 hover:underline shrink-0"
+                >
+                  Draft in Studio →
+                </Link>
+              </div>
+            )}
+          </section>
+
+          {/* 4. Poetry & Literature */}
+          <section aria-labelledby="literature-heading" className="space-y-3">
+            <div className="flex items-baseline justify-between border-b border-card-border pb-2">
+              <h2
+                id="literature-heading"
+                className="font-serif text-2xl font-medium text-zinc-900 dark:text-zinc-100"
+              >
+                Poetry &amp; Literature
+              </h2>
+              <button
+                onClick={() => setSelectedCategory('Literature & Poetry')}
+                className="text-xs font-mono text-blue-600 dark:text-blue-400 hover:underline cursor-pointer"
+              >
+                Filter Literature
+              </button>
+            </div>
+            {poetryAndLiterature.length > 0 ? (
+              <div className="divide-y divide-card-border">
+                {poetryAndLiterature.map(renderEntryRow)}
+              </div>
+            ) : (
+              <p className="py-6 text-sm text-zinc-500 dark:text-zinc-400 italic font-serif">
+                Notes on books, poetry, and enduring literature will appear here once published.
+              </p>
+            )}
+          </section>
+
+          {/* 5. Personal Notes & Fragments */}
+          <section aria-labelledby="fragments-heading" className="space-y-3">
+            <div className="flex items-baseline justify-between border-b border-card-border pb-2">
+              <h2
+                id="fragments-heading"
+                className="font-serif text-2xl font-medium text-zinc-900 dark:text-zinc-100"
+              >
+                Personal Notes &amp; Fragments
+              </h2>
+              <button
+                onClick={() => setSelectedCategory('Notes & Fragments')}
+                className="text-xs font-mono text-blue-600 dark:text-blue-400 hover:underline cursor-pointer"
+              >
+                Filter Fragments
+              </button>
+            </div>
+            {notesAndFragments.length > 0 ? (
+              <div className="divide-y divide-card-border">
+                {notesAndFragments.map(renderEntryRow)}
+              </div>
+            ) : (
+              <p className="py-6 text-sm text-zinc-500 dark:text-zinc-400 italic font-serif">
+                Open questions and unfinished observations are kept privately until ready to share.
+              </p>
+            )}
+          </section>
+
+          {/* Quiet Link to Preserved Earlier Technical Archive */}
+          {archivedEntries.length > 0 && (
+            <div className="pt-8 border-t border-card-border flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs text-zinc-500 dark:text-zinc-400">
+              <span>
+                {archivedEntries.length} earlier technical notes are preserved in the archive pending author review.
+              </span>
+              <button
+                onClick={() => setSelectedCategory('Archive')}
+                className="font-mono text-blue-600 dark:text-blue-400 hover:underline cursor-pointer text-left"
+              >
+                View Technical Archive →
+              </button>
+            </div>
+          )}
+        </div>
+      ) : (
+        /* FILTERED / ARCHIVE LIST VIEW */
+        <section className="space-y-6">
+          <div className="flex flex-wrap items-center justify-between gap-2 border-b border-card-border pb-3">
+            <div className="space-y-1">
+              <h2 className="font-serif text-2xl font-medium text-zinc-900 dark:text-zinc-100">
+                {selectedCategory === 'Archive'
+                  ? 'Earlier Technical Archive (Pending Review)'
+                  : selectedCategory === 'All'
+                    ? 'Search Results'
+                    : selectedCategory}
+              </h2>
+              {selectedCategory === 'Archive' && (
+                <p className="text-xs text-zinc-500 dark:text-zinc-400">
+                  Existing technical articles preserved until reviewed in Author Studio.
+                </p>
               )}
             </div>
+            <span className="text-xs font-mono text-zinc-500 dark:text-zinc-400">
+              {filteredList.length} {filteredList.length === 1 ? 'piece' : 'pieces'}
+            </span>
+          </div>
 
-          </motion.div>
-        ) : (
-          /* Dedicated In-Place Reading Experience */
-          <motion.div
-            key="reader"
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 15 }}
-            transition={{ duration: 0.25 }}
-            className="space-y-10"
-          >
-            {/* Sticky Reading Bar */}
-            <div className="sticky top-4 z-40 bg-white/95 dark:bg-zinc-950/95 border border-slate-200 dark:border-white/10 p-3 sm:p-4 rounded-2xl shadow-lg backdrop-blur-xl flex items-center justify-between">
-              <div className="flex items-center space-x-3">
-                <button
-                  onClick={closeArticle}
-                  className="px-3 py-1.5 rounded-xl bg-slate-100 dark:bg-white/10 hover:bg-slate-200 dark:hover:bg-white/20 text-xs font-semibold text-slate-800 dark:text-white transition-all flex items-center space-x-1.5 cursor-pointer"
-                >
-                  <ArrowLeft className="w-4 h-4" />
-                  <span>All Dispatches</span>
-                </button>
-
-                <div className="hidden md:flex items-center space-x-2 text-xs text-slate-500 dark:text-zinc-400 font-mono border-l border-slate-200 dark:border-white/10 pl-3">
-                  <span className="truncate max-w-sm font-sans font-medium text-slate-800 dark:text-zinc-200">{activeBlog?.title}</span>
-                </div>
-              </div>
-
-              <div className="flex items-center space-x-2">
-                <button
-                  onClick={() => activeBlog && handleCopyLink(activeBlog.id)}
-                  className="px-3 py-1.5 rounded-xl bg-indigo-500/10 text-indigo-700 dark:text-indigo-300 border border-indigo-500/20 text-xs font-semibold hover:bg-indigo-500/20 transition-all flex items-center space-x-1.5 cursor-pointer"
-                >
-                  {copiedLink ? <Check className="w-3.5 h-3.5 text-emerald-500" /> : <Share2 className="w-3.5 h-3.5" />}
-                  <span>{copiedLink ? 'Link Copied!' : 'Share'}</span>
-                </button>
-
-                <button 
-                  onClick={closeArticle}
-                  className="p-1.5 rounded-xl text-slate-400 hover:text-slate-700 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/10 transition-colors cursor-pointer"
-                  title="Close (Esc)"
-                >
-                  <X className="w-4 h-4" />
-                </button>
-              </div>
-
-              {/* Reading Progress Line */}
-              <div 
-                className="absolute -bottom-[1px] left-0 h-[2px] bg-gradient-to-r from-indigo-500 via-purple-500 to-rose-500 transition-all duration-100 rounded-b-2xl"
-                style={{ width: `${readingProgress}%` }}
-              />
+          {filteredList.length > 0 ? (
+            <div className="divide-y divide-card-border">
+              {filteredList.map(renderEntryRow)}
             </div>
-
-            {/* Article Canvas */}
-            <article className="max-w-3xl mx-auto space-y-8 bg-white dark:bg-zinc-950 p-6 sm:p-12 rounded-3xl border border-slate-200/80 dark:border-white/10 shadow-sm">
-              
-              {/* Meta & Breadcrumb */}
-              <div className="space-y-4 border-b border-slate-200/80 dark:border-white/10 pb-8">
-                <div className="flex flex-wrap items-center gap-3 text-xs font-mono text-slate-500 dark:text-zinc-400">
-                  <span className={`px-2.5 py-1 rounded-md font-bold uppercase tracking-wider ${
-                    activeBlog?.type === 'non-tech'
-                      ? 'bg-rose-500/10 text-rose-700 dark:text-rose-400'
-                      : 'bg-indigo-500/10 text-indigo-700 dark:text-indigo-400'
-                  }`}>
-                    {activeBlog?.category}
-                  </span>
-                  <span>•</span>
-                  <span>{activeBlog?.date}</span>
-                  <span>•</span>
-                  <span>{activeBlog?.readTime}</span>
-                </div>
-
-                <h1 className="text-2xl sm:text-4xl lg:text-5xl font-black text-slate-900 dark:text-white tracking-tight leading-[1.15]">
-                  {activeBlog?.title}
-                </h1>
-                
-                {/* Author Card Row */}
-                <div className="pt-2 flex items-center space-x-3">
-                  <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-indigo-600 to-rose-500 flex items-center justify-center text-white font-bold text-sm shadow-xs">
-                    KV
-                  </div>
-                  <div>
-                    <div className="font-bold text-slate-900 dark:text-white text-sm">Kuldeep Chandra Vishwakarma</div>
-                    <div className="text-xs text-slate-500 dark:text-zinc-400">Software Engineer & Founder • Kuldeepvishwakarma.com</div>
-                  </div>
-                </div>
-
-                {/* Synopsis / Excerpt Callout */}
-                <div className="mt-4 p-4 rounded-2xl bg-slate-50 dark:bg-white/[0.03] border-l-4 border-indigo-500 text-slate-700 dark:text-zinc-300 text-sm sm:text-base leading-relaxed italic">
-                  {activeBlog?.description}
-                </div>
-
-                {/* Section Quick Jump */}
-                {articleHeadings.length > 0 && (
-                  <div className="pt-4">
-                    <div className="text-xs font-mono text-slate-500 dark:text-zinc-500 mb-2 flex items-center gap-1.5">
-                      <Layers className="w-3.5 h-3.5 text-indigo-500" />
-                      <span>Section Index:</span>
-                    </div>
-                    <div className="flex flex-wrap gap-1.5">
-                      {articleHeadings.map((h, i) => (
-                        <span 
-                          key={i} 
-                          className="px-2.5 py-1 text-xs font-mono rounded-lg bg-slate-100 dark:bg-white/5 text-slate-700 dark:text-zinc-300 border border-slate-200 dark:border-white/5"
-                        >
-                          #{h}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                )}
+          ) : (
+            <div className="py-12 px-6 rounded-xl border border-card-border bg-card-bg text-center space-y-3">
+              <p className="font-serif italic text-base text-zinc-600 dark:text-zinc-400">
+                {searchQuery
+                  ? `No pieces matched "${searchQuery}".`
+                  : `No published pieces in ${selectedCategory} yet.`}
+              </p>
+              <div className="flex items-center justify-center gap-4 text-xs font-mono">
+                <button
+                  onClick={() => {
+                    setSelectedCategory('All');
+                    setSearchQuery('');
+                  }}
+                  className="text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 underline cursor-pointer"
+                >
+                  Back to Journal
+                </button>
+                <Link
+                  href="/blog/studio"
+                  className="text-blue-600 dark:text-blue-400 hover:underline"
+                >
+                  Write in Author Studio →
+                </Link>
               </div>
-
-              {/* Article Markdown Body */}
-              <div className="text-base sm:text-[17px] text-slate-800 dark:text-zinc-200 leading-[1.8] space-y-6 pt-2">
-                {activeBlog?.content.split('\n\n').map((paragraph, pIdx) => {
-                  // Headings
-                  if (paragraph.startsWith('### ')) {
-                    const headingText = paragraph.replace('### ', '');
-                    return (
-                      <h3 key={pIdx} className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white pt-6 pb-2 border-b border-slate-200/80 dark:border-white/10 flex items-center gap-2">
-                        <ChevronRight className="w-5 h-5 text-indigo-500 shrink-0" />
-                        <span>{headingText}</span>
-                      </h3>
-                    );
-                  }
-                  
-                  // Code Blocks
-                  if (paragraph.startsWith('```')) {
-                    const lines = paragraph.split('\n');
-                    const lang = lines[0].replace('```', '') || 'code';
-                    const codeLines = lines.slice(1, lines.length - 1).join('\n');
-                    const isCopied = copiedCodeIdx === pIdx;
-
-                    return (
-                      <div key={pIdx} className="rounded-2xl bg-slate-950 dark:bg-black border border-slate-800 dark:border-white/10 overflow-hidden shadow-xl my-6">
-                        <div className="flex items-center justify-between px-4 py-2.5 bg-slate-900 dark:bg-zinc-900 border-b border-slate-800 dark:border-white/10 text-xs font-mono text-zinc-400">
-                          <div className="flex items-center space-x-2">
-                            <span className="w-2.5 h-2.5 rounded-full bg-rose-500/80 inline-block" />
-                            <span className="w-2.5 h-2.5 rounded-full bg-amber-500/80 inline-block" />
-                            <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/80 inline-block" />
-                            <span className="uppercase text-[11px] font-semibold text-zinc-300 ml-2">{lang}</span>
-                          </div>
-                          <button
-                            onClick={() => handleCopyCode(codeLines, pIdx)}
-                            className="px-2.5 py-1 rounded bg-white/10 hover:bg-white/20 text-zinc-200 transition-colors flex items-center space-x-1.5 cursor-pointer text-xs"
-                          >
-                            {isCopied ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
-                            <span>{isCopied ? 'Copied' : 'Copy snippet'}</span>
-                          </button>
-                        </div>
-                        <pre className="p-4 sm:p-5 font-mono text-xs sm:text-sm text-zinc-200 overflow-x-auto whitespace-pre leading-relaxed">
-                          <code>{codeLines}</code>
-                        </pre>
-                      </div>
-                    );
-                  }
-
-                  // Unordered or Ordered lists
-                  if (paragraph.startsWith('* ') || paragraph.startsWith('1. ') || paragraph.startsWith('- ')) {
-                    return (
-                      <ul key={pIdx} className="list-disc pl-6 space-y-2 text-slate-700 dark:text-zinc-300">
-                        {paragraph.split('\n').map((li, lIdx) => (
-                          <li key={lIdx} className="leading-relaxed">
-                            {renderFormattedText(li.replace(/^\* |^\d+\.\s|^-\s/, ''))}
-                          </li>
-                        ))}
-                      </ul>
-                    );
-                  }
-
-                  // Regular Paragraph
-                  return (
-                    <p key={pIdx} className="text-slate-700 dark:text-zinc-300 leading-relaxed">
-                      {renderFormattedText(paragraph)}
-                    </p>
-                  );
-                })}
-              </div>
-
-              {/* Author Dispatch Sign-off */}
-              <div className="pt-10 border-t border-slate-200/80 dark:border-white/10 space-y-6">
-                <div className="p-6 rounded-2xl bg-slate-50 dark:bg-white/[0.03] border border-slate-200/80 dark:border-white/10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-                  <div className="flex items-center space-x-3.5">
-                    <div className="w-12 h-12 rounded-full bg-gradient-to-tr from-indigo-500 to-rose-500 flex items-center justify-center text-white font-bold text-base shadow-xs shrink-0">
-                      KV
-                    </div>
-                    <div>
-                      <div className="font-bold text-slate-900 dark:text-white text-sm">Written by Kuldeep Chandra Vishwakarma</div>
-                      <p className="text-xs text-slate-600 dark:text-zinc-400 max-w-md mt-0.5">
-                        Software engineer building distributed web applications, deterministic AI agents, and open-source systems.
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-center gap-2 self-end sm:self-center">
-                    <a
-                      href="https://github.com/IamKady"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="px-3 py-1.5 rounded-xl border border-slate-300 dark:border-white/10 bg-white dark:bg-white/5 hover:bg-slate-100 dark:hover:bg-white/10 text-xs font-semibold text-slate-800 dark:text-zinc-200 transition-colors"
-                    >
-                      GitHub Profile ↗
-                    </a>
-                  </div>
-                </div>
-
-                {/* Up Next Recommendation */}
-                {nextBlog && (
-                  <div 
-                    onClick={() => openArticle(nextBlog.id)}
-                    className="p-5 rounded-2xl border border-indigo-500/20 bg-indigo-500/5 hover:bg-indigo-500/10 dark:bg-indigo-950/20 dark:hover:bg-indigo-950/30 transition-all cursor-pointer flex items-center justify-between group"
-                  >
-                    <div>
-                      <span className="text-[10px] font-mono font-bold text-indigo-600 dark:text-indigo-400 uppercase tracking-wider">
-                        Read Next Dispatch
-                      </span>
-                      <h4 className="text-sm sm:text-base font-bold text-slate-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors mt-0.5">
-                        {nextBlog.title}
-                      </h4>
-                      <p className="text-xs text-slate-500 dark:text-zinc-400 font-mono mt-1">
-                        {nextBlog.category} • {nextBlog.readTime}
-                      </p>
-                    </div>
-                    <ChevronRight className="w-5 h-5 text-indigo-500 group-hover:translate-x-1.5 transition-transform shrink-0 ml-4" />
-                  </div>
-                )}
-              </div>
-
-            </article>
-
-          </motion.div>
-        )}
-      </AnimatePresence>
-
+            </div>
+          )}
+        </section>
+      )}
     </div>
   );
 }

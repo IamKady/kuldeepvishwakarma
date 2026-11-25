@@ -76,6 +76,7 @@ export default function Home() {
   ).filter((p): p is NonNullable<typeof p> => Boolean(p));
 
   const recentWriting = [...blogsData]
+    .filter((b) => (b.status || (b.type === 'tech' ? 'archived' : 'published')) === 'published')
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
     .slice(0, 3);
 
@@ -385,10 +386,10 @@ export default function Home() {
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
           <div className="space-y-1.5">
             <p className="text-xs font-mono uppercase tracking-[0.16em] text-zinc-500 dark:text-zinc-400">
-              04 / Writing &amp; Notes
+              04 / Writing &amp; Journal
             </p>
-            <h2 id="writing-heading" className="text-2xl sm:text-3xl font-semibold tracking-tight text-zinc-900 dark:text-zinc-50">
-              Journal &amp; Technical Essays
+            <h2 id="writing-heading" className="font-serif text-2xl sm:text-3xl font-semibold tracking-tight text-zinc-900 dark:text-zinc-50">
+              Personal Journal &amp; Reflections
             </h2>
           </div>
           <div className="flex items-center gap-5 text-sm">
@@ -402,7 +403,7 @@ export default function Home() {
               href="/blog"
               className="inline-flex items-center gap-1 font-medium text-blue-600 dark:text-blue-400 hover:underline"
             >
-              All writing <ArrowRight className="w-3.5 h-3.5" />
+              Read journal <ArrowRight className="w-3.5 h-3.5" />
             </Link>
           </div>
         </div>
@@ -420,7 +421,7 @@ export default function Home() {
                 <span>{post.readTime}</span>
               </div>
               <div className="md:col-span-9 space-y-1">
-                <h3 className="text-base font-semibold text-zinc-900 dark:text-zinc-100 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors flex items-center gap-1.5">
+                <h3 className="font-serif text-lg font-medium text-zinc-900 dark:text-zinc-100 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors flex items-center gap-1.5">
                   {post.title}
                   <ArrowUpRight className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0" />
                 </h3>

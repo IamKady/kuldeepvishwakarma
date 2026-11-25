@@ -1,19 +1,19 @@
 'use client';
 
-import React, { useState, useEffect, useRef, useMemo, useCallback } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
-import { 
-  Search, 
-  Sparkles, 
-  Rocket, 
-  Terminal, 
-  FileText, 
-  Link as LinkIcon, 
-  FolderCode, 
-  CornerDownLeft, 
-  X 
+import {
+  Search,
+  Sparkles,
+  Rocket,
+  Terminal,
+  FileText,
+  Link as LinkIcon,
+  FolderCode,
+  CornerDownLeft,
+  X
 } from 'lucide-react';
 import { searchIndex, SearchableItem } from '@/data/db';
 
@@ -24,31 +24,39 @@ interface CommandPaletteProps {
 
 export default function CommandPalette({ isOpen, onClose }: CommandPaletteProps) {
   const [query, setQuery] = useState('');
+  const [results, setResults] = useState<SearchableItem[]>([]);
   const [selectedIndex, setSelectedIndex] = useState(0);
   const inputRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
 
-  const results = useMemo(() => {
+  // Search filter effect
+  useEffect(() => {
     if (!query.trim()) {
-      return searchIndex.slice(0, 5);
+      // Show default suggestions (first 5 items)
+      setResults(searchIndex.slice(0, 5));
+      setSelectedIndex(0);
+      return;
     }
 
-    const q = query.toLowerCase();
-    return searchIndex
-      .filter(item =>
+    const filtered = searchIndex.filter(item => {
+      const q = query.toLowerCase();
+      return (
         item.title.toLowerCase().includes(q) ||
         item.description.toLowerCase().includes(q) ||
         item.category.toLowerCase().includes(q) ||
         item.content.toLowerCase().includes(q)
-      )
-      .slice(0, 8);
+      );
+    });
+
+    setResults(filtered.slice(0, 8)); // limit to 8 results for clean display
+    setSelectedIndex(0);
   }, [query]);
 
-  const handleSelect = useCallback((item: SearchableItem) => {
+  const handleSelect = (item: SearchableItem) => {
     router.push(item.url);
     onClose();
     setQuery('');
-  }, [router, onClose]);
+  };
 
   // Global keybind for CMD+K or Ctrl+K to toggle (controlled by layout)
   useEffect(() => {
@@ -87,7 +95,7 @@ export default function CommandPalette({ isOpen, onClose }: CommandPaletteProps)
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [isOpen, results, selectedIndex, handleSelect, onClose]);
+  }, [isOpen, results, selectedIndex]);
 
 
 
@@ -113,7 +121,7 @@ export default function CommandPalette({ isOpen, onClose }: CommandPaletteProps)
       {isOpen && (
         <div className="fixed inset-0 z-50 flex items-start justify-center pt-[15vh]">
           {/* Overlay background */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -131,12 +139,12 @@ export default function CommandPalette({ isOpen, onClose }: CommandPaletteProps)
           >
             {/* Input Bar */}
             <div className="flex items-center px-4 py-3.5 border-b border-slate-200 dark:border-white/5 space-x-3">
-              <Image 
-                src="/logo.png" 
-                alt="KCV Logo" 
+              <Image
+                src="/logo.png"
+                alt="KCV Logo"
                 width={24}
                 height={24}
-                className="w-6 h-6 rounded-md object-contain border border-slate-200 dark:border-white/10 flex-shrink-0" 
+                className="w-6 h-6 rounded-md object-contain border border-slate-200 dark:border-white/10 flex-shrink-0"
               />
               <Search className="w-4 h-4 text-slate-400 dark:text-zinc-400 flex-shrink-0" />
               <input
@@ -144,10 +152,10 @@ export default function CommandPalette({ isOpen, onClose }: CommandPaletteProps)
                 type="text"
                 placeholder="Search projects, startups, blogs, cyber logs, and tools..."
                 value={query}
-                onChange={e => { setQuery(e.target.value); setSelectedIndex(0); }}
+                onChange={e => setQuery(e.target.value)}
                 className="w-full bg-transparent border-0 outline-none text-slate-900 dark:text-zinc-100 placeholder-slate-400 dark:placeholder-zinc-500 font-sans text-base"
               />
-              <button 
+              <button
                 onClick={onClose}
                 className="p-1 rounded-md text-slate-400 dark:text-zinc-400 hover:text-slate-700 dark:hover:text-zinc-200 hover:bg-slate-100 dark:hover:bg-white/5 transition-colors cursor-pointer"
               >
@@ -170,11 +178,10 @@ export default function CommandPalette({ isOpen, onClose }: CommandPaletteProps)
                           <button
                             onClick={() => handleSelect(item)}
                             onMouseEnter={() => setSelectedIndex(idx)}
-                            className={`w-full text-left px-3 py-2.5 rounded-lg flex items-center justify-between transition-colors font-sans ${
-                              isSelected 
-                                ? 'bg-blue-50 dark:bg-blue-500/15 text-blue-950 dark:text-white' 
-                                : 'text-slate-700 dark:text-zinc-300 hover:bg-slate-100 dark:hover:bg-white/5 hover:text-slate-900 dark:hover:text-zinc-100'
-                            }`}
+                            className={`w-full text-left px-3 py-2.5 rounded-lg flex items-center justify-between transition-colors font-sans ${isSelected
+                              ? 'bg-blue-50 dark:bg-blue-500/15 text-blue-950 dark:text-white'
+                              : 'text-slate-700 dark:text-zinc-300 hover:bg-slate-100 dark:hover:bg-white/5 hover:text-slate-900 dark:hover:text-zinc-100'
+                              }`}
                           >
                             <div className="flex items-center space-x-3 overflow-hidden">
                               <div className="flex-shrink-0 p-1.5 rounded-md bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/5">

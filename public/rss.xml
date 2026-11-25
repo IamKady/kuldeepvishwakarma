@@ -1,46 +1,46 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
 <channel>
-  <title>Kuldeep Chandra Vishwakarma | Journal &amp; Essays</title>
-  <link>https://kuldeepvishwakarma.com</link>
+  <title>Kuldeep Chandra Vishwakarma | Journal &amp; Writing</title>
+  <link>https://kuldeepvishwakarma.com/blog</link>
   <atom:link href="https://kuldeepvishwakarma.com/rss.xml" rel="self" type="application/rss+xml" />
-  <description>Technical essays, engineering post-mortems, and personal writing by Kuldeep Chandra Vishwakarma.</description>
+  <description>An independent personal literary and philosophical journal by Kuldeep Chandra Vishwakarma.</description>
   <language>en-us</language>
-  <lastBuildDate>Wed, 25 Nov 2026 17:00:00 +0530</lastBuildDate>
+  <lastBuildDate>Wed, 25 Nov 2026 23:00:00 +0530</lastBuildDate>
   <item>
-    <title>Cutting LLM Inference Costs by 42% with Hybrid Semantic Caching (pgvector + Redis)</title>
-    <link>https://kuldeepvishwakarma.com/blog#semantic-caching-pgvector-rag</link>
-    <description>A practical engineering guide to combining L1 Redis exact-hash lookups with L2 pgvector HNSW similarity search and temporal TTL guards in Next.js 16.</description>
-    <pubDate>Wed, 18 Nov 2026 00:00:00 +0530</pubDate>
-    <guid>https://kuldeepvishwakarma.com/blog#semantic-caching-pgvector-rag</guid>
+    <title>From Civil Blueprints to Distributed Systems: Lessons from Engineering Transitions</title>
+    <link>https://kuldeepvishwakarma.com/blog#from-civil-blueprints-to-distributed-systems</link>
+    <description>How the physical mechanics of load distribution, structural drafting, and material tension directly inform resilient software architecture.</description>
+    <pubDate>Sat, 08 Aug 2026 00:00:00 +0530</pubDate>
+    <guid>https://kuldeepvishwakarma.com/blog#from-civil-blueprints-to-distributed-systems</guid>
   </item>
   <item>
-    <title>Engineering Sub-100ms Healthcare Platforms: Lessons from Production Launches</title>
-    <link>https://kuldeepvishwakarma.com/blog#shipping-production-healthcare-platforms</link>
-    <description>What building live digital platforms for Vijaya Home Healthcare and Sapthagiri Health Care taught me about mobile speed, local SEO, and patient UX.</description>
-    <pubDate>Wed, 28 Oct 2026 00:00:00 +0530</pubDate>
-    <guid>https://kuldeepvishwakarma.com/blog#shipping-production-healthcare-platforms</guid>
+    <title>The Art of Visual Thinking: Sketching Beyond Code</title>
+    <link>https://kuldeepvishwakarma.com/blog#art-visual-thinking</link>
+    <description>Exploring pencil drawing, architectural blueprints, and how physical sketching sharpens thinking.</description>
+    <pubDate>Sun, 02 Aug 2026 00:00:00 +0530</pubDate>
+    <guid>https://kuldeepvishwakarma.com/blog#art-visual-thinking</guid>
   </item>
   <item>
-    <title>Migrating to Next.js 16 &amp; Turbopack: What Broke, What Flew, and Edge Gotchas</title>
-    <link>https://kuldeepvishwakarma.com/blog#nextjs-16-turbopack-tutorial</link>
-    <description>A candid engineering post-mortem on adopting Next.js 16 App Router and Turbopack in production.</description>
-    <pubDate>Wed, 05 Aug 2026 00:00:00 +0530</pubDate>
-    <guid>https://kuldeepvishwakarma.com/blog#nextjs-16-turbopack-tutorial</guid>
+    <title>20 Books That Shaped My Mind: From Philosophy to Fiction</title>
+    <link>https://kuldeepvishwakarma.com/blog#reading-books-wisdom</link>
+    <description>A reflection on foundational books across Stoicism, science, literature, and personal growth.</description>
+    <pubDate>Tue, 28 Jul 2026 00:00:00 +0530</pubDate>
+    <guid>https://kuldeepvishwakarma.com/blog#reading-books-wisdom</guid>
   </item>
   <item>
-    <title>Building an Automated AI News Feed using Next.js &amp; Gemini</title>
-    <link>https://kuldeepvishwakarma.com/blog#ai-news-automation</link>
-    <description>A deep-dive guide on how to parse RSS feeds, run them through Google Gemini for relevance, and automatically publish posts.</description>
-    <pubDate>Sat, 11 Jul 2026 00:00:00 +0530</pubDate>
-    <guid>https://kuldeepvishwakarma.com/blog#ai-news-automation</guid>
+    <title>On Writing: How Daily Journaling Clears Cognitive Noise</title>
+    <link>https://kuldeepvishwakarma.com/blog#everyday-prose-writing</link>
+    <description>Why drafting personal essays, prose, and daily reflections helps clarify thought.</description>
+    <pubDate>Mon, 20 Jul 2026 00:00:00 +0530</pubDate>
+    <guid>https://kuldeepvishwakarma.com/blog#everyday-prose-writing</guid>
   </item>
   <item>
-    <title>How to Achieve a 100 Lighthouse Performance Rating in Next.js</title>
-    <link>https://kuldeepvishwakarma.com/blog#lighthouse-score-performance</link>
-    <description>Learn the exact performance optimization techniques used to get a 100 Lighthouse score on this portfolio and StartupWire.</description>
-    <pubDate>Thu, 09 Jul 2026 00:00:00 +0530</pubDate>
-    <guid>https://kuldeepvishwakarma.com/blog#lighthouse-score-performance</guid>
+    <title>Cultivating Hobbies &amp; Hands-On Crafts Outside Software</title>
+    <link>https://kuldeepvishwakarma.com/blog#creative-hobbies-balance</link>
+    <description>Finding balance, restoration, and creative energy through physical hobbies, music, and hands-on crafts.</description>
+    <pubDate>Wed, 15 Jul 2026 00:00:00 +0530</pubDate>
+    <guid>https://kuldeepvishwakarma.com/blog#creative-hobbies-balance</guid>
   </item>
 </channel>
 </rss>
