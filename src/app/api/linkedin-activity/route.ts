@@ -16,33 +16,33 @@ const fallbackLinkedInActivity: LinkedInPostItem[] = [
   {
     id: 'post-1',
     author: 'Kuldeep Chandra Vishwakarma',
-    text: '🚀 Shipped a major update to kuldeepvishwakarma.com! Integrated live Git commit telemetry directly with the GitHub REST API, added an interactive developer HUD terminal, and published field notes on distributed systems and deterministic AI pipelines.',
+    text: '⚡ Built VectorPulse: a two-tier L1 Redis + L2 pgvector HNSW semantic caching gateway for LLM pipelines. Cutting redundant Gemini API calls by 42% with <25ms cache hit latency.',
     date: new Date().toISOString(),
     relativeTime: 'Just now',
-    likesCount: 24,
-    commentsCount: 5,
-    url: 'https://www.linkedin.com/in/iamkady/',
-    category: 'Milestone'
-  },
-  {
-    id: 'post-2',
-    author: 'Kuldeep Chandra Vishwakarma',
-    text: '⚡ Scaling StartupWire.in: Built an automated tech news curation pipeline leveraging Google Gemini and pgvector cosine similarity in Supabase PostgreSQL. A 0.85 cosine distance threshold catches 80%+ duplicate wire stories before writing to the database.',
-    date: new Date(Date.now() - 86400000 * 2).toISOString(),
-    relativeTime: '2 days ago',
-    likesCount: 38,
-    commentsCount: 11,
+    likesCount: 34,
+    commentsCount: 8,
     url: 'https://www.linkedin.com/in/iamkady/',
     category: 'Project'
   },
   {
+    id: 'post-2',
+    author: 'Kuldeep Chandra Vishwakarma',
+    text: '🩺 Shipped our third production healthcare web platform (ArogyaCare Diagnostics) alongside Vijaya Home Healthcare & Sapthagiri Health Care—sub-100ms edge loads, local Schema.org SEO, and 1-tap WhatsApp booking.',
+    date: new Date(Date.now() - 86400000 * 4).toISOString(),
+    relativeTime: '4 days ago',
+    likesCount: 41,
+    commentsCount: 12,
+    url: 'https://www.linkedin.com/in/iamkady/',
+    category: 'Milestone'
+  },
+  {
     id: 'post-3',
     author: 'Kuldeep Chandra Vishwakarma',
-    text: '📝 Published architectural case studies for StartupWire and Bookperia. Exploring distributed caching, HMAC webhook validation, and defensive API boundaries in TypeScript.',
-    date: new Date(Date.now() - 86400000 * 5).toISOString(),
-    relativeTime: '5 days ago',
-    likesCount: 31,
-    commentsCount: 7,
+    text: '📝 Published a new engineering post on hybrid semantic caching (pgvector + Redis) and rolled out automated weekly digest curation on StartupWire.in.',
+    date: new Date(Date.now() - 86400000 * 9).toISOString(),
+    relativeTime: '9 days ago',
+    likesCount: 29,
+    commentsCount: 6,
     url: 'https://www.linkedin.com/in/iamkady/',
     category: 'Article'
   }

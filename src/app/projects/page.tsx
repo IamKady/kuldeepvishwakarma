@@ -29,6 +29,7 @@ export default function Projects() {
   const [selectedProjectId, setSelectedProjectId] = useState<string | null>(null);
   const [caseStudyTab, setCaseStudyTab] = useState<'story' | 'engineering' | 'seo' | 'lessons'>('story');
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
+  const [searchQuery, setSearchQuery] = useState<string>('');
   const [githubReposMap, setGithubReposMap] = useState<Record<string, GitHubRepoItem>>({});
   const [isLiveSynced, setIsLiveSynced] = useState<boolean>(false);
 
@@ -67,9 +68,17 @@ export default function Projects() {
 
   const categories = ['All', 'SaaS & AI', 'Full-Stack', 'Client Work', 'Systems & Open Source', 'Learning Labs'];
 
-  const filteredProjects = selectedCategory === 'All'
-    ? projectsData
-    : projectsData.filter(p => p.categoryTag === selectedCategory);
+  const filteredProjects = projectsData.filter(p => {
+    const matchesCategory = selectedCategory === 'All' || p.categoryTag === selectedCategory;
+    const q = searchQuery.trim().toLowerCase();
+    const matchesQuery =
+      !q ||
+      p.title.toLowerCase().includes(q) ||
+      p.tagline.toLowerCase().includes(q) ||
+      p.summary.toLowerCase().includes(q) ||
+      p.technologies.some(t => t.toLowerCase().includes(q));
+    return matchesCategory && matchesQuery;
+  });
 
   const getStatusColor = (status: Project['status']) => {
     switch (status) {
@@ -123,21 +132,61 @@ export default function Projects() {
         </div>
       </div>
 
-      {/* Category Filter Pills */}
-      <div className="flex flex-wrap gap-2 border-b border-slate-200 dark:border-white/5 pb-4">
-        {categories.map((cat) => (
-          <button
-            key={cat}
-            onClick={() => setSelectedCategory(cat)}
-            className={`px-3.5 py-1.5 rounded-full text-xs font-mono font-medium transition-all cursor-pointer ${selectedCategory === cat
+      {/* Category Filter Pills & Live Search */}
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-200 dark:border-white/5 pb-4">
+        <div className="flex flex-wrap gap-2">
+          {categories.map((cat) => (
+            <button
+              key={cat}
+              onClick={() => setSelectedCategory(cat)}
+              className={`px-3.5 py-1.5 rounded-full text-xs font-mono font-medium transition-all cursor-pointer ${selectedCategory === cat
                 ? 'bg-indigo-600 text-white shadow-md font-bold'
                 : 'bg-slate-100 dark:bg-white/5 text-slate-700 dark:text-zinc-400 hover:bg-slate-200 dark:hover:bg-white/10 border border-slate-200 dark:border-white/5'
-              }`}
-          >
-            {cat} {cat === 'All' ? `(${projectsData.length})` : `(${projectsData.filter(p => p.categoryTag === cat).length})`}
-          </button>
-        ))}
+                }`}
+            >
+              {cat} {cat === 'All' ? `(${projectsData.length})` : `(${projectsData.filter(p => p.categoryTag === cat).length})`}
+            </button>
+          ))}
+        </div>
+
+        <div className="relative w-full md:w-64 flex-shrink-0">
+          <Search className="absolute left-3 top-2.5 w-3.5 h-3.5 text-slate-400 dark:text-zinc-500" />
+          <input
+            type="text"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            placeholder="Filter by tech or keyword..."
+            aria-label="Filter projects by technology or keyword"
+            className="w-full pl-8 pr-8 py-1.5 text-xs bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-lg outline-none text-slate-900 dark:text-white focus:border-indigo-500 transition-colors font-mono"
+          />
+          {searchQuery && (
+            <button
+              onClick={() => setSearchQuery('')}
+              aria-label="Clear project search"
+              className="absolute right-2.5 top-2 text-slate-400 hover:text-slate-700 dark:hover:text-white cursor-pointer"
+            >
+              <X className="w-3.5 h-3.5" />
+            </button>
+          )}
+        </div>
       </div>
+
+      {filteredProjects.length === 0 && (
+        <div className="p-8 rounded-2xl border border-slate-200 dark:border-white/10 text-center space-y-3 bg-white/60 dark:bg-black/30">
+          <p className="text-sm text-slate-600 dark:text-zinc-400 font-mono">
+            No projects matched &quot;{searchQuery}&quot; in {selectedCategory}.
+          </p>
+          <button
+            onClick={() => {
+              setSelectedCategory('All');
+              setSearchQuery('');
+            }}
+            className="px-4 py-1.5 rounded-lg bg-indigo-600 text-white text-xs font-mono font-semibold hover:bg-indigo-500 transition-colors cursor-pointer"
+          >
+            Reset Filters
+          </button>
+        </div>
+      )}
 
       {/* Projects List Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -363,8 +412,8 @@ export default function Projects() {
                     key={tab.id}
                     onClick={() => setCaseStudyTab(tab.id as any)}
                     className={`flex items-center space-x-1.5 px-4 py-3.5 text-xs font-semibold transition-colors relative cursor-pointer ${caseStudyTab === tab.id
-                        ? 'text-indigo-700 dark:text-indigo-400 font-bold'
-                        : 'text-slate-600 dark:text-zinc-400 hover:text-slate-900 dark:hover:text-zinc-200'
+                      ? 'text-indigo-700 dark:text-indigo-400 font-bold'
+                      : 'text-slate-600 dark:text-zinc-400 hover:text-slate-900 dark:hover:text-zinc-200'
                       }`}
                   >
                     {tab.icon}

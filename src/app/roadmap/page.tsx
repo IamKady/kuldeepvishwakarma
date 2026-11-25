@@ -7,15 +7,15 @@ export default function RoadmapPage() {
   const milestones = [
     {
       year: 'Q3 2026',
-      title: 'Programmatic Newsletter & Audio Digests',
-      desc: 'Build background agents inside StartupWire to parse and generate email updates and text-to-speech audio podcasts.',
-      status: 'In Progress'
+      title: 'Programmatic Weekly Digests & Healthcare Launches',
+      desc: 'Shipped automated weekly digest curation for StartupWire.in and launched production healthcare platforms (Vijaya & Sapthagiri).',
+      status: 'Completed'
     },
     {
       year: 'Q4 2026',
-      title: 'Exposing News Curation API',
-      desc: 'Create secure developer APIs for authenticated clients to pull aggregated startup and AI feeds, setting up billing systems.',
-      status: 'Backlog'
+      title: 'VectorPulse Semantic Cache & News Curation API',
+      desc: 'Launching hybrid BM25 + pgvector HNSW semantic caching (-42% LLM inference spend), ArogyaCare Diagnostics portal, and scoped StartupWire API feeds.',
+      status: 'In Progress'
     },
     {
       year: '2027',
@@ -50,7 +50,9 @@ export default function RoadmapPage() {
           <div key={idx} className="relative">
             {/* Status dot */}
             <div className="absolute top-1.5 -left-[45px] w-8 h-8 rounded-full glass-panel border border-slate-200 dark:border-white/10 flex items-center justify-center bg-white dark:bg-zinc-950 shadow-md">
-              {item.status === 'In Progress' ? (
+              {item.status === 'Completed' ? (
+                <CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
+              ) : item.status === 'In Progress' ? (
                 <Clock className="w-4 h-4 text-indigo-600 dark:text-indigo-400 animate-pulse" />
               ) : (
                 <Calendar className="w-4 h-4 text-slate-400 dark:text-zinc-500" />
@@ -63,9 +65,11 @@ export default function RoadmapPage() {
                   {item.year}
                 </span>
                 <span className={`text-[9px] font-mono px-2 py-0.5 rounded border uppercase ${
-                  item.status === 'In Progress'
-                    ? 'bg-indigo-500/10 text-indigo-700 dark:text-indigo-400 border-indigo-500/20'
-                    : 'bg-slate-200 dark:bg-zinc-500/10 text-slate-600 dark:text-zinc-400 border-slate-300 dark:border-zinc-500/20'
+                  item.status === 'Completed'
+                    ? 'bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border-emerald-500/20'
+                    : item.status === 'In Progress'
+                      ? 'bg-indigo-500/10 text-indigo-700 dark:text-indigo-400 border-indigo-500/20'
+                      : 'bg-slate-200 dark:bg-zinc-500/10 text-slate-600 dark:text-zinc-400 border-slate-300 dark:border-zinc-500/20'
                 }`}>
                   {item.status}
                 </span>

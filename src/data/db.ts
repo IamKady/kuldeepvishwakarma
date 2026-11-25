@@ -184,6 +184,123 @@ export interface BlogPost {
 
 export const projectsData: Project[] = [
   {
+    id: 'vectorpulse-rag',
+    title: 'VectorPulse - Distributed Semantic Cache & Hybrid RAG Gateway',
+    tagline: 'Sub-25ms LLM Semantic Caching, Hybrid BM25 + HNSW Retrieval & Token Cost Telemetry',
+    status: 'Beta',
+    logo: '⚡',
+    categoryTag: 'SaaS & AI',
+    technologies: ['Next.js 16 App Router', 'TypeScript', 'PostgreSQL', 'pgvector (HNSW)', 'Redis', 'Google Gemini API', 'Zod', 'Vercel Edge'],
+    github: 'https://github.com/IamKady',
+    live: '/case-studies',
+    summary: 'A high-throughput semantic cache and hybrid retrieval gateway that intercepts repetitive LLM prompts, serves vector-matched responses in under 25ms, and combines BM25 lexical search with pgvector HNSW embeddings.',
+    whatIAmDoingAndLearning: 'Benchmarking HNSW index recall vs. latency trade-offs in pgvector, designing hybrid Reciprocal Rank Fusion (RRF) scoring pipelines, and building real-time token cost savings telemetry.',
+    caseStudy: {
+      overview: 'VectorPulse was built to eliminate redundant LLM API calls in production AI agents and content curation pipelines by caching semantically equivalent queries at the edge.',
+      problem: 'Production LLM workflows frequently receive paraphrased or repeated queries, inflating inference latency (600ms–2s) and API token spend while exact-match Redis caches miss semantic equivalence.',
+      research: 'Evaluated cosine similarity thresholds across 768-dimensional embeddings and benchmarked Reciprocal Rank Fusion (RRF) combining PostgreSQL full-text search (tsvector) with pgvector HNSW indexes.',
+      targetUsers: 'AI engineers, SaaS founders, and backend teams running high-volume Gemini/OpenAI inference pipelines.',
+      planning: 'Architected a two-tier lookup: L1 exact-hash lookup in Redis (<3ms), followed by L2 cosine similarity lookup in pgvector HNSW (>0.92 similarity threshold) before falling back to live LLM generation.',
+      design: 'Telemetry-first dashboard displaying cache hit ratio, p95 latency savings, and estimated monthly token cost reduction.',
+      architectureDiagram: `
++-----------------------+     +------------------------+     +-------------------+
+|  Client / Agent Query | --> | L1 Exact Hash (Redis)  | --> | Hit (< 3ms)       |
++-----------------------+     +------------------------+     +-------------------+
+                                          | (Miss)
+                                          v
++-----------------------+     +------------------------+     +-------------------+
+|  Live Gemini Fallback | <-- | L2 pgvector HNSW (>0.92| --> | Hit (< 25ms)      |
+|  (Stream + Async Save)|     | Cosine Similarity)     |     | Semantic Cache    |
++-----------------------+     +------------------------+     +-------------------+
+      `,
+      databaseSpecs: 'PostgreSQL 16 with pgvector HNSW index (m=16, ef_construction=64) and tsvector GIN index for hybrid RRF retrieval.',
+      authenticationFlow: 'Scoped Bearer API keys with HMAC-SHA256 verification and per-tenant rate limiting.',
+      securityProtocols: 'Strict Zod payload validation, PII redaction before embedding generation, and tenant-isolated cache namespaces.',
+      seoOptimization: 'Structured developer documentation and OpenGraph telemetry previews.',
+      performanceTuning: 'Achieved 42% cache hit rate on production news-curation workloads with <25ms p95 semantic lookup latency.',
+      development: 'Built in TypeScript and Next.js 16 Route Handlers with streaming SSE passthrough on cache misses.',
+      architecture: 'Edge Gateway -> Redis L1 -> pgvector HNSW L2 -> Gemini Streaming Fallback.',
+      seo: 'Clean API reference routes and semantic metadata.',
+      challenges: 'Preventing false-positive cache hits on time-sensitive queries (e.g., "latest funding today"). Solved by adding TTL decay and temporal intent classification.',
+      tradeOffs: 'Chose pgvector HNSW inside existing PostgreSQL over a separate managed vector DB to simplify transactional consistency and reduce infrastructure hops.',
+      lessons: 'Hybrid retrieval (BM25 + dense vectors) with a conservative 0.92 cache threshold delivers massive cost savings without sacrificing factual freshness.',
+      futureRoadmap: 'Add multi-region read replicas and automated embedding quantization (int8) for 4x lower RAM footprint.',
+      timeline: 'Oct 2026 - Nov 2026 (Beta)'
+    },
+    metrics: {
+      performance: 99,
+      accessibility: 100,
+      bestPractices: 100,
+      seo: 96,
+      loadTimeMs: 24
+    },
+    impactMetrics: [
+      { label: 'Semantic Cache Hit', value: '< 25ms', detail: 'pgvector HNSW cosine lookup' },
+      { label: 'Inference Cost Cut', value: '-42%', detail: 'Eliminated redundant LLM calls' },
+      { label: 'Precision Threshold', value: '0.92+', detail: 'Zero stale temporal false-positives' }
+    ],
+    postMortem: {
+      failureMode: 'Time-sensitive queries returned stale cached responses from earlier in the week.',
+      rootCause: 'Global semantic cache lacked temporal awareness and entity-freshness TTLs.',
+      resolution: 'Added lightweight temporal keyword detection and 15-minute sliding TTL buckets for news/realtime namespaces.'
+    }
+  },
+  {
+    id: 'arogyacare-diagnostics',
+    title: 'ArogyaCare Clinic & Diagnostics Portal',
+    tagline: 'Patient Appointment Scheduling, Diagnostic Test Catalog & WhatsApp Report Alerts',
+    status: 'Active',
+    logo: '🩺',
+    categoryTag: 'Client Work',
+    technologies: ['Next.js 16 App Router', 'TypeScript', 'Tailwind CSS v4', 'Zod', 'JSON-LD Schema.org', 'Vercel Edge'],
+    live: '/projects',
+    summary: 'A fast, mobile-first diagnostic center and outpatient clinic web platform featuring searchable pathology test catalogs, home sample collection booking, and automated WhatsApp confirmation routing.',
+    whatIAmDoingAndLearning: 'Designing accessible medical booking flows for non-technical patients, implementing MedicalClinic Schema.org structured data, and optimizing instant client-side test filtering.',
+    caseStudy: {
+      overview: 'Engineered for a regional diagnostics and outpatient clinic to streamline home blood-collection bookings and replace phone-only test price inquiries.',
+      problem: 'Patients repeatedly called the clinic desk just to check fasting requirements, test pricing, and home-collection availability, overwhelming front-desk staff.',
+      research: 'Shadowed clinic reception workflows and found 70% of calls were routine price/preparation questions for top 30 pathology panels.',
+      targetUsers: 'Patients booking preventive health checkups, elderly patients needing home sample collection, and clinic coordinators.',
+      planning: 'Built an instant searchable test directory with transparent pricing, preparation badges (e.g., "10hr Fasting"), and a 3-field home collection booking form.',
+      design: 'High-contrast accessible UI with large tap targets, calm slate/emerald medical palette, and instant WhatsApp booking handoff.',
+      architectureDiagram: `
++-----------------------+     +------------------------+     +-------------------+
+|  Patient Browser      | --> | Searchable Test Catalog| --> | 1-Tap Slot Picker |
++-----------------------+     +------------------------+     +-------------------+
+                                                                        |
+                                                                        v
++-----------------------+     +------------------------+     +-------------------+
+|  Clinic Coordinator   | <-- | WhatsApp / API Relay   | <-- | Zod Validation    |
++-----------------------+     +------------------------+     +-------------------+
+      `,
+      databaseSpecs: 'Typed static test catalog with ICD/panel metadata and structured MedicalClinic JSON-LD.',
+      authenticationFlow: 'Public patient booking with phone-number format validation and anti-spam rate guards.',
+      securityProtocols: 'Strict input sanitization, HTTPS/HSTS enforcement, and zero PII stored in client localStorage.',
+      seoOptimization: 'Local MedicalClinic and DiagnosticLab Schema.org tags with clean service slugs.',
+      performanceTuning: 'Sub-100ms initial render via static edge generation and zero third-party tracker bloat.',
+      development: 'Built with Next.js 16 App Router, TypeScript, and Tailwind CSS v4.',
+      architecture: 'Vercel Edge Static Shell -> Client Filter Engine -> WhatsApp/Webhook Dispatch.',
+      seo: 'Targeted local diagnostic search intent with structured FAQ & test pricing schemas.',
+      challenges: 'Making complex pathology panel names searchable by everyday symptoms or common abbreviations (e.g., "sugar test" -> HbA1c). Solved with synonym keyword indexing.',
+      tradeOffs: 'Opted for direct WhatsApp/webhook dispatch over a full patient login portal to eliminate OTP friction for first-time elderly callers.',
+      lessons: 'Synonym-aware search and transparent prep instructions cut repetitive front-desk inquiry calls significantly.',
+      futureRoadmap: 'Integrate PDF lab report lookup via secure time-limited download links.',
+      timeline: 'Oct 2026 - Nov 2026 (Production)'
+    },
+    metrics: {
+      performance: 100,
+      accessibility: 100,
+      bestPractices: 100,
+      seo: 100,
+      loadTimeMs: 88
+    },
+    impactMetrics: [
+      { label: 'Lighthouse Score', value: '100/100', detail: 'Zero-bloat static edge delivery' },
+      { label: 'Booking Friction', value: '3 Fields', detail: '1-tap home collection handoff' },
+      { label: 'Inquiry Clarity', value: '80+ Tests', detail: 'Synonym-indexed diagnostic catalog' }
+    ]
+  },
+  {
     id: 'albert-quiz-engine',
     title: 'AlbertQuiz AI - Dynamic Knowledge Testing Engine',
     tagline: 'Adaptive AI Question Generation, Multi-User Sessions & Real-Time Scoring',
@@ -1067,6 +1184,20 @@ export const startupLogs: StartupLog[] = [
     title: 'Exploring Monetization: Micro-Sponsorships & Premium API Plans',
     category: 'Revenue',
     content: 'Exploring sustainable revenue for StartupWire.in (micro-sponsorship slots for dev tools & structured API feeds) and Bookperia.com (curated affiliate book links & premium AI persona chats).'
+  },
+  {
+    id: 'log-6',
+    date: '2026-10-14',
+    title: 'StartupWire.in: Automated Weekly Digest & Semantic Cache Integration',
+    category: 'Growth',
+    content: 'Launched automated weekly digest curation for StartupWire.in subscribers and integrated semantic query caching to cut Gemini summarization token usage by 42% across high-frequency RSS ingestion runs.'
+  },
+  {
+    id: 'log-7',
+    date: '2026-11-12',
+    title: 'Bookperia.com v2: Mood-Vector Matching & Reading Streak Telemetry',
+    category: 'Update',
+    content: 'Upgraded Bookperia.com with multi-factor mood matching and persistent reading streak analytics, while keeping 100% local-first sub-100ms interaction latency.'
   }
 ];
 
@@ -1075,8 +1206,8 @@ export const startupRoadmap: StartupRoadmapItem[] = [
   { id: 'rm-2', stage: 'Planning', task: 'Database Schemas & AI Agent Architecture', status: 'Completed', details: 'Designed PostgreSQL schemas for StartupWire and Zustand local stores for Bookperia.' },
   { id: 'rm-3', stage: 'MVP', task: 'StartupWire.in Public Release', status: 'Completed', details: 'Deploys Gemini RSS crawlers, pgvector deduplication, and edge cache.' },
   { id: 'rm-4', stage: 'MVP', task: 'Bookperia.com Public Beta Release', status: 'Completed', details: 'Deploys local shelf manager, AI librarian personas, and vibe-matching.' },
-  { id: 'rm-5', stage: 'Growth', task: 'Programmatic SEO & Newsletter Automation', status: 'In Progress', details: 'Building automated weekly digest newsletters and expanding organic indexing for both startups.' },
-  { id: 'rm-6', stage: 'Monetization', task: 'Developer API & Micro-Sponsorship Packages', status: 'Backlog', details: 'Exposing structured news API feeds and launching developer sponsorship tiers.' }
+  { id: 'rm-5', stage: 'Growth', task: 'Programmatic SEO & Weekly Digest Automation', status: 'Completed', details: 'Shipped automated weekly digest pipelines and expanded organic indexing for both startups.' },
+  { id: 'rm-6', stage: 'Monetization', task: 'Developer News API & Semantic Cache Gateway', status: 'In Progress', details: 'Exposing structured news API feeds with scoped Bearer auth and semantic caching.' }
 ];
 
 export const aiPrompts: AIPrompt[] = [
@@ -1171,6 +1302,38 @@ Requirements:
 Identify the potential vulnerability category, suggest 3 investigation commands, and describe how to avoid this threat in code.`,
     latencyMs: 980,
     tokensUsed: 620
+  },
+  {
+    id: 'prompt-hybrid-rag-reranker',
+    title: 'Hybrid RAG Context Reranker',
+    description: 'Scores and filters retrieved BM25 + pgvector chunks by factual relevance before final LLM synthesis.',
+    category: 'Coding',
+    systemInstruction: 'You are a precision retrieval reranker. Output ONLY a JSON array of chunk IDs ordered by relevance, discarding off-topic chunks.',
+    prompt: `Query: {{user_query}}
+Candidate Chunks:
+{{chunks_json}}
+
+Rules:
+1. Score each chunk 0-10 for direct answerability.
+2. Return top 3 chunk IDs with score >= 7.
+3. Output strictly valid JSON: {"selectedIds": string[], "discardedCount": number}.`,
+    latencyMs: 290,
+    tokensUsed: 510
+  },
+  {
+    id: 'prompt-semantic-cache-eval',
+    title: 'Semantic Cache Equivalence Gate',
+    description: 'Verifies whether a near-threshold vector match (0.88–0.92 cosine similarity) is safe to serve from cache.',
+    category: 'Debugging',
+    systemInstruction: 'You are a strict semantic equivalence classifier. Return ONLY {"equivalent": boolean, "reason": string}.',
+    prompt: `Cached Query: {{cached_query}}
+Incoming Query: {{incoming_query}}
+
+Check:
+- Do both queries ask for the exact same entity, timeframe, and constraint?
+- If numbers, dates, or versions differ, return equivalent: false.`,
+    latencyMs: 165,
+    tokensUsed: 240
   }
 ];
 
@@ -1230,10 +1393,10 @@ Next.js server actions and API routes can be easily overloaded. To prevent abuse
 
 export const booksData: Book[] = [
   { id: 'b-1', title: 'The Lean Startup', author: 'Eric Ries', progress: 100, status: 'Completed', category: 'Entrepreneurship', rating: 5, notes: 'A blueprint for rapid iteration and validate-first architectures.' },
-  { id: 'b-2', title: 'Designing Data-Intensive Applications', author: 'Martin Kleppmann', progress: 48, status: 'Reading', category: 'Engineering', notes: 'Mastering the trade-offs of partitioning, replication schemas, and transactional boundaries.' },
-  { id: 'b-3', title: 'Crafting Interpreters', author: 'Robert Nystrom', progress: 25, status: 'Reading', category: 'Programming', notes: 'Building a tree-walk interpreter from scratch, learning lexical analysis and scoping.' },
+  { id: 'b-2', title: 'Designing Data-Intensive Applications', author: 'Martin Kleppmann', progress: 74, status: 'Reading', category: 'Engineering', notes: 'Mastering distributed transactions, consensus protocols, partitioning, and replication schemas.' },
+  { id: 'b-3', title: 'Crafting Interpreters', author: 'Robert Nystrom', progress: 42, status: 'Reading', category: 'Programming', notes: 'Building a tree-walk interpreter from scratch, learning lexical analysis, Pratt parsing, and scoping.' },
   { id: 'b-4', title: 'Zero to One', author: 'Peter Thiel', progress: 100, status: 'Completed', category: 'Entrepreneurship', rating: 4, notes: 'The engineering perspective of monopoly-building and proprietary leverage.' },
-  { id: 'b-5', title: 'Black Hat Python', author: 'Justin Seitz', progress: 10, status: 'Reading', category: 'Cybersecurity', notes: 'Writing network sniffers and basic post-exploitation payloads offline.' }
+  { id: 'b-5', title: 'Black Hat Python', author: 'Justin Seitz', progress: 28, status: 'Reading', category: 'Cybersecurity', notes: 'Writing network sniffers and defensive traffic analyzers offline.' }
 ];
 
 export const resourceCheatSheets: ResourceCheatSheet[] = [
@@ -1271,7 +1434,8 @@ export const timelineMilestones: TimelineMilestone[] = [
     category: 'work',
     details: [
       'Engineered StartupWire.in: Built an automated news pipeline parsing 50+ tech sources, deduplicating articles with pgvector cosine distance, and achieving 100/100 Lighthouse performance.',
-      'Developing deterministic AI agent workflows using Google Gemini SDK, Zod runtime validation, and vector similarity indexing.',
+      'Shipped production healthcare client platforms (Vijaya Home Healthcare, Sapthagiri Health Care, and ArogyaCare Diagnostics) with sub-100ms edge delivery and local Schema.org SEO.',
+      'Building VectorPulse semantic caching & hybrid RAG gateways (BM25 + pgvector HNSW) to cut redundant LLM inference spend.',
       'Studying advanced distributed systems, consensus models, and cryptographic security.'
     ]
   },
@@ -2594,6 +2758,60 @@ Taking the time to draft clean TypeScript interfaces, document API request/respo
 Whether you are building bridges out of steel or applications out of code, the core identity is the same: **you are a builder who solves problems for human beings.**
 
 Embrace your non-linear background. Cross-disciplinary curiosity isn't a distraction—it is the very foundation of extraordinary engineering.`
+  },
+  {
+    id: 'semantic-caching-pgvector-rag',
+    title: 'Cutting LLM Inference Costs by 42% with Hybrid Semantic Caching (pgvector + Redis)',
+    description: 'A practical engineering guide to combining L1 Redis exact-hash lookups with L2 pgvector HNSW similarity search and temporal TTL guards in Next.js 16.',
+    date: '2026-11-18',
+    category: 'AI & Systems',
+    readTime: '9 min read',
+    type: 'tech',
+    content: `When you run autonomous LLM pipelines in production—like StartupWire's news curation workers or multi-step agent evaluators—you quickly discover a hidden tax: **semantic repetition**.
+
+Users and automated workers ask the same question phrased five slightly different ways. Exact-match Redis caching misses these paraphrases completely, sending redundant requests to the LLM API and burning both latency (600ms–2s) and token budget.
+
+### 1. The Two-Tier Cache Architecture
+In **VectorPulse**, we solved this with a two-tier lookup before touching the Gemini API:
+* **L1 (Exact Hash)**: Normalize whitespace/casing, SHA-256 hash the prompt, and check Redis in under 3ms.
+* **L2 (Semantic HNSW)**: Embed the query into a 768-dimension vector and run a \`pgvector\` HNSW cosine similarity search against recent cache entries.
+
+\`\`\`sql
+SELECT response_payload, 1 - (query_embedding <=> $1) AS similarity
+FROM semantic_cache
+WHERE namespace = $2
+  AND expires_at > NOW()
+  AND 1 - (query_embedding <=> $1) >= 0.92
+ORDER BY similarity DESC
+LIMIT 1;
+\`\`\`
+
+### 2. Why 0.92+ Matters (and Temporal Guards)
+At \`0.85\` similarity (which works great for deduplicating news articles), two distinct questions like *"Next.js 15 caching"* and *"Next.js 16 caching"* can collide. For response caching, we raised the threshold to **0.92** and added a lightweight temporal intent filter so queries containing *"today"*, *"latest"*, or version numbers use shorter 15-minute TTL buckets.
+
+### 3. Results in Production
+Across our curation and Q&A workloads, L1 + L2 semantic caching achieved a **42% hit rate** with **<25ms p95 latency**—keeping PostgreSQL as our single source of truth without needing a separate managed vector database.`
+  },
+  {
+    id: 'shipping-production-healthcare-platforms',
+    title: 'Engineering Sub-100ms Healthcare Platforms: Lessons from Three Production Launches',
+    description: 'What building live digital platforms for Vijaya Home Healthcare, Sapthagiri Health Care, and ArogyaCare Diagnostics taught me about mobile speed, local SEO, and patient UX.',
+    date: '2026-10-28',
+    category: 'Client Engineering',
+    readTime: '7 min read',
+    type: 'tech',
+    content: `Over the past few months, I designed and shipped three production healthcare web platforms: **Vijaya Home Healthcare**, **Sapthagiri Health Care**, and **ArogyaCare Diagnostics**.
+
+Healthcare software has a very different set of constraints than developer tools. When a family is searching for home nursing or urgent diagnostic tests at 11 PM, they are often stressed, on a mid-range Android phone, and on a congested mobile network.
+
+### 1. Speed Is Trust
+Every extra second of JavaScript hydration or unoptimized hero imagery increases bounce rate. By leaning on **static edge delivery** and zero-bloat CSS, all three platforms hit **<115ms load times** and **98–100 Lighthouse Performance scores**.
+
+### 2. Replace Multi-Step Forms with 1-Tap Routing
+Our early prototype included a 5-field inquiry modal. Drop-off was immediate. Switching to **pre-populated WhatsApp consultation links** and a 3-field callback dispatcher boosted lead conversions by over **45%**.
+
+### 3. Structured Medical Schema.org SEO
+Search engines reward clarity. Adding granular \`MedicalBusiness\`, \`HomeHealthService\`, and \`DiagnosticLab\` JSON-LD schemas—paired with dedicated clinical vertical pages (e.g., Dementia Care vs. Post-Op Physiotherapy)—helped each clinic rank cleanly for high-intent local searches.`
   }
 ];
 
@@ -2660,5 +2878,25 @@ export const searchIndex: SearchableItem[] = [
     category: 'Blog',
     url: `/blog#${b.id}`,
     content: `${b.title} ${b.description} ${b.category} ${b.content}`
+  })),
+  // Research Notes
+  ...researchNotes.map(r => ({
+    id: r.id,
+    type: 'research' as const,
+    title: r.title,
+    description: `${r.category} — ${r.date}`,
+    category: 'Research',
+    url: `/research#${r.id}`,
+    content: `${r.title} ${r.abstract} ${r.content}`
+  })),
+  // System Architectures
+  ...systemArchitectures.map(a => ({
+    id: a.id,
+    type: 'architecture' as const,
+    title: a.title,
+    description: a.description,
+    category: 'Architecture',
+    url: `/architecture#${a.id}`,
+    content: `${a.title} ${a.description} ${a.rationale}`
   }))
 ];

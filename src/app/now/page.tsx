@@ -23,11 +23,17 @@ export default function NowPage() {
   return (
     <div className="max-w-3xl mx-auto px-4 space-y-12 py-6">
       <div className="space-y-3">
-        <h1 className="text-3xl sm:text-5xl font-black text-slate-900 dark:text-white tracking-tight flex items-center gap-2">
-          <Clock className="w-8 h-8 text-indigo-600 dark:text-indigo-400" /> Now
-        </h1>
+        <div className="flex flex-wrap items-center justify-between gap-2">
+          <h1 className="text-3xl sm:text-5xl font-black text-slate-900 dark:text-white tracking-tight flex items-center gap-2">
+            <Clock className="w-8 h-8 text-indigo-600 dark:text-indigo-400" /> Now
+          </h1>
+          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border border-emerald-500/20 text-xs font-mono font-semibold">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+            Updated November 2026
+          </span>
+        </div>
         <p className="text-sm text-slate-600 dark:text-zinc-400 font-sans">
-          This is a snapshot of what I am focusing on right now. Inspired by Derek Sivers' "now page" movement.
+          This is a snapshot of what I am focusing on right now. Inspired by Derek Sivers&apos; &quot;now page&quot; movement.
         </p>
       </div>
 
@@ -45,9 +51,9 @@ export default function NowPage() {
           {/* Current Focus */}
           <div className="p-5 rounded-2xl border border-slate-200 dark:border-white/5 bg-white dark:bg-white/[0.01] shadow-xs dark:shadow-none space-y-3">
             <span className="text-[10px] font-mono text-slate-500 dark:text-zinc-500 uppercase tracking-wider block flex items-center gap-1.5"><Radio className="w-3.5 h-3.5" /> Daily Focus</span>
-            <h3 className="text-sm font-bold text-slate-900 dark:text-white">Deep Work &amp; Systems Engineering</h3>
+            <h3 className="text-sm font-bold text-slate-900 dark:text-white">AI Infrastructure &amp; Client Platforms</h3>
             <p className="text-xs text-slate-600 dark:text-zinc-400 leading-relaxed">
-              Focusing on clean TypeScript architecture, AI agent pipelines, and reading Martin Kleppmann&apos;s Designing Data-Intensive Applications.
+              Building VectorPulse (pgvector HNSW semantic caching), shipping healthcare web platforms, and studying distributed consensus in DDIA.
             </p>
           </div>
         </div>
@@ -104,15 +110,22 @@ export default function NowPage() {
             <li className="flex items-start">
               <span className="w-1.5 h-1.5 rounded-full bg-indigo-600 dark:bg-indigo-500 mt-2 mr-3 flex-shrink-0" />
               <div>
-                <span className="font-bold text-slate-900 dark:text-white">Scaling StartupWire.in</span>
-                <p className="text-xs text-slate-600 dark:text-zinc-400 mt-0.5">Refining semantic deduplication with pgvector in Supabase and setting up automated weekly digest newsletters for readers.</p>
+                <span className="font-bold text-slate-900 dark:text-white">VectorPulse &amp; StartupWire.in API</span>
+                <p className="text-xs text-slate-600 dark:text-zinc-400 mt-0.5">Shipping L1 Redis + L2 pgvector HNSW semantic caching (-42% inference cost) and opening the structured StartupWire news API beta.</p>
+              </div>
+            </li>
+            <li className="flex items-start">
+              <span className="w-1.5 h-1.5 rounded-full bg-indigo-600 dark:bg-indigo-500 mt-2 mr-3 flex-shrink-0" />
+              <div>
+                <span className="font-bold text-slate-900 dark:text-white">Healthcare Digital Platforms</span>
+                <p className="text-xs text-slate-600 dark:text-zinc-400 mt-0.5">Maintaining and optimizing Vijaya Home Healthcare, Sapthagiri Health Care, and ArogyaCare Diagnostics for sub-100ms mobile UX.</p>
               </div>
             </li>
             <li className="flex items-start">
               <span className="w-1.5 h-1.5 rounded-full bg-indigo-600 dark:bg-indigo-500 mt-2 mr-3 flex-shrink-0" />
               <div>
                 <span className="font-bold text-slate-900 dark:text-white">MSc in Computer Science</span>
-                <p className="text-xs text-slate-600 dark:text-zinc-400 mt-0.5">Deepening research into distributed systems, consensus protocols, and advanced database indexing.</p>
+                <p className="text-xs text-slate-600 dark:text-zinc-400 mt-0.5">Deepening research into distributed systems, consensus protocols, and hybrid vector-lexical indexing.</p>
               </div>
             </li>
             <li className="flex items-start">
@@ -133,12 +146,12 @@ export default function NowPage() {
           <div className="space-y-3.5">
             <div className="flex justify-between items-center text-xs">
               <span className="font-bold text-slate-800 dark:text-zinc-200">Designing Data-Intensive Applications</span>
-              <span className="font-mono text-slate-600 dark:text-zinc-400 text-[10px]">48% Complete</span>
+              <span className="font-mono text-slate-600 dark:text-zinc-400 text-[10px]">74% Complete</span>
             </div>
             <div className="w-full h-1 bg-slate-200 dark:bg-white/5 rounded-full overflow-hidden">
-              <div className="h-full bg-indigo-600 dark:bg-indigo-500" style={{ width: '48%' }} />
+              <div className="h-full bg-indigo-600 dark:bg-indigo-500" style={{ width: '74%' }} />
             </div>
-            <p className="text-[10px] text-slate-500 dark:text-zinc-500 font-mono">By Martin Kleppmann • Current chapter: Partitioning and Relational Replications</p>
+            <p className="text-[10px] text-slate-500 dark:text-zinc-500 font-mono">By Martin Kleppmann • Current chapter: Consistency and Consensus</p>
           </div>
         </div>
       </div>

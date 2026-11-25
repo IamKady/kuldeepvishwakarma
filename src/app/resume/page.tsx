@@ -58,7 +58,7 @@ export default function Resume() {
               resume_kuldeep_vishwakarma.pdf <span className="text-xs text-slate-500 dark:text-zinc-400 normal-case">(A4 Render)</span>
             </h1>
             <p className="text-xs text-slate-500 dark:text-zinc-400 font-mono mt-0.5">
-              Size: ~135 KB | Ver: 1.4.8 | Systems Active
+              Size: ~142 KB | Ver: 1.5.0 | Updated Nov 2026
             </p>
           </div>
         </div>
@@ -271,9 +271,15 @@ export default function Resume() {
               </p>
             </div>
             <div>
-              <span className={`font-bold block ${isPdf ? 'text-zinc-900' : 'text-white'} print:text-zinc-900`}>Vijaya Home Healthcare &amp; Sapthagiri Health Care — Commercial Healthcare Platforms</span>
+              <span className={`font-bold block ${isPdf ? 'text-zinc-900' : 'text-white'} print:text-zinc-900`}>VectorPulse — Distributed Semantic Cache &amp; Hybrid RAG Gateway</span>
               <p className={isPdf ? 'text-zinc-700' : 'text-zinc-400 print:text-zinc-700'}>
-                Engineered production digital healthcare web applications for Bangalore healthcare providers, featuring direct WhatsApp consultation routing, multi-service clinical catalogs, local Schema.org SEO, and edge CDN delivery with sub-100ms first paint times.
+                Two-tier L1 Redis + L2 pgvector HNSW semantic cache gateway with Reciprocal Rank Fusion (BM25 + dense vectors), cutting redundant LLM API spend by 42% at &lt;25ms lookup latency.
+              </p>
+            </div>
+            <div>
+              <span className={`font-bold block ${isPdf ? 'text-zinc-900' : 'text-white'} print:text-zinc-900`}>Vijaya, Sapthagiri &amp; ArogyaCare — Commercial Healthcare Platforms</span>
+              <p className={isPdf ? 'text-zinc-700' : 'text-zinc-400 print:text-zinc-700'}>
+                Engineered three production digital healthcare web applications featuring direct WhatsApp consultation routing, synonym-indexed diagnostic catalogs, local Schema.org SEO, and edge CDN delivery with sub-100ms first paint times.
               </p>
             </div>
           </div>
