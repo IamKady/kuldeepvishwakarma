@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { FileSearch, Github, ExternalLink, Cpu, Shield, TrendingUp, Lightbulb, AlertTriangle, Activity } from 'lucide-react';
+import { FileSearch, Github, ExternalLink, Cpu, Shield, TrendingUp, Lightbulb, AlertTriangle } from 'lucide-react';
 import { projectsData } from '@/data/db';
 
 export default function CaseStudiesPage() {
@@ -31,13 +31,13 @@ export default function CaseStudiesPage() {
               onClick={() => setActiveStudyId(project.id)}
               className={`w-full text-left p-4 rounded-xl border transition-all cursor-pointer flex items-center justify-between ${
                 activeStudyId === project.id 
-                  ? 'bg-indigo-600 border-indigo-500 text-white font-semibold shadow-md' 
-                  : 'bg-white dark:bg-zinc-950/40 border-slate-200 dark:border-white/5 text-slate-700 dark:text-zinc-400 hover:border-slate-300 dark:hover:border-white/10'
+                  ? 'bg-blue-600 border-blue-600 text-white font-semibold shadow-sm' 
+                  : 'bg-card-bg border-card-border text-zinc-700 dark:text-zinc-300 hover:border-zinc-400 dark:hover:border-zinc-600'
               }`}
             >
               <div>
                 <span className="text-xs font-bold block">{project.title}</span>
-                <span className="text-[10px] text-slate-500 dark:text-zinc-500 mt-1 block font-mono">{project.caseStudy.timeline}</span>
+                <span className={`text-[10px] mt-1 block font-mono ${activeStudyId === project.id ? 'text-blue-100' : 'text-zinc-500 dark:text-zinc-400'}`}>{project.caseStudy.timeline}</span>
               </div>
               <span className="text-lg">{project.logo}</span>
             </button>
@@ -45,7 +45,7 @@ export default function CaseStudiesPage() {
         </div>
 
         {/* Right content display */}
-        <div className="lg:col-span-8 p-6 sm:p-8 rounded-2xl border border-slate-200 dark:border-white/10 glass-panel space-y-8 bg-white/80 dark:bg-zinc-950/40 shadow-2xl">
+        <div className="lg:col-span-8 min-w-0 p-6 sm:p-8 rounded-2xl border border-card-border space-y-8 bg-card-bg shadow-sm">
           <div className="border-b border-slate-200 dark:border-white/5 pb-5 flex flex-col sm:flex-row justify-between items-start gap-4">
             <div>
               <div className="flex items-center space-x-3">

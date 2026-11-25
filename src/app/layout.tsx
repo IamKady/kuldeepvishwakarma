@@ -167,8 +167,8 @@ export default function RootLayout({
     "@type": "WebSite",
     "@id": "https://kuldeepvishwakarma.com/#website",
     "url": "https://kuldeepvishwakarma.com",
-    "name": "Kuldeep Chandra Vishwakarma Portfolio",
-    "description": "Personal Operating System of Kuldeep Chandra Vishwakarma — Software Engineer, AI Builder, and Startup Founder.",
+    "name": "Kuldeep Chandra Vishwakarma",
+    "description": "Personal website and engineering journal of Kuldeep Chandra Vishwakarma — Software Developer, AI Builder, and Entrepreneur.",
     "publisher": {
       "@id": "https://kuldeepvishwakarma.com/#person"
     },
@@ -183,6 +183,17 @@ export default function RootLayout({
     "inLanguage": "en"
   };
 
+  const themeInitScript = `
+    (function() {
+      try {
+        var saved = localStorage.getItem('theme');
+        var theme = saved === 'dark' ? 'dark' : 'light';
+        document.documentElement.classList.remove('light', 'dark');
+        document.documentElement.classList.add(theme);
+      } catch (e) {}
+    })();
+  `;
+
   return (
     <html
       lang="en"
@@ -190,6 +201,7 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <head>
+        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}

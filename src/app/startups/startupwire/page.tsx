@@ -26,10 +26,10 @@ export default function StartupWireProductPage() {
     <div className="max-w-5xl mx-auto px-4 space-y-16 py-6">
       
       {/* Back button */}
-      <div className="flex items-center justify-between">
+      <div className="flex flex-wrap items-center justify-between gap-3">
         <Link 
           href="/startups"
-          className="px-4 py-2 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10 text-xs font-semibold text-zinc-300 hover:text-white transition-all flex items-center space-x-1.5 cursor-pointer"
+          className="px-4 py-2 rounded-lg bg-card-bg border border-card-border hover:border-zinc-400 dark:hover:border-zinc-600 text-xs font-semibold text-zinc-700 dark:text-zinc-300 hover:text-zinc-900 dark:hover:text-white transition-all flex items-center space-x-1.5 cursor-pointer"
         >
           <ArrowLeft className="w-3.5 h-3.5" />
           <span>Back to Startup Journal</span>
@@ -38,7 +38,7 @@ export default function StartupWireProductPage() {
           href="https://startupwire.in" 
           target="_blank" 
           rel="noopener noreferrer"
-          className="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-xs font-semibold text-white rounded-lg transition-all flex items-center space-x-1.5 cursor-pointer shadow-lg shadow-indigo-600/10"
+          className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-xs font-semibold text-white rounded-lg transition-all flex items-center space-x-1.5 cursor-pointer shadow-sm"
         >
           <span>Launch StartupWire.in</span>
           <ExternalLink className="w-3.5 h-3.5" />
@@ -122,8 +122,8 @@ export default function StartupWireProductPage() {
           </div>
 
           {/* Pipeline Blueprint Card */}
-          <div className="p-5 rounded-2xl border border-slate-800 dark:border-white/10 bg-slate-900 dark:bg-black/60 font-mono text-[10px] text-zinc-200 dark:text-zinc-300 space-y-4 shadow-xl">
-            <span className="text-zinc-400 dark:text-zinc-500 font-bold uppercase tracking-widest text-[9px] block mb-2">// ASCII PIPELINE FLOWCHART</span>
+          <div className="p-5 rounded-2xl border border-slate-800 dark:border-white/10 bg-slate-900 dark:bg-black/60 font-mono text-[10px] text-zinc-200 dark:text-zinc-300 space-y-4 shadow-xl overflow-x-auto">
+            <span className="text-zinc-400 dark:text-zinc-500 font-bold uppercase tracking-widest text-[9px] block mb-2">{'// ASCII PIPELINE FLOWCHART'}</span>
             <pre className="leading-tight select-none">
 {`[RSS Feed Feeder Nodes]
          |
@@ -228,7 +228,7 @@ export default function StartupWireProductPage() {
               </p>
             </div>
             <span className="text-[10px] text-slate-500 dark:text-zinc-500 font-mono">
-              Compiled by system_admin on 2026.07.13
+              StartupWire Architecture Notes
             </span>
           </div>
         </div>

@@ -1,11 +1,33 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
 <channel>
-  <title>Kuldeep Chandra Vishwakarma | RSS Feed</title>
+  <title>Kuldeep Chandra Vishwakarma | Journal &amp; Essays</title>
   <link>https://kuldeepvishwakarma.com</link>
-  <description>Latest logs, tech news, and system telemetry from Kuldeep's personal operating system.</description>
+  <atom:link href="https://kuldeepvishwakarma.com/rss.xml" rel="self" type="application/rss+xml" />
+  <description>Technical essays, engineering post-mortems, and personal writing by Kuldeep Chandra Vishwakarma.</description>
   <language>en-us</language>
-  <lastBuildDate>Mon, 13 Jul 2026 13:36:32 +0530</lastBuildDate>
+  <lastBuildDate>Wed, 25 Nov 2026 17:00:00 +0530</lastBuildDate>
+  <item>
+    <title>Cutting LLM Inference Costs by 42% with Hybrid Semantic Caching (pgvector + Redis)</title>
+    <link>https://kuldeepvishwakarma.com/blog#semantic-caching-pgvector-rag</link>
+    <description>A practical engineering guide to combining L1 Redis exact-hash lookups with L2 pgvector HNSW similarity search and temporal TTL guards in Next.js 16.</description>
+    <pubDate>Wed, 18 Nov 2026 00:00:00 +0530</pubDate>
+    <guid>https://kuldeepvishwakarma.com/blog#semantic-caching-pgvector-rag</guid>
+  </item>
+  <item>
+    <title>Engineering Sub-100ms Healthcare Platforms: Lessons from Production Launches</title>
+    <link>https://kuldeepvishwakarma.com/blog#shipping-production-healthcare-platforms</link>
+    <description>What building live digital platforms for Vijaya Home Healthcare and Sapthagiri Health Care taught me about mobile speed, local SEO, and patient UX.</description>
+    <pubDate>Wed, 28 Oct 2026 00:00:00 +0530</pubDate>
+    <guid>https://kuldeepvishwakarma.com/blog#shipping-production-healthcare-platforms</guid>
+  </item>
+  <item>
+    <title>Migrating to Next.js 16 &amp; Turbopack: What Broke, What Flew, and Edge Gotchas</title>
+    <link>https://kuldeepvishwakarma.com/blog#nextjs-16-turbopack-tutorial</link>
+    <description>A candid engineering post-mortem on adopting Next.js 16 App Router and Turbopack in production.</description>
+    <pubDate>Wed, 05 Aug 2026 00:00:00 +0530</pubDate>
+    <guid>https://kuldeepvishwakarma.com/blog#nextjs-16-turbopack-tutorial</guid>
+  </item>
   <item>
     <title>Building an Automated AI News Feed using Next.js &amp; Gemini</title>
     <link>https://kuldeepvishwakarma.com/blog#ai-news-automation</link>
@@ -16,7 +38,7 @@
   <item>
     <title>How to Achieve a 100 Lighthouse Performance Rating in Next.js</title>
     <link>https://kuldeepvishwakarma.com/blog#lighthouse-score-performance</link>
-    <description>Learn the exact performance optimization techniques I used to get a perfect Lighthouse score on my portfolio and StartupWire.</description>
+    <description>Learn the exact performance optimization techniques used to get a 100 Lighthouse score on this portfolio and StartupWire.</description>
     <pubDate>Thu, 09 Jul 2026 00:00:00 +0530</pubDate>
     <guid>https://kuldeepvishwakarma.com/blog#lighthouse-score-performance</guid>
   </item>

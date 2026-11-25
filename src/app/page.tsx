@@ -3,7 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { ArrowUpRight, ArrowRight, Mail } from 'lucide-react';
+import { ArrowUpRight, ArrowRight, Mail, CheckCircle2 } from 'lucide-react';
 import { projectsData, blogsData, timelineMilestones } from '@/data/db';
 
 const FEATURED_PROJECT_IDS = [
@@ -44,14 +44,14 @@ const experienceItems = [
     org: 'StartupWire.in & Bookperia.com',
     period: '2025 — Present',
     summary:
-      'Building autonomous AI news curation pipelines with pgvector deduplication on StartupWire, and local-first literary discovery tools on Bookperia.',
+      'Built autonomous AI news curation pipelines with pgvector deduplication on StartupWire, and local-first literary discovery tools on Bookperia.',
   },
   {
     role: 'Independent Software Developer',
     org: 'Client & Product Engineering',
     period: '2024 — Present',
     summary:
-      'Designed and shipped production healthcare web platforms (Vijaya Home Healthcare and Sapthagiri Health Care), editorial systems (KadyVerse), and full-stack web tools.',
+      'Designed and shipped commercial healthcare web platforms for Vijaya Home Healthcare and Sapthagiri Health Care, alongside KadyVerse and full-stack web tools.',
   },
   {
     role: 'Technical Web & SEO Developer',
@@ -60,6 +60,14 @@ const experienceItems = [
     summary:
       'Built responsive web interfaces, restructured technical sitemaps, and improved organic search indexing across client web properties.',
   },
+];
+
+const verifiedAchievements = [
+  'B.Tech in Computer Science & Engineering (Honors, 7.29 CGPA, AKTU) — currently pursuing an M.Sc. in Computer Science.',
+  'Built and launched StartupWire.in, automating RSS ingestion with Gemini summaries and pgvector cosine-distance deduplication.',
+  'Designed and delivered commercial healthcare web platforms for Vijaya Home Healthcare and Sapthagiri Health Care.',
+  'Built and deployed KadyVerse (esbuild static pre-rendering + Supabase RLS writing studio), Bookperia, AIToolsWebsite, and AlbertQuiz AI.',
+  'Merged open-source documentation and layout performance contributions to Next.js and Framer Motion.',
 ];
 
 export default function Home() {
@@ -74,13 +82,13 @@ export default function Home() {
   const journeyMilestones = timelineMilestones.slice(0, 4);
 
   return (
-    <div className="max-w-5xl mx-auto px-5 sm:px-8 space-y-24 sm:space-y-32">
+    <div className="max-w-5xl mx-auto px-5 sm:px-8 space-y-24 sm:space-y-28">
       {/* 1. HERO SECTION */}
       <motion.section
-        initial={{ opacity: 0, y: 12 }}
+        initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.45 }}
-        className="pt-4 sm:pt-10 pb-4 space-y-8"
+        transition={{ duration: 0.35 }}
+        className="pt-4 sm:pt-10 pb-2 space-y-8"
       >
         <div className="space-y-5 max-w-3xl">
           <p className="text-xs font-mono uppercase tracking-[0.18em] text-blue-600 dark:text-blue-400">
@@ -169,28 +177,23 @@ export default function Home() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {selectedProjects.map((project) => (
+          {selectedProjects.map((project, idx) => (
             <article
               key={project.id}
-              className="p-6 rounded-xl border border-card-border bg-card-bg flex flex-col justify-between gap-6 hover:border-zinc-300 dark:hover:border-zinc-700 transition-colors"
+              className="group p-6 sm:p-7 rounded-xl border border-card-border bg-card-bg flex flex-col justify-between gap-6 hover:border-zinc-400 dark:hover:border-zinc-600 hover:shadow-sm transition-all duration-200"
             >
-              <div className="space-y-3">
-                <div className="flex items-start justify-between gap-3">
-                  <div className="space-y-1">
-                    <span className="text-[11px] font-mono uppercase tracking-wider text-blue-600 dark:text-blue-400">
-                      {project.categoryTag || project.status}
-                    </span>
-                    <h3 className="text-lg font-semibold text-zinc-900 dark:text-zinc-100 leading-snug">
-                      {project.title}
-                    </h3>
-                  </div>
+              <div className="space-y-3.5">
+                <div className="flex items-center justify-between gap-3">
+                  <span className="text-[11px] font-mono uppercase tracking-wider text-blue-600 dark:text-blue-400">
+                    {String(idx + 1).padStart(2, '0')} · {project.categoryTag || project.status}
+                  </span>
                   <div className="flex items-center gap-2 text-xs font-mono flex-shrink-0">
                     {project.github && (
                       <a
                         href={project.github}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="px-2 py-1 rounded border border-card-border text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
+                        className="px-2 py-0.5 rounded border border-card-border text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
                       >
                         Code
                       </a>
@@ -200,7 +203,7 @@ export default function Home() {
                         href={project.live}
                         target={project.live.startsWith('http') ? '_blank' : '_self'}
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-0.5 px-2 py-1 rounded border border-card-border text-zinc-700 dark:text-zinc-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                        className="inline-flex items-center gap-0.5 px-2 py-0.5 rounded border border-card-border text-zinc-700 dark:text-zinc-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
                       >
                         Live <ArrowUpRight className="w-3 h-3" />
                       </a>
@@ -208,35 +211,48 @@ export default function Home() {
                   </div>
                 </div>
 
-                <p className="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
-                  {project.summary}
-                </p>
+                <div className="space-y-1.5">
+                  <h3 className="text-lg font-semibold text-zinc-900 dark:text-zinc-100 leading-snug group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                    {project.title}
+                  </h3>
+                  <p className="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
+                    {project.summary}
+                  </p>
+                </div>
               </div>
 
-              <div className="flex flex-wrap gap-1.5 pt-2 border-t border-card-border">
-                {project.technologies.slice(0, 4).map((tech) => (
-                  <span
-                    key={tech}
-                    className="text-[11px] font-mono px-2 py-0.5 rounded bg-card-inner text-zinc-600 dark:text-zinc-400"
-                  >
-                    {tech}
-                  </span>
-                ))}
+              <div className="pt-3 border-t border-card-border flex items-center justify-between gap-3">
+                <div className="flex flex-wrap gap-1.5">
+                  {project.technologies.slice(0, 3).map((tech) => (
+                    <span
+                      key={tech}
+                      className="text-[11px] font-mono px-2 py-0.5 rounded bg-card-inner text-zinc-600 dark:text-zinc-400"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+                <Link
+                  href={`/projects#${project.id}`}
+                  className="text-xs font-medium text-zinc-600 dark:text-zinc-400 hover:text-blue-600 dark:hover:text-blue-400 inline-flex items-center gap-1 flex-shrink-0 transition-colors"
+                >
+                  Details <ArrowRight className="w-3 h-3" />
+                </Link>
               </div>
             </article>
           ))}
         </div>
       </section>
 
-      {/* 3. TECHNICAL EXPERTISE & EXPERIENCE */}
-      <section aria-labelledby="expertise-heading" className="space-y-10 border-t border-card-border pt-14">
+      {/* 3. EXPERIENCE & ACHIEVEMENTS + TECHNICAL EXPERTISE */}
+      <section aria-labelledby="experience-heading" className="space-y-12 border-t border-card-border pt-14">
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
           <div className="space-y-1.5">
             <p className="text-xs font-mono uppercase tracking-[0.16em] text-zinc-500 dark:text-zinc-400">
-              02 / Craft &amp; Experience
+              02 / Experience &amp; Achievements
             </p>
-            <h2 id="expertise-heading" className="text-2xl sm:text-3xl font-semibold tracking-tight text-zinc-900 dark:text-zinc-50">
-              Technical Expertise
+            <h2 id="experience-heading" className="text-2xl sm:text-3xl font-semibold tracking-tight text-zinc-900 dark:text-zinc-50">
+              Engineering Practice &amp; Track Record
             </h2>
           </div>
           <Link
@@ -247,6 +263,7 @@ export default function Home() {
           </Link>
         </div>
 
+        {/* Technical Expertise Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {expertiseAreas.map((area) => (
             <div
@@ -263,34 +280,56 @@ export default function Home() {
           ))}
         </div>
 
-        <div className="space-y-4 pt-2">
-          <h3 className="text-xs font-mono uppercase tracking-[0.16em] text-zinc-500 dark:text-zinc-400">
-            Development Experience
-          </h3>
-          <div className="divide-y divide-card-border border-y border-card-border">
-            {experienceItems.map((exp) => (
-              <div
-                key={exp.role}
-                className="py-5 grid grid-cols-1 md:grid-cols-12 gap-2 md:gap-6 items-baseline"
-              >
-                <div className="md:col-span-3 text-xs font-mono text-zinc-500 dark:text-zinc-400">
-                  {exp.period}
-                </div>
-                <div className="md:col-span-9 space-y-1">
-                  <div className="flex flex-wrap items-baseline gap-x-2">
-                    <span className="text-sm font-semibold text-zinc-900 dark:text-zinc-100">
-                      {exp.role}
-                    </span>
-                    <span className="text-sm text-zinc-500 dark:text-zinc-400">
-                      · {exp.org}
+        {/* Experience Timeline & Verifiable Achievements */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start pt-2">
+          <div className="lg:col-span-7 space-y-4">
+            <h3 className="text-xs font-mono uppercase tracking-[0.16em] text-zinc-500 dark:text-zinc-400">
+              Development Experience
+            </h3>
+            <div className="divide-y divide-card-border border-y border-card-border">
+              {experienceItems.map((exp) => (
+                <div key={exp.role} className="py-5 space-y-1.5">
+                  <div className="flex flex-wrap items-baseline justify-between gap-2">
+                    <div>
+                      <span className="text-sm font-semibold text-zinc-900 dark:text-zinc-100">
+                        {exp.role}
+                      </span>
+                      <span className="text-sm text-zinc-500 dark:text-zinc-400">
+                        {' '}· {exp.org}
+                      </span>
+                    </div>
+                    <span className="text-xs font-mono text-zinc-500 dark:text-zinc-400">
+                      {exp.period}
                     </span>
                   </div>
                   <p className="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
                     {exp.summary}
                   </p>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
+          </div>
+
+          <div className="lg:col-span-5 p-6 rounded-xl border border-card-border bg-card-bg space-y-4">
+            <h3 className="text-xs font-mono uppercase tracking-[0.16em] text-blue-600 dark:text-blue-400">
+              Verified Achievements
+            </h3>
+            <ul className="space-y-3 text-sm text-zinc-600 dark:text-zinc-300 leading-relaxed">
+              {verifiedAchievements.map((item, idx) => (
+                <li key={idx} className="flex items-start gap-2.5">
+                  <CheckCircle2 className="w-4 h-4 text-blue-600 dark:text-blue-400 flex-shrink-0 mt-0.5" />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+            <div className="pt-2 border-t border-card-border">
+              <Link
+                href="/resume"
+                className="inline-flex items-center gap-1 text-xs font-medium text-blue-600 dark:text-blue-400 hover:underline"
+              >
+                Inspect full resume <ArrowRight className="w-3 h-3" />
+              </Link>
+            </div>
           </div>
         </div>
       </section>

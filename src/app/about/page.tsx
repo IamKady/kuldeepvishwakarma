@@ -1,13 +1,13 @@
 'use client';
 
 import React, { useState } from 'react';
+import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   History, 
   Heart, 
   Terminal as TerminalIcon, 
   BookOpen, 
-  Eye, 
   Briefcase, 
   GraduationCap, 
   FolderGit2, 
@@ -15,8 +15,7 @@ import {
   Code,
   Shield,
   Layers,
-  Compass,
-  ArrowRight
+  Compass
 } from 'lucide-react';
 import { timelineMilestones, TimelineMilestone } from '@/data/db';
 
@@ -78,15 +77,15 @@ export default function About() {
   const getCategoryBadgeColor = (cat: TimelineMilestone['category']) => {
     switch (cat) {
       case 'work':
-        return 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20';
+        return 'bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border-emerald-500/20';
       case 'education':
-        return 'bg-indigo-500/10 text-indigo-400 border-indigo-500/20';
+        return 'bg-blue-500/10 text-blue-700 dark:text-blue-400 border-blue-500/20';
       case 'projects':
-        return 'bg-violet-500/10 text-violet-400 border-violet-500/20';
+        return 'bg-violet-500/10 text-violet-700 dark:text-violet-400 border-violet-500/20';
       case 'achievements':
-        return 'bg-amber-500/10 text-amber-400 border-amber-500/20';
+        return 'bg-amber-500/10 text-amber-700 dark:text-amber-400 border-amber-500/20';
       default:
-        return 'bg-rose-500/10 text-rose-400 border-rose-500/20';
+        return 'bg-rose-500/10 text-rose-700 dark:text-rose-400 border-rose-500/20';
     }
   };
 
@@ -114,13 +113,15 @@ export default function About() {
         <div className="w-full md:w-60 flex-shrink-0">
           <div className="relative p-2 rounded-2xl glass-panel border border-slate-200 dark:border-white/10 shadow-xl group overflow-hidden bg-white/80 dark:bg-white/[0.01]">
             <div className="relative aspect-[3/4] rounded-xl overflow-hidden border border-slate-200 dark:border-white/5 bg-slate-900 dark:bg-black/40">
-              <img 
+              <Image 
                 src="/kuldeep.jpg" 
-                alt="Kuldeep Chandra Vishwakarma" 
-                className="w-full h-full object-cover object-center scale-[1.02] transform hover:scale-[1.08] transition-transform duration-500"
-                style={{ objectPosition: 'center 20%' }}
+                alt="Kuldeep Chandra Vishwakarma"
+                fill
+                sizes="(max-width: 768px) 100vw, 240px"
+                priority
+                className="object-cover object-[center_20%] scale-[1.02] hover:scale-[1.06] transition-transform duration-500"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/80 via-transparent to-transparent pointer-events-none" />
+              <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/70 via-transparent to-transparent pointer-events-none" />
               <div className="absolute top-2 right-2 bg-emerald-500/20 text-emerald-700 dark:text-emerald-400 border border-emerald-500/30 text-xs font-mono uppercase tracking-widest px-2 py-0.5 rounded font-medium">
                 Active
               </div>

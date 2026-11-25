@@ -7,7 +7,6 @@ import {
   Github,
   ExternalLink,
   ArrowUpRight,
-  Check,
   X,
   FileSearch,
   Cpu,
@@ -19,7 +18,6 @@ import {
   Database,
   Star,
   GitFork,
-  Radio,
   Code2
 } from 'lucide-react';
 import { projectsData, Project } from '@/data/db';
@@ -410,7 +408,7 @@ export default function Projects() {
                 ].map((tab) => (
                   <button
                     key={tab.id}
-                    onClick={() => setCaseStudyTab(tab.id as any)}
+                    onClick={() => setCaseStudyTab(tab.id as 'story' | 'engineering' | 'seo' | 'lessons')}
                     className={`flex items-center space-x-1.5 px-4 py-3.5 text-xs font-semibold transition-colors relative cursor-pointer ${caseStudyTab === tab.id
                       ? 'text-indigo-700 dark:text-indigo-400 font-bold'
                       : 'text-slate-600 dark:text-zinc-400 hover:text-slate-900 dark:hover:text-zinc-200'
@@ -496,7 +494,7 @@ export default function Projects() {
 
                           {/* Architecture Diagram */}
                           <div className="p-4 rounded-xl border border-slate-800 dark:border-white/5 bg-slate-900 dark:bg-black/60 font-mono text-[10px] text-zinc-200 dark:text-zinc-300 overflow-x-auto">
-                            <span className="text-[9px] text-zinc-400 dark:text-zinc-500 uppercase font-bold tracking-widest block mb-2">// System Architecture Blueprint</span>
+                            <span className="text-[9px] text-zinc-400 dark:text-zinc-500 uppercase font-bold tracking-widest block mb-2">{'// System Architecture Blueprint'}</span>
                             <pre className="leading-tight">{selectedProject.caseStudy.architectureDiagram}</pre>
                           </div>
                         </div>
@@ -530,23 +528,23 @@ export default function Projects() {
                         </div>
 
                         <div className="p-5 rounded-xl border border-slate-200 dark:border-white/5 bg-slate-50 dark:bg-zinc-950/60 flex flex-col justify-center space-y-4">
-                          <span className="text-[10px] font-mono text-slate-500 dark:text-zinc-500 uppercase tracking-wider block font-bold">// Lighthouse Target Standard</span>
+                          <span className="text-[10px] font-mono text-slate-500 dark:text-zinc-500 uppercase tracking-wider block font-bold">{'// Engineering & SEO Standards'}</span>
                           <div className="space-y-3 text-xs">
                             <div className="flex justify-between items-center border-b border-slate-200 dark:border-white/5 pb-1.5">
-                              <span>SEO Schema Compliance</span>
-                              <span className="text-emerald-700 dark:text-emerald-400 font-bold font-mono">100/100 (Structured JSON-LD)</span>
+                              <span>SEO Schema Markup</span>
+                              <span className="text-emerald-700 dark:text-emerald-400 font-bold font-mono">Structured JSON-LD</span>
                             </div>
                             <div className="flex justify-between items-center border-b border-slate-200 dark:border-white/5 pb-1.5">
-                              <span>Core Web Vitals FCP</span>
-                              <span className="text-emerald-700 dark:text-emerald-400 font-bold font-mono">&lt; 0.8s load path</span>
+                              <span>Delivery Architecture</span>
+                              <span className="text-emerald-700 dark:text-emerald-400 font-bold font-mono">Edge Static &amp; SSR</span>
                             </div>
                             <div className="flex justify-between items-center border-b border-slate-200 dark:border-white/5 pb-1.5">
-                              <span>Accessibility compliance</span>
-                              <span className="text-emerald-700 dark:text-emerald-400 font-bold font-mono">W3C WCAG compliant</span>
+                              <span>Accessibility Standard</span>
+                              <span className="text-emerald-700 dark:text-emerald-400 font-bold font-mono">Semantic HTML / WCAG</span>
                             </div>
                             <div className="flex justify-between items-center">
-                              <span>Clean routing slugs</span>
-                              <span className="text-emerald-700 dark:text-emerald-400 font-bold font-mono">Dynamic XML indexed</span>
+                              <span>Indexing &amp; Routing</span>
+                              <span className="text-emerald-700 dark:text-emerald-400 font-bold font-mono">Canonical + Sitemap</span>
                             </div>
                           </div>
                         </div>

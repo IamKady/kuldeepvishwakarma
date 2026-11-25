@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useMemo, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -24,39 +24,31 @@ interface CommandPaletteProps {
 
 export default function CommandPalette({ isOpen, onClose }: CommandPaletteProps) {
   const [query, setQuery] = useState('');
-  const [results, setResults] = useState<SearchableItem[]>([]);
   const [selectedIndex, setSelectedIndex] = useState(0);
   const inputRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
 
-  // Search filter effect
-  useEffect(() => {
+  const results = useMemo(() => {
     if (!query.trim()) {
-      // Show default suggestions (first 5 items)
-      setResults(searchIndex.slice(0, 5));
-      setSelectedIndex(0);
-      return;
+      return searchIndex.slice(0, 5);
     }
 
-    const filtered = searchIndex.filter(item => {
-      const q = query.toLowerCase();
-      return (
+    const q = query.toLowerCase();
+    return searchIndex
+      .filter(item =>
         item.title.toLowerCase().includes(q) ||
         item.description.toLowerCase().includes(q) ||
         item.category.toLowerCase().includes(q) ||
         item.content.toLowerCase().includes(q)
-      );
-    });
-
-    setResults(filtered.slice(0, 8)); // limit to 8 results for clean display
-    setSelectedIndex(0);
+      )
+      .slice(0, 8);
   }, [query]);
 
-  const handleSelect = (item: SearchableItem) => {
+  const handleSelect = useCallback((item: SearchableItem) => {
     router.push(item.url);
     onClose();
     setQuery('');
-  };
+  }, [router, onClose]);
 
   // Global keybind for CMD+K or Ctrl+K to toggle (controlled by layout)
   useEffect(() => {
@@ -95,7 +87,7 @@ export default function CommandPalette({ isOpen, onClose }: CommandPaletteProps)
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [isOpen, results, selectedIndex]);
+  }, [isOpen, results, selectedIndex, handleSelect, onClose]);
 
 
 
@@ -135,7 +127,7 @@ export default function CommandPalette({ isOpen, onClose }: CommandPaletteProps)
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: -10 }}
             transition={{ duration: 0.2 }}
-            className="relative w-full max-w-2xl mx-4 overflow-hidden border rounded-xl bg-white dark:bg-[#0a0a0f] shadow-2xl border-slate-200 dark:border-white/10"
+            className="relative w-full max-w-2xl mx-4 overflow-hidden border rounded-xl bg-card-bg shadow-2xl border-card-border"
           >
             {/* Input Bar */}
             <div className="flex items-center px-4 py-3.5 border-b border-slate-200 dark:border-white/5 space-x-3">
@@ -152,7 +144,7 @@ export default function CommandPalette({ isOpen, onClose }: CommandPaletteProps)
                 type="text"
                 placeholder="Search projects, startups, blogs, cyber logs, and tools..."
                 value={query}
-                onChange={e => setQuery(e.target.value)}
+                onChange={e => { setQuery(e.target.value); setSelectedIndex(0); }}
                 className="w-full bg-transparent border-0 outline-none text-slate-900 dark:text-zinc-100 placeholder-slate-400 dark:placeholder-zinc-500 font-sans text-base"
               />
               <button 
@@ -180,7 +172,7 @@ export default function CommandPalette({ isOpen, onClose }: CommandPaletteProps)
                             onMouseEnter={() => setSelectedIndex(idx)}
                             className={`w-full text-left px-3 py-2.5 rounded-lg flex items-center justify-between transition-colors font-sans ${
                               isSelected 
-                                ? 'bg-indigo-50 dark:bg-white/10 text-indigo-950 dark:text-white' 
+                                ? 'bg-blue-50 dark:bg-blue-500/15 text-blue-950 dark:text-white' 
                                 : 'text-slate-700 dark:text-zinc-300 hover:bg-slate-100 dark:hover:bg-white/5 hover:text-slate-900 dark:hover:text-zinc-100'
                             }`}
                           >
@@ -219,21 +211,20 @@ export default function CommandPalette({ isOpen, onClose }: CommandPaletteProps)
             </div>
 
             {/* Footer Help */}
-            <div className="flex justify-between items-center px-4 py-2 bg-slate-50 dark:bg-black/40 border-t border-slate-200 dark:border-white/5 text-[10px] text-slate-500 dark:text-zinc-500 font-sans">
+            <div className="flex justify-between items-center px-4 py-2 bg-card-inner border-t border-card-border text-[10px] text-zinc-500 dark:text-zinc-400 font-sans">
               <div className="flex items-center space-x-4">
                 <span>
-                  <kbd className="px-1.5 py-0.5 bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded">↑↓</kbd> to navigate
+                  <kbd className="px-1.5 py-0.5 bg-card-bg border border-card-border rounded">↑↓</kbd> to navigate
                 </span>
                 <span>
-                  <kbd className="px-1.5 py-0.5 bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded">Enter</kbd> to select
+                  <kbd className="px-1.5 py-0.5 bg-card-bg border border-card-border rounded">Enter</kbd> to select
                 </span>
                 <span>
-                  <kbd className="px-1.5 py-0.5 bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded">ESC</kbd> to close
+                  <kbd className="px-1.5 py-0.5 bg-card-bg border border-card-border rounded">ESC</kbd> to close
                 </span>
               </div>
-              <div className="flex items-center text-emerald-600 dark:text-emerald-400 font-medium">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-600 dark:bg-emerald-400 mr-1.5 animate-pulse" />
-                Index Online (2026.07.13)
+              <div className="flex items-center text-blue-600 dark:text-blue-400 font-medium">
+                {searchIndex.length} indexed entries
               </div>
             </div>
           </motion.div>

@@ -77,7 +77,7 @@ export default function Cybersecurity() {
         break;
       case 'uptime':
         newHistory.push({
-          text: 'Console Uptime: 324 days, 18 hours, 45 minutes, 12 seconds. Node: v22.1.0. Location: India (IST).',
+          text: 'Session Status: Active (Client Sandbox) | Location: Uttar Pradesh, India (IST).',
           type: 'success'
         });
         break;
@@ -105,9 +105,9 @@ export default function Cybersecurity() {
 
   const getDifficultyColor = (diff: CyberLog['difficulty']) => {
     switch (diff) {
-      case 'Easy': return 'text-emerald-400 bg-emerald-500/10 border-emerald-500/20';
-      case 'Medium': return 'text-amber-400 bg-amber-500/10 border-amber-500/20';
-      default: return 'text-rose-400 bg-rose-500/10 border-rose-500/20';
+      case 'Easy': return 'text-emerald-700 dark:text-emerald-400 bg-emerald-500/10 border-emerald-500/20';
+      case 'Medium': return 'text-amber-700 dark:text-amber-400 bg-amber-500/10 border-amber-500/20';
+      default: return 'text-rose-700 dark:text-rose-400 bg-rose-500/10 border-rose-500/20';
     }
   };
 

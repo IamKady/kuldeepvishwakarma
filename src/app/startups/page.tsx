@@ -35,15 +35,15 @@ export default function Startups() {
     switch (cat) {
       case 'Mistakes':
       case 'Failures':
-        return <AlertTriangle className="w-4 h-4 text-rose-400" />;
+        return <AlertTriangle className="w-4 h-4 text-rose-600 dark:text-rose-400" />;
       case 'Revenue':
-        return <Coins className="w-4 h-4 text-emerald-400" />;
+        return <Coins className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />;
       case 'SEO':
       case 'Marketing':
       case 'Growth':
-        return <TrendingUp className="w-4 h-4 text-indigo-400" />;
+        return <TrendingUp className="w-4 h-4 text-blue-600 dark:text-blue-400" />;
       default:
-        return <BookOpen className="w-4 h-4 text-zinc-400" />;
+        return <BookOpen className="w-4 h-4 text-zinc-500 dark:text-zinc-400" />;
     }
   };
 
@@ -51,15 +51,15 @@ export default function Startups() {
     switch (cat) {
       case 'Mistakes':
       case 'Failures':
-        return 'bg-rose-500/10 text-rose-400 border-rose-500/20';
+        return 'bg-rose-500/10 text-rose-700 dark:text-rose-400 border-rose-500/20';
       case 'Revenue':
-        return 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20';
+        return 'bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border-emerald-500/20';
       case 'SEO':
       case 'Marketing':
       case 'Growth':
-        return 'bg-indigo-500/10 text-indigo-400 border-indigo-500/20';
+        return 'bg-blue-500/10 text-blue-700 dark:text-blue-400 border-blue-500/20';
       default:
-        return 'bg-zinc-500/10 text-zinc-400 border-zinc-500/20';
+        return 'bg-zinc-500/10 text-zinc-700 dark:text-zinc-400 border-zinc-500/20';
     }
   };
 
@@ -120,14 +120,14 @@ export default function Startups() {
               </p>
 
               <div className="flex flex-wrap gap-2 pt-1 font-mono text-xs">
-                <span className="px-2.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">
-                  👥 1,240+ Active Readers
+                <span className="px-2.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border border-emerald-500/20">
+                  ⚡ Gemini Flash Curation
                 </span>
-                <span className="px-2.5 py-0.5 rounded-full bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-500/20">
-                  📡 40+ Crawled RSS Feeds
+                <span className="px-2.5 py-0.5 rounded-full bg-blue-500/10 text-blue-700 dark:text-blue-400 border border-blue-500/20">
+                  📡 40+ RSS Sources
                 </span>
-                <span className="px-2.5 py-0.5 rounded-full bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 border border-cyan-500/20">
-                  ⚡ 100/100 Lighthouse
+                <span className="px-2.5 py-0.5 rounded-full bg-cyan-500/10 text-cyan-700 dark:text-cyan-400 border border-cyan-500/20">
+                  🔍 pgvector Deduplication
                 </span>
               </div>
 
@@ -194,13 +194,13 @@ export default function Startups() {
               </p>
 
               <div className="flex flex-wrap gap-2 pt-1 font-mono text-[10px]">
-                <span className="px-2 py-0.5 rounded-full bg-rose-500/10 text-rose-600 dark:text-rose-400 border border-rose-500/20">
-                  📚 500+ Curated Volumes
+                <span className="px-2 py-0.5 rounded-full bg-rose-500/10 text-rose-700 dark:text-rose-400 border border-rose-500/20">
+                  📚 Curated Literary Catalog
                 </span>
-                <span className="px-2 py-0.5 rounded-full bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-500/20">
+                <span className="px-2 py-0.5 rounded-full bg-blue-500/10 text-blue-700 dark:text-blue-400 border border-blue-500/20">
                   🤖 AI Reading Companion
                 </span>
-                <span className="px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">
+                <span className="px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border border-emerald-500/20">
                   🔒 Local-First Shelves
                 </span>
               </div>

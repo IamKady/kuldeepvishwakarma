@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Mail, 
@@ -11,8 +11,6 @@ import {
   Clock, 
   Check, 
   Send, 
-  Download, 
-  Info,
   CalendarCheck,
   Phone
 } from 'lucide-react';
@@ -31,12 +29,20 @@ export default function Contact() {
   const [schedulerEmail, setSchedulerEmail] = useState('');
   const [meetingBooked, setMeetingBooked] = useState(false);
 
-  const days = [
-    { label: 'Tue, Jul 14', value: '2026-07-14' },
-    { label: 'Wed, Jul 15', value: '2026-07-15' },
-    { label: 'Thu, Jul 16', value: '2026-07-16' },
-    { label: 'Fri, Jul 17', value: '2026-07-17' },
-  ];
+  const days = useMemo(() => {
+    const result: { label: string; value: string }[] = [];
+    const cursor = new Date();
+    while (result.length < 4) {
+      cursor.setDate(cursor.getDate() + 1);
+      const dayOfWeek = cursor.getDay();
+      if (dayOfWeek === 0 || dayOfWeek === 6) continue;
+      result.push({
+        label: cursor.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' }),
+        value: cursor.toISOString().slice(0, 10),
+      });
+    }
+    return result;
+  }, []);
 
   const timeSlots = ['10:00 AM', '11:30 AM', '02:00 PM', '03:30 PM', '05:00 PM'];
 
@@ -79,7 +85,7 @@ export default function Contact() {
     )}&body=${encodeURIComponent(
       `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`
     )}`;
-    window.location.href = mailtoUrl;
+    window.location.assign(mailtoUrl);
 
     setTimeout(() => {
       setFormSending(false);
@@ -129,7 +135,7 @@ export default function Contact() {
     )}&body=${encodeURIComponent(
       `Hello Kuldeep,\n\nI would like to schedule a Zoom consultation with you.\n\nDate: ${selectedDay}\nTime: ${selectedTime} (IST)\n\nMy Details:\nName: ${schedulerName}\nEmail: ${schedulerEmail}\n\nBest regards,\n${schedulerName}`
     )}`;
-    window.location.href = mailtoUrl;
+    window.location.assign(mailtoUrl);
     setMeetingBooked(true);
     triggerConfetti();
   };
@@ -152,11 +158,11 @@ export default function Contact() {
   };
 
   const socialChannels = [
-    { name: 'Email', value: 'kuldeepvishwakarma3803@gmail.com', url: 'mailto:kuldeepvishwakarma3803@gmail.com', icon: <Mail className="w-4 h-4 text-rose-400" /> },
-    { name: 'LinkedIn', value: 'linkedin.com/in/iamkady', url: 'https://www.linkedin.com/in/iamkady/', icon: <Linkedin className="w-4 h-4 text-indigo-400" /> },
-    { name: 'GitHub', value: 'github.com/IamKady', url: 'https://github.com/IamKady', icon: <Github className="w-4 h-4 text-white" /> },
-    { name: 'X / Twitter', value: 'x.com/Kuldeep81824338', url: 'https://x.com/Kuldeep81824338', icon: <Twitter className="w-4 h-4 text-emerald-400" /> },
-    { name: 'Phone', value: '+91 8303929309', url: 'tel:+918303929309', icon: <Phone className="w-4 h-4 text-emerald-400" /> }
+    { name: 'Email', value: 'kuldeepvishwakarma3803@gmail.com', url: 'mailto:kuldeepvishwakarma3803@gmail.com', icon: <Mail className="w-4 h-4 text-rose-600 dark:text-rose-400" /> },
+    { name: 'LinkedIn', value: 'linkedin.com/in/iamkady', url: 'https://www.linkedin.com/in/iamkady/', icon: <Linkedin className="w-4 h-4 text-blue-600 dark:text-blue-400" /> },
+    { name: 'GitHub', value: 'github.com/IamKady', url: 'https://github.com/IamKady', icon: <Github className="w-4 h-4 text-zinc-900 dark:text-white" /> },
+    { name: 'X / Twitter', value: 'x.com/Kuldeep81824338', url: 'https://x.com/Kuldeep81824338', icon: <Twitter className="w-4 h-4 text-sky-600 dark:text-sky-400" /> },
+    { name: 'Phone', value: '+91 8303929309', url: 'tel:+918303929309', icon: <Phone className="w-4 h-4 text-emerald-600 dark:text-emerald-400" /> }
   ];
 
   return (
@@ -201,75 +207,75 @@ export default function Contact() {
           </div>
 
           {/* Contact Message Form */}
-          <div className="p-6 rounded-xl border border-slate-200 dark:border-white/10 glass-panel shadow-xl space-y-4 bg-white/80 dark:bg-black/40">
-            <h3 className="text-sm font-bold text-slate-900 dark:text-white uppercase tracking-wider font-mono border-b border-slate-200 dark:border-white/5 pb-2">
-              Send Console Message
-            </h3>
+          <div className="p-6 rounded-xl border border-card-border shadow-sm space-y-4 bg-card-bg">
+            <h2 className="text-sm font-bold text-zinc-900 dark:text-white uppercase tracking-wider font-mono border-b border-card-border pb-2">
+              Send a Message
+            </h2>
 
             <form onSubmit={handleFormSubmit} className="space-y-4 font-sans text-xs sm:text-sm">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="space-y-1">
-                  <label className="text-xs font-mono text-slate-600 dark:text-zinc-400 uppercase font-medium">Your Name</label>
+                  <label className="text-xs font-mono text-zinc-600 dark:text-zinc-400 uppercase font-medium">Your Name</label>
                   <input
                     type="text"
                     required
                     value={formData.name}
                     onChange={e => setFormData({ ...formData, name: e.target.value })}
-                    className="w-full px-3.5 py-2.5 bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-lg outline-none text-slate-900 dark:text-white focus:border-indigo-500 transition-colors shadow-xs dark:shadow-none text-xs sm:text-sm"
-                    placeholder="Guest Administrator"
+                    className="w-full px-3.5 py-2.5 bg-background border border-card-border rounded-lg outline-none text-zinc-900 dark:text-white focus:border-blue-600 transition-colors text-xs sm:text-sm"
+                    placeholder="Alex Morgan"
                   />
                 </div>
                 <div className="space-y-1">
-                  <label className="text-xs font-mono text-slate-600 dark:text-zinc-400 uppercase font-medium">Your Email</label>
+                  <label className="text-xs font-mono text-zinc-600 dark:text-zinc-400 uppercase font-medium">Your Email</label>
                   <input
                     type="email"
                     required
                     value={formData.email}
                     onChange={e => setFormData({ ...formData, email: e.target.value })}
-                    className="w-full px-3.5 py-2.5 bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-lg outline-none text-slate-900 dark:text-white focus:border-indigo-500 transition-colors shadow-xs dark:shadow-none text-xs sm:text-sm"
-                    placeholder="guest_user@host.com"
+                    className="w-full px-3.5 py-2.5 bg-background border border-card-border rounded-lg outline-none text-zinc-900 dark:text-white focus:border-blue-600 transition-colors text-xs sm:text-sm"
+                    placeholder="alex@company.com"
                   />
                 </div>
               </div>
 
               <div className="space-y-1">
-                <label className="text-xs font-mono text-slate-600 dark:text-zinc-400 uppercase font-medium">Subject</label>
+                <label className="text-xs font-mono text-zinc-600 dark:text-zinc-400 uppercase font-medium">Subject</label>
                 <input
                   type="text"
                   required
                   value={formData.subject}
                   onChange={e => setFormData({ ...formData, subject: e.target.value })}
-                  className="w-full px-3.5 py-2.5 bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-lg outline-none text-slate-900 dark:text-white focus:border-indigo-500 transition-colors shadow-xs dark:shadow-none text-xs sm:text-sm"
-                  placeholder="System Integration / Full-stack Opportunity"
+                  className="w-full px-3.5 py-2.5 bg-background border border-card-border rounded-lg outline-none text-zinc-900 dark:text-white focus:border-blue-600 transition-colors text-xs sm:text-sm"
+                  placeholder="Engineering Role / Product Collaboration"
                 />
               </div>
 
               <div className="space-y-1">
-                <label className="text-xs font-mono text-slate-600 dark:text-zinc-400 uppercase font-medium">Message</label>
+                <label className="text-xs font-mono text-zinc-600 dark:text-zinc-400 uppercase font-medium">Message</label>
                 <textarea
                   required
                   rows={4}
                   value={formData.message}
                   onChange={e => setFormData({ ...formData, message: e.target.value })}
-                  className="w-full px-3.5 py-2.5 bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-lg outline-none text-slate-900 dark:text-white focus:border-indigo-500 transition-colors resize-none shadow-xs dark:shadow-none text-xs sm:text-sm"
-                  placeholder="Write message details..."
+                  className="w-full px-3.5 py-2.5 bg-background border border-card-border rounded-lg outline-none text-zinc-900 dark:text-white focus:border-blue-600 transition-colors resize-none text-xs sm:text-sm"
+                  placeholder="Share a bit about your project or inquiry..."
                 />
               </div>
 
               <button
                 type="submit"
                 disabled={formSending}
-                className="w-full py-2.5 bg-indigo-600 hover:bg-indigo-500 disabled:bg-indigo-600/40 text-white rounded-lg font-semibold tracking-wide transition-all shadow-lg hover:shadow-indigo-600/10 cursor-pointer flex items-center justify-center space-x-1.5"
+                className="w-full py-2.5 bg-zinc-900 dark:bg-zinc-100 hover:bg-blue-600 dark:hover:bg-blue-500 dark:hover:text-white disabled:opacity-50 text-white dark:text-zinc-900 rounded-lg font-semibold tracking-wide transition-all cursor-pointer flex items-center justify-center space-x-1.5"
               >
                 {formSending ? (
-                  <span>Encrypting & Sending...</span>
+                  <span>Sending...</span>
                 ) : formSent ? (
                   <span className="flex items-center text-emerald-400 font-bold">
-                    <Check className="w-3.5 h-3.5 mr-1" /> Message Transmitted!
+                    <Check className="w-3.5 h-3.5 mr-1" /> Message Sent!
                   </span>
                 ) : (
                   <>
-                    <span>Transmit Message</span>
+                    <span>Send Message</span>
                     <Send className="w-3.5 h-3.5" />
                   </>
                 )}
@@ -281,14 +287,14 @@ export default function Contact() {
 
         {/* Right Column: Calendly-Style Meeting Scheduler */}
         <div className="lg:col-span-6">
-          <div className="p-6 rounded-xl border border-slate-200 dark:border-white/10 glass-panel shadow-xl space-y-5 bg-white/80 dark:bg-black/40">
-            <div className="flex items-center justify-between border-b border-slate-200 dark:border-white/5 pb-2.5">
-              <h3 className="text-sm font-bold text-slate-900 dark:text-white uppercase tracking-wider font-mono flex items-center">
-                <Calendar className="w-4 h-4 mr-2 text-indigo-600 dark:text-indigo-400" />
-                Telemetry Meeting Booker
-              </h3>
-              <span className="text-[9px] bg-slate-100 dark:bg-white/5 px-2 py-0.5 border border-slate-200 dark:border-white/5 rounded-full font-mono text-emerald-700 dark:text-emerald-400">
-                Live Scheduler
+          <div className="p-6 rounded-xl border border-card-border shadow-sm space-y-5 bg-card-bg">
+            <div className="flex items-center justify-between border-b border-card-border pb-2.5">
+              <h2 className="text-sm font-bold text-zinc-900 dark:text-white uppercase tracking-wider font-mono flex items-center">
+                <Calendar className="w-4 h-4 mr-2 text-blue-600 dark:text-blue-400" />
+                Schedule a Call
+              </h2>
+              <span className="text-[10px] bg-card-inner px-2 py-0.5 border border-card-border rounded-full font-mono text-emerald-700 dark:text-emerald-400">
+                IST (UTC +5:30)
               </span>
             </div>
 
@@ -305,8 +311,8 @@ export default function Contact() {
                   
                   {/* Step 1: Select Day */}
                   <div className="space-y-2">
-                    <label className="text-[10px] font-mono text-slate-500 dark:text-zinc-500 uppercase tracking-wider block">
-                      Step 1: Choose Operational Date
+                    <label className="text-[10px] font-mono text-zinc-500 dark:text-zinc-400 uppercase tracking-wider block">
+                      Step 1: Select Date
                     </label>
                     <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
                       {days.map((day) => (
@@ -314,10 +320,10 @@ export default function Contact() {
                           key={day.value}
                           type="button"
                           onClick={() => { setSelectedDay(day.value); setSelectedTime(null); }}
-                          className={`py-2 rounded-lg border text-center transition-all cursor-pointer ${
+                          className={`py-2 px-2 rounded-lg border text-center transition-all cursor-pointer ${
                             selectedDay === day.value 
-                              ? 'bg-indigo-600 border-indigo-500 text-white font-semibold shadow-md' 
-                              : 'bg-white dark:bg-zinc-950/40 border-slate-200 dark:border-white/5 text-slate-700 dark:text-zinc-400 hover:border-slate-300 dark:hover:border-white/10'
+                              ? 'bg-blue-600 border-blue-600 text-white font-semibold' 
+                              : 'bg-background border-card-border text-zinc-700 dark:text-zinc-300 hover:border-zinc-400 dark:hover:border-zinc-600'
                           }`}
                         >
                           {day.label}
@@ -333,8 +339,8 @@ export default function Contact() {
                       animate={{ opacity: 1, y: 0 }}
                       className="space-y-2"
                     >
-                      <label className="text-[10px] font-mono text-slate-500 dark:text-zinc-500 uppercase tracking-wider block">
-                        Step 2: Choose Slot Time (IST)
+                      <label className="text-[10px] font-mono text-zinc-500 dark:text-zinc-400 uppercase tracking-wider block">
+                        Step 2: Choose Time Slot (IST)
                       </label>
                       <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
                         {timeSlots.map((slot) => (
@@ -344,8 +350,8 @@ export default function Contact() {
                             onClick={() => setSelectedTime(slot)}
                             className={`py-2 rounded-lg border text-center transition-all cursor-pointer flex items-center justify-center space-x-1.5 ${
                               selectedTime === slot 
-                                ? 'bg-indigo-600 border-indigo-500 text-white font-semibold shadow-md' 
-                                : 'bg-white dark:bg-zinc-950/40 border-slate-200 dark:border-white/5 text-slate-700 dark:text-zinc-400 hover:border-slate-300 dark:hover:border-white/10'
+                                ? 'bg-blue-600 border-blue-600 text-white font-semibold' 
+                                : 'bg-background border-card-border text-zinc-700 dark:text-zinc-300 hover:border-zinc-400 dark:hover:border-zinc-600'
                             }`}
                           >
                             <Clock className="w-3 h-3 opacity-60" />
@@ -356,16 +362,16 @@ export default function Contact() {
                     </motion.div>
                   )}
 
-                  {/* Step 3: Input Coordinates */}
+                  {/* Step 3: Input Details */}
                   {selectedTime && (
                     <motion.div 
                       initial={{ opacity: 0, y: 5 }}
                       animate={{ opacity: 1, y: 0 }}
                       className="space-y-4"
                     >
-                      <div className="border-t border-slate-200 dark:border-white/5 pt-3 space-y-3">
-                        <label className="text-[10px] font-mono text-slate-500 dark:text-zinc-500 uppercase tracking-wider block">
-                          Step 3: Account Verification Coordinates
+                      <div className="border-t border-card-border pt-3 space-y-3">
+                        <label className="text-[10px] font-mono text-zinc-500 dark:text-zinc-400 uppercase tracking-wider block">
+                          Step 3: Your Details
                         </label>
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                           <div className="space-y-1">
@@ -375,7 +381,7 @@ export default function Contact() {
                               placeholder="Your Name"
                               value={schedulerName}
                               onChange={e => setSchedulerName(e.target.value)}
-                              className="w-full px-3 py-2 bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-lg outline-none text-slate-900 dark:text-white focus:border-indigo-500 transition-colors shadow-xs dark:shadow-none"
+                              className="w-full px-3 py-2 bg-background border border-card-border rounded-lg outline-none text-zinc-900 dark:text-white focus:border-blue-600 transition-colors"
                             />
                           </div>
                           <div className="space-y-1">
@@ -385,7 +391,7 @@ export default function Contact() {
                               placeholder="Your Email"
                               value={schedulerEmail}
                               onChange={e => setSchedulerEmail(e.target.value)}
-                              className="w-full px-3 py-2 bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-lg outline-none text-slate-900 dark:text-white focus:border-indigo-500 transition-colors shadow-xs dark:shadow-none"
+                              className="w-full px-3 py-2 bg-background border border-card-border rounded-lg outline-none text-zinc-900 dark:text-white focus:border-blue-600 transition-colors"
                             />
                           </div>
                         </div>
@@ -393,10 +399,10 @@ export default function Contact() {
 
                       <button
                         type="submit"
-                        className="w-full py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg font-semibold tracking-wide transition-all shadow-lg hover:shadow-emerald-600/10 cursor-pointer flex items-center justify-center space-x-1.5"
+                        className="w-full py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-semibold tracking-wide transition-all cursor-pointer flex items-center justify-center space-x-1.5"
                       >
                         <CalendarCheck className="w-3.5 h-3.5 mr-1" />
-                        <span>Confirm Zoom Booking</span>
+                        <span>Confirm Call Request</span>
                       </button>
                     </motion.div>
                   )}
@@ -407,17 +413,17 @@ export default function Contact() {
                   key="scheduler-success"
                   initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  className="py-8 text-center space-y-4 font-sans text-xs text-slate-600 dark:text-zinc-400"
+                  className="py-8 text-center space-y-4 font-sans text-xs text-zinc-600 dark:text-zinc-400"
                 >
                   <div className="mx-auto w-12 h-12 rounded-full bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center">
                     <Check className="w-6 h-6 text-emerald-600 dark:text-emerald-400 stroke-[3]" />
                   </div>
                   <div className="space-y-1">
-                    <h4 className="text-sm font-bold text-slate-900 dark:text-white uppercase tracking-wider font-mono">
-                      Meeting Reserved!
+                    <h4 className="text-sm font-bold text-zinc-900 dark:text-white uppercase tracking-wider font-mono">
+                      Meeting Requested!
                     </h4>
                     <p className="max-w-xs mx-auto leading-relaxed">
-                      A calendar reservation invite has been logged for **{schedulerName}** on **{selectedDay}** at **{selectedTime}** (IST).
+                      A calendar request has been logged for <strong>{schedulerName}</strong> on <strong>{selectedDay}</strong> at <strong>{selectedTime}</strong> (IST).
                     </p>
                   </div>
                   <div className="pt-2">

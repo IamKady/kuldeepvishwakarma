@@ -2,13 +2,14 @@ import { MetadataRoute } from 'next';
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: 'Kuldeep Chandra Vishwakarma — Portfolio & Engineering OS',
-    short_name: 'Kuldeep V.',
-    description: 'Personal Operating System of Kuldeep Chandra Vishwakarma. Software Engineer, AI Builder, and Startup Founder.',
+    name: 'Kuldeep Chandra Vishwakarma — Portfolio & Journal',
+    short_name: 'KCV',
+    description:
+      'Personal website and engineering journal of Kuldeep Chandra Vishwakarma. Software Developer, AI Builder, and Entrepreneur.',
     start_url: '/',
     display: 'standalone',
-    background_color: '#090d16',
-    theme_color: '#090d16',
+    background_color: '#faf9f6',
+    theme_color: '#faf9f6',
     icons: [
       {
         src: '/icon.png',
